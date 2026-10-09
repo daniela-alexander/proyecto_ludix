@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Ludix{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <header class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            Ludix
+        </a>
+
+        <nav>
+
+            {% if user.is_authenticated %}
+
+                <span class="user-name">
+                    Hola {{ user.username }}
+                </span>
+
+                <a href="{% url 'profile' %}">Mi perfil</a>
+
+                <form method="post" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">
+                        Cerrar sesión
+                    </button>
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    Iniciar sesión
+                </a>
+
+                <a href="{% url 'register' %}">
+                    Crear cuenta
+                </a>
+
+            {% endif %}
+
+            <button id="theme-toggle" class="theme-btn">
+                🌙
+            </button>
+
+        </nav>
+
+    </header>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+    
+    <div class="usuarios-conectados" title="Usuarios conectados">
+        <span class="icono-usuarios">👥</span>
+        <span id="contador-usuarios">0</span>
+        <span class="texto-usuarios">Usuarios conectados</span>
+    </div>
+
+    <script>
+        const protocolo = window.location.protocol === "https:" ? "wss" : "ws";
+
+        const socket = new WebSocket(
+            `${protocolo}://${window.location.host}/ws/usuarios/`
+        );
+
+        socket.onmessage = function(evento) {
+            const datos = JSON.parse(evento.data);
+
+            document.getElementById("contador-usuarios").textContent =
+                datos.usuarios;
+        };
+
+        socket.onclose = function() {
+            console.log("Conexión WebSocket cerrada");
+        };
+
+        socket.onerror = function(error) {
+            console.error("Error en WebSocket:", error);
+        };
+
+        
+        const btn = document.getElementById("theme-toggle");
+        const body = document.body;
+
+        const temas = ["", "eclipse", "aurora"];
+        const iconos = ["🌗", "🌑", "☀️"];
+
+        let temaActual = 0;
+
+        function aplicarTema(indice) {
+            temas.forEach(tema => {
+                if (tema) {
+                    body.classList.remove(tema);
+                }
+            });
+
+            if (temas[indice]) {
+                body.classList.add(temas[indice]);
+            }
+
+            btn.textContent = iconos[indice];
+
+            const nombres = ["Nebula", "Eclipse", "Aurora"];
+            btn.setAttribute("aria-label", `Tema actual: ${nombres[indice]}`);
+            btn.setAttribute("title", `Tema actual: ${nombres[indice]}`);
+        }
+
+        btn.addEventListener("click", () => {
+            temaActual = (temaActual + 1) % temas.length;
+            aplicarTema(temaActual);
+        });
+
+        aplicarTema(temaActual);
+
+
+    </script>
+
+</body>
+</html>

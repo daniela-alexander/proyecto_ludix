@@ -1,0 +1,222 @@
+
+{% extends "base.html" %}
+
+{% block title %}Mi perfil | Ludix{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+
+    <div class="profile-heading">
+        <div>
+            <p class="profile-eyebrow">TU ESPACIO PERSONAL</p>
+            <h1>Mi perfil</h1>
+            <p>Gestiona tu cuenta y descubre tu actividad en Ludix.</p>
+        </div>
+
+        <div class="profile-avatar">
+            {{ request.user.username|first|upper }}
+        </div>
+    </div>
+
+    {% if email_success %}
+        <div class="profile-message success">{{ email_success }}</div>
+    {% endif %}
+
+    {% if email_error %}
+        <div class="profile-message error">{{ email_error }}</div>
+    {% endif %}
+
+    <div class="profile-stats">
+
+        <article class="profile-card stat-card">
+            <span class="stat-icon">🎲</span>
+            <span class="stat-label">Juegos en biblioteca</span>
+            <strong>{{ total_juegos }}</strong>
+        </article>
+
+        <article class="profile-card stat-card">
+            <span class="stat-icon">❤️</span>
+            <span class="stat-label">Favoritos</span>
+            <strong>{{ total_favoritos }}</strong>
+        </article>
+
+        <article class="profile-card stat-card">
+            <span class="stat-icon">⭐</span>
+            <span class="stat-label">Lista de deseos</span>
+            <strong>{{ total_wishlist }}</strong>
+        </article>
+
+        <article class="profile-card stat-card">
+            <span class="stat-icon">📦</span>
+            <span class="stat-label">Pedidos</span>
+            <strong>{{ total_pedidos }}</strong>
+        </article>
+
+    </div>
+
+    <div class="profile-layout">
+
+        <section class="profile-card account-card">
+            <h2>Datos de la cuenta</h2>
+            <p class="profile-description">
+                Tu información personal.
+            </p>
+
+            <div class="profile-detail">
+                <span>Nombre de usuario</span>
+                <strong>{{ request.user.username }}</strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Rol</span>
+                <strong>{{ perfil.get_rol_display }}</strong>
+            </div>
+
+            <form method="post" class="profile-form">
+                {% csrf_token %}
+
+                <label for="email">Correo electrónico</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ request.user.email }}"
+                    placeholder="tu@email.com"
+                >
+
+                <button type="submit">Guardar email</button>
+            </form>
+
+            <div class="profile-detail">
+                <span>Idioma preferido</span>
+                <strong>{{ perfil.get_idioma_preferido_display }}</strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Fecha de nacimiento</span>
+                <strong>
+                    {% if perfil.fecha_nacimiento %}
+                        {{ perfil.fecha_nacimiento|date:"d/m/Y" }}
+                    {% else %}
+                        No indicada
+                    {% endif %}
+                </strong>
+            </div>
+        </section>
+
+        <section class="profile-card activity-card">
+            <h2>Mis juegos favoritos</h2>
+            <p class="profile-description">
+                Tus juegos marcados como favoritos.
+            </p>
+
+            {% for entrada in favoritos %}
+                <div class="profile-list-item">
+                    <span class="game-icon">🎲</span>
+                    <div>
+                        <strong>{{ entrada.juego.titulo }}</strong>
+                        <span>
+                            Añadido {{ entrada.fecha_agregado|date:"d/m/Y" }}
+                        </span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="profile-empty">
+                    Todavía no tienes juegos favoritos.
+                </p>
+            {% endfor %}
+        </section>
+
+        <section class="profile-card activity-card">
+            <h2>Mi biblioteca</h2>
+            <p class="profile-description">
+                Los últimos juegos que has añadido.
+            </p>
+
+            {% for entrada in biblioteca %}
+                <div class="profile-list-item">
+                    <span class="game-icon">🎮</span>
+                    <div>
+                        <strong>{{ entrada.juego.titulo }}</strong>
+                        <span>
+                            Añadido {{ entrada.fecha_agregado|date:"d/m/Y" }}
+                        </span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="profile-empty">
+                    Tu biblioteca todavía está vacía.
+                </p>
+            {% endfor %}
+        </section>
+
+        <section class="profile-card activity-card">
+            <h2>Lista de deseos</h2>
+            <p class="profile-description">
+                Juegos que te gustaría conseguir.
+            </p>
+
+            {% for entrada in wishlist %}
+                <div class="profile-list-item">
+                    <span class="game-icon">⭐</span>
+                    <div>
+                        <strong>{{ entrada.juego.titulo }}</strong>
+                        <span>
+                            Añadido {{ entrada.agregado_el|date:"d/m/Y" }}
+                        </span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="profile-empty">
+                    Tu lista de deseos está vacía.
+                </p>
+            {% endfor %}
+        </section>
+
+        <section class="profile-card activity-card">
+            <h2>Últimas sesiones</h2>
+
+            {% for sesion in sesiones %}
+                <div class="profile-list-item">
+                    <span class="game-icon">🧩</span>
+                    <div>
+                        <strong>Sesión #{{ sesion.id }}</strong>
+                        <span>
+                            {{ sesion.get_tipo_sugerencia_display }}
+                            · {{ sesion.creado_el|date:"d/m/Y H:i" }}
+                        </span>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="profile-empty">
+                    Todavía no tienes sesiones registradas.
+                </p>
+            {% endfor %}
+        </section>
+
+        <section class="profile-card activity-card">
+            <h2>Últimos pedidos</h2>
+
+            {% for pedido in pedidos %}
+                <div class="profile-list-item">
+                    <span class="game-icon">📦</span>
+                    <div>
+                        <strong>Pedido #{{ pedido.id }}</strong>
+                        <span>
+                            {{ pedido.get_estado_display }}
+                            · {{ pedido.creado_el|date:"d/m/Y" }}
+                        </span>
+                    </div>
+                    <strong>{{ pedido.total }} €</strong>
+                </div>
+            {% empty %}
+                <p class="profile-empty">
+                    Todavía no tienes pedidos registrados.
+                </p>
+            {% endfor %}
+        </section>
+
+    </div>
+
+</section>
+{% endblock %}

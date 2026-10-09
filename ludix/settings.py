@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django_filters',
 
     'juegos',
+    'accounts',
+    
 ]
 
 MIDDLEWARE = [
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'ludix.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,3 +154,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'juegos.pagination.JuegoPagination',
     'PAGE_SIZE': 10,
 }
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+LOGOUT_REDIRECT_URL = 'home'

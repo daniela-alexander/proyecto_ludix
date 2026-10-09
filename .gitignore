@@ -6,7 +6,6 @@ __pycache__/
 *.pyd
 *.sqlite3
 media/
-static/
 *.log
 .pytest_cache/
 __pycache__/

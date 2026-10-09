@@ -16,5 +16,5 @@ class JuegoListView(ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_class = JuegoFilter
 
-def inicio(request):
-    return render(request, "juegos/inicio.html")
+def home(request):
+    return render(request, "home.html")
