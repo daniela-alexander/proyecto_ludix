@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
+from django_filters.rest_framework import DjangoFilterBackend
 
+from .filters import JuegoFilter
 from .models import Juego
 from .serializers import JuegoSerializer
 from .pagination import JuegoPagination 
@@ -11,4 +13,8 @@ class JuegoListView(ListAPIView):
     queryset = Juego.objects.all()
     serializer_class = JuegoSerializer
     pagination_class = JuegoPagination
-# Create your views here.
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = JuegoFilter
+
+def home(request):
+    return render(request, "home.html")

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="register-page">
+    <h1>Crear cuenta</h1>
+
+    <form method="post" id="registro-form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="register-fields">
+            <div class="register-field">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+
+            <div class="register-field">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+
+            <div class="register-field">
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+
+                {% if form.password1.help_text %}
+                    <div class="password-help">
+                        <ul id="password-rules">
+                            <li data-rule="length">Al menos 8 caracteres</li>
+                            <li data-rule="uppercase">Una letra mayúscula</li>
+                            <li data-rule="lowercase">Una letra minúscula</li>
+                            <li data-rule="number">Un número</li>
+                            <li data-rule="special">Un carácter especial</li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="register-field">
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+                
+                <div class="register-actions">
+                    <button type="submit">Crear cuenta</button>
+                </div>
+            </div>
+            
+
+        </div>
+
+        
+    </form>
+</section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const password = document.getElementById("id_password1");
+    const rules = document.querySelectorAll("#password-rules li");
+
+    if (!password) return;
+
+    function checkPassword() {
+        const value = password.value;
+
+        const checks = {
+            length: value.length >= 8,
+            uppercase: /[A-Z]/.test(value),
+            lowercase: /[a-z]/.test(value),
+            number: /[0-9]/.test(value),
+            special: /[^A-Za-z0-9]/.test(value)
+        };
+
+        rules.forEach(function (rule) {
+            const name = rule.dataset.rule;
+            const valid = checks[name];
+
+            rule.classList.toggle("valid", valid);
+        });
+    }
+
+    password.addEventListener("input", checkPassword);
+    checkPassword();
+});
+</script>
+
+{% endblock %}

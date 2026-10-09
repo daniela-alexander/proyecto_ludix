@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'django_filters',
 
     'juegos',
+    'accounts',
+    
 ]
 
 MIDDLEWARE = [
@@ -59,7 +63,7 @@ ROOT_URLCONF = 'ludix.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +76,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ludix.wsgi.application'
+
+ASGI_APPLICATION = 'ludix.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
@@ -142,3 +154,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'juegos.pagination.JuegoPagination',
     'PAGE_SIZE': 10,
 }
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+LOGOUT_REDIRECT_URL = 'home'
