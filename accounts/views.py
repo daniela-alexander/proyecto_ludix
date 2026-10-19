@@ -35,6 +35,11 @@ def profile_view(request):
 
     if request.method == "POST":
         email = request.POST.get("email", "").strip()
+        profile_image = request.FILES.get("profile_image")
+
+        if profile_image:
+            profile.profile_image = profile_image
+            profile.save(update_fields=["profile_image"])
 
         try:
             email = django_forms.EmailField(

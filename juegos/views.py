@@ -9,7 +9,7 @@ from .pagination import GamePagination
 
 
 class GameListView(ListAPIView):
-    queryset = Game.objects.all()
+    queryset = Game.objects.all().order_by("id")
     serializer_class = GameSerializer
     pagination_class = GamePagination
     filter_backends = [DjangoFilterBackend]

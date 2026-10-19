@@ -991,6 +991,14 @@ main:has(.register-page) {
     font-size: 2rem;
     font-weight: 900;
     box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .profile-stats {

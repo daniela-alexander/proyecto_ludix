@@ -1,6 +1,9 @@
+from decimal import Decimal
+
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils.text import slugify
 
 
 class UserProfile(models.Model):
@@ -39,6 +42,12 @@ class UserProfile(models.Model):
         blank=True,
     )
 
+    profile_image = models.ImageField(
+        upload_to="avatars/",
+        blank=True,
+        null=True,
+    )
+
     class Meta:
         db_table = "perfil_usuario"
 
@@ -54,6 +63,12 @@ class Category(models.Model):
         unique=True,
     )
 
+    slug = models.SlugField(
+        max_length=150,
+        unique=True,
+        blank=True,
+    )
+
     description = models.TextField(
         null=True,
         blank=True,
@@ -63,6 +78,11 @@ class Category(models.Model):
         db_table = "categoria"
         verbose_name = "Category"
         verbose_name_plural = "Categories"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -76,10 +96,21 @@ class Mechanic(models.Model):
         unique=True,
     )
 
+    slug = models.SlugField(
+        max_length=150,
+        unique=True,
+        blank=True,
+    )
+
     class Meta:
         db_table = "mecanica"
         verbose_name = "Mechanic"
         verbose_name_plural = "Mechanics"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -96,6 +127,12 @@ class Game(models.Model):
 
     title = models.CharField(
         max_length=200,
+    )
+
+    slug = models.SlugField(
+        max_length=220,
+        unique=True,
+        blank=True,
     )
 
     description = models.TextField(
@@ -115,8 +152,8 @@ class Game(models.Model):
         max_digits=3,
         decimal_places=2,
         validators=[
-            MinValueValidator(1.0),
-            MaxValueValidator(5.0),
+            MinValueValidator(Decimal("1.00")),
+            MaxValueValidator(Decimal("5.00")),
         ],
     )
 
@@ -125,7 +162,7 @@ class Game(models.Model):
         decimal_places=2,
         default=0.00,
         validators=[
-            MinValueValidator(0),
+            MinValueValidator(Decimal("0.00")),
         ],
     )
 
@@ -154,6 +191,12 @@ class Game(models.Model):
 
     class Meta:
         db_table = "juego"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title)
+            self.slug = base_slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -403,7 +446,7 @@ class Order(models.Model):
         max_digits=10,
         decimal_places=2,
         validators=[
-            MinValueValidator(0),
+            MinValueValidator(Decimal("0.00")),
         ],
     )
 
@@ -441,7 +484,7 @@ class OrderLine(models.Model):
         max_digits=10,
         decimal_places=2,
         validators=[
-            MinValueValidator(0),
+            MinValueValidator(Decimal("0.00")),
         ],
     )
 

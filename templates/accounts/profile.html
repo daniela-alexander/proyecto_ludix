@@ -14,7 +14,11 @@
         </div>
 
         <div class="profile-avatar">
-            {{ request.user.username|first|upper }}
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ request.user.username }} profile photo">
+            {% else %}
+                {{ request.user.username|first|upper }}
+            {% endif %}
         </div>
     </div>
 
@@ -72,8 +76,11 @@
                 <strong>{{ profile.get_role_display }}</strong>
             </div>
 
-            <form method="post" class="profile-form">
+            <form method="post" class="profile-form" enctype="multipart/form-data">
                 {% csrf_token %}
+
+                <label for="profile_image">Profile photo</label>
+                <input type="file" id="profile_image" name="profile_image" accept="image/*">
 
                 <label for="email">Email</label>
                 <input
@@ -84,7 +91,7 @@
                     placeholder="you@email.com"
                 >
 
-                <button type="submit">Save email</button>
+                <button type="submit">Save changes</button>
             </form>
 
             <div class="profile-detail">

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import logout
 from django.shortcuts import render
@@ -39,4 +41,5 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
     path('recommendations/', include('recommendations.urls')),
     path('websocket-test/', websocket_test_view, name='websocket_test'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
