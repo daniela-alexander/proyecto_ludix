@@ -170,6 +170,11 @@ class Game(models.Model):
         default=0,
     )
 
+    is_online = models.BooleanField(
+        default=False,
+        help_text="Indica si el juego es online o de mesa.",
+    )
+
     referral_link = models.TextField(
         null=True,
         blank=True,

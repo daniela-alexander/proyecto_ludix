@@ -60,6 +60,9 @@ class GameFilter(django_filters.FilterSet):
         queryset=Mechanic.objects.order_by("name"),
         distinct=True,
     )
+    is_online = django_filters.BooleanFilter(
+        field_name="is_online",
+    )
 
     class Meta:
         model = Game
@@ -73,6 +76,7 @@ class GameFilter(django_filters.FilterSet):
             "duration_max",
             "category",
             "mechanic",
+            "is_online",
         ]
 
 
