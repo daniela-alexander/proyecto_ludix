@@ -2,19 +2,22 @@ from django.shortcuts import render
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .filters import JuegoFilter
-from .models import Juego
-from .serializers import JuegoSerializer
-from .pagination import JuegoPagination 
-# este ultimo añadido por daniela para configurar la paginación
+from .filters import GameFilter
+from .models import Game
+from .serializers import GameSerializer
+from .pagination import GamePagination
 
 
-class JuegoListView(ListAPIView):
-    queryset = Juego.objects.all()
-    serializer_class = JuegoSerializer
-    pagination_class = JuegoPagination
+class GameListView(ListAPIView):
+    queryset = Game.objects.all()
+    serializer_class = GameSerializer
+    pagination_class = GamePagination
     filter_backends = [DjangoFilterBackend]
-    filterset_class = JuegoFilter
+    filterset_class = GameFilter
+
+
+JuegoListView = GameListView
+
 
 def home(request):
     return render(request, "home.html")

@@ -4,5 +4,5 @@ from .views import add_to_library, library_list
 
 urlpatterns = [
     path("", library_list, name="library_list"),
-    path("add/<int:juego_id>/", add_to_library, name="library_add"),
+    path("add/<int:game_id>/", add_to_library, name="library_add"),
 ]

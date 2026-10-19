@@ -1,15 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
-from juegos.models import BibliotecaJuego
+from juegos.models import LibraryGame
 
 
 @login_required
 def library_list(request):
     entries = (
-        BibliotecaJuego.objects.filter(usuario__user=request.user)
-        .select_related("usuario__user", "juego")
-        .order_by("-fecha_agregado")
+        LibraryGame.objects.filter(user_profile__user=request.user)
+        .select_related("user_profile__user", "game")
+        .order_by("-added_at")
     )
 
     payload = {
@@ -17,10 +17,10 @@ def library_list(request):
         "items": [
             {
                 "id": item.id,
-                "juego_id": item.juego.id,
-                "titulo": item.juego.titulo,
-                "favorito": item.favorito,
-                "fecha_agregado": item.fecha_agregado.isoformat(),
+                "juego_id": item.game.id,
+                "titulo": item.game.title,
+                "favorito": item.favorite,
+                "fecha_agregado": item.added_at.isoformat(),
             }
             for item in entries
         ],
@@ -30,19 +30,19 @@ def library_list(request):
 
 @login_required
 def add_to_library(request, juego_id):
-    from juegos.models import Juego, PerfilUsuario
+    from juegos.models import Game, UserProfile
 
-    usuario = PerfilUsuario.objects.get(user=request.user)
-    juego = Juego.objects.get(id=juego_id)
+    user_profile = UserProfile.objects.get(user=request.user)
+    game = Game.objects.get(id=juego_id)
 
-    item, created = BibliotecaJuego.objects.get_or_create(usuario=usuario, juego=juego)
+    item, created = LibraryGame.objects.get_or_create(user_profile=user_profile, game=game)
     if request.method == "POST":
-        item.favorito = request.POST.get("favorito") in {"true", "1", "True"}
+        item.favorite = request.POST.get("favorito") in {"true", "1", "True"}
         item.save()
 
     return JsonResponse({
         "created": created,
-        "juego_id": juego.id,
-        "titulo": juego.titulo,
-        "favorito": item.favorito,
+        "juego_id": game.id,
+        "titulo": game.title,
+        "favorito": item.favorite,
     })

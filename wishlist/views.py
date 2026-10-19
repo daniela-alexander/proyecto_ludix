@@ -1,15 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
-from juegos.models import PerfilUsuario, Wishlist
+from juegos.models import UserProfile, Wishlist
 
 
 @login_required
 def wishlist_list(request):
     items = (
-        Wishlist.objects.filter(usuario__user=request.user)
-        .select_related("usuario__user", "juego")
-        .order_by("-agregado_el")
+        Wishlist.objects.filter(user_profile__user=request.user)
+        .select_related("user_profile__user", "game")
+        .order_by("-added_at")
     )
 
     payload = {
@@ -17,9 +17,9 @@ def wishlist_list(request):
         "items": [
             {
                 "id": item.id,
-                "juego_id": item.juego.id,
-                "titulo": item.juego.titulo,
-                "agregado_el": item.agregado_el.isoformat(),
+                "juego_id": item.game.id,
+                "titulo": item.game.title,
+                "agregado_el": item.added_at.isoformat(),
             }
             for item in items
         ],
@@ -29,14 +29,14 @@ def wishlist_list(request):
 
 @login_required
 def add_to_wishlist(request, juego_id):
-    from juegos.models import Juego
+    from juegos.models import Game
 
-    usuario = PerfilUsuario.objects.get(user=request.user)
-    juego = Juego.objects.get(id=juego_id)
+    user_profile = UserProfile.objects.get(user=request.user)
+    game = Game.objects.get(id=juego_id)
 
-    item, created = Wishlist.objects.get_or_create(usuario=usuario, juego=juego)
+    item, created = Wishlist.objects.get_or_create(user_profile=user_profile, game=game)
     return JsonResponse({
         "created": created,
-        "juego_id": juego.id,
-        "titulo": juego.titulo,
+        "juego_id": game.id,
+        "titulo": game.title,
     })

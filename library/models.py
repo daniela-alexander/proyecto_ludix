@@ -4,5 +4,6 @@ from juegos.models import BibliotecaJuego
 class LibraryEntry(BibliotecaJuego):
     class Meta:
         proxy = True
-        verbose_name = "Entrada de biblioteca"
-        verbose_name_plural = "Biblioteca"
+        app_label = "library"
+        verbose_name = "Library entry"
+        verbose_name_plural = "Library"

@@ -406,6 +406,143 @@ input:focus{
         0 0 0 3px rgba(124,108,255,.15);
 }
 
+.auth-page,
+.error-page {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:calc(100vh - 170px);
+    padding:2rem 0;
+}
+
+.auth-card,
+.error-box {
+    width:min(100%, 560px);
+    padding:2.5rem;
+    border-radius:28px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.auth-card--wide {
+    width:min(100%, 760px);
+}
+
+.auth-kicker,
+.error-badge {
+    display:inline-block;
+    margin-bottom:1rem;
+    padding:.45rem .8rem;
+    border-radius:999px;
+    background:rgba(124,108,255,.12);
+    border:1px solid rgba(124,108,255,.28);
+    color:var(--neon);
+    font-size:.75rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+}
+
+.auth-subtitle {
+    margin-bottom:1.5rem;
+}
+
+.auth-form,
+.auth-form.form {
+    width:100%;
+    max-width:none;
+    margin:0;
+    padding:0;
+    background:transparent;
+    border:none;
+    box-shadow:none;
+}
+
+.auth-field {
+    display:flex;
+    flex-direction:column;
+    gap:.55rem;
+}
+
+.field-error,
+.form-errors {
+    margin-top:.45rem;
+    padding:.85rem 1rem;
+    border-radius:12px;
+    border:1px solid rgba(255,110,110,.25);
+    background:rgba(255,70,70,.12);
+    color:#ffb4b4;
+    font-size:.9rem;
+}
+
+.form-errors p,
+.field-error p {
+    margin:0;
+    color:#ffb4b4;
+}
+
+.auth-footer {
+    margin-top:1.5rem;
+    text-align:center;
+}
+
+.auth-footer a,
+.primary-link,
+.secondary-link {
+    color:var(--neon);
+    text-decoration:none;
+    font-weight:700;
+}
+
+.auth-footer a:hover,
+.primary-link:hover,
+.secondary-link:hover {
+    text-decoration:underline;
+}
+
+.error-box {
+    width:min(100%, 760px);
+    text-align:center;
+}
+
+.error-box h1 {
+    margin-bottom:1rem;
+}
+
+.error-actions {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-top:2rem;
+}
+
+.primary-link,
+.secondary-link {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    padding:.85rem 1.4rem;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--card-hover);
+    transition:.25s;
+}
+
+.primary-link {
+    background:linear-gradient(135deg, var(--accent), var(--accent-hover));
+    border-color:transparent;
+    color:#fff;
+}
+
+.primary-link:hover,
+.secondary-link:hover {
+    transform:translateY(-2px);
+    box-shadow:0 0 16px rgba(124,108,255,.25);
+}
+
 
 /* =========================
    BOTONES

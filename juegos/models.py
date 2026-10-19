@@ -3,38 +3,38 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
-class PerfilUsuario(models.Model):
-    class Rol(models.TextChoices):
-        CLIENTE = "CLIENTE", "Cliente"
+class UserProfile(models.Model):
+    class Role(models.TextChoices):
+        CLIENT = "CLIENTE", "Cliente"
         ADMIN = "ADMIN", "Administrador"
 
-    class Idioma(models.TextChoices):
-        ESPANOL = "es", "Español"
-        INGLES = "en", "Inglés"
+    class Language(models.TextChoices):
+        SPANISH = "es", "Español"
+        ENGLISH = "en", "Inglés"
         CATALAN = "ca", "Catalán"
-        ITALIANO = "it", "Italiano"
+        ITALIAN = "it", "Italiano"
 
     id = models.BigAutoField(primary_key=True)
 
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        related_name="perfil",
+        related_name="profile",
     )
 
-    rol = models.CharField(
+    role = models.CharField(
         max_length=20,
-        choices=Rol.choices,
-        default=Rol.CLIENTE,
+        choices=Role.choices,
+        default=Role.CLIENT,
     )
 
-    idioma_preferido = models.CharField(
+    preferred_language = models.CharField(
         max_length=5,
-        choices=Idioma.choices,
-        default=Idioma.ESPANOL,
+        choices=Language.choices,
+        default=Language.SPANISH,
     )
 
-    fecha_nacimiento = models.DateField(
+    date_of_birth = models.DateField(
         null=True,
         blank=True,
     )
@@ -43,49 +43,49 @@ class PerfilUsuario(models.Model):
         db_table = "perfil_usuario"
 
     def __str__(self):
-        return f"{self.user.username} - {self.rol}"
+        return f"{self.user.username} - {self.role}"
 
 
-class Categoria(models.Model):
+class Category(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    nombre = models.CharField(
+    name = models.CharField(
         max_length=100,
         unique=True,
     )
 
-    descripcion = models.TextField(
+    description = models.TextField(
         null=True,
         blank=True,
     )
 
     class Meta:
         db_table = "categoria"
-        verbose_name = "Categoría"
-        verbose_name_plural = "Categorías"
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 
-class Mecanica(models.Model):
+class Mechanic(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    nombre = models.CharField(
+    name = models.CharField(
         max_length=100,
         unique=True,
     )
 
     class Meta:
         db_table = "mecanica"
-        verbose_name = "Mecánica"
-        verbose_name_plural = "Mecánicas"
+        verbose_name = "Mechanic"
+        verbose_name_plural = "Mechanics"
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 
-class Juego(models.Model):
+class Game(models.Model):
     id = models.BigAutoField(primary_key=True)
 
     bgg_id = models.IntegerField(
@@ -94,24 +94,24 @@ class Juego(models.Model):
         blank=True,
     )
 
-    titulo = models.CharField(
+    title = models.CharField(
         max_length=200,
     )
 
-    descripcion = models.TextField(
+    description = models.TextField(
         default="",
         blank=True,
     )
 
-    num_jugadores_min = models.PositiveIntegerField()
+    min_players = models.PositiveIntegerField()
 
-    num_jugadores_max = models.PositiveIntegerField()
+    max_players = models.PositiveIntegerField()
 
-    duracion_minutos = models.PositiveIntegerField()
+    duration_minutes = models.PositiveIntegerField()
 
-    edad_minima = models.PositiveIntegerField()
+    min_age = models.PositiveIntegerField()
 
-    dificultad = models.DecimalField(
+    difficulty = models.DecimalField(
         max_digits=3,
         decimal_places=2,
         validators=[
@@ -120,7 +120,7 @@ class Juego(models.Model):
         ],
     )
 
-    precio = models.DecimalField(
+    price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0.00,
@@ -133,22 +133,22 @@ class Juego(models.Model):
         default=0,
     )
 
-    link_referido = models.TextField(
+    referral_link = models.TextField(
         null=True,
         blank=True,
     )
 
-    categorias = models.ManyToManyField(
-        Categoria,
-        through="JuegoCategoria",
-        related_name="juegos",
+    categories = models.ManyToManyField(
+        Category,
+        through="GameCategory",
+        related_name="games",
         blank=True,
     )
 
-    mecanicas = models.ManyToManyField(
-        Mecanica,
-        through="JuegoMecanica",
-        related_name="juegos",
+    mechanics = models.ManyToManyField(
+        Mechanic,
+        through="GameMechanic",
+        related_name="games",
         blank=True,
     )
 
@@ -156,22 +156,22 @@ class Juego(models.Model):
         db_table = "juego"
 
     def __str__(self):
-        return self.titulo
+        return self.title
 
 
-class JuegoCategoria(models.Model):
+class GameCategory(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE,
-        related_name="juego_categorias",
+        related_name="game_categories",
     )
 
-    categoria = models.ForeignKey(
-        Categoria,
+    category = models.ForeignKey(
+        Category,
         on_delete=models.CASCADE,
-        related_name="juego_categorias",
+        related_name="game_categories",
     )
 
     class Meta:
@@ -179,28 +179,28 @@ class JuegoCategoria(models.Model):
 
         constraints = [
             models.UniqueConstraint(
-                fields=["juego", "categoria"],
+                fields=["game", "category"],
                 name="unique_juego_categoria",
             )
         ]
 
     def __str__(self):
-        return f"{self.juego} - {self.categoria}"
+        return f"{self.game} - {self.category}"
 
 
-class JuegoMecanica(models.Model):
+class GameMechanic(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE,
-        related_name="juego_mecanicas",
+        related_name="game_mechanics",
     )
 
-    mecanica = models.ForeignKey(
-        Mecanica,
+    mechanic = models.ForeignKey(
+        Mechanic,
         on_delete=models.CASCADE,
-        related_name="juego_mecanicas",
+        related_name="game_mechanics",
     )
 
     class Meta:
@@ -208,35 +208,35 @@ class JuegoMecanica(models.Model):
 
         constraints = [
             models.UniqueConstraint(
-                fields=["juego", "mecanica"],
+                fields=["game", "mechanic"],
                 name="unique_juego_mecanica",
             )
         ]
 
     def __str__(self):
-        return f"{self.juego} - {self.mecanica}"
+        return f"{self.game} - {self.mechanic}"
 
 
-class BibliotecaJuego(models.Model):
+class LibraryGame(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    usuario = models.ForeignKey(
-        PerfilUsuario,
+    user_profile = models.ForeignKey(
+        UserProfile,
         on_delete=models.CASCADE,
-        related_name="biblioteca",
+        related_name="library",
     )
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE,
-        related_name="bibliotecas",
+        related_name="libraries",
     )
 
-    favorito = models.BooleanField(
+    favorite = models.BooleanField(
         default=False,
     )
 
-    fecha_agregado = models.DateTimeField(
+    added_at = models.DateTimeField(
         auto_now_add=True,
     )
 
@@ -245,31 +245,31 @@ class BibliotecaJuego(models.Model):
 
         constraints = [
             models.UniqueConstraint(
-                fields=["usuario", "juego"],
+                fields=["user_profile", "game"],
                 name="unique_usuario_juego_biblioteca",
             )
         ]
 
     def __str__(self):
-        return f"{self.usuario} - {self.juego}"
+        return f"{self.user_profile} - {self.game}"
 
 
 class Wishlist(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    usuario = models.ForeignKey(
-        PerfilUsuario,
+    user_profile = models.ForeignKey(
+        UserProfile,
         on_delete=models.CASCADE,
         related_name="wishlist",
     )
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE,
         related_name="wishlists",
     )
 
-    agregado_el = models.DateTimeField(
+    added_at = models.DateTimeField(
         auto_now_add=True,
     )
 
@@ -278,41 +278,41 @@ class Wishlist(models.Model):
 
         constraints = [
             models.UniqueConstraint(
-                fields=["usuario", "juego"],
+                fields=["user_profile", "game"],
                 name="unique_usuario_juego_wishlist",
             )
         ]
 
     def __str__(self):
-        return f"{self.usuario} - {self.juego}"
+        return f"{self.user_profile} - {self.game}"
 
 
-class SesionSugerencia(models.Model):
-    class TipoSugerencia(models.TextChoices):
-        BIBLIOTECA = "BIBLIOTECA", "Biblioteca"
-        COMPRA = "COMPRA", "Compra"
+class SuggestionSession(models.Model):
+    class SuggestionType(models.TextChoices):
+        LIBRARY = "BIBLIOTECA", "Biblioteca"
+        PURCHASE = "COMPRA", "Compra"
 
     id = models.BigAutoField(primary_key=True)
 
-    anfitrion = models.ForeignKey(
-        PerfilUsuario,
+    host = models.ForeignKey(
+        UserProfile,
         on_delete=models.CASCADE,
-        related_name="sesiones_sugerencia",
+        related_name="suggestion_sessions",
     )
 
-    tipo_sugerencia = models.CharField(
+    suggestion_type = models.CharField(
         max_length=20,
-        choices=TipoSugerencia.choices,
+        choices=SuggestionType.choices,
     )
 
-    num_jugadores = models.PositiveIntegerField()
+    player_count = models.PositiveIntegerField()
 
-    duracion_max = models.PositiveIntegerField(
+    max_duration = models.PositiveIntegerField(
         null=True,
         blank=True,
     )
 
-    creado_el = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
     )
 
@@ -320,22 +320,22 @@ class SesionSugerencia(models.Model):
         db_table = "sesion_sugerencia"
 
     def __str__(self):
-        return f"Sesión {self.id} - {self.tipo_sugerencia}"
+        return f"Session {self.id} - {self.suggestion_type}"
 
 
-class SesionJuegoPropuesto(models.Model):
+class ProposedGameSession(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    sesion = models.ForeignKey(
-        SesionSugerencia,
+    session = models.ForeignKey(
+        SuggestionSession,
         on_delete=models.CASCADE,
-        related_name="juegos_propuestos",
+        related_name="proposed_games",
     )
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE,
-        related_name="sesiones_propuesto",
+        related_name="proposed_sessions",
     )
 
     class Meta:
@@ -343,31 +343,31 @@ class SesionJuegoPropuesto(models.Model):
 
         constraints = [
             models.UniqueConstraint(
-                fields=["sesion", "juego"],
+                fields=["session", "game"],
                 name="unique_sesion_juego_propuesto",
             )
         ]
 
     def __str__(self):
-        return f"{self.sesion} - {self.juego}"
+        return f"{self.session} - {self.game}"
 
 
-class VotoSugerencia(models.Model):
+class SuggestionVote(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    sesion = models.ForeignKey(
-        SesionSugerencia,
+    session = models.ForeignKey(
+        SuggestionSession,
         on_delete=models.CASCADE,
-        related_name="votos",
+        related_name="votes",
     )
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.CASCADE,
-        related_name="votos",
+        related_name="votes",
     )
 
-    puntuacion = models.IntegerField(
+    score = models.IntegerField(
         default=1,
     )
 
@@ -375,28 +375,28 @@ class VotoSugerencia(models.Model):
         db_table = "voto_sugerencia"
 
     def __str__(self):
-        return f"{self.sesion} - {self.juego} - {self.puntuacion}"
+        return f"{self.session} - {self.game} - {self.score}"
 
 
-class Pedido(models.Model):
-    class Estado(models.TextChoices):
-        PENDIENTE = "PENDIENTE", "Pendiente"
-        PAGADO = "PAGADO", "Pagado"
-        ENVIADO = "ENVIADO", "Enviado"
-        CANCELADO = "CANCELADO", "Cancelado"
+class Order(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "PENDIENTE", "Pendiente"
+        PAID = "PAGADO", "Pagado"
+        SHIPPED = "ENVIADO", "Enviado"
+        CANCELLED = "CANCELADO", "Cancelado"
 
     id = models.BigAutoField(primary_key=True)
 
-    cliente = models.ForeignKey(
-        PerfilUsuario,
+    customer = models.ForeignKey(
+        UserProfile,
         on_delete=models.CASCADE,
-        related_name="pedidos",
+        related_name="orders",
     )
 
-    estado = models.CharField(
+    status = models.CharField(
         max_length=20,
-        choices=Estado.choices,
-        default=Estado.PENDIENTE,
+        choices=Status.choices,
+        default=Status.PENDING,
     )
 
     total = models.DecimalField(
@@ -407,7 +407,7 @@ class Pedido(models.Model):
         ],
     )
 
-    creado_el = models.DateTimeField(
+    created_at = models.DateTimeField(
         auto_now_add=True,
     )
 
@@ -415,29 +415,29 @@ class Pedido(models.Model):
         db_table = "pedido"
 
     def __str__(self):
-        return f"Pedido #{self.id}"
+        return f"Order #{self.id}"
 
 
-class LineaPedido(models.Model):
+class OrderLine(models.Model):
     id = models.BigAutoField(primary_key=True)
 
-    pedido = models.ForeignKey(
-        Pedido,
+    order = models.ForeignKey(
+        Order,
         on_delete=models.CASCADE,
-        related_name="lineas",
+        related_name="lines",
     )
 
-    juego = models.ForeignKey(
-        Juego,
+    game = models.ForeignKey(
+        Game,
         on_delete=models.PROTECT,
-        related_name="lineas_pedido",
+        related_name="order_lines",
     )
 
-    cantidad = models.PositiveIntegerField(
+    quantity = models.PositiveIntegerField(
         default=1,
     )
 
-    precio_unitario = models.DecimalField(
+    unit_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         validators=[
@@ -449,4 +449,18 @@ class LineaPedido(models.Model):
         db_table = "linea_pedido"
 
     def __str__(self):
-        return f"{self.pedido} - {self.juego}"
+        return f"{self.order} - {self.game}"
+
+
+PerfilUsuario = UserProfile
+Categoria = Category
+Mecanica = Mechanic
+Juego = Game
+BibliotecaJuego = LibraryGame
+SesionSugerencia = SuggestionSession
+SesionJuegoPropuesto = ProposedGameSession
+VotoSugerencia = SuggestionVote
+Pedido = Order
+LineaPedido = OrderLine
+JuegoCategoria = GameCategory
+JuegoMecanica = GameMechanic
