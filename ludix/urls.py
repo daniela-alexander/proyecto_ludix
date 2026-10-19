@@ -9,4 +9,8 @@ urlpatterns = [
     path("", home, name="home"),
     path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
     path("accounts/", include("accounts.urls")),
+    path("library/", include("library.urls")),
+    path("wishlist/", include("wishlist.urls")),
+    path("orders/", include("orders.urls")),
+    path("recommendations/", include("recommendations.urls")),
 ]

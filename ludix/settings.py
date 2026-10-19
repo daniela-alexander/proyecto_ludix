@@ -45,7 +45,10 @@ INSTALLED_APPS = [
 
     'juegos',
     'accounts',
-    
+    'library',
+    'wishlist',
+    'orders',
+    'recommendations',
 ]
 
 MIDDLEWARE = [
