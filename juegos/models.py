@@ -315,6 +315,30 @@ class SesionSugerencia(models.Model):
     creado_el = models.DateTimeField(
         auto_now_add=True,
     )
+    
+    edad_minima_participante = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    dificultad_preferida = models.DecimalField(
+        max_digits=3,
+        decimal_places=2,
+        validators=[
+            MinValueValidator(1.0),
+            MaxValueValidator(5.0),
+        ],
+        null=True,
+        blank=True,
+    )
+
+    tematica = models.ForeignKey(
+        Categoria,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="sesiones_sugerencia",
+    )
 
     class Meta:
         db_table = "sesion_sugerencia"

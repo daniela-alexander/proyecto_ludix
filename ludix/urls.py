@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path
-from juegos.views import JuegoListView, home
+from juegos.views import JuegoListView, home, sugerencia_view
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path("", home, name="home"),
     path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
     path("accounts/", include("accounts.urls")),
+    path("sugerencia/", sugerencia_view, name="sugerencia"),  # Agrega esta línea para incluir las URLs de sugerencia
 ]
