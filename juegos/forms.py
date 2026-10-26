@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Categoria, SesionSugerencia
+from .models import Category, SuggestionSession
 
 
 class SugerenciaForm(forms.Form):
@@ -8,11 +8,11 @@ class SugerenciaForm(forms.Form):
         label="¿De dónde quieres que salgan las recomendaciones?",
         choices=[
             (
-                SesionSugerencia.TipoSugerencia.BIBLIOTECA,
+                SuggestionSession.SuggestionType.LIBRARY,
                 "De mi biblioteca",
             ),
             (
-                SesionSugerencia.TipoSugerencia.COMPRA,
+                SuggestionSession.SuggestionType.PURCHASE,
                 "Del catálogo de Ludix",
             ),
         ],
@@ -78,7 +78,7 @@ class SugerenciaForm(forms.Form):
 
     tematica = forms.ModelChoiceField(
         label="Temática",
-        queryset=Categoria.objects.order_by("nombre"),
+        queryset=Category.objects.order_by("name"),
         required=False,
         empty_label="Cualquiera",
     )

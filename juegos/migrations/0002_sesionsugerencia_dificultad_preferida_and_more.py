@@ -13,18 +13,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='sesionsugerencia',
+            model_name='suggestionsession',
             name='dificultad_preferida',
             field=models.DecimalField(blank=True, decimal_places=2, max_digits=3, null=True, validators=[django.core.validators.MinValueValidator(1.0), django.core.validators.MaxValueValidator(5.0)]),
         ),
         migrations.AddField(
-            model_name='sesionsugerencia',
+            model_name='suggestionsession',
             name='edad_minima_participante',
             field=models.PositiveIntegerField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='sesionsugerencia',
+            model_name='suggestionsession',
             name='tematica',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='sesiones_sugerencia', to='juegos.categoria'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='sesiones_sugerencia', to='juegos.category'),
         ),
     ]
