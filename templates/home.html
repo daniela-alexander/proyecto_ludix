@@ -1,28 +1,21 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 {% block content %}
 
 <form method="get" action="{% url 'home' %}" class="search-form">
     <section class="hero-card">
         <div class="hero-copy">
-            <h1>Bienvenido a Ludix</h1>
+            <h1>{% translate "Bienvenido a Ludix" %}</h1>
 
-            <p>
-                Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida.
-            </p>
+            <pp>{% translate "Descubre, compara y encuentra los mejores juegos de mesa para tu
+                próxima partida." %}</p>
         </div>
 
         <div class="search-main">
-            <label for="q">Buscar juegos</label>
+            <label for="q">{% translate "Buscar juegos" %}</label>
             <div class="search-row">
-                <input
-                    id="q"
-                    name="q"
-                    type="search"
-                    value="{{ query }}"
-                    placeholder="Busca por título, categoría o mecánica"
-                >
-                <button type="submit" class="search-button">Buscar</button>
+                <placeholder="{% translate 'Busca por título, categoría o mecánica' %}" <button type="submit"
+                    class="search-button">{% translate "Buscar" %}</button>
             </div>
         </div>
     </section>
@@ -31,118 +24,127 @@
         <aside class="filter-panel">
             <div class="filter-header">
                 <div>
-                    <span class="filter-kicker">Filtros</span>
-                    <h3>Refinar búsqueda</h3>
+                    <span class="filter-kicker">{% translate "Filtros" %}</span>
+                    <h3>{% translate "Refinar búsqueda" %}</h3>
                 </div>
-                <a href="{% url 'home' %}" class="clear-link">Limpiar</a>
+                <a href="{% url 'home' %}" class="clear-link">{% translate "Limpiar" %}</a>
             </div>
 
             <div class="filter-grid">
                 <div class="filter-group">
-                    <label for="price_min">Precio mínimo</label>
-                    <input id="price_min" name="price_min" type="number" min="0" step="0.01" value="{{ price_min }}" placeholder="0">
+                    <label for="price_min">{% translate "Precio mínimo" %}</label>
+                    <input id="price_min" name="price_min" type="number" min="0" step="0.01" value="{{ price_min }}"
+                        placeholder="0">
                 </div>
 
                 <div class="filter-group">
-                    <label for="price_max">Precio máximo</label>
-                    <input id="price_max" name="price_max" type="number" min="0" step="0.01" value="{{ price_max }}" placeholder="100">
+                    <label for="price_max">{% translate "Precio máximo" %}</label>
+                    <input id="price_max" name="price_max" type="number" min="0" step="0.01" value="{{ price_max }}"
+                        placeholder="100">
                 </div>
             </div>
 
             <div class="filter-group">
-                <label for="category">Categoría</label>
+                <label for="category">{% translate "Categoría" %}</label>
                 <select id="category" name="category">
-                    <option value="">Todas</option>
+                    <option value="">{% translate "Todas" %}</option>
                     {% for category in categories %}
-                        <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:'s' %}selected{% endif %}>
-                            {{ category.name }}
-                        </option>
+                    <option value="{{ category.id }}" {% if selected_category  == category.id|stringformat:'s' %}
+                    selected
+                    {% endif %}>
+                        {{ category.name }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="sort">Ordenar por</label>
+                <label for="sort">{% translate "Ordenar por" %}</label>
                 <select id="sort" name="sort">
                     {% for value, label in sort_options %}
-                        <option value="{{ value }}" {% if selected_sort == value %}selected{% endif %}>
-                            {{ label }}
-                        </option>
+                    <option value="{{ value }}" {% if selected_sort == value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
 
             <div class="filter-group type-group">
-                <span>Tipo</span>
+                <span>{% translate "Tipo" %}</span>
                 <div class="chip-list">
                     <label class="chip-option">
                         <input type="radio" name="format" value="" {% if not selected_format %}checked{% endif %}>
-                        <span>Todos</span>
+                        <span>{% translate "Todos" %}</span>
                     </label>
                     <label class="chip-option">
-                        <input type="radio" name="format" value="mesa" {% if selected_format == 'mesa' %}checked{% endif %}>
-                        <span>Juego de mesa</span>
+                        <input type="radio" name="format" value="mesa" {% if selected_format == 'mesa' %}checked{% endif%}>
+                        <span>{% translate "Juego de mesa" %}</span>
                     </label>
                     <label class="chip-option">
                         <input type="radio" name="format" value="online" {% if selected_format == 'online' %}checked{% endif %}>
-                        <span>Juego online</span>
+                        <span>{% translate "Juego online" %}</span>
                     </label>
                 </div>
             </div>
-            <button type="submit" class="filter-submit">Aplicar filtros</button>
+            <button type="submit" class="filter-submit">{% translate "Aplicar filtros"
+                %}</button>
         </aside>
 
         <div class="game-results">
             {% if games %}
-                <section class="featured-highlight">
-                    <div class="featured-header">
-                        <h2>
-                            {% if query %}
-                                Resultados para "{{ query }}"
-                            {% else %}
-                                Juegos destacados
-                            {% endif %}
-                        </h2>
-                    </div>
-
-                    <div class="game-grid">
-                        {% for game in games %}
-                            <article class="game-card">
-                                <span class="game-tag">
-                                    {% for category in game.categories.all|slice:":2" %}
-                                        {{ category.name }}{% if not forloop.last %}, {% endif %}
-                                    {% empty %}
-                                        General
-                                    {% endfor %}
-                                </span>
-
-                                <h3>{{ game.title }}</h3>
-                                <p>{{ game.description|truncatechars:120 }}</p>
-
-                                <div class="game-meta">
-                                    <span>{{ game.min_players }}-{{ game.max_players }} jugadores</span>
-                                    <span>{{ game.duration_minutes }} min</span>
-                                </div>
-
-                                <div class="game-footer">
-                                    <strong>{{ game.price }} €</strong>
-                                    <a href="#">Ver juego</a>
-                                </div>
-                            </article>
-                        {% endfor %}
-                    </div>
-                </section>
-            {% else %}
-                <section class="results-section empty-state">
-                    <h2>No hemos encontrado resultados</h2>
-                    <p>
+            <section class="featured-highlight">
+                <div class="featured-header">
+                    <h2>
                         {% if query %}
-                            No hay juegos que coincidan con "{{ query }}". Prueba otro título, categoría o mecánica.
+                        {% blocktranslate with query=query %}Resultados para "{{ query }}"
+                        {% endblocktranslate %}
                         {% else %}
-                            No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones.
+                        {% translate "Juegos destacados" %}
                         {% endif %}
-                    </p>
-                </section>
+                    </h2>
+                </div>
+
+                <div class="game-grid">
+                    {% for game in games %}
+                    <article class="game-card">
+                        <span class="game-tag">
+                            {% for category in game.categories.all|slice:":2" %}
+                            {{ category.name }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                            {% translate "General" %}
+                            {% endfor %}
+                        </span>
+
+                        <h3>{{ game.title }}</h3>
+                        <p>{{ game.description|truncatechars:120 }}</p>
+
+                        <div class="game-meta">
+                            <span>{% blocktranslate with min=game.min_players max=game.max_players %}{{ min
+                                }}-{{ max }} jugadores{% endblocktranslate %}</span>
+                            <span>{{ game.duration_minutes }} min</span>
+                        </div>
+
+                        <div class="game-footer">
+                            <strong>{{ game.price }} €</strong>
+                            <a href="#">{% translate "Ver juego" %}</a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </section>
+            {% else %}
+            <section class="results-section empty-state">
+                <h2>{% translate "No hemos encontrado resultados" %}</h2>
+                <p>
+                    {% if query %}
+                    {% blocktranslate with query=query %}No hay juegos que coincidan con "{{ query
+                    }}". Prueba otro título, categoría o mecánica.{% endblocktranslate %}
+                    {% else %}
+                    {% translate "No hay juegos que coincidan con estos filtros. Prueba a cambiar
+                    tus opciones." %}
+                    {% endif %}
+                </p>
+            </section>
             {% endif %}
         </div>
     </div>

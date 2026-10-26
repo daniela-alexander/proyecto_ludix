@@ -1,13 +1,15 @@
-{% load static %}
+{% load i18n static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Ludix{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
 
     <header class="navbar">
@@ -15,19 +17,37 @@
 
         <nav>
             {% if user.is_authenticated %}
-                <span class="user-name">Hola, {{ user.username }}</span>
-                <a href="{% url 'profile' %}">Mi perfil</a>
-
-                <form method="post" action="{% url 'logout' %}" class="logout-form">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-button">Cerrar sesión</button>
-                </form>
+            <span class="user-name">
+                {% blocktranslate with username=user.username %} Hola, {{ username }}
+                {% endblocktranslate %}
+            </span>
+            <a href="{% url 'profile' %}">{% translate "Mi perfil" %}</a>
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">{% translate "Cerrar sesión"
+                    %}</button>
+            </form>
             {% else %}
-                <a href="{% url 'login' %}">Iniciar sesión</a>
-                <a href="{% url 'register' %}">Crear cuenta</a>
+            <a href="{% url 'login' %}">{% translate "Iniciar sesión" %}</a>
+            <a href="{% url 'register' %}">{% translate "Crear cuenta" %}</a>
             {% endif %}
-
-            <button id="theme-toggle" class="theme-btn" type="button" aria-label="Cambiar tema">🌙</button>
+            <form method="post" action="{% url 'set_language' %}" class="language-form">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <label for="language-select">{% translate "Idioma" %}</label>
+                <select id="language-select" name="language" onchange="this.form.submit()">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% for language_code, language_name in AVAILABLE_LANGUAGES %}
+                    <option value="{{ language_code }}" {% if language_code == CURRENT_LANGUAGE %}selected{% endif %}>
+                        {{ language_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <button type="submit">{% translate "Cambiar" %}</button>
+            </form>
+            <button id="theme-toggle" class="theme-btn" type="button" aria-label="{% translate 'Cambiar tema' %}"
+                data-current-theme-prefix="{% translate 'Tema actual' %}">🌙</button>
         </nav>
     </header>
 
@@ -35,17 +55,17 @@
         {% block content %}{% endblock %}
     </main>
 
-    <div class="usuarios-conectados" title="Usuarios conectados">
-        <span class="icono-usuarios">👥</span>
+    <div class="usuarios-conectados" title="{% translate 'Usuarios conectados' %}"> <span
+            class="icono-usuarios">👥</span>
         <span id="contador-usuarios">0</span>
-        <span class="texto-usuarios">Usuarios conectados</span>
+        <span class="texto-usuarios">{% translate "Usuarios conectados" %}</span>
     </div>
 
     <script>
         const protocolo = window.location.protocol === "https:" ? "wss" : "ws";
         const socket = new WebSocket(`${protocolo}://${window.location.host}/ws/usuarios/`);
 
-        socket.onmessage = function(evento) {
+        socket.onmessage = function (evento) {
             const datos = JSON.parse(evento.data);
             const contador = document.getElementById("contador-usuarios");
             if (contador) {
@@ -53,11 +73,11 @@
             }
         };
 
-        socket.onclose = function() {
+        socket.onclose = function () {
             console.log("Conexión WebSocket cerrada");
         };
 
-        socket.onerror = function(error) {
+        socket.onerror = function (error) {
             console.error("Error de WebSocket:", error);
         };
 
@@ -78,9 +98,9 @@
 
             if (btn) {
                 btn.textContent = iconos[indice];
-                const nombres = ["Nebula", "Eclipse", "Aurora"];
-                btn.setAttribute("aria-label", `Tema actual: ${nombres[indice]}`);
-                btn.setAttribute("title", `Tema actual: ${nombres[indice]}`);
+                const etiqueta = `${btn.dataset.currentThemePrefix}: ${nombres[indice]}`;
+                btn.setAttribute("aria-label", etiqueta);
+                btn.setAttribute("title", etiqueta);
             }
         }
 
@@ -95,4 +115,5 @@
     </script>
 
 </body>
+
 </html>
