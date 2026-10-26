@@ -22,15 +22,15 @@ class JuegoMecanicaInline(admin.TabularInline):
 @admin.register(Juego)
 class JuegoAdmin(admin.ModelAdmin):
     list_display = (
-        "titulo",
-        "num_jugadores_min",
-        "num_jugadores_max",
-        "duracion_minutos",
-        "edad_minima",
-        "dificultad",
+        "title",
+        "min_players",
+        "max_players",
+        "duration_minutes",
+        "min_age",
+        "difficulty",
         "stock",
     )
-    search_fields = ("titulo",)
+    search_fields = ("title",)
     inlines = (JuegoCategoriaInline, JuegoMecanicaInline)
 
 

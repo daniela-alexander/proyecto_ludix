@@ -153,47 +153,50 @@ def sugerencia_view(request):
         perfil, _ = PerfilUsuario.objects.get_or_create(user=request.user)
         criterios = form.cleaned_data
 
-        sesion = SesionSugerencia.objects.create(
-            anfitrion=perfil,
-            tipo_sugerencia=criterios["tipo_sugerencia"],
-            num_jugadores=criterios["num_jugadores"],
+        session = SesionSugerencia.objects.create(
+            host=perfil,
+            suggestion_type=criterios["tipo_sugerencia"],
+            player_count=criterios["num_jugadores"],
             edad_minima_participante=criterios[
                 "edad_minima_participante"
             ],
             dificultad_preferida=criterios["dificultad_preferida"],
-            duracion_max=criterios["duracion_max"],
+            max_duration=criterios["duracion_max"],
             tematica=criterios["tematica"],
         )
 
         juegos = Juego.objects.filter(
-            num_jugadores_min__lte=criterios["num_jugadores"],
-            num_jugadores_max__gte=criterios["num_jugadores"],
-            edad_minima__lte=criterios["edad_minima_participante"],
-            duracion_minutos__lte=criterios["duracion_max"],
+            min_players__lte=criterios["num_jugadores"],
+            max_players__gte=criterios["num_jugadores"],
+            min_age__lte=criterios["edad_minima_participante"],
+            duration_minutes__lte=criterios["duracion_max"],
         )
 
-        if criterios["tipo_sugerencia"] == SesionSugerencia.TipoSugerencia.BIBLIOTECA:
-            juegos = juegos.filter(bibliotecas__usuario=perfil)
+        if (
+            criterios["tipo_sugerencia"]
+            == SesionSugerencia.SuggestionType.LIBRARY
+        ):
+            juegos = juegos.filter(libraries__user_profile=perfil)
 
         if criterios["tematica"]:
-            juegos = juegos.filter(categorias=criterios["tematica"])
+            juegos = juegos.filter(categories=criterios["tematica"])
 
         candidatos = list(juegos.distinct())
         candidatos.sort(
             key=lambda juego: (
                 abs(
-                    juego.dificultad
+                    juego.difficulty
                     - criterios["dificultad_preferida"]
                 ),
-                juego.duracion_minutos,
-                juego.titulo.lower(),
+                juego.duration_minutes,
+                juego.title.lower(),
             )
         )
         recomendaciones = candidatos[:3]
 
         SesionJuegoPropuesto.objects.bulk_create(
             [
-                SesionJuegoPropuesto(sesion=sesion, juego=juego)
+                SesionJuegoPropuesto(session=session, game=juego)
                 for juego in recomendaciones
             ]
         )

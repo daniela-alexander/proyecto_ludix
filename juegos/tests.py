@@ -8,6 +8,8 @@ from .models import (
     Mechanic,
     Order,
     OrderLine,
+    ProposedGameSession,
+    SuggestionSession,
     UserProfile,
 )
 
@@ -147,4 +149,99 @@ class GameApiSearchTests(TestCase):
         self.assertEqual(
             [game.title for game in response.context["games"]],
             ["Prueba Ludix", "Cartas del reino"],
+        )
+
+
+class SuggestionViewTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user("suggestion_user", password="test")
+        self.profile = UserProfile.objects.create(user=self.user)
+        self.game = Game.objects.create(
+            title="Juego recomendado",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=60,
+            min_age=8,
+            difficulty=3,
+            price=19.99,
+        )
+        self.category = Category.objects.create(name="Estrategia")
+        self.game.categories.add(self.category)
+        self.client.force_login(self.user)
+
+    def test_purchase_suggestion_creates_session_and_proposal(self):
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 18,
+                "duracion_max": 90,
+                "dificultad_preferida": 3,
+                "tematica": self.category.id,
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["enviado"])
+        session = SuggestionSession.objects.get(host=self.profile)
+        self.assertEqual(
+            session.suggestion_type,
+            SuggestionSession.SuggestionType.PURCHASE,
+        )
+        self.assertEqual(session.player_count, 4)
+        self.assertEqual(session.max_duration, 90)
+        self.assertEqual(session.edad_minima_participante, 18)
+        self.assertEqual(session.tematica, self.category)
+        self.assertEqual(
+            list(
+                ProposedGameSession.objects.filter(session=session).values_list(
+                    "game_id", flat=True
+                )
+            ),
+            [self.game.id],
+        )
+
+    def test_library_suggestion_only_recommends_games_in_library(self):
+        other_game = Game.objects.create(
+            title="Otro juego",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=45,
+            min_age=8,
+            difficulty=3,
+            price=19.99,
+        )
+        LibraryGame.objects.create(user_profile=self.profile, game=self.game)
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.LIBRARY,
+                "num_jugadores": 4,
+                "edad_minima_participante": 18,
+                "duracion_max": 90,
+                "dificultad_preferida": 3,
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["enviado"])
+        session = SuggestionSession.objects.get(host=self.profile)
+        self.assertEqual(
+            list(
+                ProposedGameSession.objects.filter(session=session).values_list(
+                    "game_id", flat=True
+                )
+            ),
+            [self.game.id],
+        )
+        self.assertNotIn(
+            other_game.id,
+            ProposedGameSession.objects.filter(session=session).values_list(
+                "game_id", flat=True
+            ),
         )

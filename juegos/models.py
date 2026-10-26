@@ -381,7 +381,7 @@ class SuggestionSession(models.Model):
     )
 
     tematica = models.ForeignKey(
-        Categoria,
+        Category,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

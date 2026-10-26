@@ -3,6 +3,68 @@
 from django.db import migrations, models
 
 
+def _rename_columns(apps, schema_editor, renames):
+    model = apps.get_model("juegos", "Game")
+    table = model._meta.db_table
+    quote_name = schema_editor.connection.ops.quote_name
+
+    with schema_editor.connection.cursor() as cursor:
+        columns = {
+            column.name
+            for column in schema_editor.connection.introspection.get_table_description(
+                cursor, table
+            )
+        }
+        for old_name, new_name in renames:
+            if old_name in columns and new_name in columns:
+                raise RuntimeError(
+                    f"Both {old_name} and {new_name} exist in {table}; "
+                    "cannot safely rename the legacy column."
+                )
+            if old_name in columns:
+                schema_editor.execute(
+                    f"ALTER TABLE {quote_name(table)} "
+                    f"RENAME COLUMN {quote_name(old_name)} "
+                    f"TO {quote_name(new_name)}"
+                )
+                columns.remove(old_name)
+                columns.add(new_name)
+
+
+def rename_legacy_columns(apps, schema_editor):
+    _rename_columns(
+        apps,
+        schema_editor,
+        (
+            ("titulo", "title"),
+            ("descripcion", "description"),
+            ("num_jugadores_min", "min_players"),
+            ("num_jugadores_max", "max_players"),
+            ("duracion_minutos", "duration_minutes"),
+            ("edad_minima", "min_age"),
+            ("precio", "price"),
+            ("link_referido", "referral_link"),
+        ),
+    )
+
+
+def restore_legacy_columns(apps, schema_editor):
+    _rename_columns(
+        apps,
+        schema_editor,
+        (
+            ("title", "titulo"),
+            ("description", "descripcion"),
+            ("min_players", "num_jugadores_min"),
+            ("max_players", "num_jugadores_max"),
+            ("duration_minutes", "duracion_minutos"),
+            ("min_age", "edad_minima"),
+            ("price", "precio"),
+            ("referral_link", "link_referido"),
+        ),
+    )
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,6 +72,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(rename_legacy_columns, restore_legacy_columns),
         migrations.AddField(
             model_name='game',
             name='is_online',
