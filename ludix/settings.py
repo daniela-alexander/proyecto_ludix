@@ -25,27 +25,32 @@ SECRET_KEY = 'django-insecure-_wwaqob&f)holt3=%yd^u1no(ptf45)zk+*_uo@^*g00&&a1mz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0',
+    'testserver',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'daphne',
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'rest_framework',
     'django_filters',
-
-    'juegos',
     'accounts',
-    
+    'juegos',
+    'library',
+    'wishlist',
+    'orders',
+    'recommendations',
 ]
 
 MIDDLEWARE = [
@@ -131,12 +136,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
 MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
@@ -149,13 +155,8 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
-
-        #añadido por Daniela para configurar la paginación
-    'DEFAULT_PAGINATION_CLASS': 'juegos.pagination.JuegoPagination',
+    'DEFAULT_PAGINATION_CLASS': 'juegos.pagination.GamePagination',
     'PAGE_SIZE': 10,
 }
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
 
 LOGOUT_REDIRECT_URL = 'home'

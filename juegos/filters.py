@@ -1,16 +1,16 @@
 import django_filters
 from django import forms
 
-from .models import Categoria, Juego, Mecanica
+from .models import Category, Game, Mechanic
 
 
-class JuegoFilterForm(forms.Form):
+class GameFilterForm(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
         range_pairs = (
-            ("precio_min", "precio_max"),
-            ("dificultad_min", "dificultad_max"),
-            ("duracion_min", "duracion_max"),
+            ("price_min", "price_max"),
+            ("difficulty_min", "difficulty_max"),
+            ("duration_min", "duration_max"),
         )
 
         for minimum_name, maximum_name in range_pairs:
@@ -25,52 +25,60 @@ class JuegoFilterForm(forms.Form):
         return cleaned_data
 
 
-class JuegoFilter(django_filters.FilterSet):
-    precio_min = django_filters.NumberFilter(
-        field_name="precio",
+class GameFilter(django_filters.FilterSet):
+    price_min = django_filters.NumberFilter(
+        field_name="price",
         lookup_expr="gte",
     )
-    precio_max = django_filters.NumberFilter(
-        field_name="precio",
+    price_max = django_filters.NumberFilter(
+        field_name="price",
         lookup_expr="lte",
     )
-    dificultad_min = django_filters.NumberFilter(
-        field_name="dificultad",
+    difficulty_min = django_filters.NumberFilter(
+        field_name="difficulty",
         lookup_expr="gte",
     )
-    dificultad_max = django_filters.NumberFilter(
-        field_name="dificultad",
+    difficulty_max = django_filters.NumberFilter(
+        field_name="difficulty",
         lookup_expr="lte",
     )
-    duracion_min = django_filters.NumberFilter(
-        field_name="duracion_minutos",
+    duration_min = django_filters.NumberFilter(
+        field_name="duration_minutes",
         lookup_expr="gte",
     )
-    duracion_max = django_filters.NumberFilter(
-        field_name="duracion_minutos",
+    duration_max = django_filters.NumberFilter(
+        field_name="duration_minutes",
         lookup_expr="lte",
     )
-    categoria = django_filters.ModelChoiceFilter(
-        field_name="categorias",
-        queryset=Categoria.objects.order_by("nombre"),
+    category = django_filters.ModelChoiceFilter(
+        field_name="categories",
+        queryset=Category.objects.order_by("name"),
         distinct=True,
     )
-    mecanica = django_filters.ModelChoiceFilter(
-        field_name="mecanicas",
-        queryset=Mecanica.objects.order_by("nombre"),
+    mechanic = django_filters.ModelChoiceFilter(
+        field_name="mechanics",
+        queryset=Mechanic.objects.order_by("name"),
         distinct=True,
+    )
+    is_online = django_filters.BooleanFilter(
+        field_name="is_online",
     )
 
     class Meta:
-        model = Juego
-        form = JuegoFilterForm
+        model = Game
+        form = GameFilterForm
         fields = [
-            "precio_min",
-            "precio_max",
-            "dificultad_min",
-            "dificultad_max",
-            "duracion_min",
-            "duracion_max",
-            "categoria",
-            "mecanica",
+            "price_min",
+            "price_max",
+            "difficulty_min",
+            "difficulty_max",
+            "duration_min",
+            "duration_max",
+            "category",
+            "mechanic",
+            "is_online",
         ]
+
+
+JuegoFilterForm = GameFilterForm
+JuegoFilter = GameFilter

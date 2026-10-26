@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 
-from juegos.models import BibliotecaJuego, PerfilUsuario, Wishlist
+from juegos.models import LibraryGame, UserProfile, Wishlist
 from .forms import RegisterForm
 
 
@@ -22,10 +22,11 @@ def register_view(request):
     return render(request, "accounts/register.html", {
         "form": form
     })
-    
+
+
 @login_required
 def profile_view(request):
-    perfil, creado = PerfilUsuario.objects.get_or_create(
+    profile, created = UserProfile.objects.get_or_create(
         user=request.user
     )
 
@@ -34,6 +35,11 @@ def profile_view(request):
 
     if request.method == "POST":
         email = request.POST.get("email", "").strip()
+        profile_image = request.FILES.get("profile_image")
+
+        if profile_image:
+            profile.profile_image = profile_image
+            profile.save(update_fields=["profile_image"])
 
         try:
             email = django_forms.EmailField(
@@ -48,39 +54,47 @@ def profile_view(request):
         except ValidationError:
             email_error = "Introduce una dirección de email válida."
 
-    biblioteca = (
-        BibliotecaJuego.objects
-        .filter(usuario=perfil)
-        .select_related("juego")
-        .order_by("-fecha_agregado")
+    library = (
+        LibraryGame.objects
+        .filter(user_profile=profile)
+        .select_related("game")
+        .order_by("-added_at")
     )
 
-    favoritos = biblioteca.filter(favorito=True)
+    favorites = library.filter(favorite=True)
 
     wishlist = (
         Wishlist.objects
-        .filter(usuario=perfil)
-        .select_related("juego")
-        .order_by("-agregado_el")
+        .filter(user_profile=profile)
+        .select_related("game")
+        .order_by("-added_at")
     )
 
-    sesiones = perfil.sesiones_sugerencia.order_by(
-        "-creado_el"
+    sessions = profile.suggestion_sessions.order_by(
+        "-created_at"
     )[:5]
 
-    pedidos = perfil.pedidos.order_by("-creado_el")[:5]
+    orders = profile.orders.order_by("-created_at")[:5]
 
     context = {
-        "perfil": perfil,
-        "biblioteca": biblioteca[:6],
-        "favoritos": favoritos[:6],
+        "profile": profile,
+        "perfil": profile,
+        "library": library[:6],
+        "biblioteca": library[:6],
+        "favorites": favorites[:6],
+        "favoritos": favorites[:6],
         "wishlist": wishlist[:6],
-        "sesiones": sesiones,
-        "pedidos": pedidos,
-        "total_juegos": biblioteca.count(),
-        "total_favoritos": favoritos.count(),
+        "sessions": sessions,
+        "sesiones": sessions,
+        "orders": orders,
+        "pedidos": orders,
+        "total_games": library.count(),
+        "total_juegos": library.count(),
+        "total_favorites": favorites.count(),
+        "total_favoritos": favorites.count(),
         "total_wishlist": wishlist.count(),
-        "total_pedidos": perfil.pedidos.count(),
+        "total_orders": profile.orders.count(),
+        "total_pedidos": profile.orders.count(),
         "email_error": email_error,
         "email_success": email_success,
     }

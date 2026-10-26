@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Sesión cerrada{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-card">
+        <p class="auth-kicker">Hasta pronto</p>
+        <h1>Has cerrado sesión</h1>
+        <p class="auth-subtitle">Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras.</p>
+
+        <div class="error-actions">
+            <a href="{% url 'home' %}" class="primary-link">Volver al inicio</a>
+            <a href="{% url 'login' %}" class="secondary-link">Iniciar sesión otra vez</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
