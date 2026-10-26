@@ -24,6 +24,9 @@
 
     --radius:20px;
 
+    --recommend-button-start: #3a4a74;
+    --recommend-button-end: #2e3c60;
+
     --glow-cyan: rgba(77, 226, 255, .12);
     --glow-purple: rgba(124, 108, 255, .12);
 }
@@ -53,6 +56,9 @@
     --shadow:
         0 15px 40px rgba(0,0,0,.5);
 
+    --recommend-button-start: #1d1d22;
+    --recommend-button-end: #29292c;
+
     --glow-cyan: rgba(77, 226, 255, .06);
     --glow-purple: rgba(124, 108, 255, .08);
 }
@@ -80,6 +86,9 @@
     --border: #d9deed;
 
     --shadow: 0 10px 30px rgba(37, 45, 80, .10);
+
+    --recommend-button-start: #59c7c0;
+    --recommend-button-end: #5ab9b3;
 
     --glow-cyan: rgba(77, 226, 255, .16);
     --glow-purple: rgba(124, 108, 255, .09);
@@ -1505,4 +1514,337 @@ main:has(.register-page) {
     .profile-form button {
         width: 100%;
     }
+}
+
+/* =========================
+   RECOMENDADOR LUDIX
+========================= */
+
+.recommend-card{
+    max-width:600px;
+    margin:0 auto;
+
+    padding:2.5rem;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    box-shadow:var(--shadow);
+}
+
+.recommend-header{
+    margin-bottom:2rem;
+}
+
+.recommend-header h1{
+    margin-bottom:.75rem;
+}
+
+.recommend-header p{
+    max-width:none;
+}
+
+.recommend-form{
+    width:100%;
+    max-width:none;
+
+    margin:0;
+    padding:0;
+
+    background:none;
+    border:none;
+    box-shadow:none;
+}
+
+.recommend-group{
+    margin-bottom:2rem;
+}
+
+.recommend-group label{
+    display:block;
+    margin-bottom:.8rem;
+
+    font-size:1rem;
+    font-weight:700;
+
+    color:var(--text-primary);
+}
+
+/* =========================
+   SELECTS
+========================= */
+
+.recommend-group select{
+    width:100%;
+
+    padding:1rem;
+
+    border-radius:16px;
+
+    background:var(--bg-secondary);
+
+    color:var(--text-primary);
+
+    border:1px solid var(--border);
+
+    transition:.25s;
+}
+
+.recommend-group select:hover{
+    border-color:var(--accent);
+}
+
+.recommend-group select:focus{
+    outline:none;
+
+    border-color:var(--accent);
+
+    box-shadow:
+        0 0 0 3px rgba(124,108,255,.15);
+}
+
+/* =========================
+   RANGE
+========================= */
+
+.recommend-group input[type="range"]{
+    width:100%;
+
+    appearance:none;
+
+    background:var(--bg-secondary);
+
+    height:10px;
+
+    border-radius:999px;
+
+    border:none;
+}
+
+.recommend-group input[type="range"]::-webkit-slider-thumb{
+    appearance:none;
+
+    width:24px;
+    height:24px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    border:2px solid white;
+
+    box-shadow:
+        0 0 12px var(--accent),
+        0 0 24px rgba(124,108,255,.4);
+
+    cursor:pointer;
+}
+
+.recommend-group input[type="range"]::-webkit-slider-thumb:hover{
+    transform:scale(1.12);
+}
+
+.slider-labels{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:.6rem;
+
+    color:var(--text-secondary);
+
+    font-size:.85rem;
+}
+
+/* =========================
+   BOTON
+========================= */
+
+.recommend-btn{
+    width:100%;
+    padding:1rem;
+    font-size:1rem;
+    border-radius:16px;
+    margin-top:1rem;
+    background: linear-gradient(
+        135deg,
+        var(--recommend-button-start),
+        var(--recommend-button-end)
+    );
+    color: #fff;
+}
+
+.recommend-btn:hover{
+    box-shadow:
+        0 0 15px rgba(124,108,255,.45),
+        0 0 30px rgba(124,108,255,.25);
+}
+
+/* =========================
+   SUCCESS
+========================= */
+
+.recommend-success{
+    padding:1rem 1.2rem;
+
+    margin-bottom:2rem;
+
+    border-radius:16px;
+
+    color:#4ade80;
+
+    background:rgba(74,222,128,.08);
+
+    border:1px solid rgba(74,222,128,.25);
+}
+
+/* =========================
+   HOVER GENERAL
+========================= */
+
+.recommend-group input:hover,
+.recommend-group select:hover{
+    border-color:var(--accent);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .recommend-card{
+        padding:1.5rem;
+    }
+
+    .slider-labels{
+        font-size:.75rem;
+    }
+
+}
+
+/* =========================
+   RECOMENDADOR
+========================= */
+
+.recommend-card {
+    width: 100%;
+    max-width: none;
+}
+
+.recommend-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.recommend-layout.has-results {
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr);
+}
+
+.recommend-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-content: start;
+}
+
+.recommend-form .recommend-group {
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.recommend-form .recommend-btn {
+    grid-column: 1 / -1;
+}
+
+.recommend-results {
+    min-width: 0;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.recommend-results article {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.recommend-results article h3 {
+    margin-bottom: .5rem;
+}
+
+.recommend-results article p + p {
+    margin-top: .25rem;
+}
+
+@media (max-width: 850px) {
+    .recommend-layout.has-results {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .recommend-card {
+        padding: 1.25rem;
+    }
+
+    .recommend-form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .recommend-form .recommend-btn {
+        grid-column: auto;
+    }
+}
+
+.difficulty-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: .8rem;
+}
+
+.difficulty-heading label {
+    margin-bottom: 0;
+}
+
+#dificultad-valor {
+    color: var(--neon);
+    font-weight: 800;
+}
+
+/* =========================
+   outputs
+========================= */
+
+.slider-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: .8rem;
+}
+
+.slider-heading label {
+    margin-bottom: 0;
+}
+
+.slider-heading output {
+    color: var(--neon);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.slider-labels span:last-child {
+    text-align: right;
 }

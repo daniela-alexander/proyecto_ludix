@@ -18,6 +18,8 @@
                 <span class="user-name">Hola, {{ user.username }}</span>
                 <a href="{% url 'profile' %}">Mi perfil</a>
 
+                <a href="{% url 'sugerencia' %}">Recomiéndame un juego</a>
+
                 <form method="post" action="{% url 'logout' %}" class="logout-form">
                     {% csrf_token %}
                     <button type="submit" class="logout-button">Cerrar sesión</button>

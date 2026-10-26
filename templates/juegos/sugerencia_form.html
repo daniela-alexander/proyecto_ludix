@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}
+Recomiéndame un juego | Ludix
+{% endblock %}
+
+{% block content %}
+
+<section class="recommend-card">
+
+    <div class="recommend-header">
+        <h1>🎲 Encuentra tu próximo juego</h1>
+
+        <p>
+            Configura tus preferencias y deja que Ludix
+            encuentre el juego perfecto para ti.
+        </p>
+    </div>
+
+    {% if enviado %}
+        <div class="recommend-success">
+            ✅ Preferencias guardadas correctamente.
+        </div>
+    {% endif %}
+
+    <div class="recommend-layout{% if enviado %} has-results{% endif %}">
+
+        <form method="post" class="recommend-form">
+
+            {% csrf_token %}
+
+            <div class="recommend-group">
+                <label>
+                    🎮 {{ form.tipo_sugerencia.label }}
+                </label>
+
+                {{ form.tipo_sugerencia }}
+                <p class="helptext">{{ form.tipo_sugerencia.help_text }}</p>
+            </div>
+
+            <div class="recommend-group">
+
+                <div class="slider-heading">
+                    <label for="{{ form.num_jugadores.id_for_label }}">
+                        👥 {{ form.num_jugadores.label }}
+                    </label>
+                    <output
+                        id="jugadores-valor"
+                        for="{{ form.num_jugadores.id_for_label }}"
+                    >0</output>
+                </div>
+
+                {{ form.num_jugadores }}
+
+                <div class="slider-labels">
+                    <span>1 jugador</span>
+                    <span>10 jugadores</span>
+                </div>
+
+            </div>
+
+            <div class="recommend-group">
+
+                <div class="slider-heading">
+                    <label for="{{ form.edad_minima_participante.id_for_label }}">
+                        👶 {{ form.edad_minima_participante.label }}
+                    </label>
+                    <output
+                        id="edad-valor"
+                        for="{{ form.edad_minima_participante.id_for_label }}"
+                    >0</output>
+                </div>
+
+                {{ form.edad_minima_participante }}
+                <div class="slider-labels">
+                    <span>0</span>
+                    <span>100</span>
+                </div>
+
+            </div>
+
+            <div class="recommend-group">
+
+                <div class="difficulty-heading">
+                    <label for="{{ form.dificultad_preferida.id_for_label }}">
+                        🎯 {{ form.dificultad_preferida.label }}
+                    </label>
+
+                    <output
+                        id="dificultad-valor"
+                        for="{{ form.dificultad_preferida.id_for_label }}"
+                    >3</output>
+                </div>
+
+                {{ form.dificultad_preferida }}
+
+                <div class="slider-labels">
+                    <span>1 · Muy fácil</span>
+                    <span>3 · Normal</span>
+                    <span>5 · Experto</span>
+                </div>
+
+            </div>
+
+            <div class="recommend-group">
+
+                <div class="slider-heading">
+                    <label for="{{ form.duracion_max.id_for_label }}">
+                        ⏱️ {{ form.duracion_max.label }}
+                    </label>
+                    <output
+                        id="duracion-valor"
+                        for="{{ form.duracion_max.id_for_label }}"
+                    >0</output>
+                </div>
+
+                {{ form.duracion_max }}
+
+                <div class="slider-labels">
+                    <span>15 min</span>
+                    <span>4 h</span>
+                </div>
+
+            </div>
+
+            <div class="recommend-group">
+
+                <label>
+                    🏷️ {{ form.tematica.label }}
+                </label>
+
+                {{ form.tematica }}
+
+            </div>
+
+            <button type="submit" class="recommend-btn">
+                🔍 Buscar recomendaciones
+            </button>
+
+        </form>
+
+        
+
+        {% if enviado %}
+            <section class="recommend-results">
+                <h2>Recomendaciones</h2>
+
+                {% for juego in recomendaciones %}
+                    <article>
+                        <h3>{{ juego.titulo }}</h3>
+                        <p>Jugadores: {{ juego.num_jugadores_min }}–{{ juego.num_jugadores_max }}</p>
+                        <p>Edad mínima: {{ juego.edad_minima }} años</p>
+                        <p>Duración: {{ juego.duracion_minutos }} minutos</p>
+                        <p>Dificultad: {{ juego.dificultad }}</p>
+
+                        {% if juego.stock > 0 %}
+                            <p>Disponible</p>
+                        {% else %}
+                            <p>No disponible actualmente</p>
+                        {% endif %}
+                    </article>
+                {% empty %}
+                    <p>No encontramos juegos que encajen con esos criterios.</p>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </div>
+
+</section>
+
+<script>
+    const controles = [
+        ["{{ form.num_jugadores.id_for_label }}", "jugadores-valor", " jugadores"],
+        ["{{ form.edad_minima_participante.id_for_label }}", "edad-valor", " años"],
+        ["{{ form.dificultad_preferida.id_for_label }}", "dificultad-valor", ""],
+        ["{{ form.duracion_max.id_for_label }}", "duracion-valor", " min"],
+    ];
+
+    controles.forEach(([controlId, outputId, sufijo]) => {
+        const control = document.getElementById(controlId);
+        const output = document.getElementById(outputId);
+
+        if (control && output) {
+            const actualizar = () => {
+                output.textContent = `${control.value}${sufijo}`;
+            };
+
+            control.addEventListener("input", actualizar);
+            actualizar();
+        }
+    });
+</script>
+
+{% endblock %}

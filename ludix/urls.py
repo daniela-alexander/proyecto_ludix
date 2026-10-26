@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.contrib.auth import logout
 from django.shortcuts import render
 from django.urls import include, path
-
+from juegos.views import JuegoListView, home, sugerencia_view
+from django.contrib.auth import views as auth_views
 from juegos.views import GameListView, home
 
 
@@ -32,7 +33,11 @@ handler500 = 'ludix.urls.custom_500'
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
-    path('logout/', logout_view, name='logout'),
+    path("api/juegos/", JuegoListView.as_view()),
+    path("", home, name="home"),
+    path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
+    path("accounts/", include("accounts.urls")),
+    path("sugerencia/", sugerencia_view, name="sugerencia"),  # Agrega esta línea para incluir las URLs de sugerencia
     path('api/games/', GameListView.as_view(), name='game_list'),
     path('api/juegos/', GameListView.as_view()),
     path('accounts/', include('accounts.urls')),
