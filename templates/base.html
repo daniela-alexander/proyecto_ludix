@@ -18,14 +18,12 @@
         <nav>
             {% if user.is_authenticated %}
             <span class="user-name">
-                {% blocktranslate with username=user.username %} Hola, {{ username }}
-                {% endblocktranslate %}
+                {% blocktranslate trimmed with username=user.username %}Hola, {{ username }}{% endblocktranslate %}
             </span>
             <a href="{% url 'profile' %}">{% translate "Mi perfil" %}</a>
             <form method="post" action="{% url 'logout' %}" class="logout-form">
                 {% csrf_token %}
-                <button type="submit" class="logout-button">{% translate "Cerrar sesión"
-                    %}</button>
+                <button type="submit" class="logout-button">{% translate "Cerrar sesión" %}</button>
             </form>
             {% else %}
             <a href="{% url 'login' %}">{% translate "Iniciar sesión" %}</a>
@@ -44,7 +42,7 @@
                     </option>
                     {% endfor %}
                 </select>
-                <button type="submit">{% translate "Cambiar" %}</button>
+                <button type="submit" class="language-button">{% translate "Cambiar" %}</button>
             </form>
             <button id="theme-toggle" class="theme-btn" type="button" aria-label="{% translate 'Cambiar tema' %}"
                 data-current-theme-prefix="{% translate 'Tema actual' %}">🌙</button>

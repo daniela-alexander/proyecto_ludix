@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}My profile | Ludix{% endblock %}
+{% block title %}{% translate "Mi perfil" %} | Ludix{% endblock %}
 
 {% block content %}
 <section class="profile-page">
@@ -14,8 +15,11 @@
 
         <div class="profile-avatar">
             {% if profile.profile_image %}
-            <img src="{{ profile.profile_image.url }}" alt="{% blocktranslate with username=request.user.username %}Foto de perfil de {{
-username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|upper }} {% endif %} </div>
+            <img src="{{ profile.profile_image.url }}" alt="{% blocktranslate trimmed with username=request.user.username %}Foto de perfil de {{ username }}{% endblocktranslate %}">
+            {% else %}
+            {{ request.user.username|first|upper }}
+            {% endif %}
+        </div>
         </div>
 
         {% if email_success %}
@@ -115,8 +119,7 @@ username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|up
                     <div>
                         <strong>{{ item.game.title }}</strong>
                         <span>
-                            {% blocktranslate with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}
-                            {% endblocktranslate %}
+                            {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
                 </div>
@@ -139,8 +142,7 @@ username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|up
                     <div>
                         <strong>{{ item.game.title }}</strong>
                         <span>
-                            {% blocktranslate with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}
-                            {% endblocktranslate %}
+                            {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
                 </div>
@@ -152,7 +154,7 @@ username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|up
             </section>
 
             <section class="profile-card activity-card">
-                <h2>Wishlist</h2>
+                <h2>{% translate "Lista de deseos" %}</h2>
                 <p class="profile-description">
                     {% translate "Juegos que quieres añadir a tu colección." %}
                 </p>
@@ -163,8 +165,7 @@ username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|up
                     <div>
                         <strong>{{ item.game.title }}</strong>
                         <span>
-                            {% blocktranslate with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}
-                            {% endblocktranslate %}
+                            {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
                 </div>
@@ -182,8 +183,7 @@ username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|up
                 <div class="profile-list-item">
                     <span class="game-icon">🧩</span>
                     <div>
-                        <strong>{% blocktranslate with id=session.id %}Sesión n.o {{ id }}
-                            {% endblocktranslate %}</strong>
+                        <strong>{% blocktranslate trimmed with id=session.id %}Sesión n.o {{ id }}{% endblocktranslate %}</strong>
                         <span>
                             {{ session.get_suggestion_type_display }}
                             · {{ session.created_at|date:"d/m/Y H:i" }}
@@ -192,20 +192,19 @@ username }}{% endblocktranslate %}" {% else %} {{ request.user.username|first|up
                 </div>
                 {% empty %}
                 <p class="profile-empty">
-                    {% translate "Todavía no tienes sesionnes guardadas." %}
+                    {% translate "Todavía no tienes sesiones guardadas." %}
                 </p>
                 {% endfor %}
             </section>
 
             <section class="profile-card activity-card">
-                <h2>{% translate "Últimos pedidos." %}</h2>
+                <h2>{% translate "Últimos pedidos" %}</h2>
 
                 {% for order in orders %}
                 <div class="profile-list-item">
                     <span class="game-icon">📦</span>
                     <div>
-                        <strong>{% blocktranslate with id=order.id %}Pedido n.o {{ id }}
-                            {% endblocktranslate %}</strong>
+                        <strong>{% blocktranslate trimmed with id=order.id %}Pedido n.o {{ id }}{% endblocktranslate %}</strong>
                         <span>
                             {{ order.get_status_display }}
                             · {{ order.created_at|date:"d/m/Y" }}

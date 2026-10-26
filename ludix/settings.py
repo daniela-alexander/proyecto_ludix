@@ -131,6 +131,7 @@ LANGUAGE_CODE = 'es'
 LANGUAGES = [
    ('es', 'Castellano'),
    ('ca', 'Català'),
+   ('en', 'English'),
    ('it', 'Italiano'),
 ]
 LOCALE_PATHS = [

@@ -7,15 +7,15 @@
         <div class="hero-copy">
             <h1>{% translate "Bienvenido a Ludix" %}</h1>
 
-            <pp>{% translate "Descubre, compara y encuentra los mejores juegos de mesa para tu
-                próxima partida." %}</p>
+            <p>{% translate "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida." %}</p>
         </div>
 
         <div class="search-main">
             <label for="q">{% translate "Buscar juegos" %}</label>
             <div class="search-row">
-                <placeholder="{% translate 'Busca por título, categoría o mecánica' %}" <button type="submit"
-                    class="search-button">{% translate "Buscar" %}</button>
+                <input id="q" name="q" type="search" value="{{ query }}"
+                    placeholder="{% translate 'Busca por título, categoría o mecánica' %}">
+                <button type="submit" class="search-button">{% translate "Buscar" %}</button>
             </div>
         </div>
     </section>
@@ -52,7 +52,7 @@
                     <option value="{{ category.id }}" {% if selected_category  == category.id|stringformat:'s' %}
                     selected
                     {% endif %}>
-                        {{ category.name }}
+                        {{ category.get_name }}
                     </option>
                     {% endfor %}
                 </select>
@@ -86,8 +86,8 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="filter-submit">{% translate "Aplicar filtros"
-                %}</button>
+            <button type="submit" class="filter-submit">
+                {% translate "Aplicar filtros"%}</button>
         </aside>
 
         <div class="game-results">
@@ -96,8 +96,7 @@
                 <div class="featured-header">
                     <h2>
                         {% if query %}
-                        {% blocktranslate with query=query %}Resultados para "{{ query }}"
-                        {% endblocktranslate %}
+                        {% blocktranslate trimmed with query=query %}Resultados para "{{ query }}"{% endblocktranslate %}
                         {% else %}
                         {% translate "Juegos destacados" %}
                         {% endif %}
@@ -109,18 +108,17 @@
                     <article class="game-card">
                         <span class="game-tag">
                             {% for category in game.categories.all|slice:":2" %}
-                            {{ category.name }}{% if not forloop.last %}, {% endif %}
+                            {{ category.get_name }}{% if not forloop.last %}, {% endif %}
                             {% empty %}
                             {% translate "General" %}
                             {% endfor %}
                         </span>
 
-                        <h3>{{ game.title }}</h3>
-                        <p>{{ game.description|truncatechars:120 }}</p>
+                        <h3>{{ game.get_title }}</h3>
+                        <p>{{ game.get_description|truncatechars:120 }}</p>
 
                         <div class="game-meta">
-                            <span>{% blocktranslate with min=game.min_players max=game.max_players %}{{ min
-                                }}-{{ max }} jugadores{% endblocktranslate %}</span>
+                            <span>{% blocktranslate trimmed with min=game.min_players max=game.max_players %}{{ min }}-{{ max }} jugadores{% endblocktranslate %}</span>
                             <span>{{ game.duration_minutes }} min</span>
                         </div>
 
@@ -137,11 +135,9 @@
                 <h2>{% translate "No hemos encontrado resultados" %}</h2>
                 <p>
                     {% if query %}
-                    {% blocktranslate with query=query %}No hay juegos que coincidan con "{{ query
-                    }}". Prueba otro título, categoría o mecánica.{% endblocktranslate %}
+                    {% blocktranslate trimmed with query=query %}No hay juegos que coincidan con "{{ query }}". Prueba otro título, categoría o mecánica.{% endblocktranslate %}
                     {% else %}
-                    {% translate "No hay juegos que coincidan con estos filtros. Prueba a cambiar
-                    tus opciones." %}
+                    {% translate "No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones." %}
                     {% endif %}
                 </p>
             </section>

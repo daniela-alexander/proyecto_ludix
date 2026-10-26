@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from .models import (
     Category,
@@ -148,3 +149,50 @@ class GameApiSearchTests(TestCase):
             [game.title for game in response.context["games"]],
             ["Prueba Ludix", "Cartas del reino"],
         )
+
+
+class LanguageSelectionTests(TestCase):
+    def test_selected_language_is_applied_across_pages(self):
+        self.client.post(
+            "/i18n/setlang/",
+            {"language": "en", "next": "/"},
+        )
+
+        home_response = self.client.get("/")
+        websocket_response = self.client.get("/websocket-test/")
+
+        self.assertContains(home_response, "Welcome to Ludix")
+        self.assertContains(home_response, '<html lang="en">')
+        self.assertContains(home_response, 'name="language"')
+        self.assertContains(websocket_response, "Users online")
+        self.assertContains(websocket_response, '<html lang="en">')
+        self.assertContains(websocket_response, 'name="language"')
+
+    def test_auth_and_profile_pages_follow_the_selected_language(self):
+        self.client.post(
+            reverse("set_language"),
+            {"language": "ca", "next": "/"},
+        )
+
+        self.assertContains(
+            self.client.get(reverse("login")),
+            "Inicia la sessió a Ludix",
+        )
+        self.assertContains(
+            self.client.get(reverse("register")),
+            "Uneix-te a Ludix",
+        )
+
+        user = User.objects.create_user(username="languageuser")
+        self.client.force_login(user)
+        self.assertContains(
+            self.client.get(reverse("profile")),
+            "EL TEU ESPAI PERSONAL",
+        )
+
+    def test_language_switcher_offers_all_requested_languages(self):
+        response = self.client.get("/")
+
+        for language in ("es", "ca", "en", "it"):
+            with self.subTest(language=language):
+                self.assertContains(response, f'value="{language}"')

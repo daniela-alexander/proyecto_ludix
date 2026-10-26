@@ -244,6 +244,47 @@ body{
         0 0 12px rgba(124,108,255,.2);
 }
 
+.navbar nav .language-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .4rem;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+.language-form label {
+    color: var(--text-primary);
+}
+
+.language-form select {
+    max-width: 130px;
+    padding: .65rem .5rem;
+    color: var(--text-primary);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.navbar nav button.language-button {
+    width: auto;
+    margin: 0;
+    padding: .65rem .8rem;
+    color: var(--text-primary);
+    background: var(--card);
+    border: 1px solid var(--border);
+    font-size: .9rem;
+}
+
+.navbar nav button.language-button:hover {
+    background: var(--card-hover);
+}
+
 .user-name{
     color:var(--text-secondary);
 }
