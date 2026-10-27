@@ -45,8 +45,9 @@ class JuegoAdmin(admin.ModelAdmin):
     inlines = (JuegoCategoriaInline, JuegoMecanicaInline)
 
 
+
 @admin.register(Categoria)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoriaAdmin(admin.ModelAdmin):
     list_display = ("name", "id")
     search_fields = ("name",)
 
@@ -59,6 +60,5 @@ class CategoryAdmin(admin.ModelAdmin):
         "description",
     )
     
-    
-admin.site.register(Categoria)
+
 admin.site.register(Mecanica)
