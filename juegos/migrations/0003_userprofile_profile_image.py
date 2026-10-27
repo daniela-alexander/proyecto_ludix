@@ -3,6 +3,58 @@
 from django.db import migrations, models
 
 
+def _rename_columns(apps, schema_editor, renames):
+    model = apps.get_model("juegos", "UserProfile")
+    table = model._meta.db_table
+    quote_name = schema_editor.connection.ops.quote_name
+
+    with schema_editor.connection.cursor() as cursor:
+        columns = {
+            column.name
+            for column in schema_editor.connection.introspection.get_table_description(
+                cursor, table
+            )
+        }
+        for old_name, new_name in renames:
+            if old_name in columns and new_name in columns:
+                raise RuntimeError(
+                    f"Both {old_name} and {new_name} exist in {table}; "
+                    "cannot safely rename the legacy column."
+                )
+            if old_name in columns:
+                schema_editor.execute(
+                    f"ALTER TABLE {quote_name(table)} "
+                    f"RENAME COLUMN {quote_name(old_name)} "
+                    f"TO {quote_name(new_name)}"
+                )
+                columns.remove(old_name)
+                columns.add(new_name)
+
+
+def rename_legacy_columns(apps, schema_editor):
+    _rename_columns(
+        apps,
+        schema_editor,
+        (
+            ("rol", "role"),
+            ("idioma_preferido", "preferred_language"),
+            ("fecha_nacimiento", "date_of_birth"),
+        ),
+    )
+
+
+def restore_legacy_columns(apps, schema_editor):
+    _rename_columns(
+        apps,
+        schema_editor,
+        (
+            ("role", "rol"),
+            ("preferred_language", "idioma_preferido"),
+            ("date_of_birth", "fecha_nacimiento"),
+        ),
+    )
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,6 +62,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(rename_legacy_columns, restore_legacy_columns),
         migrations.AddField(
             model_name='userprofile',
             name='profile_image',

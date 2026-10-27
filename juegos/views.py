@@ -6,10 +6,21 @@ from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.translation import gettext_lazy as _
 
-from .filters import GameFilter
+from .models import (
+    BibliotecaJuego,
+    Juego,
+    PerfilUsuario,
+    SesionJuegoPropuesto,
+    SesionSugerencia,
+)
+# este ultimo añadido por daniela para configurar la paginación
+from .filters import GameFilter, JuegoFilter
 from .models import Category, Game, Order, OrderLine
-from .serializers import GameSerializer
-from .pagination import GamePagination
+from .serializers import GameSerializer, JuegoSerializer
+from .pagination import GamePagination, JuegoPagination
+
+from django.contrib.auth.decorators import login_required
+from .forms import SugerenciaForm
 
 
 class GameListView(ListAPIView):
@@ -29,7 +40,6 @@ class GameListView(ListAPIView):
 
 
 JuegoListView = GameListView
-
 
 def home(request):
     query = request.GET.get("q", "").strip()
@@ -129,5 +139,77 @@ def home(request):
             "selected_format": game_format,
             "selected_sort": sort_by,
             "sort_options": sort_options,
+        },
+    )
+  
+@login_required
+def sugerencia_view(request):
+    form = SugerenciaForm(
+        request.POST if request.method == "POST" else None
+    )
+    enviado = False
+    recomendaciones = []
+
+    if request.method == "POST" and form.is_valid():
+        perfil, _ = PerfilUsuario.objects.get_or_create(user=request.user)
+        criterios = form.cleaned_data
+
+        session = SesionSugerencia.objects.create(
+            host=perfil,
+            suggestion_type=criterios["tipo_sugerencia"],
+            player_count=criterios["num_jugadores"],
+            edad_minima_participante=criterios[
+                "edad_minima_participante"
+            ],
+            dificultad_preferida=criterios["dificultad_preferida"],
+            max_duration=criterios["duracion_max"],
+            tematica=criterios["tematica"],
+        )
+
+        juegos = Juego.objects.filter(
+            min_players__lte=criterios["num_jugadores"],
+            max_players__gte=criterios["num_jugadores"],
+            min_age__lte=criterios["edad_minima_participante"],
+            duration_minutes__lte=criterios["duracion_max"],
+        )
+
+        if (
+            criterios["tipo_sugerencia"]
+            == SesionSugerencia.SuggestionType.LIBRARY
+        ):
+            juegos = juegos.filter(libraries__user_profile=perfil)
+
+        if criterios["tematica"]:
+            juegos = juegos.filter(categories=criterios["tematica"])
+
+        candidatos = list(juegos.distinct())
+        candidatos.sort(
+            key=lambda juego: (
+                abs(
+                    juego.difficulty
+                    - criterios["dificultad_preferida"]
+                ),
+                juego.duration_minutes,
+                juego.title.lower(),
+            )
+        )
+        recomendaciones = candidatos[:3]
+
+        SesionJuegoPropuesto.objects.bulk_create(
+            [
+                SesionJuegoPropuesto(session=session, game=juego)
+                for juego in recomendaciones
+            ]
+        )
+
+        enviado = True
+
+    return render(
+        request,
+        "juegos/sugerencia_form.html",
+        {
+            "form": form,
+            "enviado": enviado,
+            "recomendaciones": recomendaciones,
         },
     )

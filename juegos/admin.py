@@ -1,10 +1,34 @@
 from django.contrib import admin
-from .models import Game, Category
+from .models import (
+    Categoria,
+    Juego,
+    JuegoCategoria,
+    JuegoMecanica,
+    Mecanica,
+)
 
 
-@admin.register(Game)
-class GameAdmin(admin.ModelAdmin):
-    list_display = ("title", "id")
+class JuegoCategoriaInline(admin.TabularInline):
+    model = JuegoCategoria
+    extra = 1
+
+
+class JuegoMecanicaInline(admin.TabularInline):
+    model = JuegoMecanica
+    extra = 1
+
+@admin.register(Juego)
+class JuegoAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "min_players",
+        "max_players",
+        "duration_minutes",
+        "min_age",
+        "difficulty",
+        "stock",
+        "id",
+    )
     search_fields = ("title",)
 
     fields = (
@@ -17,9 +41,11 @@ class GameAdmin(admin.ModelAdmin):
         "title_it",
         "description_it",
     )
+    
+    inlines = (JuegoCategoriaInline, JuegoMecanicaInline)
 
 
-@admin.register(Category)
+@admin.register(Categoria)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "id")
     search_fields = ("name",)
@@ -32,3 +58,7 @@ class CategoryAdmin(admin.ModelAdmin):
         "slug",
         "description",
     )
+    
+    
+admin.site.register(Categoria)
+admin.site.register(Mecanica)
