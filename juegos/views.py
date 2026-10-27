@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
+from django.utils.translation import gettext_lazy as _
 
 from .models import (
     BibliotecaJuego,
@@ -48,12 +49,12 @@ def home(request):
     game_format = request.GET.get("format", "").strip()
     sort_by = request.GET.get("sort", "title")
     sort_options = (
-        ("title", "Orden alfabético"),
-        ("best_selling", "Más vendidos"),
-        ("price_asc", "Precio: menor a mayor"),
-        ("price_desc", "Precio: mayor a menor"),
-        ("favorites", "Más favoritos"),
-        ("shortest", "Partidas más cortas"),
+        ("title", _("Orden alfabético")),
+        ("best_selling", _("Más vendidos")),
+        ("price_asc", _("Precio: menor a mayor")),
+        ("price_desc", _("Precio: mayor a menor")),
+        ("favorites", _("Más favoritos")),
+        ("shortest", _("Partidas más cortas")),
     )
     if sort_by not in {value for value, _ in sort_options}:
         sort_by = "title"

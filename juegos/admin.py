@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import (
     Categoria,
     Juego,
@@ -18,7 +17,6 @@ class JuegoMecanicaInline(admin.TabularInline):
     model = JuegoMecanica
     extra = 1
 
-
 @admin.register(Juego)
 class JuegoAdmin(admin.ModelAdmin):
     list_display = (
@@ -29,10 +27,38 @@ class JuegoAdmin(admin.ModelAdmin):
         "min_age",
         "difficulty",
         "stock",
+        "id",
     )
     search_fields = ("title",)
+
+    fields = (
+        "title",
+        "description",
+        "title_en",
+        "description_en",
+        "title_ca",
+        "description_ca",
+        "title_it",
+        "description_it",
+    )
+    
     inlines = (JuegoCategoriaInline, JuegoMecanicaInline)
 
 
-admin.site.register(Categoria)
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ("name", "id")
+    search_fields = ("name",)
+
+    fields = (
+        "name",
+        "name_en",
+        "name_ca",
+        "name_it",
+        "slug",
+        "description",
+    )
+    
+
 admin.site.register(Mecanica)

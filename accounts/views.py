@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
+from django.utils.translation import gettext as _
 
 from juegos.models import LibraryGame, UserProfile, Wishlist
 from .forms import RegisterForm
@@ -49,10 +50,10 @@ def profile_view(request):
             request.user.email = email
             request.user.save(update_fields=["email"])
 
-            email_success = "Email actualizado correctamente."
+            email_success = _("Email actualizado correctamente.")
 
         except ValidationError:
-            email_error = "Introduce una dirección de email válida."
+            email_error = _("Introduce una dirección de email válida.")
 
     library = (
         LibraryGame.objects

@@ -1,15 +1,16 @@
 from decimal import Decimal
-
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils.translation import get_language
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 
 class UserProfile(models.Model):
     class Role(models.TextChoices):
-        CLIENT = "CLIENTE", "Cliente"
-        ADMIN = "ADMIN", "Administrador"
+        CLIENT = "CLIENTE", _("Cliente")
+        ADMIN = "ADMIN", _("Administrador")
 
     class Language(models.TextChoices):
         SPANISH = "es", "Español"
@@ -73,6 +74,21 @@ class Category(models.Model):
         null=True,
         blank=True,
     )
+
+    name_en = models.CharField(max_length=100, blank=True, default="")
+    name_ca = models.CharField(max_length=100, blank=True, default="")
+    name_it = models.CharField(max_length=100, blank=True, default="")
+    
+    def get_name(self):
+        lang = (get_language() or "es").split("-")[0]
+    
+        translations = {
+            "en": self.name_en,
+            "ca": self.name_ca,
+            "it": self.name_it,
+        }
+    
+        return translations.get(lang) or self.name
 
     class Meta:
         db_table = "categoria"
@@ -139,6 +155,37 @@ class Game(models.Model):
         default="",
         blank=True,
     )
+
+    title_en = models.CharField(max_length=200, blank=True, default="")
+    title_ca = models.CharField(max_length=200, blank=True, default="")
+    title_it = models.CharField(max_length=200, blank=True, default="")
+
+    description_en = models.TextField(blank=True, default="")
+    description_ca = models.TextField(blank=True, default="")
+    description_it = models.TextField(blank=True, default="")
+
+    def get_title(self):
+        lang = (get_language() or "es").split("-")[0]
+
+        translations = {
+            "en": self.title_en,
+            "ca": self.title_ca,
+            "it": self.title_it,
+        }
+
+        return translations.get(lang) or self.title
+
+    def get_description(self):
+        lang = (get_language() or "es").split("-")[0]
+
+        translations = {
+            "en": self.description_en,
+            "ca": self.description_ca,
+            "it": self.description_it,
+        }
+
+        return translations.get(lang) or self.description
+
 
     min_players = models.PositiveIntegerField()
 
@@ -337,8 +384,8 @@ class Wishlist(models.Model):
 
 class SuggestionSession(models.Model):
     class SuggestionType(models.TextChoices):
-        LIBRARY = "BIBLIOTECA", "Biblioteca"
-        PURCHASE = "COMPRA", "Compra"
+        LIBRARY = "BIBLIOTECA", _("Biblioteca")
+        PURCHASE = "COMPRA", _("Compra")
 
     id = models.BigAutoField(primary_key=True)
 
@@ -452,10 +499,10 @@ class SuggestionVote(models.Model):
 
 class Order(models.Model):
     class Status(models.TextChoices):
-        PENDING = "PENDIENTE", "Pendiente"
-        PAID = "PAGADO", "Pagado"
-        SHIPPED = "ENVIADO", "Enviado"
-        CANCELLED = "CANCELADO", "Cancelado"
+        PENDING = "PENDIENTE", _("Pendiente")
+        PAID = "PAGADO", _("Pagado")
+        SHIPPED = "ENVIADO", _("Enviado")
+        CANCELLED = "CANCELADO", _("Cancelado")
 
     id = models.BigAutoField(primary_key=True)
 

@@ -1,0 +1,363 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Hola, %(username)s"
+msgstr "Hello, %(username)s"
+
+msgid "Mi perfil"
+msgstr "My profile"
+
+msgid "Cerrar sesión"
+msgstr "Log out"
+
+msgid "Iniciar sesión"
+msgstr "Log in"
+
+msgid "Crear cuenta"
+msgstr "Create account"
+
+msgid "Idioma"
+msgstr "Language"
+
+msgid "Cambiar"
+msgstr "Change"
+
+msgid "Cambiar tema"
+msgstr "Change theme"
+
+msgid "Tema actual"
+msgstr "Current theme"
+
+msgid "Usuarios conectados"
+msgstr "Users online"
+
+msgid "Bienvenido a Ludix"
+msgstr "Welcome to Ludix"
+
+msgid "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida."
+msgstr "Discover, compare, and find the best board games for your next game night."
+
+msgid "Buscar juegos"
+msgstr "Search games"
+
+msgid "Busca por título, categoría o mecánica"
+msgstr "Search by title, category, or mechanic"
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "Filtros"
+msgstr "Filters"
+
+msgid "Refinar búsqueda"
+msgstr "Refine your search"
+
+msgid "Limpiar"
+msgstr "Clear"
+
+msgid "Precio mínimo"
+msgstr "Minimum price"
+
+msgid "Precio máximo"
+msgstr "Maximum price"
+
+msgid "Categoría"
+msgstr "Category"
+
+msgid "Todas"
+msgstr "All"
+
+msgid "Ordenar por"
+msgstr "Sort by"
+
+msgid "Tipo"
+msgstr "Type"
+
+msgid "Todos"
+msgstr "All"
+
+msgid "Juego de mesa"
+msgstr "Board game"
+
+msgid "Juego online"
+msgstr "Online game"
+
+msgid "Aplicar filtros"
+msgstr "Apply filters"
+
+msgid "Resultados para \"%(query)s\""
+msgstr "Results for \"%(query)s\""
+
+msgid "Juegos destacados"
+msgstr "Featured games"
+
+msgid "General"
+msgstr "General"
+
+msgid "%(min)s-%(max)s jugadores"
+msgstr "%(min)s-%(max)s players"
+
+msgid "Ver juego"
+msgstr "View game"
+
+msgid "No hemos encontrado resultados"
+msgstr "We couldn't find any results"
+
+msgid "No hay juegos que coincidan con \"%(query)s\". Prueba otro título, categoría o mecánica."
+msgstr "No games match \"%(query)s\". Try another title, category, or mechanic."
+
+msgid "No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones."
+msgstr "No games match these filters. Try changing your options."
+
+msgid "Orden alfabético"
+msgstr "Alphabetical order"
+
+msgid "Más vendidos"
+msgstr "Best sellers"
+
+msgid "Precio: menor a mayor"
+msgstr "Price: low to high"
+
+msgid "Precio: mayor a menor"
+msgstr "Price: high to low"
+
+msgid "Más favoritos"
+msgstr "Most favorited"
+
+msgid "Partidas más cortas"
+msgstr "Shortest games"
+
+msgid "Bienvenido de nuevo"
+msgstr "Welcome back"
+
+msgid "Inicia sesión en Ludix"
+msgstr "Log in to Ludix"
+
+msgid "Accede a tu perfil, lista de deseos y biblioteca de juegos."
+msgstr "Access your profile, wishlist, and game library."
+
+msgid "Entrar"
+msgstr "Log in"
+
+msgid "¿Necesitas una cuenta?"
+msgstr "Need an account?"
+
+msgid "Créala aquí"
+msgstr "Create one here"
+
+msgid "Únete a Ludix"
+msgstr "Join Ludix"
+
+msgid "Crea tu cuenta"
+msgstr "Create your account"
+
+msgid "Empieza a construir tu biblioteca y tu lista de deseos."
+msgstr "Start building your library and wishlist."
+
+msgid "Al menos 8 caracteres"
+msgstr "At least 8 characters"
+
+msgid "Una letra mayúscula"
+msgstr "One uppercase letter"
+
+msgid "Una letra minúscula"
+msgstr "One lowercase letter"
+
+msgid "Un número"
+msgstr "One number"
+
+msgid "Un carácter especial"
+msgstr "One special character"
+
+msgid "¿Ya tienes cuenta?"
+msgstr "Already have an account?"
+
+msgid "Inicia sesión"
+msgstr "Log in"
+
+msgid "TU ESPACIO PERSONAL"
+msgstr "YOUR PERSONAL SPACE"
+
+msgid "Gestiona tu cuenta y descubre tu actividad en Ludix."
+msgstr "Manage your account and see your activity on Ludix."
+
+msgid "Foto de perfil de %(username)s"
+msgstr "%(username)s's profile photo"
+
+msgid "Juegos en la biblioteca"
+msgstr "Games in library"
+
+msgid "Favoritos"
+msgstr "Favorites"
+
+msgid "Lista de deseos"
+msgstr "Wishlist"
+
+msgid "Pedidos"
+msgstr "Orders"
+
+msgid "Datos de la cuenta"
+msgstr "Account details"
+
+msgid "Tu información personal."
+msgstr "Your personal information."
+
+msgid "Nombre de usuario"
+msgstr "Username"
+
+msgid "Rol"
+msgstr "Role"
+
+msgid "Foto de perfil"
+msgstr "Profile photo"
+
+msgid "Correo electrónico"
+msgstr "Email address"
+
+msgid "Guardar cambios"
+msgstr "Save changes"
+
+msgid "Idioma actual"
+msgstr "Current language"
+
+msgid "Fecha de nacimiento"
+msgstr "Date of birth"
+
+msgid "No indicado"
+msgstr "Not specified"
+
+msgid "Mis juegos favoritos"
+msgstr "My favorite games"
+
+msgid "Juegos marcados como favoritos."
+msgstr "Games marked as favorites."
+
+msgid "Añadido %(date)s"
+msgstr "Added %(date)s"
+
+msgid "Todavía no tienes juegos favoritos."
+msgstr "You don't have any favorite games yet."
+
+msgid "Mi biblioteca"
+msgstr "My library"
+
+msgid "Los últimos juegos que has añadido."
+msgstr "The latest games you've added."
+
+msgid "Tu biblioteca está vacía."
+msgstr "Your library is empty."
+
+msgid "Juegos que quieres añadir a tu colección."
+msgstr "Games you want to add to your collection."
+
+msgid "Tu lista de deseos está vacía."
+msgstr "Your wishlist is empty."
+
+msgid "Últimas sesiones"
+msgstr "Recent sessions"
+
+msgid "Sesión n.o %(id)s"
+msgstr "Session no. %(id)s"
+
+msgid "Todavía no tienes sesiones guardadas."
+msgstr "You don't have any saved sessions yet."
+
+msgid "Últimos pedidos"
+msgstr "Recent orders"
+
+msgid "Pedido n.o %(id)s"
+msgstr "Order no. %(id)s"
+
+msgid "Todavía no tienes pedidos."
+msgstr "You don't have any orders yet."
+
+msgid "Cliente"
+msgstr "Customer"
+
+msgid "Administrador"
+msgstr "Administrator"
+
+msgid "Biblioteca"
+msgstr "Library"
+
+msgid "Compra"
+msgstr "Purchase"
+
+msgid "Pendiente"
+msgstr "Pending"
+
+msgid "Pagado"
+msgstr "Paid"
+
+msgid "Enviado"
+msgstr "Shipped"
+
+msgid "Cancelado"
+msgstr "Cancelled"
+
+msgid "Ya existe una cuenta con este correo electrónico."
+msgstr "An account with this email address already exists."
+
+msgid "Email actualizado correctamente."
+msgstr "Email updated successfully."
+
+msgid "Introduce una dirección de email válida."
+msgstr "Enter a valid email address."
+
+msgid "Sesión cerrada"
+msgstr "Logged out"
+
+msgid "Hasta pronto"
+msgstr "See you soon"
+
+msgid "Has cerrado sesión"
+msgstr "You've logged out"
+
+msgid "Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras."
+msgstr "Thanks for visiting Ludix. You can log in again whenever you like."
+
+msgid "Volver al inicio"
+msgstr "Back to home"
+
+msgid "Iniciar sesión otra vez"
+msgstr "Log in again"
+
+msgid "Página no encontrada"
+msgstr "Page not found"
+
+msgid "La página que buscas no existe o ha cambiado de ubicación."
+msgstr "The page you're looking for doesn't exist or has moved."
+
+msgid "Ir al inicio"
+msgstr "Go to home"
+
+msgid "Error del servidor"
+msgstr "Server error"
+
+msgid "Algo ha ido mal"
+msgstr "Something went wrong"
+
+msgid "Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en unos momentos."
+msgstr "We're experiencing a temporary server error. Please try again in a few moments."
+
+msgid "Intentarlo de nuevo"
+msgstr "Try again"
+
+msgid "Ludix WebSocket Test"
+msgstr "Ludix WebSocket test"
+
+msgid "Conectando..."
+msgstr "Connecting..."
+
+msgid "Conectado"
+msgstr "Connected"
+
+msgid "Error de conexión"
+msgstr "Connection error"
+
+msgid "Desconectado"
+msgstr "Disconnected"

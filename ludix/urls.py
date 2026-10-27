@@ -33,9 +33,11 @@ handler500 = 'ludix.urls.custom_500'
 urlpatterns = [
     path('', home, name='home'),
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('logout/', logout_view, name='logout'),
     path("api/juegos/", JuegoListView.as_view()),
     path("", home, name="home"),
-    path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
+    # path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
     path("accounts/", include("accounts.urls")),
     path("sugerencia/", sugerencia_view, name="sugerencia"),  # Agrega esta línea para incluir las URLs de sugerencia
     path('api/games/', GameListView.as_view(), name='game_list'),

@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Página no encontrada{% endblock %}
+{% block title %}{% translate "Página no encontrada" %}{% endblock %}
 
 {% block content %}
 <section class="error-page">
     <div class="error-box">
         <span class="error-badge">404</span>
-        <h1>Página no encontrada</h1>
-        <p>La página que buscas no existe o ha cambiado de ubicación.</p>
+        <h1>{% translate "Página no encontrada" %}</h1>
+        <p>{% translate "La página que buscas no existe o ha cambiado de ubicación." %}</p>
 
         <div class="error-actions">
-            <a href="{% url 'home' %}" class="primary-link">Ir al inicio</a>
-            <a href="{% url 'login' %}" class="secondary-link">Iniciar sesión</a>
+            <a href="{% url 'home' %}" class="primary-link">{% translate "Ir al inicio" %}</a>
+            <a href="{% url 'login' %}" class="secondary-link">{% translate "Iniciar sesión" %}</a>
         </div>
     </div>
 </section>

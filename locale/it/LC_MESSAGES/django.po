@@ -1,0 +1,363 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Hola, %(username)s"
+msgstr "Ciao, %(username)s"
+
+msgid "Mi perfil"
+msgstr "Il mio profilo"
+
+msgid "Cerrar sesión"
+msgstr "Esci"
+
+msgid "Iniciar sesión"
+msgstr "Accedi"
+
+msgid "Crear cuenta"
+msgstr "Crea un account"
+
+msgid "Idioma"
+msgstr "Lingua"
+
+msgid "Cambiar"
+msgstr "Cambia"
+
+msgid "Cambiar tema"
+msgstr "Cambia tema"
+
+msgid "Tema actual"
+msgstr "Tema attuale"
+
+msgid "Usuarios conectados"
+msgstr "Utenti connessi"
+
+msgid "Bienvenido a Ludix"
+msgstr "Benvenuto su Ludix"
+
+msgid "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida."
+msgstr "Scopri, confronta e trova i migliori giochi da tavolo per la tua prossima partita."
+
+msgid "Buscar juegos"
+msgstr "Cerca giochi"
+
+msgid "Busca por título, categoría o mecánica"
+msgstr "Cerca per titolo, categoria o meccanica"
+
+msgid "Buscar"
+msgstr "Cerca"
+
+msgid "Filtros"
+msgstr "Filtri"
+
+msgid "Refinar búsqueda"
+msgstr "Affina la ricerca"
+
+msgid "Limpiar"
+msgstr "Pulisci"
+
+msgid "Precio mínimo"
+msgstr "Prezzo minimo"
+
+msgid "Precio máximo"
+msgstr "Prezzo massimo"
+
+msgid "Categoría"
+msgstr "Categoria"
+
+msgid "Todas"
+msgstr "Tutte"
+
+msgid "Ordenar por"
+msgstr "Ordina per"
+
+msgid "Tipo"
+msgstr "Tipo"
+
+msgid "Todos"
+msgstr "Tutti"
+
+msgid "Juego de mesa"
+msgstr "Gioco da tavolo"
+
+msgid "Juego online"
+msgstr "Gioco online"
+
+msgid "Aplicar filtros"
+msgstr "Applica filtri"
+
+msgid "Resultados para \"%(query)s\""
+msgstr "Risultati per \"%(query)s\""
+
+msgid "Juegos destacados"
+msgstr "Giochi in evidenza"
+
+msgid "General"
+msgstr "Generale"
+
+msgid "%(min)s-%(max)s jugadores"
+msgstr "%(min)s-%(max)s giocatori"
+
+msgid "Ver juego"
+msgstr "Vedi gioco"
+
+msgid "No hemos encontrado resultados"
+msgstr "Non abbiamo trovato risultati"
+
+msgid "No hay juegos que coincidan con \"%(query)s\". Prueba otro título, categoría o mecánica."
+msgstr "Nessun gioco corrisponde a \"%(query)s\". Prova un altro titolo, categoria o meccanica."
+
+msgid "No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones."
+msgstr "Nessun gioco corrisponde a questi filtri. Prova a modificare le opzioni."
+
+msgid "Orden alfabético"
+msgstr "Ordine alfabetico"
+
+msgid "Más vendidos"
+msgstr "Più venduti"
+
+msgid "Precio: menor a mayor"
+msgstr "Prezzo: dal più basso al più alto"
+
+msgid "Precio: mayor a menor"
+msgstr "Prezzo: dal più alto al più basso"
+
+msgid "Más favoritos"
+msgstr "Più apprezzati"
+
+msgid "Partidas más cortas"
+msgstr "Partite più brevi"
+
+msgid "Bienvenido de nuevo"
+msgstr "Bentornato"
+
+msgid "Inicia sesión en Ludix"
+msgstr "Accedi a Ludix"
+
+msgid "Accede a tu perfil, lista de deseos y biblioteca de juegos."
+msgstr "Accedi al tuo profilo, alla lista dei desideri e alla libreria dei giochi."
+
+msgid "Entrar"
+msgstr "Accedi"
+
+msgid "¿Necesitas una cuenta?"
+msgstr "Hai bisogno di un account?"
+
+msgid "Créala aquí"
+msgstr "Crealo qui"
+
+msgid "Únete a Ludix"
+msgstr "Unisciti a Ludix"
+
+msgid "Crea tu cuenta"
+msgstr "Crea il tuo account"
+
+msgid "Empieza a construir tu biblioteca y tu lista de deseos."
+msgstr "Inizia a creare la tua libreria e la tua lista dei desideri."
+
+msgid "Al menos 8 caracteres"
+msgstr "Almeno 8 caratteri"
+
+msgid "Una letra mayúscula"
+msgstr "Una lettera maiuscola"
+
+msgid "Una letra minúscula"
+msgstr "Una lettera minuscola"
+
+msgid "Un número"
+msgstr "Un numero"
+
+msgid "Un carácter especial"
+msgstr "Un carattere speciale"
+
+msgid "¿Ya tienes cuenta?"
+msgstr "Hai già un account?"
+
+msgid "Inicia sesión"
+msgstr "Accedi"
+
+msgid "TU ESPACIO PERSONAL"
+msgstr "IL TUO SPAZIO PERSONALE"
+
+msgid "Gestiona tu cuenta y descubre tu actividad en Ludix."
+msgstr "Gestisci il tuo account e scopri la tua attività su Ludix."
+
+msgid "Foto de perfil de %(username)s"
+msgstr "Foto del profilo di %(username)s"
+
+msgid "Juegos en la biblioteca"
+msgstr "Giochi nella libreria"
+
+msgid "Favoritos"
+msgstr "Preferiti"
+
+msgid "Lista de deseos"
+msgstr "Lista dei desideri"
+
+msgid "Pedidos"
+msgstr "Ordini"
+
+msgid "Datos de la cuenta"
+msgstr "Dati dell'account"
+
+msgid "Tu información personal."
+msgstr "Le tue informazioni personali."
+
+msgid "Nombre de usuario"
+msgstr "Nome utente"
+
+msgid "Rol"
+msgstr "Ruolo"
+
+msgid "Foto de perfil"
+msgstr "Foto del profilo"
+
+msgid "Correo electrónico"
+msgstr "Indirizzo email"
+
+msgid "Guardar cambios"
+msgstr "Salva le modifiche"
+
+msgid "Idioma actual"
+msgstr "Lingua attuale"
+
+msgid "Fecha de nacimiento"
+msgstr "Data di nascita"
+
+msgid "No indicado"
+msgstr "Non indicato"
+
+msgid "Mis juegos favoritos"
+msgstr "I miei giochi preferiti"
+
+msgid "Juegos marcados como favoritos."
+msgstr "Giochi aggiunti ai preferiti."
+
+msgid "Añadido %(date)s"
+msgstr "Aggiunto il %(date)s"
+
+msgid "Todavía no tienes juegos favoritos."
+msgstr "Non hai ancora giochi preferiti."
+
+msgid "Mi biblioteca"
+msgstr "La mia libreria"
+
+msgid "Los últimos juegos que has añadido."
+msgstr "Gli ultimi giochi che hai aggiunto."
+
+msgid "Tu biblioteca está vacía."
+msgstr "La tua libreria è vuota."
+
+msgid "Juegos que quieres añadir a tu colección."
+msgstr "Giochi che vuoi aggiungere alla tua collezione."
+
+msgid "Tu lista de deseos está vacía."
+msgstr "La tua lista dei desideri è vuota."
+
+msgid "Últimas sesiones"
+msgstr "Sessioni recenti"
+
+msgid "Sesión n.o %(id)s"
+msgstr "Sessione n. %(id)s"
+
+msgid "Todavía no tienes sesiones guardadas."
+msgstr "Non hai ancora sessioni salvate."
+
+msgid "Últimos pedidos"
+msgstr "Ordini recenti"
+
+msgid "Pedido n.o %(id)s"
+msgstr "Ordine n. %(id)s"
+
+msgid "Todavía no tienes pedidos."
+msgstr "Non hai ancora ordini."
+
+msgid "Cliente"
+msgstr "Cliente"
+
+msgid "Administrador"
+msgstr "Amministratore"
+
+msgid "Biblioteca"
+msgstr "Libreria"
+
+msgid "Compra"
+msgstr "Acquisto"
+
+msgid "Pendiente"
+msgstr "In attesa"
+
+msgid "Pagado"
+msgstr "Pagato"
+
+msgid "Enviado"
+msgstr "Spedito"
+
+msgid "Cancelado"
+msgstr "Annullato"
+
+msgid "Ya existe una cuenta con este correo electrónico."
+msgstr "Esiste già un account con questo indirizzo email."
+
+msgid "Email actualizado correctamente."
+msgstr "Indirizzo email aggiornato correttamente."
+
+msgid "Introduce una dirección de email válida."
+msgstr "Inserisci un indirizzo email valido."
+
+msgid "Sesión cerrada"
+msgstr "Sessione chiusa"
+
+msgid "Hasta pronto"
+msgstr "A presto"
+
+msgid "Has cerrado sesión"
+msgstr "Hai chiuso la sessione"
+
+msgid "Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras."
+msgstr "Grazie per aver visitato Ludix. Puoi accedere di nuovo quando vuoi."
+
+msgid "Volver al inicio"
+msgstr "Torna alla home"
+
+msgid "Iniciar sesión otra vez"
+msgstr "Accedi di nuovo"
+
+msgid "Página no encontrada"
+msgstr "Pagina non trovata"
+
+msgid "La página que buscas no existe o ha cambiado de ubicación."
+msgstr "La pagina che cerchi non esiste o è stata spostata."
+
+msgid "Ir al inicio"
+msgstr "Vai alla home"
+
+msgid "Error del servidor"
+msgstr "Errore del server"
+
+msgid "Algo ha ido mal"
+msgstr "Qualcosa è andato storto"
+
+msgid "Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en unos momentos."
+msgstr "Si è verificato un errore temporaneo del server. Riprova tra qualche istante."
+
+msgid "Intentarlo de nuevo"
+msgstr "Riprova"
+
+msgid "Ludix WebSocket Test"
+msgstr "Test WebSocket di Ludix"
+
+msgid "Conectando..."
+msgstr "Connessione in corso..."
+
+msgid "Conectado"
+msgstr "Connesso"
+
+msgid "Error de conexión"
+msgstr "Errore di connessione"
+
+msgid "Desconectado"
+msgstr "Disconnesso"
