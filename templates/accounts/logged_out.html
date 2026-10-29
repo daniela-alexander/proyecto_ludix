@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Sesión cerrada{% endblock %}
+{% block title %} {% translate "Sesión cerrada" %}{% endblock %}
 
 {% block content %}
 <section class="auth-page">
     <div class="auth-card">
-        <p class="auth-kicker">Hasta pronto</p>
-        <h1>Has cerrado sesión</h1>
-        <p class="auth-subtitle">Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras.</p>
+        <p class="auth-kicker"> {% translate "Hasta pronto" %}</p>
+        <h1>{% translate "Has cerrado sesión" %}</h1>
+        <p class="auth-subtitle">{% translate "Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras." %}</p>
 
         <div class="error-actions">
-            <a href="{% url 'home' %}" class="primary-link">Volver al inicio</a>
-            <a href="{% url 'login' %}" class="secondary-link">Iniciar sesión otra vez</a>
+            <a href="{% url 'home' %}" class="primary-link">{% translate "Volver al inicio" %}</a>
+            <a href="{% url 'login' %}" class="secondary-link">{% translate "Iniciar sesión otra vez" %}</a>
         </div>
     </div>
 </section>

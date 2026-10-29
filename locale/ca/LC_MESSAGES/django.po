@@ -1,0 +1,363 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Hola, %(username)s"
+msgstr "Hola, %(username)s"
+
+msgid "Mi perfil"
+msgstr "El meu perfil"
+
+msgid "Cerrar sesión"
+msgstr "Tanca la sessió"
+
+msgid "Iniciar sesión"
+msgstr "Inicia la sessió"
+
+msgid "Crear cuenta"
+msgstr "Crea un compte"
+
+msgid "Idioma"
+msgstr "Idioma"
+
+msgid "Cambiar"
+msgstr "Canvia"
+
+msgid "Cambiar tema"
+msgstr "Canvia el tema"
+
+msgid "Tema actual"
+msgstr "Tema actual"
+
+msgid "Usuarios conectados"
+msgstr "Usuaris connectats"
+
+msgid "Bienvenido a Ludix"
+msgstr "Us donem la benvinguda a Ludix"
+
+msgid "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida."
+msgstr "Descobreix, compara i troba els millors jocs de taula per a la propera partida."
+
+msgid "Buscar juegos"
+msgstr "Cerca jocs"
+
+msgid "Busca por título, categoría o mecánica"
+msgstr "Cerca per títol, categoria o mecànica"
+
+msgid "Buscar"
+msgstr "Cerca"
+
+msgid "Filtros"
+msgstr "Filtres"
+
+msgid "Refinar búsqueda"
+msgstr "Afina la cerca"
+
+msgid "Limpiar"
+msgstr "Neteja"
+
+msgid "Precio mínimo"
+msgstr "Preu mínim"
+
+msgid "Precio máximo"
+msgstr "Preu màxim"
+
+msgid "Categoría"
+msgstr "Categoria"
+
+msgid "Todas"
+msgstr "Totes"
+
+msgid "Ordenar por"
+msgstr "Ordena per"
+
+msgid "Tipo"
+msgstr "Tipus"
+
+msgid "Todos"
+msgstr "Tots"
+
+msgid "Juego de mesa"
+msgstr "Joc de taula"
+
+msgid "Juego online"
+msgstr "Joc en línia"
+
+msgid "Aplicar filtros"
+msgstr "Aplica els filtres"
+
+msgid "Resultados para \"%(query)s\""
+msgstr "Resultats per a «%(query)s»"
+
+msgid "Juegos destacados"
+msgstr "Jocs destacats"
+
+msgid "General"
+msgstr "General"
+
+msgid "%(min)s-%(max)s jugadores"
+msgstr "%(min)s-%(max)s jugadors"
+
+msgid "Ver juego"
+msgstr "Mostra el joc"
+
+msgid "No hemos encontrado resultados"
+msgstr "No hem trobat cap resultat"
+
+msgid "No hay juegos que coincidan con \"%(query)s\". Prueba otro título, categoría o mecánica."
+msgstr "No hi ha cap joc que coincideixi amb «%(query)s». Prova un altre títol, categoria o mecànica."
+
+msgid "No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones."
+msgstr "No hi ha cap joc que coincideixi amb aquests filtres. Prova de canviar les opcions."
+
+msgid "Orden alfabético"
+msgstr "Ordre alfabètic"
+
+msgid "Más vendidos"
+msgstr "Més venuts"
+
+msgid "Precio: menor a mayor"
+msgstr "Preu: de més baix a més alt"
+
+msgid "Precio: mayor a menor"
+msgstr "Preu: de més alt a més baix"
+
+msgid "Más favoritos"
+msgstr "Més preferits"
+
+msgid "Partidas más cortas"
+msgstr "Partides més curtes"
+
+msgid "Bienvenido de nuevo"
+msgstr "Us donem la benvinguda de nou"
+
+msgid "Inicia sesión en Ludix"
+msgstr "Inicia la sessió a Ludix"
+
+msgid "Accede a tu perfil, lista de deseos y biblioteca de juegos."
+msgstr "Accedeix al teu perfil, a la llista de desitjos i a la biblioteca de jocs."
+
+msgid "Entrar"
+msgstr "Entra"
+
+msgid "¿Necesitas una cuenta?"
+msgstr "Necessites un compte?"
+
+msgid "Créala aquí"
+msgstr "Crea'l aquí"
+
+msgid "Únete a Ludix"
+msgstr "Uneix-te a Ludix"
+
+msgid "Crea tu cuenta"
+msgstr "Crea el teu compte"
+
+msgid "Empieza a construir tu biblioteca y tu lista de deseos."
+msgstr "Comença a crear la teva biblioteca i la teva llista de desitjos."
+
+msgid "Al menos 8 caracteres"
+msgstr "Com a mínim 8 caràcters"
+
+msgid "Una letra mayúscula"
+msgstr "Una lletra majúscula"
+
+msgid "Una letra minúscula"
+msgstr "Una lletra minúscula"
+
+msgid "Un número"
+msgstr "Un número"
+
+msgid "Un carácter especial"
+msgstr "Un caràcter especial"
+
+msgid "¿Ya tienes cuenta?"
+msgstr "Ja tens un compte?"
+
+msgid "Inicia sesión"
+msgstr "Inicia la sessió"
+
+msgid "TU ESPACIO PERSONAL"
+msgstr "EL TEU ESPAI PERSONAL"
+
+msgid "Gestiona tu cuenta y descubre tu actividad en Ludix."
+msgstr "Gestiona el teu compte i descobreix la teva activitat a Ludix."
+
+msgid "Foto de perfil de %(username)s"
+msgstr "Foto de perfil de %(username)s"
+
+msgid "Juegos en la biblioteca"
+msgstr "Jocs a la biblioteca"
+
+msgid "Favoritos"
+msgstr "Preferits"
+
+msgid "Lista de deseos"
+msgstr "Llista de desitjos"
+
+msgid "Pedidos"
+msgstr "Comandes"
+
+msgid "Datos de la cuenta"
+msgstr "Dades del compte"
+
+msgid "Tu información personal."
+msgstr "La teva informació personal."
+
+msgid "Nombre de usuario"
+msgstr "Nom d'usuari"
+
+msgid "Rol"
+msgstr "Rol"
+
+msgid "Foto de perfil"
+msgstr "Foto de perfil"
+
+msgid "Correo electrónico"
+msgstr "Adreça electrònica"
+
+msgid "Guardar cambios"
+msgstr "Desa els canvis"
+
+msgid "Idioma actual"
+msgstr "Idioma actual"
+
+msgid "Fecha de nacimiento"
+msgstr "Data de naixement"
+
+msgid "No indicado"
+msgstr "No indicat"
+
+msgid "Mis juegos favoritos"
+msgstr "Els meus jocs preferits"
+
+msgid "Juegos marcados como favoritos."
+msgstr "Jocs marcats com a preferits."
+
+msgid "Añadido %(date)s"
+msgstr "Afegit el %(date)s"
+
+msgid "Todavía no tienes juegos favoritos."
+msgstr "Encara no tens cap joc preferit."
+
+msgid "Mi biblioteca"
+msgstr "La meva biblioteca"
+
+msgid "Los últimos juegos que has añadido."
+msgstr "Els últims jocs que has afegit."
+
+msgid "Tu biblioteca está vacía."
+msgstr "La teva biblioteca és buida."
+
+msgid "Juegos que quieres añadir a tu colección."
+msgstr "Jocs que vols afegir a la teva col·lecció."
+
+msgid "Tu lista de deseos está vacía."
+msgstr "La teva llista de desitjos és buida."
+
+msgid "Últimas sesiones"
+msgstr "Sessions recents"
+
+msgid "Sesión n.o %(id)s"
+msgstr "Sessió núm. %(id)s"
+
+msgid "Todavía no tienes sesiones guardadas."
+msgstr "Encara no tens cap sessió desada."
+
+msgid "Últimos pedidos"
+msgstr "Comandes recents"
+
+msgid "Pedido n.o %(id)s"
+msgstr "Comanda núm. %(id)s"
+
+msgid "Todavía no tienes pedidos."
+msgstr "Encara no tens cap comanda."
+
+msgid "Cliente"
+msgstr "Client"
+
+msgid "Administrador"
+msgstr "Administrador"
+
+msgid "Biblioteca"
+msgstr "Biblioteca"
+
+msgid "Compra"
+msgstr "Compra"
+
+msgid "Pendiente"
+msgstr "Pendent"
+
+msgid "Pagado"
+msgstr "Pagat"
+
+msgid "Enviado"
+msgstr "Enviat"
+
+msgid "Cancelado"
+msgstr "Cancel·lat"
+
+msgid "Ya existe una cuenta con este correo electrónico."
+msgstr "Ja existeix un compte amb aquesta adreça electrònica."
+
+msgid "Email actualizado correctamente."
+msgstr "Adreça electrònica actualitzada correctament."
+
+msgid "Introduce una dirección de email válida."
+msgstr "Introdueix una adreça electrònica vàlida."
+
+msgid "Sesión cerrada"
+msgstr "Sessió tancada"
+
+msgid "Hasta pronto"
+msgstr "Fins aviat"
+
+msgid "Has cerrado sesión"
+msgstr "Has tancat la sessió"
+
+msgid "Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras."
+msgstr "Gràcies per visitar Ludix. Pots tornar a iniciar la sessió quan vulguis."
+
+msgid "Volver al inicio"
+msgstr "Torna a l'inici"
+
+msgid "Iniciar sesión otra vez"
+msgstr "Torna a iniciar la sessió"
+
+msgid "Página no encontrada"
+msgstr "No s'ha trobat la pàgina"
+
+msgid "La página que buscas no existe o ha cambiado de ubicación."
+msgstr "La pàgina que cerques no existeix o ha canviat d'ubicació."
+
+msgid "Ir al inicio"
+msgstr "Ves a l'inici"
+
+msgid "Error del servidor"
+msgstr "Error del servidor"
+
+msgid "Algo ha ido mal"
+msgstr "Alguna cosa ha anat malament"
+
+msgid "Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en unos momentos."
+msgstr "S'ha produït un error temporal al servidor. Torna-ho a provar d'aquí a una estona."
+
+msgid "Intentarlo de nuevo"
+msgstr "Torna-ho a provar"
+
+msgid "Ludix WebSocket Test"
+msgstr "Prova de WebSocket de Ludix"
+
+msgid "Conectando..."
+msgstr "S'està connectant..."
+
+msgid "Conectado"
+msgstr "Connectat"
+
+msgid "Error de conexión"
+msgstr "Error de connexió"
+
+msgid "Desconectado"
+msgstr "Desconnectat"

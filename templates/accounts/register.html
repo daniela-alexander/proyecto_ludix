@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Crear cuenta{% endblock %}
+{% block title %}{% translate "Crear cuenta" %}{% endblock %}
 
 {% block content %}
 <section class="register-page">
     <div class="auth-card auth-card--wide">
-        <p class="auth-kicker">Únete a Ludix</p>
-        <h1>Crea tu cuenta</h1>
-        <p class="auth-subtitle">Empieza a construir tu biblioteca y tu lista de deseos.</p>
+        <p class="auth-kicker">{% translate "Únete a Ludix" %}</p>
+        <h1>{% translate "Crea tu cuenta" %}</h1>
+        <p class="auth-subtitle">{% translate "Empieza a construir tu biblioteca y tu lista de deseos." %}</p>
 
         <form method="post" id="registro-form">
             {% csrf_token %}
@@ -39,11 +40,11 @@
                     {% if form.password1.help_text %}
                         <div class="password-help">
                             <ul id="password-rules">
-                                <li data-rule="length">Al menos 8 caracteres</li>
-                                <li data-rule="uppercase">Una letra mayúscula</li>
-                                <li data-rule="lowercase">Una letra minúscula</li>
-                                <li data-rule="number">Un número</li>
-                                <li data-rule="special">Un carácter especial</li>
+                                <li data-rule="length">{% translate "Al menos 8 caracteres" %}</li>
+                                <li data-rule="uppercase">{% translate "Una letra mayúscula" %}</li>
+                                <li data-rule="lowercase">{% translate "Una letra minúscula" %}</li>
+                                <li data-rule="number">{% translate "Un número" %}</li>
+                                <li data-rule="special">{% translate "Un carácter especial" %}</li>
                             </ul>
                         </div>
                     {% endif %}
@@ -57,13 +58,13 @@
             </div>
 
             <div class="register-actions">
-                <button type="submit">Crear cuenta</button>
+                <button type="submit">{% translate "Crear cuenta" %}</button>
             </div>
         </form>
 
         <p class="auth-footer">
-            ¿Ya tienes cuenta?
-            <a href="{% url 'login' %}">Inicia sesión</a>
+           {% translate "¿Ya tienes cuenta?" %}
+            <a href="{% url 'login' %}">{% translate "Inicia sesión" %}</a>
         </p>
     </div>
 </section>

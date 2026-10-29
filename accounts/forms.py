@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class RegisterForm(UserCreationForm):
@@ -16,7 +17,7 @@ class RegisterForm(UserCreationForm):
         normalized_email = email.strip()
 
         if User.objects.filter(email__iexact=normalized_email).exists():
-            raise ValidationError("Ya existe una cuenta con este correo electrónico.")
+            raise ValidationError(_("Ya existe una cuenta con este correo electrónico."))
 
         return normalized_email
 

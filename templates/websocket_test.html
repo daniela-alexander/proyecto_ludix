@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ludix WebSocket Test</title>
+    <title>{% translate "Ludix WebSocket Test" %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,6 +24,20 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
+        .language-form {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .language-form select,
+        .language-form button {
+            padding: 8px;
+            border: 1px solid #4b5563;
+            border-radius: 6px;
+        }
         h1 {
             margin-top: 0;
         }
@@ -39,17 +54,35 @@
     </style>
 </head>
 <body>
+    <form method="post" action="{% url 'set_language' %}" class="language-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <label for="language-select">{% translate "Idioma" %}</label>
+        {% get_current_language as CURRENT_LANGUAGE %}
+        {% get_available_languages as AVAILABLE_LANGUAGES %}
+        <select id="language-select" name="language">
+            {% for language_code, language_name in AVAILABLE_LANGUAGES %}
+            <option value="{{ language_code }}" {% if language_code == CURRENT_LANGUAGE %}selected{% endif %}>
+                {{ language_name }}
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit">{% translate "Cambiar" %}</button>
+    </form>
     <div class="card">
-        <h1>Usuarios conectados</h1>
+        <h1>{% translate "Usuarios conectados" %}</h1>
         <div id="count">0</div>
-        <div id="status" class="status">Conectando...</div>
+        <div id="status" class="status">{% translate "Conectando..." %}</div>
     </div>
 
+    {% translate "Conectado" as connected_text %}
+    {% translate "Error de conexión" as connection_error_text %}
+    {% translate "Desconectado" as disconnected_text %}
     <script>
         const socket = new WebSocket('ws://localhost:8000/ws/usuarios/');
 
         socket.onopen = function () {
-            document.getElementById('status').textContent = 'Conectado';
+            document.getElementById('status').textContent = "{{ connected_text|escapejs }}";
         };
 
         socket.onmessage = function (event) {
@@ -58,11 +91,11 @@
         };
 
         socket.onerror = function () {
-            document.getElementById('status').textContent = 'Error de conexión';
+            document.getElementById('status').textContent = "{{ connection_error_text|escapejs }}";
         };
 
         socket.onclose = function () {
-            document.getElementById('status').textContent = 'Desconectado';
+            document.getElementById('status').textContent = "{{ disconnected_text|escapejs }}";
         };
     </script>
 </body>

@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Error del servidor{% endblock %}
+{% block title %}{% translate "Error del servidor" %}{% endblock %}
 
 {% block content %}
 <section class="error-page">
     <div class="error-box">
         <span class="error-badge">500</span>
-        <h1>Algo ha ido mal</h1>
-        <p>Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en unos momentos.</p>
+        <h1>{% translate "Algo ha ido mal" %}</h1>
+        <p>{% translate "Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en unos momentos." %}</p>
 
         <div class="error-actions">
-            <a href="{% url 'home' %}" class="primary-link">Volver al inicio</a>
-            <a href="{% url 'login' %}" class="secondary-link">Intentarlo de nuevo</a>
+            <a href="{% url 'home' %}" class="primary-link">{% translate "Volver al inicio" %}</a>
+            <a href="{% url 'login' %}" class="secondary-link">{% translate "Intentarlo de nuevo" %}</a>
         </div>
     </div>
 </section>

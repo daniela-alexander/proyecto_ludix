@@ -1,214 +1,210 @@
-
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}My profile | Ludix{% endblock %}
+{% block title %}{% translate "Mi perfil" %} | Ludix{% endblock %}
 
 {% block content %}
 <section class="profile-page">
 
     <div class="profile-heading">
         <div>
-            <p class="profile-eyebrow">YOUR PERSONAL SPACE</p>
-            <h1>My profile</h1>
-            <p>Manage your account and discover your activity on Ludix.</p>
+            <p class="profile-eyebrow">{% translate "TU ESPACIO PERSONAL" %}</p>
+            <h1>{% translate "Mi perfil" %}</h1>
+            <p>{% translate "Gestiona tu cuenta y descubre tu actividad en Ludix." %}</p>
         </div>
 
         <div class="profile-avatar">
             {% if profile.profile_image %}
-                <img src="{{ profile.profile_image.url }}" alt="{{ request.user.username }} profile photo">
+            <img src="{{ profile.profile_image.url }}" alt="{% blocktranslate trimmed with username=request.user.username %}Foto de perfil de {{ username }}{% endblocktranslate %}">
             {% else %}
-                {{ request.user.username|first|upper }}
+            {{ request.user.username|first|upper }}
             {% endif %}
         </div>
-    </div>
+        </div>
 
-    {% if email_success %}
+        {% if email_success %}
         <div class="profile-message success">{{ email_success }}</div>
-    {% endif %}
+        {% endif %}
 
-    {% if email_error %}
+        {% if email_error %}
         <div class="profile-message error">{{ email_error }}</div>
-    {% endif %}
+        {% endif %}
 
-    <div class="profile-stats">
+        <div class="profile-stats">
 
-        <article class="profile-card stat-card">
-            <span class="stat-icon">🎲</span>
-            <span class="stat-label">Games in library</span>
-            <strong>{{ total_games }}</strong>
-        </article>
+            <article class="profile-card stat-card">
+                <span class="stat-icon">🎲</span>
+                <span class="stat-label">{% translate "Juegos en la biblioteca" %}</span>
+                <strong>{{ total_games }}</strong>
+            </article>
 
-        <article class="profile-card stat-card">
-            <span class="stat-icon">❤️</span>
-            <span class="stat-label">Favorites</span>
-            <strong>{{ total_favorites }}</strong>
-        </article>
+            <article class="profile-card stat-card">
+                <span class="stat-icon">❤️</span>
+                <span class="stat-label">{% translate "Favoritos" %}</span>
+                <strong>{{ total_favorites }}</strong>
+            </article>
 
-        <article class="profile-card stat-card">
-            <span class="stat-icon">⭐</span>
-            <span class="stat-label">Wishlist</span>
-            <strong>{{ total_wishlist }}</strong>
-        </article>
+            <article class="profile-card stat-card">
+                <span class="stat-icon">⭐</span>
+                <span class="stat-label">{% translate "Lista de deseos" %}</span>
+                <strong>{{ total_wishlist }}</strong>
+            </article>
 
-        <article class="profile-card stat-card">
-            <span class="stat-icon">📦</span>
-            <span class="stat-label">Orders</span>
-            <strong>{{ total_orders }}</strong>
-        </article>
+            <article class="profile-card stat-card">
+                <span class="stat-icon">📦</span>
+                <span class="stat-label">{% translate "Pedidos" %}</span>
+                <strong>{{ total_orders }}</strong>
+            </article>
 
-    </div>
+        </div>
 
-    <div class="profile-layout">
+        <div class="profile-layout">
 
-        <section class="profile-card account-card">
-            <h2>Account details</h2>
-            <p class="profile-description">
-                Your personal information.
-            </p>
+            <section class="profile-card account-card">
+                <h2>{% translate "Datos de la cuenta" %}</h2>
+                <p class="profile-description">
+                    {% translate "Tu información personal." %}
+                </p>
 
-            <div class="profile-detail">
-                <span>Username</span>
-                <strong>{{ request.user.username }}</strong>
-            </div>
+                <div class="profile-detail">
+                    <span>{% translate "Nombre de usuario" %}</span>
+                    <strong>{{ request.user.username }}</strong>
+                </div>
 
-            <div class="profile-detail">
-                <span>Role</span>
-                <strong>{{ profile.get_role_display }}</strong>
-            </div>
+                <div class="profile-detail">
+                    <span>{% translate "Rol" %}</span>
+                    <strong>{{ profile.get_role_display }}</strong>
+                </div>
 
-            <form method="post" class="profile-form" enctype="multipart/form-data">
-                {% csrf_token %}
+                <form method="post" class="profile-form" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-                <label for="profile_image">Profile photo</label>
-                <input type="file" id="profile_image" name="profile_image" accept="image/*">
+                    <label for="profile_image">{% translate "Foto de perfil" %}</label>
+                    <input type="file" id="profile_image" name="profile_image" accept="image/*">
 
-                <label for="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value="{{ request.user.email }}"
-                    placeholder="you@email.com"
-                >
+                    <label for="email">{% translate "Correo electrónico" %}</label>
+                    <input type="email" id="email" name="email" value="{{ request.user.email }}"
+                        placeholder="tu@correo.com">
 
-                <button type="submit">Save changes</button>
-            </form>
+                    <button type="submit">{% translate "Guardar cambios" %}</button>
+                </form>
 
-            <div class="profile-detail">
-                <span>Preferred language</span>
-                <strong>{{ profile.get_preferred_language_display }}</strong>
-            </div>
+                <div class="profile-detail">
+                    <span>{% translate "Idioma actual" %}</span>
+                    {% get_language_info for LANGUAGE_CODE as current_language %}
+                    <strong>{{ current_language.name_local }}</strong>
+                </div>
 
-            <div class="profile-detail">
-                <span>Date of birth</span>
-                <strong>
-                    {% if profile.date_of_birth %}
+                <div class="profile-detail">
+                    <span>{% translate "Fecha de nacimiento" %}</span>
+                    <strong>
+                        {% if profile.date_of_birth %}
                         {{ profile.date_of_birth|date:"d/m/Y" }}
-                    {% else %}
-                        Not provided
-                    {% endif %}
-                </strong>
-            </div>
-        </section>
+                        {% else %}
+                        {% translate "No indicado" %}
+                        {% endif %}
+                    </strong>
+                </div>
+            </section>
 
-        <section class="profile-card activity-card">
-            <h2>My favorite games</h2>
-            <p class="profile-description">
-                Games marked as favorites.
-            </p>
+            <section class="profile-card activity-card">
+                <h2>{% translate "Mis juegos favoritos" %}</h2>
+                <p class="profile-description">
+                    {% translate "Juegos marcados como favoritos." %}
+                </p>
 
-            {% for item in favorites %}
+                {% for item in favorites %}
                 <div class="profile-list-item">
                     <span class="game-icon">🎲</span>
                     <div>
                         <strong>{{ item.game.title }}</strong>
                         <span>
-                            Added {{ item.added_at|date:"d/m/Y" }}
+                            {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
                 </div>
-            {% empty %}
+                {% empty %}
                 <p class="profile-empty">
-                    You do not have favorite games yet.
+                    {% translate "Todavía no tienes juegos favoritos." %}
                 </p>
-            {% endfor %}
-        </section>
+                {% endfor %}
+            </section>
 
-        <section class="profile-card activity-card">
-            <h2>My library</h2>
-            <p class="profile-description">
-                The latest games you added.
-            </p>
+            <section class="profile-card activity-card">
+                <h2>{% translate "Mi biblioteca" %}</h2>
+                <p class="profile-description">
+                    {% translate "Los últimos juegos que has añadido." %}
+                </p>
 
-            {% for item in library %}
+                {% for item in library %}
                 <div class="profile-list-item">
                     <span class="game-icon">🎮</span>
                     <div>
                         <strong>{{ item.game.title }}</strong>
                         <span>
-                            Added {{ item.added_at|date:"d/m/Y" }}
+                            {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
                 </div>
-            {% empty %}
+                {% empty %}
                 <p class="profile-empty">
-                    Your library is still empty.
+                    {% translate "Tu biblioteca está vacía." %}
                 </p>
-            {% endfor %}
-        </section>
+                {% endfor %}
+            </section>
 
-        <section class="profile-card activity-card">
-            <h2>Wishlist</h2>
-            <p class="profile-description">
-                Games you want to add to your collection.
-            </p>
+            <section class="profile-card activity-card">
+                <h2>{% translate "Lista de deseos" %}</h2>
+                <p class="profile-description">
+                    {% translate "Juegos que quieres añadir a tu colección." %}
+                </p>
 
-            {% for item in wishlist %}
+                {% for item in wishlist %}
                 <div class="profile-list-item">
                     <span class="game-icon">⭐</span>
                     <div>
                         <strong>{{ item.game.title }}</strong>
                         <span>
-                            Added {{ item.added_at|date:"d/m/Y" }}
+                            {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
                 </div>
-            {% empty %}
+                {% empty %}
                 <p class="profile-empty">
-                    Your wishlist is empty.
+                    {% translate "Tu lista de deseos está vacía." %}
                 </p>
-            {% endfor %}
-        </section>
+                {% endfor %}
+            </section>
 
-        <section class="profile-card activity-card">
-            <h2>Latest sessions</h2>
+            <section class="profile-card activity-card">
+                <h2>{% translate "Últimas sesiones" %}</h2>
 
-            {% for session in sessions %}
+                {% for session in sessions %}
                 <div class="profile-list-item">
                     <span class="game-icon">🧩</span>
                     <div>
-                        <strong>Session #{{ session.id }}</strong>
+                        <strong>{% blocktranslate trimmed with id=session.id %}Sesión n.o {{ id }}{% endblocktranslate %}</strong>
                         <span>
                             {{ session.get_suggestion_type_display }}
                             · {{ session.created_at|date:"d/m/Y H:i" }}
                         </span>
                     </div>
                 </div>
-            {% empty %}
+                {% empty %}
                 <p class="profile-empty">
-                    You do not have any saved sessions yet.
+                    {% translate "Todavía no tienes sesiones guardadas." %}
                 </p>
-            {% endfor %}
-        </section>
+                {% endfor %}
+            </section>
 
-        <section class="profile-card activity-card">
-            <h2>Latest orders</h2>
+            <section class="profile-card activity-card">
+                <h2>{% translate "Últimos pedidos" %}</h2>
 
-            {% for order in orders %}
+                {% for order in orders %}
                 <div class="profile-list-item">
                     <span class="game-icon">📦</span>
                     <div>
-                        <strong>Order #{{ order.id }}</strong>
+                        <strong>{% blocktranslate trimmed with id=order.id %}Pedido n.o {{ id }}{% endblocktranslate %}</strong>
                         <span>
                             {{ order.get_status_display }}
                             · {{ order.created_at|date:"d/m/Y" }}
@@ -216,14 +212,14 @@
                     </div>
                     <strong>{{ order.total }} €</strong>
                 </div>
-            {% empty %}
+                {% empty %}
                 <p class="profile-empty">
-                    You do not have any orders yet.
+                    {% translate "Todavía no tienes pedidos." %}
                 </p>
-            {% endfor %}
-        </section>
+                {% endfor %}
+            </section>
 
-    </div>
+        </div>
 
 </section>
 {% endblock %}

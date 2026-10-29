@@ -1,43 +1,44 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Iniciar sesión{% endblock %}
+{% block title %} {% translate "Iniciar sesión" %} {% endblock %}
 
 {% block content %}
 <section class="auth-page">
     <div class="auth-card">
-        <p class="auth-kicker">Bienvenido de nuevo</p>
-        <h1>Inicia sesión en Ludix</h1>
-        <p class="auth-subtitle">Accede a tu perfil, lista de deseos y biblioteca de juegos.</p>
+        <p class="auth-kicker">{% translate "Bienvenido de nuevo" %}</p>
+        <h1>{% translate "Inicia sesión en Ludix" %}</h1>
+        <p class="auth-subtitle">{% translate "Accede a tu perfil, lista de deseos y biblioteca de juegos." %}</p>
 
         {% if form.non_field_errors %}
-            <div class="form-errors">
-                {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
+        <div class="form-errors">
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
         {% endif %}
 
         <form method="post" class="auth-form">
             {% csrf_token %}
 
             {% for field in form %}
-                <div class="auth-field">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="field-error">
-                            {{ field.errors }}
-                        </div>
-                    {% endif %}
+            <div class="auth-field">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                <div class="field-error">
+                    {{ field.errors }}
                 </div>
+                {% endif %}
+            </div>
             {% endfor %}
 
-            <button type="submit">Entrar</button>
+            <button type="submit">{% translate "Entrar" %}</button>
         </form>
 
         <p class="auth-footer">
-            ¿Necesitas una cuenta?
-            <a href="{% url 'register' %}">Créala aquí</a>
+            {% translate "¿Necesitas una cuenta?" %}
+            <a href="{% url 'register' %}">{% translate "Créala aquí" %}</a>
         </p>
     </div>
 </section>
