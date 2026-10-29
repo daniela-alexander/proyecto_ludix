@@ -6,7 +6,7 @@ Recomiéndame un juego | Ludix
 
 {% block content %}
 
-<section class="recommend-card">
+<section class="recommend-card {% if enviado %}compact{% endif %}">
 
     <div class="recommend-header">
         <h1>🎲 Encuentra tu próximo juego</h1>
@@ -17,13 +17,23 @@ Recomiéndame un juego | Ludix
         </p>
     </div>
 
-    {% if enviado %}
+    {% comment %} {% if enviado %}
         <div class="recommend-success">
             ✅ Preferencias guardadas correctamente.
         </div>
+    {% endif %} {% endcomment %}
+
+    {% if enviado %}
+        <button
+            type="button"
+            id="toggle-search"
+            class="toggle-search-btn"
+        >
+            ▼ Modificar búsqueda
+        </button>
     {% endif %}
 
-    <div class="recommend-layout{% if enviado %} has-results{% endif %}">
+    <div id="search-container">
 
         <form method="post" class="recommend-form">
 
@@ -139,21 +149,40 @@ Recomiéndame un juego | Ludix
 
         </form>
 
-        
+    </div>
 
-        {% if enviado %}
-            <section class="recommend-results">
-                <h2>Recomendaciones</h2>
+</section>
 
-                {% for juego in recomendaciones %}
-                    <article>
-                        <h3>{{ juego.titulo }}</h3>
-                        <p>Jugadores: {{ juego.num_jugadores_min }}–{{ juego.num_jugadores_max }}</p>
-                        <p>Edad mínima: {{ juego.edad_minima }} años</p>
-                        <p>Duración: {{ juego.duracion_minutos }} minutos</p>
-                        <p>Dificultad: {{ juego.dificultad }}</p>
+    {% if enviado %}
+        <section class="recommend-results">
+            <h2>Recomendaciones</h2>
 
-                        {% if juego.stock > 0 %}
+            <div class="results-toolbar">
+                <button type="button" id="list-view">
+                    📋 Lista
+                </button>
+
+                <button type="button" id="grid-view">
+                    🔲 Cuadrícula
+                </button>
+            </div>
+            <div id="results-container" class="results-grid">
+                {% for game in recomendaciones %}
+                    <article class="result-card">
+                        <div class="result-image">
+                            🎲
+                            {% comment %} cuando haya imagenes dejamos <img src="..."> {% endcomment %}
+                        </div>
+
+                        <div class="result-content">
+                            <h3>{{ game.title }}</h3>
+                            <p>Jugadores: {{ game.min_players }}–{{ game.max_players }}</p>
+                            <p>Edad mínima: {{ game.min_age }} años</p>
+                            <p>Duración: {{ game.duration_minutes }} minutos</p>
+                            <p>Dificultad: {{ game.difficulty }}</p>
+                        <div>
+
+                        {% if game.stock > 0 %}
                             <p>Disponible</p>
                         {% else %}
                             <p>No disponible actualmente</p>
@@ -162,11 +191,9 @@ Recomiéndame un juego | Ludix
                 {% empty %}
                     <p>No encontramos juegos que encajen con esos criterios.</p>
                 {% endfor %}
-            </section>
-        {% endif %}
-    </div>
-
-</section>
+            </div>
+        </section>
+    {% endif %}
 
 <script>
     const controles = [
@@ -189,6 +216,48 @@ Recomiéndame un juego | Ludix
             actualizar();
         }
     });
+
+    const btn = document.getElementById("toggle-search");
+    const panel = document.getElementById("search-container");
+
+    if(btn && panel){
+
+        panel.classList.add("collapsed");
+
+        btn.addEventListener("click", () => {
+
+            panel.classList.toggle("collapsed");
+
+            btn.textContent =
+                panel.classList.contains("collapsed")
+                ? "▼ Modificar búsqueda"
+                : "▲ Ocultar búsqueda";
+        });
+    }
+
+
+    const listBtn = document.getElementById("list-view");
+    const gridBtn = document.getElementById("grid-view");
+    const container = document.getElementById("results-container");
+
+    if(listBtn && gridBtn && container){
+
+        listBtn.addEventListener("click", () => {
+
+            container.classList.remove("results-grid");
+            container.classList.add("results-list");
+
+        });
+
+        gridBtn.addEventListener("click", () => {
+
+            container.classList.remove("results-list");
+            container.classList.add("results-grid");
+
+        });
+
+    }
+
 </script>
 
 {% endblock %}

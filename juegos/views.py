@@ -196,8 +196,8 @@ def sugerencia_view(request):
 
         SesionJuegoPropuesto.objects.bulk_create(
             [
-                SesionJuegoPropuesto(session=session, game=juego)
-                for juego in recomendaciones
+                SesionJuegoPropuesto(session=session, game=game)
+                for game in recomendaciones
             ]
         )
 
