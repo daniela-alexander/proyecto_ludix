@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('juegos', '0005_game_description_ca_game_description_en_and_more'),
+        ('juegos', '0005_merge_20261026_1659'),
     ]
 
     operations = [

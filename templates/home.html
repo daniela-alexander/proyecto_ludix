@@ -17,6 +17,11 @@
                     placeholder="{% translate 'Busca por título, categoría o mecánica' %}">
                 <button type="submit" class="search-button">{% translate "Buscar" %}</button>
             </div>
+
+            <div class="search-row recommendation-row">
+                <a class="recommendation-button" href="{% url 'sugerencia' %}">{% translate "¡Recomiéndame un juego!" %}</a>
+            </div>
+            
         </div>
     </section>
 

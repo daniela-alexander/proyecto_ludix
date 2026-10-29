@@ -1576,6 +1576,60 @@ main:has(.register-page) {
    RECOMENDADOR LUDIX
 ========================= */
 
+.search-row:last-child{
+    justify-content:center;
+    margin-top:.75rem;
+}
+
+.recommendation-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:320px;
+
+    padding:1.1rem 2rem;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--neon)
+        );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 0 20px rgba(124,108,255,.25),
+        0 0 40px rgba(77,226,255,.15);
+
+    transition:.25s;
+}
+
+.recommendation-button:hover{
+    transform:translateY(-3px) scale(1.02);
+
+    box-shadow:
+        0 0 25px rgba(124,108,255,.45),
+        0 0 50px rgba(77,226,255,.25);
+}
+
+.recommendation-button h2{
+    margin:0;
+    font-size:1.2rem;
+    color:#fff;
+}
+
+.recommendation-row{
+    justify-content:center;
+}
+
 .recommend-card{
     max-width:600px;
     margin:0 auto;

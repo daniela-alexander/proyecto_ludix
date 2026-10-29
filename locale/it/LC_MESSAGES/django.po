@@ -361,3 +361,6 @@ msgstr "Errore di connessione"
 
 msgid "Desconectado"
 msgstr "Disconnesso"
+
+msgid "¡Recomiéndame un juego!"
+msgstr "Consigliami un gioco!"
