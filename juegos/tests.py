@@ -1,7 +1,9 @@
-from django.test import TestCase
+from django.test import SimpleTestCase, TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
+from channels.testing import WebsocketCommunicator
 
+from .consumers import UsuariosConsumer
 from .models import (
     Category,
     Game,
@@ -14,6 +16,48 @@ from .models import (
     UserProfile,
     Wishlist,
 )
+
+
+class UsuariosConsumerTests(SimpleTestCase):
+    def setUp(self):
+        UsuariosConsumer.usuarios_conectados.clear()
+
+    async def test_connected_count_decreases_when_socket_disconnects(self):
+        first = WebsocketCommunicator(
+            UsuariosConsumer.as_asgi(),
+            "/ws/usuarios/",
+        )
+        second = WebsocketCommunicator(
+            UsuariosConsumer.as_asgi(),
+            "/ws/usuarios/",
+        )
+        first_connected = False
+        second_connected = False
+
+        try:
+            connected, _ = await first.connect()
+            self.assertTrue(connected)
+            first_connected = True
+            self.assertEqual(await first.receive_json_from(), {"usuarios": 1})
+
+            connected, _ = await second.connect()
+            self.assertTrue(connected)
+            second_connected = True
+            self.assertEqual(await first.receive_json_from(), {"usuarios": 2})
+            self.assertEqual(await second.receive_json_from(), {"usuarios": 2})
+
+            await first.disconnect()
+            first_connected = False
+            self.assertEqual(await second.receive_json_from(), {"usuarios": 1})
+
+            await second.disconnect()
+            second_connected = False
+            self.assertEqual(UsuariosConsumer.usuarios_conectados, set())
+        finally:
+            if first_connected:
+                await first.disconnect()
+            if second_connected:
+                await second.disconnect()
 
 
 class GameApiSearchTests(TestCase):
