@@ -72,6 +72,11 @@ def game_detail(request, game_id):
     )
 
 
+def game_shop(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+    return render(request, "juegos/game_shop.html", {"game": game})
+
+
 def home(request):
     query = request.GET.get("q", "").strip()
     category_id = request.GET.get("category")

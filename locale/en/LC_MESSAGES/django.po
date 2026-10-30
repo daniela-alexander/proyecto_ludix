@@ -206,6 +206,36 @@ msgstr "Add to wishlist"
 msgid "Quitar de la lista de deseos"
 msgstr "Remove from wishlist"
 
+msgid "Comprar juego"
+msgstr "Buy game"
+
+msgid "Tienda próximamente"
+msgstr "Store coming soon"
+
+msgid "Tienda"
+msgstr "Store"
+
+msgid "Estamos preparando algo especial"
+msgstr "We're preparing something special"
+
+msgid "LA TIENDA LUDIX"
+msgstr "THE LUDIX STORE"
+
+msgid "Muy pronto podrás comprar tus juegos favoritos."
+msgstr "Soon you'll be able to buy your favorite games."
+
+msgid "Estamos trabajando para que pronto puedas descubrir y comprar juegos directamente desde Ludix. ¡Gracias por esperar!"
+msgstr "We're working to let you discover and buy games directly from Ludix. Thanks for your patience!"
+
+msgid "El juego que te interesa"
+msgstr "The game you're interested in"
+
+msgid "Volver al juego"
+msgstr "Back to game"
+
+msgid "Explorar el catálogo"
+msgstr "Browse the catalog"
+
 msgid "Inicia sesión para añadirlo"
 msgstr "Log in to add it"
 

@@ -112,6 +112,11 @@
                     {% endif %}
                 </div>
 
+                <a class="game-shop-button" href="{% url 'game_shop' game.id %}">
+                    <span aria-hidden="true">🛍</span>
+                    {% translate "Comprar juego" %}
+                </a>
+
                 <div class="game-detail-purchase-divider"></div>
                 <h2>{% translate "Añádelo a tu colección" %}</h2>
                 <p class="game-detail-purchase-copy">{% translate "Guarda este juego en tu biblioteca para tenerlo siempre a mano." %}</p>

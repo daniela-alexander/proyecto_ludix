@@ -335,6 +335,23 @@ class GameDetailTests(TestCase):
         self.assertContains(response, "Aventura")
         self.assertContains(response, "Cooperación")
         self.assertContains(response, "Inicia sesión para añadirlo")
+        self.assertContains(
+            response,
+            reverse("game_shop", kwargs={"game_id": self.game.id}),
+        )
+
+    def test_game_shop_page_shows_coming_soon_and_returns_to_game(self):
+        response = self.client.get(
+            reverse("game_shop", kwargs={"game_id": self.game.id})
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Muy pronto podrás comprar tus juegos favoritos.")
+        self.assertContains(response, "Juego detallado")
+        self.assertContains(
+            response,
+            f'href="{reverse("game_detail", kwargs={"game_id": self.game.id})}"',
+        )
 
     def test_detail_page_uses_translations(self):
         detail_url = reverse("game_detail", kwargs={"game_id": self.game.id})
