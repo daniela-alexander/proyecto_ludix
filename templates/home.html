@@ -135,30 +135,56 @@
                         </div>
 
                         {% if user.is_authenticated %}
-                        {% if game.id in library_game_ids %}
-                        <form method="post" action="{% url 'library_remove' game.id %}" class="game-card-library-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                            <button type="submit"
-                                    aria-label="{% translate 'Quitar de mi biblioteca' %}"
-                                    title="{% translate 'Ya está en tu biblioteca' %}"
-                                    data-library-label="{% translate 'Ya está en tu biblioteca' %}"
-                                    data-remove-label="{% translate 'Quitar de mi biblioteca' %}"
-                                    class="game-card-library-button is-in-library">
-                                <span class="library-button-added" aria-hidden="true">✓</span>
-                                <span class="library-button-remove" aria-hidden="true">−</span>
-                            </button>
-                        </form>
-                        {% else %}
-                        <form method="post" action="{% url 'library_add' game.id %}" class="game-card-library-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                            <button type="submit"
-                                    aria-label="{% translate 'Añadir a mi biblioteca' %}"
-                                    title="{% translate 'Añadir a mi biblioteca' %}"
-                                    class="game-card-library-button">+</button>
-                        </form>
-                        {% endif %}
+                        <div class="game-card-actions">
+                            {% if game.id in library_game_ids %}
+                            <form method="post" action="{% url 'library_remove' game.id %}" class="game-card-action-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                <button type="submit"
+                                        aria-label="{% translate 'Quitar de mi biblioteca' %}"
+                                        title="{% translate 'Ya está en tu biblioteca' %}"
+                                        data-library-label="{% translate 'Ya está en tu biblioteca' %}"
+                                        data-remove-label="{% translate 'Quitar de mi biblioteca' %}"
+                                        class="game-card-library-button is-in-library">
+                                    <span class="library-button-added" aria-hidden="true">✓</span>
+                                    <span class="library-button-remove" aria-hidden="true">−</span>
+                                </button>
+                            </form>
+                            <form method="post" action="{% url 'library_favorite' game.id %}" class="game-card-action-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                <button type="submit"
+                                        class="game-card-icon-button game-card-favorite-button{% if game.id in favorite_game_ids %} is-active{% endif %}"
+                                        aria-label="{% if game.id in favorite_game_ids %}{% translate 'Quitar de favoritos' %}{% else %}{% translate 'Añadir a favoritos' %}{% endif %}"
+                                        title="{% if game.id in favorite_game_ids %}{% translate 'Quitar de favoritos' %}{% else %}{% translate 'Añadir a favoritos' %}{% endif %}"
+                                        aria-pressed="{% if game.id in favorite_game_ids %}true{% else %}false{% endif %}">
+                                    {% if game.id in favorite_game_ids %}♥{% else %}♡{% endif %}
+                                </button>
+                            </form>
+                            {% else %}
+                            <form method="post" action="{% url 'library_add' game.id %}" class="game-card-action-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                <button type="submit"
+                                        aria-label="{% translate 'Añadir a mi biblioteca' %}"
+                                        title="{% translate 'Añadir a mi biblioteca' %}"
+                                        class="game-card-library-button">+</button>
+                            </form>
+                            <form method="post"
+                                action="{% if game.id in wishlist_game_ids %}{% url 'wishlist_remove' game.id %}{% else %}{% url 'wishlist_add' game.id %}{% endif %}"
+                                class="game-card-action-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                <button type="submit"
+                                        class="game-card-icon-button game-card-wishlist-button{% if game.id in wishlist_game_ids %} is-active{% endif %}"
+                                        aria-label="{% if game.id in wishlist_game_ids %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                                        title="{% if game.id in wishlist_game_ids %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                                        aria-pressed="{% if game.id in wishlist_game_ids %}true{% else %}false{% endif %}">
+                                    {% if game.id in wishlist_game_ids %}★{% else %}☆{% endif %}
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
                         {% endif %}
                     </article>
                     {% endfor %}

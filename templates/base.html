@@ -61,23 +61,59 @@
 
     <script>
         const protocolo = window.location.protocol === "https:" ? "wss" : "ws";
-        const socket = new WebSocket(`${protocolo}://${window.location.host}/ws/usuarios/`);
+        let socketUsuarios = null;
 
-        socket.onmessage = function (evento) {
-            const datos = JSON.parse(evento.data);
-            const contador = document.getElementById("contador-usuarios");
-            if (contador) {
-                contador.textContent = datos.usuarios;
+        function conectarUsuarios() {
+            if (
+                socketUsuarios
+                && (
+                    socketUsuarios.readyState === WebSocket.CONNECTING
+                    || socketUsuarios.readyState === WebSocket.OPEN
+                )
+            ) {
+                return;
             }
-        };
 
-        socket.onclose = function () {
-            console.log("Conexión WebSocket cerrada");
-        };
+            const socketActual = new WebSocket(
+                `${protocolo}://${window.location.host}/ws/usuarios/`
+            );
+            socketUsuarios = socketActual;
 
-        socket.onerror = function (error) {
-            console.error("Error de WebSocket:", error);
-        };
+            socketActual.onmessage = function (evento) {
+                const datos = JSON.parse(evento.data);
+                const contador = document.getElementById("contador-usuarios");
+                if (contador) {
+                    contador.textContent = datos.usuarios;
+                }
+            };
+
+            socketActual.onclose = function () {
+                if (socketUsuarios === socketActual) {
+                    socketUsuarios = null;
+                }
+            };
+
+            socketActual.onerror = function (error) {
+                console.error("Error de WebSocket:", error);
+            };
+        }
+
+        function desconectarUsuarios() {
+            const socketActual = socketUsuarios;
+            socketUsuarios = null;
+
+            if (
+                socketActual
+                && socketActual.readyState !== WebSocket.CLOSED
+                && socketActual.readyState !== WebSocket.CLOSING
+            ) {
+                socketActual.close();
+            }
+        }
+
+        window.addEventListener("pagehide", desconectarUsuarios);
+        window.addEventListener("pageshow", conectarUsuarios);
+        conectarUsuarios();
 
         const btn = document.getElementById("theme-toggle");
         const body = document.body;

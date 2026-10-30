@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Tienda próximamente" %} | Ludix{% endblock %}
+
+{% block content %}
+<section class="shop-coming-page">
+    <nav class="game-detail-breadcrumbs" aria-label="{% translate 'Ruta de navegación' %}">
+        <a href="{% url 'home' %}">{% translate "Catálogo" %}</a>
+        <span aria-hidden="true">/</span>
+        <a href="{% url 'game_detail' game.id %}">{{ game.get_title }}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{% translate "Tienda" %}</span>
+    </nav>
+
+    <article class="shop-coming-card">
+        <div class="shop-coming-art" aria-hidden="true">
+            <span class="shop-coming-orbit shop-coming-orbit-one"></span>
+            <span class="shop-coming-orbit shop-coming-orbit-two"></span>
+            <span class="shop-coming-bag">🛍</span>
+            <span class="shop-coming-spark shop-coming-spark-one">✦</span>
+            <span class="shop-coming-spark shop-coming-spark-two">✧</span>
+        </div>
+
+        <div class="shop-coming-copy">
+            <span class="shop-coming-badge">
+                <span class="shop-coming-status-dot" aria-hidden="true"></span>
+                {% translate "Estamos preparando algo especial" %}
+            </span>
+            <p class="shop-coming-eyebrow">{% translate "LA TIENDA LUDIX" %}</p>
+            <h1>{% translate "Muy pronto podrás comprar tus juegos favoritos." %}</h1>
+            <p class="shop-coming-description">
+                {% translate "Estamos trabajando para que pronto puedas descubrir y comprar juegos directamente desde Ludix. ¡Gracias por esperar!" %}
+            </p>
+
+            <div class="shop-coming-game">
+                <span class="shop-coming-game-icon" aria-hidden="true">{{ game.get_title|first|upper }}</span>
+                <div>
+                    <span>{% translate "El juego que te interesa" %}</span>
+                    <strong>{{ game.get_title }}</strong>
+                </div>
+                <strong class="shop-coming-game-price">{{ game.price }} €</strong>
+            </div>
+
+            <div class="shop-coming-actions">
+                <a class="shop-coming-primary" href="{% url 'game_detail' game.id %}">
+                    {% translate "Volver al juego" %}
+                </a>
+                <a class="shop-coming-secondary" href="{% url 'home' %}">
+                    {% translate "Explorar el catálogo" %}
+                </a>
+            </div>
+        </div>
+    </article>
+</section>
+{% endblock %}

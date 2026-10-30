@@ -1,7 +1,10 @@
-from django.test import TestCase
+from django.test import SimpleTestCase, TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
+from channels.testing import WebsocketCommunicator
 
+from .forms import SugerenciaForm
+from .consumers import UsuariosConsumer
 from .models import (
     Category,
     Game,
@@ -12,7 +15,50 @@ from .models import (
     ProposedGameSession,
     SuggestionSession,
     UserProfile,
+    Wishlist,
 )
+
+
+class UsuariosConsumerTests(SimpleTestCase):
+    def setUp(self):
+        UsuariosConsumer.usuarios_conectados.clear()
+
+    async def test_connected_count_decreases_when_socket_disconnects(self):
+        first = WebsocketCommunicator(
+            UsuariosConsumer.as_asgi(),
+            "/ws/usuarios/",
+        )
+        second = WebsocketCommunicator(
+            UsuariosConsumer.as_asgi(),
+            "/ws/usuarios/",
+        )
+        first_connected = False
+        second_connected = False
+
+        try:
+            connected, _ = await first.connect()
+            self.assertTrue(connected)
+            first_connected = True
+            self.assertEqual(await first.receive_json_from(), {"usuarios": 1})
+
+            connected, _ = await second.connect()
+            self.assertTrue(connected)
+            second_connected = True
+            self.assertEqual(await first.receive_json_from(), {"usuarios": 2})
+            self.assertEqual(await second.receive_json_from(), {"usuarios": 2})
+
+            await first.disconnect()
+            first_connected = False
+            self.assertEqual(await second.receive_json_from(), {"usuarios": 1})
+
+            await second.disconnect()
+            second_connected = False
+            self.assertEqual(UsuariosConsumer.usuarios_conectados, set())
+        finally:
+            if first_connected:
+                await first.disconnect()
+            if second_connected:
+                await second.disconnect()
 
 
 class GameApiSearchTests(TestCase):
@@ -193,6 +239,118 @@ class GameApiSearchTests(TestCase):
             ).exists()
         )
 
+    def test_home_shows_favorite_and_wishlist_controls_only_in_allowed_states(self):
+        user = User.objects.create_user(username="game_controls_user")
+        profile = UserProfile.objects.create(user=user)
+        LibraryGame.objects.create(
+            user_profile=profile,
+            game=self.game_one,
+            favorite=True,
+        )
+        Wishlist.objects.create(user_profile=profile, game=self.game_two)
+        self.client.force_login(user)
+
+        response = self.client.get("/")
+
+        self.assertEqual(response.context["favorite_game_ids"], {self.game_one.id})
+        self.assertEqual(response.context["wishlist_game_ids"], {self.game_two.id})
+        self.assertContains(response, 'action="/library/favorite/1/"')
+        self.assertContains(response, 'action="/wishlist/remove/2/"')
+        self.assertNotContains(response, 'action="/wishlist/add/1/"')
+        self.assertNotContains(response, 'action="/library/favorite/2/"')
+
+    def test_favorite_toggle_only_changes_games_in_current_users_library(self):
+        user = User.objects.create_user(username="favorite_toggle_user")
+        profile = UserProfile.objects.create(user=user)
+        library_entry = LibraryGame.objects.create(
+            user_profile=profile,
+            game=self.game_one,
+        )
+        self.client.force_login(user)
+
+        favorite_url = reverse(
+            "library_favorite",
+            kwargs={"game_id": self.game_one.id},
+        )
+        response = self.client.post(favorite_url, {"next": "/"})
+
+        self.assertRedirects(response, "/")
+        library_entry.refresh_from_db()
+        self.assertTrue(library_entry.favorite)
+
+        self.client.post(favorite_url, {"next": "/"})
+        library_entry.refresh_from_db()
+        self.assertFalse(library_entry.favorite)
+
+        self.client.post(
+            reverse("library_favorite", kwargs={"game_id": self.game_two.id}),
+            {"next": "/"},
+        )
+        self.assertFalse(
+            LibraryGame.objects.filter(
+                user_profile=profile,
+                game=self.game_two,
+            ).exists()
+        )
+
+    def test_wishlist_can_only_be_changed_while_game_is_outside_library(self):
+        user = User.objects.create_user(username="wishlist_controls_user")
+        profile = UserProfile.objects.create(user=user)
+        self.client.force_login(user)
+        add_url = reverse("wishlist_add", kwargs={"game_id": self.game_two.id})
+        remove_url = reverse("wishlist_remove", kwargs={"game_id": self.game_two.id})
+
+        response = self.client.post(add_url, {"next": "/"})
+
+        self.assertRedirects(response, "/")
+        self.assertTrue(
+            Wishlist.objects.filter(
+                user_profile=profile,
+                game=self.game_two,
+            ).exists()
+        )
+
+        self.client.post(remove_url, {"next": "/"})
+        self.assertFalse(
+            Wishlist.objects.filter(
+                user_profile=profile,
+                game=self.game_two,
+            ).exists()
+        )
+
+        LibraryGame.objects.create(user_profile=profile, game=self.game_two)
+        self.client.post(add_url, {"next": "/"})
+        self.assertFalse(
+            Wishlist.objects.filter(
+                user_profile=profile,
+                game=self.game_two,
+            ).exists()
+        )
+
+    def test_adding_game_to_library_removes_it_from_wishlist(self):
+        user = User.objects.create_user(username="library_clears_wishlist")
+        profile = UserProfile.objects.create(user=user)
+        Wishlist.objects.create(user_profile=profile, game=self.game_one)
+        self.client.force_login(user)
+
+        self.client.post(
+            reverse("library_add", kwargs={"game_id": self.game_one.id}),
+            {"next": "/"},
+        )
+
+        self.assertTrue(
+            LibraryGame.objects.filter(
+                user_profile=profile,
+                game=self.game_one,
+            ).exists()
+        )
+        self.assertFalse(
+            Wishlist.objects.filter(
+                user_profile=profile,
+                game=self.game_one,
+            ).exists()
+        )
+
 class GameDetailTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="detail_user")
@@ -222,6 +380,23 @@ class GameDetailTests(TestCase):
         self.assertContains(response, "Aventura")
         self.assertContains(response, "Cooperación")
         self.assertContains(response, "Inicia sesión para añadirlo")
+        self.assertContains(
+            response,
+            reverse("game_shop", kwargs={"game_id": self.game.id}),
+        )
+
+    def test_game_shop_page_shows_coming_soon_and_returns_to_game(self):
+        response = self.client.get(
+            reverse("game_shop", kwargs={"game_id": self.game.id})
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Muy pronto podrás comprar tus juegos favoritos.")
+        self.assertContains(response, "Juego detallado")
+        self.assertContains(
+            response,
+            f'href="{reverse("game_detail", kwargs={"game_id": self.game.id})}"',
+        )
 
     def test_detail_page_uses_translations(self):
         detail_url = reverse("game_detail", kwargs={"game_id": self.game.id})
@@ -236,6 +411,26 @@ class GameDetailTests(TestCase):
         self.assertContains(response, "Game details")
         self.assertContains(response, "Players")
         self.assertContains(response, "Log in to add it")
+
+    def test_detail_page_shows_controls_based_on_library_state(self):
+        profile = UserProfile.objects.create(user=self.user)
+        LibraryGame.objects.create(user_profile=profile, game=self.game, favorite=True)
+        self.client.force_login(self.user)
+
+        response = self.client.get(
+            reverse("game_detail", kwargs={"game_id": self.game.id})
+        )
+
+        self.assertContains(response, 'action="/library/favorite/1/"')
+        self.assertContains(response, 'aria-pressed="true"')
+        self.assertNotContains(response, 'action="/wishlist/add/1/"')
+
+        LibraryGame.objects.filter(user_profile=profile, game=self.game).delete()
+        response = self.client.get(
+            reverse("game_detail", kwargs={"game_id": self.game.id})
+        )
+        self.assertContains(response, 'action="/wishlist/add/1/"')
+        self.assertNotContains(response, 'action="/library/favorite/1/"')
 
     def test_user_can_add_game_from_detail_and_return_to_detail(self):
         self.client.force_login(self.user)
@@ -359,6 +554,46 @@ class SuggestionViewTests(TestCase):
         self.game.categories.add(self.category)
         self.client.force_login(self.user)
 
+    def test_age_and_duration_controls_use_sensible_ranges_and_steps(self):
+        response = self.client.get("/sugerencia/")
+        age_widget = SugerenciaForm.base_fields[
+            "edad_minima_participante"
+        ].widget
+        duration_widget = SugerenciaForm.base_fields["duracion_max"].widget
+
+        self.assertEqual(int(age_widget.attrs["min"]), 3)
+        self.assertEqual(int(age_widget.attrs["max"]), 19)
+        self.assertEqual(duration_widget.attrs["step"], "15")
+        self.assertContains(response, "Mayor de 18")
+
+    def test_over_18_age_option_includes_games_for_adults(self):
+        adult_game = Game.objects.create(
+            title="Juego para adultos",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=60,
+            min_age=40,
+            difficulty=3,
+            price=19.99,
+        )
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 19,
+                "duracion_max": 90,
+                "dificultad_preferida": 3,
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["enviado"])
+        self.assertIn(adult_game, response.context["recomendaciones"])
+
     def test_purchase_suggestion_creates_session_and_proposal(self):
         response = self.client.post(
             "/sugerencia/",
@@ -433,4 +668,74 @@ class SuggestionViewTests(TestCase):
             ProposedGameSession.objects.filter(session=session).values_list(
                 "game_id", flat=True
             ),
+        )
+
+    def test_recommendation_results_show_library_and_wishlist_actions(self):
+        owned_game = Game.objects.create(
+            title="Juego en biblioteca",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=45,
+            min_age=8,
+            difficulty=3,
+            price=19.99,
+        )
+        LibraryGame.objects.create(user_profile=self.profile, game=owned_game)
+        Wishlist.objects.create(user_profile=self.profile, game=self.game)
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 18,
+                "duracion_max": 90,
+                "dificultad_preferida": 3,
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["library_game_ids"],
+            {owned_game.id},
+        )
+        self.assertEqual(response.context["wishlist_game_ids"], {self.game.id})
+        self.assertContains(
+            response,
+            f'href="{reverse("game_shop", kwargs={"game_id": self.game.id})}"',
+        )
+        suggestion_url = (
+            f'{reverse("sugerencia")}?session='
+            f'{response.context["suggestion_session"].id}'
+        )
+        self.assertContains(response, f'value="{suggestion_url}"')
+        self.assertContains(
+            response,
+            f'action="{reverse("library_add", kwargs={"game_id": self.game.id})}"',
+        )
+        self.assertContains(
+            response,
+            f'action="{reverse("wishlist_remove", kwargs={"game_id": self.game.id})}"',
+        )
+        self.assertContains(
+            response,
+            f'action="{reverse("library_remove", kwargs={"game_id": owned_game.id})}"',
+        )
+
+        add_to_library_response = self.client.post(
+            reverse("library_add", kwargs={"game_id": self.game.id}),
+            {"next": suggestion_url},
+        )
+        self.assertRedirects(add_to_library_response, suggestion_url)
+        restored_response = self.client.get(suggestion_url)
+        self.assertContains(restored_response, self.game.title)
+        self.assertContains(
+            restored_response,
+            f'action="{reverse("library_remove", kwargs={"game_id": self.game.id})}"',
+        )
+        self.assertNotContains(
+            restored_response,
+            f'action="{reverse("wishlist_add", kwargs={"game_id": self.game.id})}"',
         )

@@ -112,16 +112,33 @@
                     {% endif %}
                 </div>
 
+                <a class="game-shop-button" href="{% url 'game_shop' game.id %}">
+                    <span aria-hidden="true">🛍</span>
+                    {% translate "Comprar juego" %}
+                </a>
+
                 <div class="game-detail-purchase-divider"></div>
                 <h2>{% translate "Añádelo a tu colección" %}</h2>
                 <p class="game-detail-purchase-copy">{% translate "Guarda este juego en tu biblioteca para tenerlo siempre a mano." %}</p>
 
                 {% if user.is_authenticated %}
+                <div class="game-detail-actions">
                     {% if is_in_library %}
                     <div class="library-added-message">
                         <span aria-hidden="true">✓</span>
                         {% translate "Este juego ya está en tu biblioteca." %}
                     </div>
+                    <form method="post" action="{% url 'library_favorite' game.id %}" class="game-detail-icon-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit"
+                                class="game-detail-icon-button game-detail-favorite-button{% if is_favorite %} is-active{% endif %}"
+                                aria-label="{% if is_favorite %}{% translate 'Quitar de favoritos' %}{% else %}{% translate 'Añadir a favoritos' %}{% endif %}"
+                                title="{% if is_favorite %}{% translate 'Quitar de favoritos' %}{% else %}{% translate 'Añadir a favoritos' %}{% endif %}"
+                                aria-pressed="{% if is_favorite %}true{% else %}false{% endif %}">
+                            {% if is_favorite %}♥{% else %}♡{% endif %}
+                        </button>
+                    </form>
                     {% else %}
                     <form method="post" action="{% url 'library_add' game.id %}" class="library-add-form">
                         {% csrf_token %}
@@ -131,7 +148,21 @@
                             {% translate "Añadir a mi biblioteca" %}
                         </button>
                     </form>
+                    <form method="post"
+                        action="{% if is_in_wishlist %}{% url 'wishlist_remove' game.id %}{% else %}{% url 'wishlist_add' game.id %}{% endif %}"
+                        class="game-detail-icon-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit"
+                                class="game-detail-icon-button game-detail-wishlist-button{% if is_in_wishlist %} is-active{% endif %}"
+                                aria-label="{% if is_in_wishlist %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                                title="{% if is_in_wishlist %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                                aria-pressed="{% if is_in_wishlist %}true{% else %}false{% endif %}">
+                            {% if is_in_wishlist %}★{% else %}☆{% endif %}
+                        </button>
+                    </form>
                     {% endif %}
+                </div>
                 {% else %}
                 <a class="library-add-button"
                     href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">

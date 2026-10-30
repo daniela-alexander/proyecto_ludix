@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}
 Recomiéndame un juego | Ludix
@@ -83,8 +84,8 @@ Recomiéndame un juego | Ludix
 
                 {{ form.edad_minima_participante }}
                 <div class="slider-labels">
-                    <span>0</span>
-                    <span>100</span>
+                    <span>3 años</span>
+                    <span>Mayor de 18</span>
                 </div>
 
             </div>
@@ -128,7 +129,7 @@ Recomiéndame un juego | Ludix
 
                 <div class="slider-labels">
                     <span>15 min</span>
-                    <span>4 h</span>
+                    <span>240 min</span>
                 </div>
 
             </div>
@@ -180,13 +181,59 @@ Recomiéndame un juego | Ludix
                             <p>Edad mínima: {{ game.min_age }} años</p>
                             <p>Duración: {{ game.duration_minutes }} minutos</p>
                             <p>Dificultad: {{ game.difficulty }}</p>
-                        <div>
 
-                        {% if game.stock > 0 %}
-                            <p>Disponible</p>
-                        {% else %}
-                            <p>No disponible actualmente</p>
-                        {% endif %}
+                            {% if game.stock > 0 %}
+                                <p>Disponible</p>
+                            {% else %}
+                                <p>No disponible actualmente</p>
+                            {% endif %}
+
+                            <div class="game-card-actions recommendation-game-actions">
+                                <a href="{% url 'game_shop' game.id %}"
+                                   class="game-card-icon-button recommendation-shop-button"
+                                   aria-label="{% translate 'Comprar juego' %}"
+                                   title="{% translate 'Comprar' %}">
+                                    <span aria-hidden="true">🛒</span>
+                                </a>
+                                {% if game.id in library_game_ids %}
+                                    <form method="post" action="{% url 'library_remove' game.id %}" class="game-card-action-form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{% url 'sugerencia' %}?session={{ suggestion_session.id }}">
+                                        <button type="submit"
+                                                aria-label="{% translate 'Quitar de mi biblioteca' %}"
+                                                title="{% translate 'Ya está en tu biblioteca' %}"
+                                                data-library-label="{% translate 'Ya está en tu biblioteca' %}"
+                                                data-remove-label="{% translate 'Quitar de mi biblioteca' %}"
+                                                class="game-card-library-button is-in-library">
+                                            <span class="library-button-added" aria-hidden="true">✓</span>
+                                            <span class="library-button-remove" aria-hidden="true">−</span>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <form method="post" action="{% url 'library_add' game.id %}" class="game-card-action-form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{% url 'sugerencia' %}?session={{ suggestion_session.id }}">
+                                        <button type="submit"
+                                                aria-label="{% translate 'Añadir a mi biblioteca' %}"
+                                                title="{% translate 'Añadir a mi biblioteca' %}"
+                                                class="game-card-library-button">+</button>
+                                    </form>
+                                    <form method="post"
+                                          action="{% if game.id in wishlist_game_ids %}{% url 'wishlist_remove' game.id %}{% else %}{% url 'wishlist_add' game.id %}{% endif %}"
+                                          class="game-card-action-form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{% url 'sugerencia' %}?session={{ suggestion_session.id }}">
+                                        <button type="submit"
+                                                class="game-card-icon-button game-card-wishlist-button{% if game.id in wishlist_game_ids %} is-active{% endif %}"
+                                                aria-label="{% if game.id in wishlist_game_ids %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                                                title="{% if game.id in wishlist_game_ids %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                                                aria-pressed="{% if game.id in wishlist_game_ids %}true{% else %}false{% endif %}">
+                                            {% if game.id in wishlist_game_ids %}★{% else %}☆{% endif %}
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
                     </article>
                 {% empty %}
                     <p>No encontramos juegos que encajen con esos criterios.</p>
@@ -197,19 +244,19 @@ Recomiéndame un juego | Ludix
 
 <script>
     const controles = [
-        ["{{ form.num_jugadores.id_for_label }}", "jugadores-valor", " jugadores"],
-        ["{{ form.edad_minima_participante.id_for_label }}", "edad-valor", " años"],
-        ["{{ form.dificultad_preferida.id_for_label }}", "dificultad-valor", ""],
-        ["{{ form.duracion_max.id_for_label }}", "duracion-valor", " min"],
+        ["{{ form.num_jugadores.id_for_label }}", "jugadores-valor", value => `${value} jugadores`],
+        ["{{ form.edad_minima_participante.id_for_label }}", "edad-valor", value => value === "{{ edad_mayor_de_18 }}" ? "Mayor de 18" : `${value} años`],
+        ["{{ form.dificultad_preferida.id_for_label }}", "dificultad-valor", value => value],
+        ["{{ form.duracion_max.id_for_label }}", "duracion-valor", value => `${value} min`],
     ];
 
-    controles.forEach(([controlId, outputId, sufijo]) => {
+    controles.forEach(([controlId, outputId, formatValue]) => {
         const control = document.getElementById(controlId);
         const output = document.getElementById(outputId);
 
         if (control && output) {
             const actualizar = () => {
-                output.textContent = `${control.value}${sufijo}`;
+                output.textContent = formatValue(control.value);
             };
 
             control.addEventListener("input", actualizar);

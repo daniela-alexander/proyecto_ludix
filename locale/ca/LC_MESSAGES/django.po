@@ -194,6 +194,48 @@ msgstr "Treu-lo de la meva biblioteca"
 msgid "Añadir a mi biblioteca"
 msgstr "Afegeix a la meva biblioteca"
 
+msgid "Añadir a favoritos"
+msgstr "Afegeix als preferits"
+
+msgid "Quitar de favoritos"
+msgstr "Treu dels preferits"
+
+msgid "Añadir a la lista de deseos"
+msgstr "Afegeix a la llista de desitjos"
+
+msgid "Quitar de la lista de deseos"
+msgstr "Treu de la llista de desitjos"
+
+msgid "Comprar juego"
+msgstr "Compra el joc"
+
+msgid "Tienda próximamente"
+msgstr "La botiga, ben aviat"
+
+msgid "Tienda"
+msgstr "Botiga"
+
+msgid "Estamos preparando algo especial"
+msgstr "Estem preparant una cosa especial"
+
+msgid "LA TIENDA LUDIX"
+msgstr "LA BOTIGA LUDIX"
+
+msgid "Muy pronto podrás comprar tus juegos favoritos."
+msgstr "Ben aviat podràs comprar els teus jocs preferits."
+
+msgid "Estamos trabajando para que pronto puedas descubrir y comprar juegos directamente desde Ludix. ¡Gracias por esperar!"
+msgstr "Estem treballant perquè aviat puguis descobrir i comprar jocs directament des de Ludix. Gràcies per esperar!"
+
+msgid "El juego que te interesa"
+msgstr "El joc que t'interessa"
+
+msgid "Volver al juego"
+msgstr "Torna al joc"
+
+msgid "Explorar el catálogo"
+msgstr "Explora el catàleg"
+
 msgid "Inicia sesión para añadirlo"
 msgstr "Inicia la sessió per afegir-lo"
 

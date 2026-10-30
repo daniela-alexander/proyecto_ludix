@@ -7,14 +7,13 @@ class UsuariosConsumer(AsyncWebsocketConsumer):
     usuarios_conectados = set()
 
     async def connect(self):
-        self.usuarios_conectados.add(self.channel_name)
-
         await self.accept()
         await self.channel_layer.group_add(
             "usuarios_conectados",
             self.channel_name,
         )
 
+        self.usuarios_conectados.add(self.channel_name)
         await self.actualizar_contador()
 
     async def disconnect(self, close_code):
