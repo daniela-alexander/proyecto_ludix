@@ -15,7 +15,7 @@ from .models import (
 )
 # este ultimo añadido por daniela para configurar la paginación
 from .filters import GameFilter, JuegoFilter
-from .models import Category, Game, LibraryGame, Order, OrderLine
+from .models import Category, Game, LibraryGame, Order, OrderLine, Wishlist
 from .serializers import GameSerializer, JuegoSerializer
 from .pagination import GamePagination, JuegoPagination
 
@@ -47,19 +47,27 @@ def game_detail(request, game_id):
         Game.objects.prefetch_related("categories", "mechanics"),
         pk=game_id,
     )
-    is_in_library = (
-        request.user.is_authenticated
-        and LibraryGame.objects.filter(
+    library_entry = None
+    is_in_wishlist = False
+    if request.user.is_authenticated:
+        library_entry = LibraryGame.objects.filter(
             user_profile__user=request.user,
             game=game,
-        ).exists()
-    )
+        ).first()
+        if library_entry is None:
+            is_in_wishlist = Wishlist.objects.filter(
+                user_profile__user=request.user,
+                game=game,
+            ).exists()
+
     return render(
         request,
         "juegos/game_detail.html",
         {
             "game": game,
-            "is_in_library": is_in_library,
+            "is_in_library": library_entry is not None,
+            "is_favorite": library_entry.favorite if library_entry else False,
+            "is_in_wishlist": is_in_wishlist,
         },
     )
 
@@ -149,9 +157,21 @@ def home(request):
 
     games = list(games[:12])
     library_game_ids = set()
+    favorite_game_ids = set()
+    wishlist_game_ids = set()
     if request.user.is_authenticated:
-        library_game_ids = set(
+        library_entries = list(
             LibraryGame.objects.filter(
+                user_profile__user=request.user,
+                game_id__in=[game.id for game in games],
+            ).values_list("game_id", "favorite")
+        )
+        library_game_ids = {game_id for game_id, _ in library_entries}
+        favorite_game_ids = {
+            game_id for game_id, favorite in library_entries if favorite
+        }
+        wishlist_game_ids = set(
+            Wishlist.objects.filter(
                 user_profile__user=request.user,
                 game_id__in=[game.id for game in games],
             ).values_list("game_id", flat=True)
@@ -164,6 +184,8 @@ def home(request):
             "query": query,
             "games": games,
             "library_game_ids": library_game_ids,
+            "favorite_game_ids": favorite_game_ids,
+            "wishlist_game_ids": wishlist_game_ids,
             "categories": Category.objects.order_by("name"),
             "selected_category": category_id,
             "price_min": price_min,

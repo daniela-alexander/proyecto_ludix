@@ -194,6 +194,18 @@ msgstr "Treu-lo de la meva biblioteca"
 msgid "Añadir a mi biblioteca"
 msgstr "Afegeix a la meva biblioteca"
 
+msgid "Añadir a favoritos"
+msgstr "Afegeix als preferits"
+
+msgid "Quitar de favoritos"
+msgstr "Treu dels preferits"
+
+msgid "Añadir a la lista de deseos"
+msgstr "Afegeix a la llista de desitjos"
+
+msgid "Quitar de la lista de deseos"
+msgstr "Treu de la llista de desitjos"
+
 msgid "Inicia sesión para añadirlo"
 msgstr "Inicia la sessió per afegir-lo"
 

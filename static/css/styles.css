@@ -735,13 +735,23 @@ input:focus{
 }
 
 .game-card .game-tag {
-    margin-right:2.8rem;
+    max-width:calc(100% - 8rem);
+    margin-right:8rem;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
-.game-card-library-form {
+.game-card-actions {
     position:absolute;
     top:.85rem;
     right:.85rem;
+    display:flex;
+    align-items:center;
+    gap:.4rem;
+}
+
+.game-card-action-form {
     width:auto;
     max-width:none;
     margin:0;
@@ -749,6 +759,24 @@ input:focus{
     border:0;
     background:transparent;
     box-shadow:none;
+}
+
+.game-card-actions .game-card-library-button,
+.game-card-icon-button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:2.4rem;
+    height:2.4rem;
+    padding:0;
+    border:1px solid var(--border);
+    border-radius:50%;
+    color:var(--text-primary);
+    background:var(--card-hover);
+    font-size:1.35rem;
+    line-height:1;
+    cursor:pointer;
+    transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
 }
 
 .game-card-library-button {
@@ -834,6 +862,32 @@ input:focus{
 }
 
 .game-card-library-button:focus-visible {
+    outline:2px solid var(--neon);
+    outline-offset:3px;
+}
+
+.game-card-icon-button:hover,
+.game-card-icon-button:focus-visible {
+    transform:scale(1.08);
+}
+
+.game-card-favorite-button.is-active,
+.game-card-favorite-button:hover,
+.game-card-favorite-button:focus-visible {
+    border-color:rgba(248,89,116,.45);
+    color:#ff6680;
+    background:rgba(248,89,116,.14);
+}
+
+.game-card-wishlist-button.is-active,
+.game-card-wishlist-button:hover,
+.game-card-wishlist-button:focus-visible {
+    border-color:rgba(255,195,77,.45);
+    color:#ffc34d;
+    background:rgba(255,195,77,.14);
+}
+
+.game-card-icon-button:focus-visible {
     outline:2px solid var(--neon);
     outline-offset:3px;
 }
@@ -1221,6 +1275,13 @@ input:focus{
     line-height:1.65;
 }
 
+.game-detail-actions {
+    display:flex;
+    align-items:center;
+    gap:.65rem;
+    margin-top:.75rem;
+}
+
 .library-add-form {
     width:auto;
     max-width:none;
@@ -1229,6 +1290,16 @@ input:focus{
     border:0;
     background:transparent;
     box-shadow:none;
+}
+
+.game-detail-actions .library-add-form {
+    flex:1;
+    min-width:0;
+}
+
+.game-detail-actions .library-added-message {
+    width:auto;
+    flex:1;
 }
 
 .library-add-button {
@@ -1248,6 +1319,59 @@ input:focus{
     text-align:center;
     cursor:pointer;
     transition:.2s ease;
+}
+
+.game-detail-icon-form {
+    flex:0 0 auto;
+    width:auto;
+    max-width:none;
+    margin:0;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+.game-detail-icon-button {
+    display:grid;
+    place-items:center;
+    width:48px;
+    height:48px;
+    padding:0;
+    border:1px solid var(--border);
+    border-radius:50%;
+    color:var(--text-secondary);
+    background:var(--card);
+    font-size:1.45rem;
+    line-height:1;
+    cursor:pointer;
+    transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.game-detail-icon-button:hover,
+.game-detail-icon-button:focus-visible {
+    transform:translateY(-2px);
+}
+
+.game-detail-favorite-button.is-active,
+.game-detail-favorite-button:hover,
+.game-detail-favorite-button:focus-visible {
+    border-color:rgba(248,89,116,.45);
+    color:#ff6680;
+    background:rgba(248,89,116,.12);
+}
+
+.game-detail-wishlist-button.is-active,
+.game-detail-wishlist-button:hover,
+.game-detail-wishlist-button:focus-visible {
+    border-color:rgba(255,195,77,.45);
+    color:#ffc34d;
+    background:rgba(255,195,77,.12);
+}
+
+.game-detail-icon-button:focus-visible {
+    outline:2px solid var(--neon);
+    outline-offset:3px;
 }
 
 .library-add-button:hover {
@@ -1299,10 +1423,14 @@ input:focus{
     .game-detail-purchase-divider,
     .game-detail-purchase h2,
     .game-detail-purchase-copy,
-    .game-detail-purchase form,
+    .game-detail-purchase > .game-detail-actions,
     .game-detail-purchase > .library-add-button,
     .game-detail-purchase > .library-added-message {
         grid-column:1 / -1;
+    }
+
+    .game-detail-actions {
+        display:flex;
     }
 
     .game-detail-purchase-divider {

@@ -194,6 +194,18 @@ msgstr "Rimuovi dalla mia libreria"
 msgid "Añadir a mi biblioteca"
 msgstr "Aggiungi alla mia libreria"
 
+msgid "Añadir a favoritos"
+msgstr "Aggiungi ai preferiti"
+
+msgid "Quitar de favoritos"
+msgstr "Rimuovi dai preferiti"
+
+msgid "Añadir a la lista de deseos"
+msgstr "Aggiungi alla lista dei desideri"
+
+msgid "Quitar de la lista de deseos"
+msgstr "Rimuovi dalla lista dei desideri"
+
 msgid "Inicia sesión para añadirlo"
 msgstr "Accedi per aggiungerlo"
 
