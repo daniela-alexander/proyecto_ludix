@@ -104,6 +104,93 @@ msgstr "%(min)s-%(max)s jugadors"
 msgid "Ver juego"
 msgstr "Mostra el joc"
 
+msgid "Volver al catálogo"
+msgstr "Torna al catàleg"
+
+msgid "Ruta de navegación"
+msgstr "Ruta de navegació"
+
+msgid "Catálogo"
+msgstr "Catàleg"
+
+msgid "DE UN VISTAZO"
+msgstr "D'UN COP D'ULL"
+
+msgid "Detalles del juego"
+msgstr "Detalls del joc"
+
+msgid "DESCUBRE SU ESTILO"
+msgstr "DESCOBREIX-NE L'ESTIL"
+
+msgid "Categorías y mecánicas"
+msgstr "Categories i mecàniques"
+
+msgid "PRECIO"
+msgstr "PREU"
+
+msgid "Información de biblioteca y precio"
+msgstr "Informació de biblioteca i preu"
+
+msgid "Añádelo a tu colección"
+msgstr "Afegeix-lo a la teva col·lecció"
+
+msgid "Guarda este juego en tu biblioteca para tenerlo siempre a mano."
+msgstr "Desa aquest joc a la teva biblioteca per tenir-lo sempre a mà."
+
+msgid "No hay descripción disponible para este juego."
+msgstr "No hi ha cap descripció disponible per a aquest joc."
+
+msgid "Jugadores"
+msgstr "Jugadors"
+
+msgid "Duración"
+msgstr "Durada"
+
+msgid "%(duration)s minutos"
+msgstr "%(duration)s minuts"
+
+msgid "Edad mínima"
+msgstr "Edat mínima"
+
+msgid "A partir de %(age)s años"
+msgstr "A partir de %(age)s anys"
+
+msgid "Dificultad"
+msgstr "Dificultat"
+
+msgid "Precio"
+msgstr "Preu"
+
+msgid "Disponibilidad"
+msgstr "Disponibilitat"
+
+msgid "%(stock)s disponibles"
+msgstr "%(stock)s disponibles"
+
+msgid "Agotado"
+msgstr "Esgotat"
+
+msgid "Categorías"
+msgstr "Categories"
+
+msgid "Sin categorías"
+msgstr "Sense categories"
+
+msgid "Mecánicas"
+msgstr "Mecàniques"
+
+msgid "Sin mecánicas indicadas"
+msgstr "No s'han indicat mecàniques"
+
+msgid "Este juego ya está en tu biblioteca."
+msgstr "Aquest joc ja és a la teva biblioteca."
+
+msgid "Añadir a mi biblioteca"
+msgstr "Afegeix a la meva biblioteca"
+
+msgid "Inicia sesión para añadirlo"
+msgstr "Inicia la sessió per afegir-lo"
+
 msgid "No hemos encontrado resultados"
 msgstr "No hem trobat cap resultat"
 

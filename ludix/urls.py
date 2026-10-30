@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import include, path
 from juegos.views import JuegoListView, home, sugerencia_view
 from django.contrib.auth import views as auth_views
-from juegos.views import GameListView, home
+from juegos.views import GameListView, game_detail, home
 
 
 def websocket_test_view(request):
@@ -40,6 +40,7 @@ urlpatterns = [
     # path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
     path("accounts/", include("accounts.urls")),
     path("sugerencia/", sugerencia_view, name="sugerencia"),  # Agrega esta línea para incluir las URLs de sugerencia
+    path("games/<int:game_id>/", game_detail, name="game_detail"),
     path('api/games/', GameListView.as_view(), name='game_list'),
     path('api/juegos/', GameListView.as_view()),
     path('accounts/', include('accounts.urls')),
@@ -49,4 +50,3 @@ urlpatterns = [
     path('recommendations/', include('recommendations.urls')),
     path('websocket-test/', websocket_test_view, name='websocket_test'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

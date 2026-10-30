@@ -24,9 +24,11 @@
             
         </div>
     </section>
+</form>
 
     <div class="catalog-layout">
-        <aside class="filter-panel">
+        <form method="get" action="{% url 'home' %}" class="filter-panel">
+            <input type="hidden" name="q" value="{{ query }}">
             <div class="filter-header">
                 <div>
                     <span class="filter-kicker">{% translate "Filtros" %}</span>
@@ -93,7 +95,7 @@
             </div>
             <button type="submit" class="filter-submit">
                 {% translate "Aplicar filtros"%}</button>
-        </aside>
+        </form>
 
         <div class="game-results">
             {% if games %}
@@ -129,8 +131,19 @@
 
                         <div class="game-footer">
                             <strong>{{ game.price }} €</strong>
-                            <a href="#">{% translate "Ver juego" %}</a>
+                            <a href="{% url 'game_detail' game.id %}">{% translate "Ver juego" %}</a>
                         </div>
+
+                        {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'library_add' game.id %}" class="game-card-library-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit"
+                                    aria-label="{% translate 'Añadir a mi biblioteca' %}"
+                                    title="{% translate 'Añadir a mi biblioteca' %}"
+                                    class="game-card-library-button">+</button>
+                        </form>
+                        {% endif %}
                     </article>
                     {% endfor %}
                 </div>
@@ -149,6 +162,5 @@
             {% endif %}
         </div>
     </div>
-</form>
 
 {% endblock %}

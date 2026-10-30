@@ -104,6 +104,93 @@ msgstr "%(min)s-%(max)s players"
 msgid "Ver juego"
 msgstr "View game"
 
+msgid "Volver al catálogo"
+msgstr "Back to catalog"
+
+msgid "Ruta de navegación"
+msgstr "Breadcrumb"
+
+msgid "Catálogo"
+msgstr "Catalog"
+
+msgid "DE UN VISTAZO"
+msgstr "AT A GLANCE"
+
+msgid "Detalles del juego"
+msgstr "Game details"
+
+msgid "DESCUBRE SU ESTILO"
+msgstr "DISCOVER ITS STYLE"
+
+msgid "Categorías y mecánicas"
+msgstr "Categories and mechanics"
+
+msgid "PRECIO"
+msgstr "PRICE"
+
+msgid "Información de biblioteca y precio"
+msgstr "Library and price information"
+
+msgid "Añádelo a tu colección"
+msgstr "Add it to your collection"
+
+msgid "Guarda este juego en tu biblioteca para tenerlo siempre a mano."
+msgstr "Save this game in your library to keep it close at hand."
+
+msgid "No hay descripción disponible para este juego."
+msgstr "No description is available for this game."
+
+msgid "Jugadores"
+msgstr "Players"
+
+msgid "Duración"
+msgstr "Duration"
+
+msgid "%(duration)s minutos"
+msgstr "%(duration)s minutes"
+
+msgid "Edad mínima"
+msgstr "Minimum age"
+
+msgid "A partir de %(age)s años"
+msgstr "Ages %(age)s and up"
+
+msgid "Dificultad"
+msgstr "Difficulty"
+
+msgid "Precio"
+msgstr "Price"
+
+msgid "Disponibilidad"
+msgstr "Availability"
+
+msgid "%(stock)s disponibles"
+msgstr "%(stock)s available"
+
+msgid "Agotado"
+msgstr "Out of stock"
+
+msgid "Categorías"
+msgstr "Categories"
+
+msgid "Sin categorías"
+msgstr "No categories"
+
+msgid "Mecánicas"
+msgstr "Mechanics"
+
+msgid "Sin mecánicas indicadas"
+msgstr "No mechanics listed"
+
+msgid "Este juego ya está en tu biblioteca."
+msgstr "This game is already in your library."
+
+msgid "Añadir a mi biblioteca"
+msgstr "Add to my library"
+
+msgid "Inicia sesión para añadirlo"
+msgstr "Log in to add it"
+
 msgid "No hemos encontrado resultados"
 msgstr "We couldn't find any results"
 

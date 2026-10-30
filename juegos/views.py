@@ -1,6 +1,6 @@
 from django.db.models import Count, IntegerField, OuterRef, Q, Subquery, Sum, Value
 from django.db.models.functions import Coalesce
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
@@ -15,7 +15,7 @@ from .models import (
 )
 # este ultimo añadido por daniela para configurar la paginación
 from .filters import GameFilter, JuegoFilter
-from .models import Category, Game, Order, OrderLine
+from .models import Category, Game, LibraryGame, Order, OrderLine
 from .serializers import GameSerializer, JuegoSerializer
 from .pagination import GamePagination, JuegoPagination
 
@@ -40,6 +40,29 @@ class GameListView(ListAPIView):
 
 
 JuegoListView = GameListView
+
+
+def game_detail(request, game_id):
+    game = get_object_or_404(
+        Game.objects.prefetch_related("categories", "mechanics"),
+        pk=game_id,
+    )
+    is_in_library = (
+        request.user.is_authenticated
+        and LibraryGame.objects.filter(
+            user_profile__user=request.user,
+            game=game,
+        ).exists()
+    )
+    return render(
+        request,
+        "juegos/game_detail.html",
+        {
+            "game": game,
+            "is_in_library": is_in_library,
+        },
+    )
+
 
 def home(request):
     query = request.GET.get("q", "").strip()

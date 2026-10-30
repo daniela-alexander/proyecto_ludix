@@ -152,6 +152,80 @@ class GameApiSearchTests(TestCase):
             ["Prueba Ludix", "Cartas del reino"],
         )
 
+class GameDetailTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username="detail_user")
+        self.game = Game.objects.create(
+            title="Juego detallado",
+            description="Descripción completa del juego.",
+            min_players=2,
+            max_players=5,
+            duration_minutes=45,
+            min_age=10,
+            difficulty=3.5,
+            price=24.99,
+            stock=3,
+        )
+        self.category = Category.objects.create(name="Aventura")
+        self.mechanic = Mechanic.objects.create(name="Cooperación")
+        self.game.categories.add(self.category)
+        self.game.mechanics.add(self.mechanic)
+
+    def test_detail_page_shows_game_information(self):
+        response = self.client.get(
+            reverse("game_detail", kwargs={"game_id": self.game.id})
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Descripción completa del juego.")
+        self.assertContains(response, "Aventura")
+        self.assertContains(response, "Cooperación")
+        self.assertContains(response, "Inicia sesión para añadirlo")
+
+    def test_detail_page_uses_translations(self):
+        detail_url = reverse("game_detail", kwargs={"game_id": self.game.id})
+        self.client.post(
+            reverse("set_language"),
+            {"language": "en", "next": detail_url},
+        )
+
+        response = self.client.get(detail_url)
+
+        self.assertContains(response, "Catalog")
+        self.assertContains(response, "Game details")
+        self.assertContains(response, "Players")
+        self.assertContains(response, "Log in to add it")
+
+    def test_user_can_add_game_from_detail_and_return_to_detail(self):
+        self.client.force_login(self.user)
+        detail_url = reverse("game_detail", kwargs={"game_id": self.game.id})
+
+        response = self.client.post(
+            reverse("library_add", kwargs={"game_id": self.game.id}),
+            {"next": detail_url},
+        )
+
+        self.assertRedirects(response, detail_url)
+        self.assertTrue(
+            LibraryGame.objects.filter(
+                user_profile__user=self.user,
+                game=self.game,
+            ).exists()
+        )
+        self.assertContains(self.client.get(detail_url), "ya está en tu biblioteca")
+
+        self.client.post(
+            reverse("library_add", kwargs={"game_id": self.game.id}),
+            {"next": detail_url},
+        )
+        self.assertEqual(
+            LibraryGame.objects.filter(
+                user_profile__user=self.user,
+                game=self.game,
+            ).count(),
+            1,
+        )
+
 
 class LanguageSelectionTests(TestCase):
     def test_selected_language_is_applied_across_pages(self):
