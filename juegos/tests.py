@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from channels.testing import WebsocketCommunicator
 
+from .forms import SugerenciaForm
 from .consumers import UsuariosConsumer
 from .models import (
     Category,
@@ -553,6 +554,46 @@ class SuggestionViewTests(TestCase):
         self.game.categories.add(self.category)
         self.client.force_login(self.user)
 
+    def test_age_and_duration_controls_use_sensible_ranges_and_steps(self):
+        response = self.client.get("/sugerencia/")
+        age_widget = SugerenciaForm.base_fields[
+            "edad_minima_participante"
+        ].widget
+        duration_widget = SugerenciaForm.base_fields["duracion_max"].widget
+
+        self.assertEqual(int(age_widget.attrs["min"]), 3)
+        self.assertEqual(int(age_widget.attrs["max"]), 19)
+        self.assertEqual(duration_widget.attrs["step"], "15")
+        self.assertContains(response, "Mayor de 18")
+
+    def test_over_18_age_option_includes_games_for_adults(self):
+        adult_game = Game.objects.create(
+            title="Juego para adultos",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=60,
+            min_age=40,
+            difficulty=3,
+            price=19.99,
+        )
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 19,
+                "duracion_max": 90,
+                "dificultad_preferida": 3,
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["enviado"])
+        self.assertIn(adult_game, response.context["recomendaciones"])
+
     def test_purchase_suggestion_creates_session_and_proposal(self):
         response = self.client.post(
             "/sugerencia/",
@@ -627,4 +668,74 @@ class SuggestionViewTests(TestCase):
             ProposedGameSession.objects.filter(session=session).values_list(
                 "game_id", flat=True
             ),
+        )
+
+    def test_recommendation_results_show_library_and_wishlist_actions(self):
+        owned_game = Game.objects.create(
+            title="Juego en biblioteca",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=45,
+            min_age=8,
+            difficulty=3,
+            price=19.99,
+        )
+        LibraryGame.objects.create(user_profile=self.profile, game=owned_game)
+        Wishlist.objects.create(user_profile=self.profile, game=self.game)
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 18,
+                "duracion_max": 90,
+                "dificultad_preferida": 3,
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["library_game_ids"],
+            {owned_game.id},
+        )
+        self.assertEqual(response.context["wishlist_game_ids"], {self.game.id})
+        self.assertContains(
+            response,
+            f'href="{reverse("game_shop", kwargs={"game_id": self.game.id})}"',
+        )
+        suggestion_url = (
+            f'{reverse("sugerencia")}?session='
+            f'{response.context["suggestion_session"].id}'
+        )
+        self.assertContains(response, f'value="{suggestion_url}"')
+        self.assertContains(
+            response,
+            f'action="{reverse("library_add", kwargs={"game_id": self.game.id})}"',
+        )
+        self.assertContains(
+            response,
+            f'action="{reverse("wishlist_remove", kwargs={"game_id": self.game.id})}"',
+        )
+        self.assertContains(
+            response,
+            f'action="{reverse("library_remove", kwargs={"game_id": owned_game.id})}"',
+        )
+
+        add_to_library_response = self.client.post(
+            reverse("library_add", kwargs={"game_id": self.game.id}),
+            {"next": suggestion_url},
+        )
+        self.assertRedirects(add_to_library_response, suggestion_url)
+        restored_response = self.client.get(suggestion_url)
+        self.assertContains(restored_response, self.game.title)
+        self.assertContains(
+            restored_response,
+            f'action="{reverse("library_remove", kwargs={"game_id": self.game.id})}"',
+        )
+        self.assertNotContains(
+            restored_response,
+            f'action="{reverse("wishlist_add", kwargs={"game_id": self.game.id})}"',
         )

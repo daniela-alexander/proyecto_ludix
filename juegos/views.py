@@ -20,7 +20,11 @@ from .serializers import GameSerializer, JuegoSerializer
 from .pagination import GamePagination, JuegoPagination
 
 from django.contrib.auth.decorators import login_required
-from .forms import SugerenciaForm
+from .forms import (
+    EDAD_FILTRO_MAYOR_DE_18,
+    EDAD_MAYOR_DE_18,
+    SugerenciaForm,
+)
 
 
 class GameListView(ListAPIView):
@@ -208,6 +212,9 @@ def sugerencia_view(request):
     )
     enviado = False
     recomendaciones = []
+    suggestion_session = None
+    library_game_ids = set()
+    wishlist_game_ids = set()
 
     if request.method == "POST" and form.is_valid():
         perfil, _ = PerfilUsuario.objects.get_or_create(user=request.user)
@@ -224,11 +231,16 @@ def sugerencia_view(request):
             max_duration=criterios["duracion_max"],
             tematica=criterios["tematica"],
         )
+        suggestion_session = session
+
+        edad_participante = criterios["edad_minima_participante"]
+        if edad_participante == EDAD_MAYOR_DE_18:
+            edad_participante = EDAD_FILTRO_MAYOR_DE_18
 
         juegos = Juego.objects.filter(
             min_players__lte=criterios["num_jugadores"],
             max_players__gte=criterios["num_jugadores"],
-            min_age__lte=criterios["edad_minima_participante"],
+            min_age__lte=edad_participante,
             duration_minutes__lte=criterios["duracion_max"],
         )
 
@@ -260,8 +272,48 @@ def sugerencia_view(request):
                 for game in recomendaciones
             ]
         )
-
         enviado = True
+    elif request.method == "GET" and request.GET.get("session"):
+        suggestion_session = get_object_or_404(
+            SesionSugerencia.objects.filter(host__user=request.user),
+            pk=request.GET["session"],
+        )
+        recomendaciones = [
+            proposal.game
+            for proposal in suggestion_session.proposed_games.select_related(
+                "game"
+            ).order_by("id")
+        ]
+        form = SugerenciaForm(
+            initial={
+                "tipo_sugerencia": suggestion_session.suggestion_type,
+                "num_jugadores": suggestion_session.player_count,
+                "edad_minima_participante": (
+                    suggestion_session.edad_minima_participante
+                ),
+                "duracion_max": suggestion_session.max_duration,
+                "dificultad_preferida": (
+                    suggestion_session.dificultad_preferida
+                ),
+                "tematica": suggestion_session.tematica_id,
+            }
+        )
+        enviado = True
+
+    if recomendaciones:
+        recommended_game_ids = [game.id for game in recomendaciones]
+        library_game_ids = set(
+            LibraryGame.objects.filter(
+                user_profile__user=request.user,
+                game_id__in=recommended_game_ids,
+            ).values_list("game_id", flat=True)
+        )
+        wishlist_game_ids = set(
+            Wishlist.objects.filter(
+                user_profile__user=request.user,
+                game_id__in=recommended_game_ids,
+            ).values_list("game_id", flat=True)
+        )
 
     return render(
         request,
@@ -270,5 +322,9 @@ def sugerencia_view(request):
             "form": form,
             "enviado": enviado,
             "recomendaciones": recomendaciones,
+            "suggestion_session": suggestion_session,
+            "library_game_ids": library_game_ids,
+            "wishlist_game_ids": wishlist_game_ids,
+            "edad_mayor_de_18": EDAD_MAYOR_DE_18,
         },
     )

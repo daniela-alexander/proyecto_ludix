@@ -2,6 +2,9 @@ from django import forms
 
 from .models import Category, SuggestionSession
 
+EDAD_MAYOR_DE_18 = 19
+EDAD_FILTRO_MAYOR_DE_18 = 100
+
 
 class SugerenciaForm(forms.Form):
     tipo_sugerencia = forms.ChoiceField(
@@ -37,13 +40,13 @@ class SugerenciaForm(forms.Form):
 
     edad_minima_participante = forms.IntegerField(
         label="Edad de la persona más joven",
-        min_value=0,
-        max_value=100,
+        min_value=3,
+        max_value=EDAD_MAYOR_DE_18,
         initial=18,
         widget=forms.NumberInput(attrs={
             "type": "range",
-            "min": "0",
-            "max": "100",
+            "min": "3",
+            "max": str(EDAD_MAYOR_DE_18),
             "step": "1",
         }),
     )
@@ -57,7 +60,7 @@ class SugerenciaForm(forms.Form):
             "type": "range",
             "min": "15",
             "max": "240",
-            "step": "1",
+            "step": "15",
         }),
     )
 

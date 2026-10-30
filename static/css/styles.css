@@ -2978,6 +2978,16 @@ main:has(.register-page) {
     margin-top: .25rem;
 }
 
+.recommend-results .recommendation-game-actions {
+    position: static;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.recommend-results .recommendation-shop-button {
+    text-decoration: none;
+}
+
 @media (max-width: 850px) {
     .recommend-layout.has-results {
         grid-template-columns: minmax(0, 1fr);
