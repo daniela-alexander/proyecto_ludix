@@ -185,6 +185,12 @@ msgstr "No mechanics listed"
 msgid "Este juego ya está en tu biblioteca."
 msgstr "This game is already in your library."
 
+msgid "Ya está en tu biblioteca"
+msgstr "Already in your library"
+
+msgid "Quitar de mi biblioteca"
+msgstr "Remove from my library"
+
 msgid "Añadir a mi biblioteca"
 msgstr "Add to my library"
 

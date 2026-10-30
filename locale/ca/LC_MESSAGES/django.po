@@ -185,6 +185,12 @@ msgstr "No s'han indicat mecàniques"
 msgid "Este juego ya está en tu biblioteca."
 msgstr "Aquest joc ja és a la teva biblioteca."
 
+msgid "Ya está en tu biblioteca"
+msgstr "Ja és a la teva biblioteca"
+
+msgid "Quitar de mi biblioteca"
+msgstr "Treu-lo de la meva biblioteca"
+
 msgid "Añadir a mi biblioteca"
 msgstr "Afegeix a la meva biblioteca"
 

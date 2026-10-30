@@ -185,6 +185,12 @@ msgstr "Nessuna meccanica indicata"
 msgid "Este juego ya está en tu biblioteca."
 msgstr "Questo gioco è già nella tua libreria."
 
+msgid "Ya está en tu biblioteca"
+msgstr "Già nella tua libreria"
+
+msgid "Quitar de mi biblioteca"
+msgstr "Rimuovi dalla mia libreria"
+
 msgid "Añadir a mi biblioteca"
 msgstr "Aggiungi alla mia libreria"
 

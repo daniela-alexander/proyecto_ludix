@@ -752,6 +752,7 @@ input:focus{
 }
 
 .game-card-library-button {
+    position:relative;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -766,6 +767,63 @@ input:focus{
     line-height:1;
     cursor:pointer;
     transition:background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.game-card-library-button.is-in-library {
+    border-color:rgba(85,214,165,.35);
+    color:#55d6a5;
+    background:rgba(85,214,165,.12);
+}
+
+.game-card-library-button.is-in-library .library-button-remove {
+    display:none;
+}
+
+.game-card-library-button.is-in-library::after {
+    position:absolute;
+    right:0;
+    bottom:calc(100% + .55rem);
+    width:max-content;
+    max-width:220px;
+    padding:.45rem .65rem;
+    border:1px solid var(--border);
+    border-radius:8px;
+    color:var(--text-primary);
+    background:var(--bg-secondary);
+    box-shadow:var(--shadow);
+    content:attr(data-library-label);
+    font-size:.72rem;
+    font-weight:600;
+    line-height:1.3;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(.2rem);
+    transition:opacity .15s ease, transform .15s ease;
+}
+
+.game-card-library-button.is-in-library:hover,
+.game-card-library-button.is-in-library:focus-visible {
+    border-color:#ef4444;
+    color:#fff;
+    background:#dc2626;
+    box-shadow:0 0 14px rgba(239,68,68,.3);
+}
+
+.game-card-library-button.is-in-library:hover .library-button-added,
+.game-card-library-button.is-in-library:focus-visible .library-button-added {
+    display:none;
+}
+
+.game-card-library-button.is-in-library:hover .library-button-remove,
+.game-card-library-button.is-in-library:focus-visible .library-button-remove {
+    display:inline;
+}
+
+.game-card-library-button.is-in-library:hover::after,
+.game-card-library-button.is-in-library:focus-visible::after {
+    content:attr(data-remove-label);
+    opacity:1;
+    transform:translateY(0);
 }
 
 .game-card-library-button:hover {
@@ -2012,6 +2070,46 @@ main:has(.register-page) {
 .profile-list-item > div span {
     color: var(--text-secondary);
     font-size: .8rem;
+}
+
+.profile-list-item > .profile-library-remove-form {
+    flex:0 0 auto;
+    width:auto;
+    max-width:none;
+    margin:0;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+.profile-library-remove-button {
+    display:grid;
+    place-items:center;
+    width:2.2rem;
+    height:2.2rem;
+    padding:0;
+    border:1px solid rgba(239,68,68,.3);
+    border-radius:50%;
+    color:#ef7777;
+    background:rgba(239,68,68,.08);
+    font-size:1.35rem;
+    line-height:1;
+    transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.profile-library-remove-button:hover,
+.profile-library-remove-button:focus-visible {
+    transform:scale(1.06);
+    border-color:#ef4444;
+    color:#fff;
+    background:#dc2626;
+    box-shadow:0 0 14px rgba(239,68,68,.25);
+}
+
+.profile-library-remove-button:focus-visible {
+    outline:2px solid var(--neon);
+    outline-offset:3px;
 }
 
 .profile-empty {

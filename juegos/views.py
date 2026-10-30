@@ -147,7 +147,15 @@ def home(request):
     else:
         games = games.order_by("title")
 
-    games = games[:12]
+    games = list(games[:12])
+    library_game_ids = set()
+    if request.user.is_authenticated:
+        library_game_ids = set(
+            LibraryGame.objects.filter(
+                user_profile__user=request.user,
+                game_id__in=[game.id for game in games],
+            ).values_list("game_id", flat=True)
+        )
 
     return render(
         request,
@@ -155,6 +163,7 @@ def home(request):
         {
             "query": query,
             "games": games,
+            "library_game_ids": library_game_ids,
             "categories": Category.objects.order_by("name"),
             "selected_category": category_id,
             "price_min": price_min,

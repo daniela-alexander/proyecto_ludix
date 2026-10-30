@@ -135,6 +135,21 @@
                         </div>
 
                         {% if user.is_authenticated %}
+                        {% if game.id in library_game_ids %}
+                        <form method="post" action="{% url 'library_remove' game.id %}" class="game-card-library-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit"
+                                    aria-label="{% translate 'Quitar de mi biblioteca' %}"
+                                    title="{% translate 'Ya está en tu biblioteca' %}"
+                                    data-library-label="{% translate 'Ya está en tu biblioteca' %}"
+                                    data-remove-label="{% translate 'Quitar de mi biblioteca' %}"
+                                    class="game-card-library-button is-in-library">
+                                <span class="library-button-added" aria-hidden="true">✓</span>
+                                <span class="library-button-remove" aria-hidden="true">−</span>
+                            </button>
+                        </form>
+                        {% else %}
                         <form method="post" action="{% url 'library_add' game.id %}" class="game-card-library-form">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ request.get_full_path }}">
@@ -143,6 +158,7 @@
                                     title="{% translate 'Añadir a mi biblioteca' %}"
                                     class="game-card-library-button">+</button>
                         </form>
+                        {% endif %}
                         {% endif %}
                     </article>
                     {% endfor %}

@@ -152,6 +152,47 @@ class GameApiSearchTests(TestCase):
             ["Prueba Ludix", "Cartas del reino"],
         )
 
+    def test_home_shows_library_state_for_current_user(self):
+        user = User.objects.create_user(username="library_card_user")
+        profile = UserProfile.objects.create(user=user)
+        LibraryGame.objects.create(user_profile=profile, game=self.game_one)
+        self.client.force_login(user)
+
+        response = self.client.get("/")
+
+        self.assertEqual(response.context["library_game_ids"], {self.game_one.id})
+        self.assertContains(response, 'class="game-card-library-button is-in-library"')
+        self.assertContains(response, 'data-remove-label="Quitar de mi biblioteca"')
+        self.assertContains(response, f'action="/library/add/{self.game_two.id}/"')
+
+    def test_remove_from_library_only_removes_current_users_game(self):
+        user = User.objects.create_user(username="library_remove_user")
+        other_user = User.objects.create_user(username="other_library_user")
+        user_profile = UserProfile.objects.create(user=user)
+        other_profile = UserProfile.objects.create(user=other_user)
+        LibraryGame.objects.create(user_profile=user_profile, game=self.game_one)
+        LibraryGame.objects.create(user_profile=other_profile, game=self.game_one)
+        self.client.force_login(user)
+
+        response = self.client.post(
+            reverse("library_remove", kwargs={"game_id": self.game_one.id}),
+            {"next": "/?q=Prueba"},
+        )
+
+        self.assertRedirects(response, "/?q=Prueba")
+        self.assertFalse(
+            LibraryGame.objects.filter(
+                user_profile=user_profile,
+                game=self.game_one,
+            ).exists()
+        )
+        self.assertTrue(
+            LibraryGame.objects.filter(
+                user_profile=other_profile,
+                game=self.game_one,
+            ).exists()
+        )
+
 class GameDetailTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="detail_user")
@@ -224,6 +265,32 @@ class GameDetailTests(TestCase):
                 game=self.game,
             ).count(),
             1,
+        )
+
+    def test_profile_library_has_remove_button_and_removes_game(self):
+        profile, _ = UserProfile.objects.get_or_create(user=self.user)
+        LibraryGame.objects.create(user_profile=profile, game=self.game)
+        self.client.force_login(self.user)
+        profile_url = reverse("profile")
+        remove_url = reverse("library_remove", kwargs={"game_id": self.game.id})
+
+        response = self.client.get(profile_url)
+
+        self.assertContains(response, f'action="{remove_url}"')
+        self.assertContains(response, 'class="profile-library-remove-button"')
+        self.assertContains(response, 'aria-label="Quitar de mi biblioteca"')
+
+        response = self.client.post(
+            remove_url,
+            {"next": profile_url},
+        )
+
+        self.assertRedirects(response, profile_url)
+        self.assertFalse(
+            LibraryGame.objects.filter(
+                user_profile=profile,
+                game=self.game,
+            ).exists()
         )
 
 

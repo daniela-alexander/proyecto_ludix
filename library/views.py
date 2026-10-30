@@ -61,3 +61,23 @@ def add_to_library(request, game_id):
         "titulo": game.title,
         "favorito": item.favorite,
     })
+
+
+@login_required
+@require_POST
+def remove_from_library(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    LibraryGame.objects.filter(
+        user_profile__user=request.user,
+        game=game,
+    ).delete()
+
+    next_url = request.POST.get("next")
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return HttpResponseRedirect(next_url)
+
+    return HttpResponseRedirect(reverse("home"))
