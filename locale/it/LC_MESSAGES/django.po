@@ -104,6 +104,99 @@ msgstr "%(min)s-%(max)s giocatori"
 msgid "Ver juego"
 msgstr "Vedi gioco"
 
+msgid "Volver al catálogo"
+msgstr "Torna al catalogo"
+
+msgid "Ruta de navegación"
+msgstr "Percorso di navigazione"
+
+msgid "Catálogo"
+msgstr "Catalogo"
+
+msgid "DE UN VISTAZO"
+msgstr "A COLPO D'OCCHIO"
+
+msgid "Detalles del juego"
+msgstr "Dettagli del gioco"
+
+msgid "DESCUBRE SU ESTILO"
+msgstr "SCOPRI IL SUO STILE"
+
+msgid "Categorías y mecánicas"
+msgstr "Categorie e meccaniche"
+
+msgid "PRECIO"
+msgstr "PREZZO"
+
+msgid "Información de biblioteca y precio"
+msgstr "Informazioni su libreria e prezzo"
+
+msgid "Añádelo a tu colección"
+msgstr "Aggiungilo alla tua collezione"
+
+msgid "Guarda este juego en tu biblioteca para tenerlo siempre a mano."
+msgstr "Salva questo gioco nella tua libreria per averlo sempre a portata di mano."
+
+msgid "No hay descripción disponible para este juego."
+msgstr "Non è disponibile una descrizione per questo gioco."
+
+msgid "Jugadores"
+msgstr "Giocatori"
+
+msgid "Duración"
+msgstr "Durata"
+
+msgid "%(duration)s minutos"
+msgstr "%(duration)s minuti"
+
+msgid "Edad mínima"
+msgstr "Età minima"
+
+msgid "A partir de %(age)s años"
+msgstr "Da %(age)s anni in su"
+
+msgid "Dificultad"
+msgstr "Difficoltà"
+
+msgid "Precio"
+msgstr "Prezzo"
+
+msgid "Disponibilidad"
+msgstr "Disponibilità"
+
+msgid "%(stock)s disponibles"
+msgstr "%(stock)s disponibili"
+
+msgid "Agotado"
+msgstr "Esaurito"
+
+msgid "Categorías"
+msgstr "Categorie"
+
+msgid "Sin categorías"
+msgstr "Nessuna categoria"
+
+msgid "Mecánicas"
+msgstr "Meccaniche"
+
+msgid "Sin mecánicas indicadas"
+msgstr "Nessuna meccanica indicata"
+
+msgid "Este juego ya está en tu biblioteca."
+msgstr "Questo gioco è già nella tua libreria."
+
+msgid "Ya está en tu biblioteca"
+msgstr "Già nella tua libreria"
+
+msgid "Quitar de mi biblioteca"
+msgstr "Rimuovi dalla mia libreria"
+
+msgid "Añadir a mi biblioteca"
+msgstr "Aggiungi alla mia libreria"
+
+msgid "Inicia sesión para añadirlo"
+msgstr "Accedi per aggiungerlo"
+
 msgid "No hemos encontrado resultados"
 msgstr "Non abbiamo trovato risultati"
 

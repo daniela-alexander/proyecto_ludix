@@ -145,6 +145,14 @@
                             {% blocktranslate trimmed with date=item.added_at|date:"d/m/Y" %}Añadido {{ date }}{% endblocktranslate %}
                         </span>
                     </div>
+                    <form method="post" action="{% url 'library_remove' item.game.id %}" class="profile-library-remove-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit"
+                                class="profile-library-remove-button"
+                                aria-label="{% translate 'Quitar de mi biblioteca' %}"
+                                title="{% translate 'Quitar de mi biblioteca' %}">−</button>
+                    </form>
                 </div>
                 {% empty %}
                 <p class="profile-empty">

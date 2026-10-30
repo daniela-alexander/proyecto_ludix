@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ game.get_title }} | Ludix{% endblock %}
+
+{% block content %}
+<section class="game-detail-page">
+    <nav class="game-detail-breadcrumbs" aria-label="{% translate 'Ruta de navegación' %}">
+        <a href="{% url 'home' %}">{% translate "Catálogo" %}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ game.get_title }}</span>
+    </nav>
+
+    <article class="game-detail-card">
+        <header class="game-detail-hero">
+            <div class="game-detail-heading">
+                <span class="game-detail-format">
+                    <span class="game-detail-format-dot" aria-hidden="true"></span>
+                    {% if game.is_online %}
+                    {% translate "Juego online" %}
+                    {% else %}
+                    {% translate "Juego de mesa" %}
+                    {% endif %}
+                </span>
+                <h1>{{ game.get_title }}</h1>
+                <p class="game-detail-description">
+                    {% if game.get_description %}
+                    {{ game.get_description }}
+                    {% else %}
+                    {% translate "No hay descripción disponible para este juego." %}
+                    {% endif %}
+                </p>
+            </div>
+            <div class="game-detail-art" aria-hidden="true">
+                <span class="game-detail-art-orbit"></span>
+                <span class="game-detail-art-initial">{{ game.get_title|first|upper }}</span>
+                <span class="game-detail-art-caption">LUDIX · JUEGOS</span>
+            </div>
+        </header>
+
+        <div class="game-detail-layout">
+            <div class="game-detail-main">
+                <section class="game-detail-section" aria-labelledby="game-facts-title">
+                    <div class="game-detail-section-heading">
+                        <span class="game-detail-eyebrow">{% translate "DE UN VISTAZO" %}</span>
+                        <h2 id="game-facts-title">{% translate "Detalles del juego" %}</h2>
+                    </div>
+                    <dl class="game-detail-facts">
+                        <div class="game-detail-fact">
+                            <span class="game-detail-fact-icon" aria-hidden="true">♟</span>
+                            <dt>{% translate "Jugadores" %}</dt>
+                            <dd>{% blocktranslate trimmed with min=game.min_players max=game.max_players %}{{ min }}-{{ max }} jugadores{% endblocktranslate %}</dd>
+                        </div>
+                        <div class="game-detail-fact">
+                            <span class="game-detail-fact-icon" aria-hidden="true">◷</span>
+                            <dt>{% translate "Duración" %}</dt>
+                            <dd>{% blocktranslate trimmed with duration=game.duration_minutes %}{{ duration }} minutos{% endblocktranslate %}</dd>
+                        </div>
+                        <div class="game-detail-fact">
+                            <span class="game-detail-fact-icon" aria-hidden="true">＋</span>
+                            <dt>{% translate "Edad mínima" %}</dt>
+                            <dd>{% blocktranslate trimmed with age=game.min_age %}A partir de {{ age }} años{% endblocktranslate %}</dd>
+                        </div>
+                        <div class="game-detail-fact">
+                            <span class="game-detail-fact-icon" aria-hidden="true">✦</span>
+                            <dt>{% translate "Dificultad" %}</dt>
+                            <dd>{{ game.difficulty }} / 5</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <section class="game-detail-section game-detail-taxonomies">
+                    <div class="game-detail-section-heading">
+                        <span class="game-detail-eyebrow">{% translate "DESCUBRE SU ESTILO" %}</span>
+                        <h2>{% translate "Categorías y mecánicas" %}</h2>
+                    </div>
+                    <div class="game-detail-taxonomy-grid">
+                        <div class="game-detail-taxonomy">
+                            <h3>{% translate "Categorías" %}</h3>
+                            <ul>
+                                {% for category in game.categories.all %}
+                                <li>{{ category.get_name }}</li>
+                                {% empty %}
+                                <li class="game-detail-taxonomy-empty">{% translate "Sin categorías" %}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="game-detail-taxonomy">
+                            <h3>{% translate "Mecánicas" %}</h3>
+                            <ul>
+                                {% for mechanic in game.mechanics.all %}
+                                <li>{{ mechanic.name }}</li>
+                                {% empty %}
+                                <li class="game-detail-taxonomy-empty">{% translate "Sin mecánicas indicadas" %}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="game-detail-purchase" aria-label="{% translate 'Información de biblioteca y precio' %}">
+                <span class="game-detail-purchase-label">{% translate "PRECIO" %}</span>
+                <p class="game-detail-price">{{ game.price }} <span>€</span></p>
+
+                <div class="game-detail-stock {% if game.stock > 0 %}is-available{% else %}is-unavailable{% endif %}">
+                    <span class="game-detail-stock-dot" aria-hidden="true"></span>
+                    {% if game.stock > 0 %}
+                    {% blocktranslate trimmed with stock=game.stock %}{{ stock }} disponibles{% endblocktranslate %}
+                    {% else %}
+                    {% translate "Agotado" %}
+                    {% endif %}
+                </div>
+
+                <div class="game-detail-purchase-divider"></div>
+                <h2>{% translate "Añádelo a tu colección" %}</h2>
+                <p class="game-detail-purchase-copy">{% translate "Guarda este juego en tu biblioteca para tenerlo siempre a mano." %}</p>
+
+                {% if user.is_authenticated %}
+                    {% if is_in_library %}
+                    <div class="library-added-message">
+                        <span aria-hidden="true">✓</span>
+                        {% translate "Este juego ya está en tu biblioteca." %}
+                    </div>
+                    {% else %}
+                    <form method="post" action="{% url 'library_add' game.id %}" class="library-add-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" class="library-add-button">
+                            <span aria-hidden="true">＋</span>
+                            {% translate "Añadir a mi biblioteca" %}
+                        </button>
+                    </form>
+                    {% endif %}
+                {% else %}
+                <a class="library-add-button"
+                    href="{% url 'login' %}?next={{ request.get_full_path|urlencode }}">
+                    <span aria-hidden="true">＋</span>
+                    {% translate "Inicia sesión para añadirlo" %}
+                </a>
+                {% endif %}
+            </aside>
+        </div>
+    </article>
+</section>
+{% endblock %}

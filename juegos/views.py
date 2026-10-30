@@ -1,6 +1,6 @@
 from django.db.models import Count, IntegerField, OuterRef, Q, Subquery, Sum, Value
 from django.db.models.functions import Coalesce
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
@@ -15,7 +15,7 @@ from .models import (
 )
 # este ultimo añadido por daniela para configurar la paginación
 from .filters import GameFilter, JuegoFilter
-from .models import Category, Game, Order, OrderLine
+from .models import Category, Game, LibraryGame, Order, OrderLine
 from .serializers import GameSerializer, JuegoSerializer
 from .pagination import GamePagination, JuegoPagination
 
@@ -40,6 +40,29 @@ class GameListView(ListAPIView):
 
 
 JuegoListView = GameListView
+
+
+def game_detail(request, game_id):
+    game = get_object_or_404(
+        Game.objects.prefetch_related("categories", "mechanics"),
+        pk=game_id,
+    )
+    is_in_library = (
+        request.user.is_authenticated
+        and LibraryGame.objects.filter(
+            user_profile__user=request.user,
+            game=game,
+        ).exists()
+    )
+    return render(
+        request,
+        "juegos/game_detail.html",
+        {
+            "game": game,
+            "is_in_library": is_in_library,
+        },
+    )
+
 
 def home(request):
     query = request.GET.get("q", "").strip()
@@ -124,7 +147,15 @@ def home(request):
     else:
         games = games.order_by("title")
 
-    games = games[:12]
+    games = list(games[:12])
+    library_game_ids = set()
+    if request.user.is_authenticated:
+        library_game_ids = set(
+            LibraryGame.objects.filter(
+                user_profile__user=request.user,
+                game_id__in=[game.id for game in games],
+            ).values_list("game_id", flat=True)
+        )
 
     return render(
         request,
@@ -132,6 +163,7 @@ def home(request):
         {
             "query": query,
             "games": games,
+            "library_game_ids": library_game_ids,
             "categories": Category.objects.order_by("name"),
             "selected_category": category_id,
             "price_min": price_min,
