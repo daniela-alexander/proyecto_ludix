@@ -119,7 +119,17 @@
         const body = document.body;
         const temas = ["", "eclipse", "aurora"];
         const iconos = ["🌗", "🌑", "☀️"];
-        let temaActual = 0;
+        const nombres = ["Nebula", "Eclipse", "Aurora"];
+        const claveTema = "ludix-theme";
+        const temaGuardado = Number.parseInt(
+            sessionStorage.getItem(claveTema),
+            10
+        );
+        let temaActual = Number.isInteger(temaGuardado)
+            && temaGuardado >= 0
+            && temaGuardado < temas.length
+            ? temaGuardado
+            : 0;
 
         function aplicarTema(indice) {
             temas.forEach((tema) => {
@@ -142,6 +152,7 @@
             btn.addEventListener("click", () => {
                 temaActual = (temaActual + 1) % temas.length;
                 aplicarTema(temaActual);
+                sessionStorage.setItem(claveTema, String(temaActual));
             });
         }
 

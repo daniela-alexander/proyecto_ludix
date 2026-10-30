@@ -243,6 +243,7 @@ Recomiéndame un juego | Ludix
     {% endif %}
 
 <script>
+(() => {
     const controles = [
         ["{{ form.num_jugadores.id_for_label }}", "jugadores-valor", value => `${value} jugadores`],
         ["{{ form.edad_minima_participante.id_for_label }}", "edad-valor", value => value === "{{ edad_mayor_de_18 }}" ? "Mayor de 18" : `${value} años`],
@@ -305,6 +306,7 @@ Recomiéndame un juego | Ludix
 
     }
 
+})();
 </script>
 
 {% endblock %}

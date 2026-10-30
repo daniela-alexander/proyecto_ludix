@@ -490,6 +490,12 @@ class GameDetailTests(TestCase):
 
 
 class LanguageSelectionTests(TestCase):
+    def test_theme_selection_is_restored_and_saved_for_the_browser_session(self):
+        response = self.client.get("/")
+
+        self.assertContains(response, 'sessionStorage.getItem(claveTema)')
+        self.assertContains(response, 'sessionStorage.setItem(claveTema')
+
     def test_selected_language_is_applied_across_pages(self):
         self.client.post(
             "/i18n/setlang/",
@@ -553,6 +559,14 @@ class SuggestionViewTests(TestCase):
         self.category = Category.objects.create(name="Estrategia")
         self.game.categories.add(self.category)
         self.client.force_login(self.user)
+
+    def test_suggestion_page_scopes_its_script_so_theme_controls_work(self):
+        response = self.client.get("/sugerencia/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "sessionStorage.getItem(claveTema)")
+        self.assertContains(response, "sessionStorage.setItem(claveTema")
+        self.assertContains(response, "(() => {")
 
     def test_age_and_duration_controls_use_sensible_ranges_and_steps(self):
         response = self.client.get("/sugerencia/")
