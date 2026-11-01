@@ -2,6 +2,7 @@ from django.test import SimpleTestCase, TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
 from channels.testing import WebsocketCommunicator
+from django.utils.translation import override
 
 from .forms import SugerenciaForm
 from .consumers import UsuariosConsumer
@@ -607,6 +608,34 @@ class SuggestionViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context["enviado"])
         self.assertIn(adult_game, response.context["recomendaciones"])
+
+    def test_thematic_choices_follow_the_active_language(self):
+        categories = {
+            "Acción": ("Action", "Acció", "Azione"),
+            "Cartas": ("Cards", "Cartes", "Carte"),
+            "Estrategia": ("Strategy", "Estratègia", "Strategia"),
+            "Familiar": ("Family", "Familiar", "Familiare"),
+        }
+        category_ids = {
+            name: (
+                Category.objects.filter(name=name).first()
+                or Category.objects.create(name=name)
+            ).pk
+            for name in categories
+        }
+
+        for language, translation_index in (
+            ("en", 0),
+            ("ca", 1),
+            ("it", 2),
+        ):
+            with self.subTest(language=language), override(language):
+                choices = dict(SugerenciaForm().fields["tematica"].choices)
+                for name, translations in categories.items():
+                    self.assertEqual(
+                        choices[category_ids[name]],
+                        translations[translation_index],
+                    )
 
     def test_purchase_suggestion_creates_session_and_proposal(self):
         response = self.client.post(

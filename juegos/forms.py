@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext, gettext_lazy as _
 
 from .models import Category, SuggestionSession
 
@@ -7,26 +8,15 @@ EDAD_FILTRO_MAYOR_DE_18 = 100
 
 
 class SugerenciaForm(forms.Form):
+
     tipo_sugerencia = forms.ChoiceField(
-        label="¿De dónde quieres que salgan las recomendaciones?",
-        choices=[
-            (
-                SuggestionSession.SuggestionType.LIBRARY,
-                "De mi biblioteca",
-            ),
-            (
-                SuggestionSession.SuggestionType.PURCHASE,
-                "Del catálogo de Ludix",
-            ),
-        ],
-        help_text=(
+        help_text=_(
             "La biblioteca muestra juegos que ya tienes. "
             "El catálogo puede incluir juegos no disponibles actualmente."
         ),
     )
 
     num_jugadores = forms.IntegerField(
-        label="Número de jugadores",
         min_value=1,
         max_value=10,
         initial=4,
@@ -39,7 +29,6 @@ class SugerenciaForm(forms.Form):
     )
 
     edad_minima_participante = forms.IntegerField(
-        label="Edad de la persona más joven",
         min_value=3,
         max_value=EDAD_MAYOR_DE_18,
         initial=18,
@@ -52,7 +41,6 @@ class SugerenciaForm(forms.Form):
     )
 
     duracion_max = forms.IntegerField(
-        label="Duración máxima en minutos",
         min_value=15,
         max_value=240,
         initial=90,
@@ -65,23 +53,46 @@ class SugerenciaForm(forms.Form):
     )
 
     dificultad_preferida = forms.DecimalField(
-        label="Dificultad (1 = muy fácil, 5 = muy difícil)",
         initial=3,
         min_value=1,
         max_value=5,
-        widget=forms.NumberInput(
-            attrs={
-                "type": "range",
-                "min": "1",
-                "max": "5",
-                "step": "1",
-            }
-        )
-    )   
+        widget=forms.NumberInput(attrs={
+            "type": "range",
+            "min": "1",
+            "max": "5",
+            "step": "1",
+        }),
+    )
 
     tematica = forms.ModelChoiceField(
-        label="Temática",
         queryset=Category.objects.order_by("name"),
         required=False,
-        empty_label="Cualquiera",
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Asignamos los labels dinámicamente para que respeten el idioma del request
+        self.fields["tipo_sugerencia"].label = _("🎮 ¿De dónde quieres que salgan las recomendaciones?")
+        self.fields["num_jugadores"].label = _("👥 Número de jugadores")
+        self.fields["edad_minima_participante"].label = _("👶 Edad de la persona más joven")
+        self.fields["duracion_max"].label = _("⏱️ Duración máxima en minutos")
+        self.fields["dificultad_preferida"].label = _("🎯 Dificultad (1 = muy fácil, 5 = muy difícil)")
+        self.fields["tematica"].label = _("🏷️ Temática")
+
+        # Opciones y empty_label también de forma dinámica
+        self.fields["tipo_sugerencia"].choices = [
+            (
+                SuggestionSession.SuggestionType.LIBRARY,
+                _("De mi biblioteca"),
+            ),
+            (
+                SuggestionSession.SuggestionType.PURCHASE,
+                _("Del catálogo de Ludix"),
+            ),
+        ]
+        
+        self.fields["tematica"].empty_label = _("Cualquiera")
+        self.fields["tematica"].label_from_instance = (
+            lambda category: gettext(category.get_name())
+        )

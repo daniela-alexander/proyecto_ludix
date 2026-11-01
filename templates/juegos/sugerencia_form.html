@@ -1,26 +1,23 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}
-Recomiéndame un juego | Ludix
-{% endblock %}
+{% block title %} {% translate "Recomiéndame un juego | Ludix" %} {% endblock %}
 
 {% block content %}
 
 <section class="recommend-card {% if enviado %}compact{% endif %}">
 
     <div class="recommend-header">
-        <h1>🎲 Encuentra tu próximo juego</h1>
+        <h1>{% translate "🎲 Encuentra tu próximo juego" %}</h1>
 
         <p>
-            Configura tus preferencias y deja que Ludix
-            encuentre el juego perfecto para ti.
+            {% translate "Configura tus preferencias y deja que Ludix encuentre el juego perfecto para ti." %}
         </p>
     </div>
 
     {% comment %} {% if enviado %}
         <div class="recommend-success">
-            ✅ Preferencias guardadas correctamente.
+            {% translate "✅ Preferencias guardadas correctamente." %}
         </div>
     {% endif %} {% endcomment %}
 
@@ -30,7 +27,7 @@ Recomiéndame un juego | Ludix
             id="toggle-search"
             class="toggle-search-btn"
         >
-            ▼ Modificar búsqueda
+            {% translate "▼ Modificar búsqueda" %}
         </button>
     {% endif %}
 
@@ -42,7 +39,7 @@ Recomiéndame un juego | Ludix
 
             <div class="recommend-group">
                 <label>
-                    🎮 {{ form.tipo_sugerencia.label }}
+                    {{ form.tipo_sugerencia.label }}
                 </label>
 
                 {{ form.tipo_sugerencia }}
@@ -53,7 +50,7 @@ Recomiéndame un juego | Ludix
 
                 <div class="slider-heading">
                     <label for="{{ form.num_jugadores.id_for_label }}">
-                        👥 {{ form.num_jugadores.label }}
+                        {{ form.num_jugadores.label }}
                     </label>
                     <output
                         id="jugadores-valor"
@@ -64,8 +61,8 @@ Recomiéndame un juego | Ludix
                 {{ form.num_jugadores }}
 
                 <div class="slider-labels">
-                    <span>1 jugador</span>
-                    <span>10 jugadores</span>
+                    <span>{% translate "1 jugador" %}</span>
+                    <span>{% translate "10 jugadores" %}</span>
                 </div>
 
             </div>
@@ -74,7 +71,7 @@ Recomiéndame un juego | Ludix
 
                 <div class="slider-heading">
                     <label for="{{ form.edad_minima_participante.id_for_label }}">
-                        👶 {{ form.edad_minima_participante.label }}
+                        {{ form.edad_minima_participante.label }}
                     </label>
                     <output
                         id="edad-valor"
@@ -94,7 +91,7 @@ Recomiéndame un juego | Ludix
 
                 <div class="difficulty-heading">
                     <label for="{{ form.dificultad_preferida.id_for_label }}">
-                        🎯 {{ form.dificultad_preferida.label }}
+                        {{ form.dificultad_preferida.label }}
                     </label>
 
                     <output
@@ -106,9 +103,9 @@ Recomiéndame un juego | Ludix
                 {{ form.dificultad_preferida }}
 
                 <div class="slider-labels">
-                    <span>1 · Muy fácil</span>
-                    <span>3 · Normal</span>
-                    <span>5 · Experto</span>
+                    <span>{% translate "1 · Muy fácil" %}</span>
+                    <span>{% translate "3 · Normal" %}</span>
+                    <span>{% translate "5 · Experto" %}</span>
                 </div>
 
             </div>
@@ -117,7 +114,7 @@ Recomiéndame un juego | Ludix
 
                 <div class="slider-heading">
                     <label for="{{ form.duracion_max.id_for_label }}">
-                        ⏱️ {{ form.duracion_max.label }}
+                        {{ form.duracion_max.label }}
                     </label>
                     <output
                         id="duracion-valor"
@@ -137,7 +134,7 @@ Recomiéndame un juego | Ludix
             <div class="recommend-group">
 
                 <label>
-                    🏷️ {{ form.tematica.label }}
+                    {{ form.tematica.label }}
                 </label>
 
                 {{ form.tematica }}
@@ -145,7 +142,7 @@ Recomiéndame un juego | Ludix
             </div>
 
             <button type="submit" class="recommend-btn">
-                🔍 Buscar recomendaciones
+                {% translate "🔍 Buscar recomendaciones" %}
             </button>
 
         </form>
@@ -156,15 +153,15 @@ Recomiéndame un juego | Ludix
 
     {% if enviado %}
         <section class="recommend-results">
-            <h2>Recomendaciones</h2>
+            <h2>{% translate "Recomendaciones" %}</h2>
 
             <div class="results-toolbar">
                 <button type="button" id="list-view">
-                    📋 Lista
+                    {% translate "📋 Lista" %}
                 </button>
 
                 <button type="button" id="grid-view">
-                    🔲 Cuadrícula
+                    {% translate "🔲 Cuadrícula" %}
                 </button>
             </div>
             <div id="results-container" class="results-grid">
@@ -177,15 +174,16 @@ Recomiéndame un juego | Ludix
 
                         <div class="result-content">
                             <h3>{{ game.title }}</h3>
-                            <p>Jugadores: {{ game.min_players }}–{{ game.max_players }}</p>
-                            <p>Edad mínima: {{ game.min_age }} años</p>
-                            <p>Duración: {{ game.duration_minutes }} minutos</p>
-                            <p>Dificultad: {{ game.difficulty }}</p>
+                            <p>{% translate "Jugadores:" %} {{ game.min_players }}-{{ game.max_players }}</p>
+                            <p>{% translate "Edad mínima:" %} {{ game.min_age }} {% translate "años" %}</p>
+                            <p>{% translate "Duración:" %} {{ game.duration_minutes }} {% translate "minutos" %}</p>
+                            <p>{% translate "Dificultad:" %} {{ game.difficulty }}</p>
+                        <div>
 
                             {% if game.stock > 0 %}
-                                <p>Disponible</p>
+                                <p>{% translate "Disponible" %}</p>
                             {% else %}
-                                <p>No disponible actualmente</p>
+                                <p>{% translate "No disponible actualmente" %}</p>
                             {% endif %}
 
                             <div class="game-card-actions recommendation-game-actions">
@@ -236,7 +234,7 @@ Recomiéndame un juego | Ludix
                         </div>
                     </article>
                 {% empty %}
-                    <p>No encontramos juegos que encajen con esos criterios.</p>
+                    <p>{% translate "No encontramos juegos que encajen con esos criterios." %}</p>
                 {% endfor %}
             </div>
         </section>
@@ -245,10 +243,26 @@ Recomiéndame un juego | Ludix
 <script>
 (() => {
     const controles = [
-        ["{{ form.num_jugadores.id_for_label }}", "jugadores-valor", value => `${value} jugadores`],
-        ["{{ form.edad_minima_participante.id_for_label }}", "edad-valor", value => value === "{{ edad_mayor_de_18 }}" ? "Mayor de 18" : `${value} años`],
-        ["{{ form.dificultad_preferida.id_for_label }}", "dificultad-valor", value => value],
-        ["{{ form.duracion_max.id_for_label }}", "duracion-valor", value => `${value} min`],
+        [
+            "{{ form.num_jugadores.id_for_label }}",
+            "jugadores-valor",
+            value => `${value} {% translate 'jugadores' %}`
+        ],
+        [
+            "{{ form.edad_minima_participante.id_for_label }}",
+            "edad-valor", 
+            value => value === "{{ edad_mayor_de_18 }}" ? "{% translate 'Mayor de 18' %}" : `${value} {% translate 'años' %}`
+        ],
+        [
+            "{{ form.dificultad_preferida.id_for_label }}", 
+            "dificultad-valor", 
+            value => value
+        ],
+        [
+            "{{ form.duracion_max.id_for_label }}", 
+            "duracion-valor", 
+            value => `${value} {% translate 'min' %}`
+        ],
     ];
 
     controles.forEach(([controlId, outputId, formatValue]) => {
@@ -276,10 +290,15 @@ Recomiéndame un juego | Ludix
 
             panel.classList.toggle("collapsed");
 
-            btn.textContent =
-                panel.classList.contains("collapsed")
-                ? "▼ Modificar búsqueda"
-                : "▲ Ocultar búsqueda";
+
+    const modificarBusqueda = "{% translate '▼ Modificar búsqueda' %}";
+    const ocultarBusqueda = "{% translate '▲ Ocultar búsqueda' %}";
+
+
+        btn.textContent =
+            panel.classList.contains("collapsed")
+            ? modificarBusqueda
+            : ocultarBusqueda;
         });
     }
 
