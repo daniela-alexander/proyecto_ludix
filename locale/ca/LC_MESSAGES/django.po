@@ -1,501 +1,2161 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-01 20:03+0000\n"
+"Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Hola, %(username)s"
-msgstr "Hola, %(username)s"
-
-msgid "Mi perfil"
-msgstr "El meu perfil"
-
-msgid "Cerrar sesión"
-msgstr "Tanca la sessió"
-
-msgid "Iniciar sesión"
-msgstr "Inicia la sessió"
-
-msgid "Crear cuenta"
-msgstr "Crea un compte"
-
-msgid "Idioma"
-msgstr "Idioma"
-
-msgid "Cambiar"
-msgstr "Canvia"
-
-msgid "Cambiar tema"
-msgstr "Canvia el tema"
-
-msgid "Tema actual"
-msgstr "Tema actual"
-
-msgid "Usuarios conectados"
-msgstr "Usuaris connectats"
-
-msgid "Bienvenido a Ludix"
-msgstr "Us donem la benvinguda a Ludix"
-
-msgid "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida."
-msgstr "Descobreix, compara i troba els millors jocs de taula per a la propera partida."
-
-msgid "Buscar juegos"
-msgstr "Cerca jocs"
-
-msgid "Busca por título, categoría o mecánica"
-msgstr "Cerca per títol, categoria o mecànica"
-
-msgid "Buscar"
-msgstr "Cerca"
-
-msgid "Filtros"
-msgstr "Filtres"
-
-msgid "Refinar búsqueda"
-msgstr "Afina la cerca"
-
-msgid "Limpiar"
-msgstr "Neteja"
-
-msgid "Precio mínimo"
-msgstr "Preu mínim"
-
-msgid "Precio máximo"
-msgstr "Preu màxim"
-
-msgid "Categoría"
-msgstr "Categoria"
-
-msgid "Todas"
-msgstr "Totes"
-
-msgid "Ordenar por"
-msgstr "Ordena per"
-
-msgid "Tipo"
-msgstr "Tipus"
-
-msgid "Todos"
-msgstr "Tots"
-
-msgid "Juego de mesa"
-msgstr "Joc de taula"
-
-msgid "Juego online"
-msgstr "Joc en línia"
-
-msgid "Aplicar filtros"
-msgstr "Aplica els filtres"
-
-msgid "Resultados para \"%(query)s\""
-msgstr "Resultats per a «%(query)s»"
-
-msgid "Juegos destacados"
-msgstr "Jocs destacats"
-
-msgid "General"
-msgstr "General"
-
-msgid "%(min)s-%(max)s jugadores"
-msgstr "%(min)s-%(max)s jugadors"
-
-msgid "Ver juego"
-msgstr "Mostra el joc"
-
-msgid "Volver al catálogo"
-msgstr "Torna al catàleg"
-
-msgid "Ruta de navegación"
-msgstr "Ruta de navegació"
-
-msgid "Catálogo"
-msgstr "Catàleg"
-
-msgid "DE UN VISTAZO"
-msgstr "D'UN COP D'ULL"
-
-msgid "Detalles del juego"
-msgstr "Detalls del joc"
-
-msgid "DESCUBRE SU ESTILO"
-msgstr "DESCOBREIX-NE L'ESTIL"
-
-msgid "Categorías y mecánicas"
-msgstr "Categories i mecàniques"
-
-msgid "PRECIO"
-msgstr "PREU"
-
-msgid "Información de biblioteca y precio"
-msgstr "Informació de biblioteca i preu"
-
-msgid "Añádelo a tu colección"
-msgstr "Afegeix-lo a la teva col·lecció"
-
-msgid "Guarda este juego en tu biblioteca para tenerlo siempre a mano."
-msgstr "Desa aquest joc a la teva biblioteca per tenir-lo sempre a mà."
-
-msgid "No hay descripción disponible para este juego."
-msgstr "No hi ha cap descripció disponible per a aquest joc."
-
-msgid "Jugadores"
-msgstr "Jugadors"
-
-msgid "Duración"
-msgstr "Durada"
-
-msgid "%(duration)s minutos"
-msgstr "%(duration)s minuts"
-
-msgid "Edad mínima"
-msgstr "Edat mínima"
-
-msgid "A partir de %(age)s años"
-msgstr "A partir de %(age)s anys"
-
-msgid "Dificultad"
-msgstr "Dificultat"
-
-msgid "Precio"
-msgstr "Preu"
-
-msgid "Disponibilidad"
-msgstr "Disponibilitat"
-
-msgid "%(stock)s disponibles"
-msgstr "%(stock)s disponibles"
-
-msgid "Agotado"
-msgstr "Esgotat"
-
-msgid "Categorías"
-msgstr "Categories"
-
-msgid "Sin categorías"
-msgstr "Sense categories"
-
-msgid "Mecánicas"
-msgstr "Mecàniques"
-
-msgid "Sin mecánicas indicadas"
-msgstr "No s'han indicat mecàniques"
-
-msgid "Este juego ya está en tu biblioteca."
-msgstr "Aquest joc ja és a la teva biblioteca."
-
-msgid "Ya está en tu biblioteca"
-msgstr "Ja és a la teva biblioteca"
-
-msgid "Quitar de mi biblioteca"
-msgstr "Treu-lo de la meva biblioteca"
-
-msgid "Añadir a mi biblioteca"
-msgstr "Afegeix a la meva biblioteca"
-
-msgid "Añadir a favoritos"
-msgstr "Afegeix als preferits"
-
-msgid "Quitar de favoritos"
-msgstr "Treu dels preferits"
-
-msgid "Añadir a la lista de deseos"
-msgstr "Afegeix a la llista de desitjos"
-
-msgid "Quitar de la lista de deseos"
-msgstr "Treu de la llista de desitjos"
-
-msgid "Comprar juego"
-msgstr "Compra el joc"
-
-msgid "Tienda próximamente"
-msgstr "La botiga, ben aviat"
-
-msgid "Tienda"
-msgstr "Botiga"
-
-msgid "Estamos preparando algo especial"
-msgstr "Estem preparant una cosa especial"
-
-msgid "LA TIENDA LUDIX"
-msgstr "LA BOTIGA LUDIX"
-
-msgid "Muy pronto podrás comprar tus juegos favoritos."
-msgstr "Ben aviat podràs comprar els teus jocs preferits."
-
-msgid "Estamos trabajando para que pronto puedas descubrir y comprar juegos directamente desde Ludix. ¡Gracias por esperar!"
-msgstr "Estem treballant perquè aviat puguis descobrir i comprar jocs directament des de Ludix. Gràcies per esperar!"
-
-msgid "El juego que te interesa"
-msgstr "El joc que t'interessa"
-
-msgid "Volver al juego"
-msgstr "Torna al joc"
-
-msgid "Explorar el catálogo"
-msgstr "Explora el catàleg"
-
-msgid "Inicia sesión para añadirlo"
-msgstr "Inicia la sessió per afegir-lo"
-
-msgid "No hemos encontrado resultados"
-msgstr "No hem trobat cap resultat"
-
-msgid "No hay juegos que coincidan con \"%(query)s\". Prueba otro título, categoría o mecánica."
-msgstr "No hi ha cap joc que coincideixi amb «%(query)s». Prova un altre títol, categoria o mecànica."
-
-msgid "No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones."
-msgstr "No hi ha cap joc que coincideixi amb aquests filtres. Prova de canviar les opcions."
-
-msgid "Orden alfabético"
-msgstr "Ordre alfabètic"
-
-msgid "Más vendidos"
-msgstr "Més venuts"
-
-msgid "Precio: menor a mayor"
-msgstr "Preu: de més baix a més alt"
-
-msgid "Precio: mayor a menor"
-msgstr "Preu: de més alt a més baix"
-
-msgid "Más favoritos"
-msgstr "Més preferits"
-
-msgid "Partidas más cortas"
-msgstr "Partides més curtes"
-
-msgid "Bienvenido de nuevo"
-msgstr "Us donem la benvinguda de nou"
-
-msgid "Inicia sesión en Ludix"
-msgstr "Inicia la sessió a Ludix"
-
-msgid "Accede a tu perfil, lista de deseos y biblioteca de juegos."
-msgstr "Accedeix al teu perfil, a la llista de desitjos i a la biblioteca de jocs."
-
-msgid "Entrar"
-msgstr "Entra"
-
-msgid "¿Necesitas una cuenta?"
-msgstr "Necessites un compte?"
-
-msgid "Créala aquí"
-msgstr "Crea'l aquí"
-
-msgid "Únete a Ludix"
-msgstr "Uneix-te a Ludix"
-
-msgid "Crea tu cuenta"
-msgstr "Crea el teu compte"
-
-msgid "Empieza a construir tu biblioteca y tu lista de deseos."
-msgstr "Comença a crear la teva biblioteca i la teva llista de desitjos."
-
-msgid "Al menos 8 caracteres"
-msgstr "Com a mínim 8 caràcters"
-
-msgid "Una letra mayúscula"
-msgstr "Una lletra majúscula"
-
-msgid "Una letra minúscula"
-msgstr "Una lletra minúscula"
-
-msgid "Un número"
-msgstr "Un número"
-
-msgid "Un carácter especial"
-msgstr "Un caràcter especial"
-
-msgid "¿Ya tienes cuenta?"
-msgstr "Ja tens un compte?"
-
-msgid "Inicia sesión"
-msgstr "Inicia la sessió"
-
-msgid "TU ESPACIO PERSONAL"
-msgstr "EL TEU ESPAI PERSONAL"
-
-msgid "Gestiona tu cuenta y descubre tu actividad en Ludix."
-msgstr "Gestiona el teu compte i descobreix la teva activitat a Ludix."
-
-msgid "Foto de perfil de %(username)s"
-msgstr "Foto de perfil de %(username)s"
-
-msgid "Juegos en la biblioteca"
-msgstr "Jocs a la biblioteca"
-
-msgid "Favoritos"
-msgstr "Preferits"
-
-msgid "Lista de deseos"
-msgstr "Llista de desitjos"
-
-msgid "Pedidos"
-msgstr "Comandes"
-
-msgid "Datos de la cuenta"
-msgstr "Dades del compte"
-
-msgid "Tu información personal."
-msgstr "La teva informació personal."
-
-msgid "Nombre de usuario"
-msgstr "Nom d'usuari"
-
-msgid "Rol"
-msgstr "Rol"
-
-msgid "Foto de perfil"
-msgstr "Foto de perfil"
-
-msgid "Correo electrónico"
-msgstr "Adreça electrònica"
-
-msgid "Guardar cambios"
-msgstr "Desa els canvis"
-
-msgid "Idioma actual"
-msgstr "Idioma actual"
-
-msgid "Fecha de nacimiento"
-msgstr "Data de naixement"
-
-msgid "No indicado"
-msgstr "No indicat"
-
-msgid "Mis juegos favoritos"
-msgstr "Els meus jocs preferits"
-
-msgid "Juegos marcados como favoritos."
-msgstr "Jocs marcats com a preferits."
-
-msgid "Añadido %(date)s"
-msgstr "Afegit el %(date)s"
-
-msgid "Todavía no tienes juegos favoritos."
-msgstr "Encara no tens cap joc preferit."
-
-msgid "Mi biblioteca"
-msgstr "La meva biblioteca"
-
-msgid "Los últimos juegos que has añadido."
-msgstr "Els últims jocs que has afegit."
-
-msgid "Tu biblioteca está vacía."
-msgstr "La teva biblioteca és buida."
-
-msgid "Juegos que quieres añadir a tu colección."
-msgstr "Jocs que vols afegir a la teva col·lecció."
-
-msgid "Tu lista de deseos está vacía."
-msgstr "La teva llista de desitjos és buida."
-
-msgid "Últimas sesiones"
-msgstr "Sessions recents"
-
-msgid "Sesión n.o %(id)s"
-msgstr "Sessió núm. %(id)s"
-
-msgid "Todavía no tienes sesiones guardadas."
-msgstr "Encara no tens cap sessió desada."
-
-msgid "Últimos pedidos"
-msgstr "Comandes recents"
-
-msgid "Pedido n.o %(id)s"
-msgstr "Comanda núm. %(id)s"
-
-msgid "Todavía no tienes pedidos."
-msgstr "Encara no tens cap comanda."
-
-msgid "Cliente"
-msgstr "Client"
-
-msgid "Administrador"
-msgstr "Administrador"
-
-msgid "Biblioteca"
-msgstr "Biblioteca"
-
-msgid "Compra"
-msgstr "Compra"
-
-msgid "Pendiente"
-msgstr "Pendent"
-
-msgid "Pagado"
-msgstr "Pagat"
-
-msgid "Enviado"
-msgstr "Enviat"
-
-msgid "Cancelado"
-msgstr "Cancel·lat"
-
+#: accounts/forms.py:20
 msgid "Ya existe una cuenta con este correo electrónico."
 msgstr "Ja existeix un compte amb aquesta adreça electrònica."
 
+#: accounts/views.py:53
 msgid "Email actualizado correctamente."
 msgstr "Adreça electrònica actualitzada correctament."
 
+#: accounts/views.py:56
 msgid "Introduce una dirección de email válida."
 msgstr "Introdueix una adreça electrònica vàlida."
 
-msgid "Sesión cerrada"
-msgstr "Sessió tancada"
+#: juegos/forms.py:14
+msgid ""
+"La biblioteca muestra juegos que ya tienes. El catálogo puede incluir juegos "
+"no disponibles actualmente."
+msgstr ""
+"La biblioteca mostra jocs que ja tens. El catàleg pot incloure jocs no "
+"disponibles actualment."
 
-msgid "Hasta pronto"
-msgstr "Fins aviat"
+#: juegos/forms.py:76
+msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
+msgstr "🎮 D'on vols que surtin les recomanacions?"
 
-msgid "Has cerrado sesión"
-msgstr "Has tancat la sessió"
+#: juegos/forms.py:77
+msgid "👥 Número de jugadores"
+msgstr "👥 Nombre de jugadors"
 
-msgid "Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras."
-msgstr "Gràcies per visitar Ludix. Pots tornar a iniciar la sessió quan vulguis."
+#: juegos/forms.py:78
+msgid "👶 Edad de la persona más joven"
+msgstr "👶 Edat de la persona més jove"
 
-msgid "Volver al inicio"
-msgstr "Torna a l'inici"
+#: juegos/forms.py:79
+msgid "⏱️ Duración máxima en minutos"
+msgstr "⏱️ Durada màxima en minuts"
 
-msgid "Iniciar sesión otra vez"
-msgstr "Torna a iniciar la sessió"
+#: juegos/forms.py:80
+msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
+msgstr "🎯 Dificultat (1 = molt fàcil, 5 = molt difícil)"
 
+#: juegos/forms.py:81
+msgid "🏷️ Temática"
+msgstr "🏷️ Temàtica"
+
+#: juegos/forms.py:87
+msgid "De mi biblioteca"
+msgstr "De la meva biblioteca"
+
+#: juegos/forms.py:91
+msgid "Del catálogo de Ludix"
+msgstr "Del catàleg de Ludix"
+
+#: juegos/forms.py:95
+msgid "Cualquiera"
+msgstr "Qualsevol"
+
+#: juegos/models.py:12
+msgid "Cliente"
+msgstr "Client"
+
+#: juegos/models.py:13
+msgid "Administrador"
+msgstr "Administrador"
+
+#: juegos/models.py:387
+msgid "Biblioteca"
+msgstr "Biblioteca"
+
+#: juegos/models.py:388
+msgid "Compra"
+msgstr "Compra"
+
+#: juegos/models.py:502
+msgid "Pendiente"
+msgstr "Pendent"
+
+#: juegos/models.py:503
+msgid "Pagado"
+msgstr "Pagat"
+
+#: juegos/models.py:504
+msgid "Enviado"
+msgstr "Enviat"
+
+#: juegos/models.py:505
+msgid "Cancelado"
+msgstr "Cancel·lat"
+
+#: juegos/views.py:92
+msgid "Orden alfabético"
+msgstr "Ordre alfabètic"
+
+#: juegos/views.py:93
+msgid "Más vendidos"
+msgstr "Més venuts"
+
+#: juegos/views.py:94
+msgid "Precio: menor a mayor"
+msgstr "Preu: de més baix a més alt"
+
+#: juegos/views.py:95
+msgid "Precio: mayor a menor"
+msgstr "Preu: de més alt a més baix"
+
+#: juegos/views.py:96
+msgid "Más favoritos"
+msgstr "Més preferits"
+
+#: juegos/views.py:97
+msgid "Partidas más cortas"
+msgstr "Partides més curtes"
+
+#: templates/404.html:4 templates/404.html:10
 msgid "Página no encontrada"
 msgstr "No s'ha trobat la pàgina"
 
+#: templates/404.html:11
 msgid "La página que buscas no existe o ha cambiado de ubicación."
 msgstr "La pàgina que cerques no existeix o ha canviat d'ubicació."
 
+#: templates/404.html:14
 msgid "Ir al inicio"
 msgstr "Ves a l'inici"
 
+#: templates/404.html:15 templates/accounts/login.html:4 templates/base.html:29
+msgid "Iniciar sesión"
+msgstr "Inicia la sessió"
+
+#: templates/500.html:4
 msgid "Error del servidor"
 msgstr "Error del servidor"
 
+#: templates/500.html:10
 msgid "Algo ha ido mal"
 msgstr "Alguna cosa ha anat malament"
 
-msgid "Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en unos momentos."
-msgstr "S'ha produït un error temporal al servidor. Torna-ho a provar d'aquí a una estona."
+#: templates/500.html:11
+msgid ""
+"Estamos experimentando un error temporal del servidor. Inténtalo de nuevo en "
+"unos momentos."
+msgstr ""
+"S'ha produït un error temporal al servidor. Torna-ho a provar d'aquí a una "
+"estona."
 
+#: templates/500.html:14 templates/accounts/logged_out.html:14
+msgid "Volver al inicio"
+msgstr "Torna a l'inici"
+
+#: templates/500.html:15
 msgid "Intentarlo de nuevo"
 msgstr "Torna-ho a provar"
 
+#: templates/accounts/logged_out.html:4
+msgid "Sesión cerrada"
+msgstr "Sessió tancada"
+
+#: templates/accounts/logged_out.html:9
+msgid "Hasta pronto"
+msgstr "Fins aviat"
+
+#: templates/accounts/logged_out.html:10
+msgid "Has cerrado sesión"
+msgstr "Has tancat la sessió"
+
+#: templates/accounts/logged_out.html:11
+msgid ""
+"Gracias por visitar Ludix. Puedes volver a iniciar sesión cuando quieras."
+msgstr ""
+"Gràcies per visitar Ludix. Pots tornar a iniciar la sessió quan vulguis."
+
+#: templates/accounts/logged_out.html:15
+msgid "Iniciar sesión otra vez"
+msgstr "Torna a iniciar la sessió"
+
+#: templates/accounts/login.html:9
+msgid "Bienvenido de nuevo"
+msgstr "Us donem la benvinguda de nou"
+
+#: templates/accounts/login.html:10
+msgid "Inicia sesión en Ludix"
+msgstr "Inicia la sessió a Ludix"
+
+#: templates/accounts/login.html:11
+msgid "Accede a tu perfil, lista de deseos y biblioteca de juegos."
+msgstr ""
+"Accedeix al teu perfil, a la llista de desitjos i a la biblioteca de jocs."
+
+#: templates/accounts/login.html:36
+msgid "Entrar"
+msgstr "Entra"
+
+#: templates/accounts/login.html:40
+msgid "¿Necesitas una cuenta?"
+msgstr "Necessites un compte?"
+
+#: templates/accounts/login.html:41
+msgid "Créala aquí"
+msgstr "Crea'l aquí"
+
+#: templates/accounts/profile.html:4 templates/accounts/profile.html:12
+#: templates/base.html:23
+msgid "Mi perfil"
+msgstr "El meu perfil"
+
+#: templates/accounts/profile.html:11
+msgid "TU ESPACIO PERSONAL"
+msgstr "EL TEU ESPAI PERSONAL"
+
+#: templates/accounts/profile.html:13
+msgid "Gestiona tu cuenta y descubre tu actividad en Ludix."
+msgstr "Gestiona el teu compte i descobreix la teva activitat a Ludix."
+
+#: templates/accounts/profile.html:18
+#, python-format
+msgid "Foto de perfil de %(username)s"
+msgstr "Foto de perfil de %(username)s"
+
+#: templates/accounts/profile.html:37
+msgid "Juegos en la biblioteca"
+msgstr "Jocs a la biblioteca"
+
+#: templates/accounts/profile.html:43
+msgid "Favoritos"
+msgstr "Preferits"
+
+#: templates/accounts/profile.html:49 templates/accounts/profile.html:165
+msgid "Lista de deseos"
+msgstr "Llista de desitjos"
+
+#: templates/accounts/profile.html:55
+msgid "Pedidos"
+msgstr "Comandes"
+
+#: templates/accounts/profile.html:64
+msgid "Datos de la cuenta"
+msgstr "Dades del compte"
+
+#: templates/accounts/profile.html:66
+msgid "Tu información personal."
+msgstr "La teva informació personal."
+
+#: templates/accounts/profile.html:70
+msgid "Nombre de usuario"
+msgstr "Nom d'usuari"
+
+#: templates/accounts/profile.html:75
+msgid "Rol"
+msgstr "Rol"
+
+#: templates/accounts/profile.html:82
+msgid "Foto de perfil"
+msgstr "Foto de perfil"
+
+#: templates/accounts/profile.html:85
+msgid "Correo electrónico"
+msgstr "Adreça electrònica"
+
+#: templates/accounts/profile.html:89
+msgid "Guardar cambios"
+msgstr "Desa els canvis"
+
+#: templates/accounts/profile.html:93
+msgid "Idioma actual"
+msgstr "Idioma actual"
+
+#: templates/accounts/profile.html:99
+msgid "Fecha de nacimiento"
+msgstr "Data de naixement"
+
+#: templates/accounts/profile.html:104
+msgid "No indicado"
+msgstr "No indicat"
+
+#: templates/accounts/profile.html:111
+msgid "Mis juegos favoritos"
+msgstr "Els meus jocs preferits"
+
+#: templates/accounts/profile.html:113
+msgid "Juegos marcados como favoritos."
+msgstr "Jocs marcats com a preferits."
+
+#: templates/accounts/profile.html:122 templates/accounts/profile.html:145
+#: templates/accounts/profile.html:176
+#, python-format
+msgid "Añadido %(date)s"
+msgstr "Afegit el %(date)s"
+
+#: templates/accounts/profile.html:128
+msgid "Todavía no tienes juegos favoritos."
+msgstr "Encara no tens cap joc preferit."
+
+#: templates/accounts/profile.html:134
+msgid "Mi biblioteca"
+msgstr "La meva biblioteca"
+
+#: templates/accounts/profile.html:136
+msgid "Los últimos juegos que has añadido."
+msgstr "Els últims jocs que has afegit."
+
+#: templates/accounts/profile.html:153 templates/accounts/profile.html:154
+#: templates/home.html:144 templates/home.html:147
+#: templates/juegos/sugerencia_form.html:203
+#: templates/juegos/sugerencia_form.html:206
+msgid "Quitar de mi biblioteca"
+msgstr "Treu-lo de la meva biblioteca"
+
+#: templates/accounts/profile.html:159
+msgid "Tu biblioteca está vacía."
+msgstr "La teva biblioteca és buida."
+
+#: templates/accounts/profile.html:167
+msgid "Juegos que quieres añadir a tu colección."
+msgstr "Jocs que vols afegir a la teva col·lecció."
+
+#: templates/accounts/profile.html:182
+msgid "Tu lista de deseos está vacía."
+msgstr "La teva llista de desitjos és buida."
+
+#: templates/accounts/profile.html:188
+msgid "Últimas sesiones"
+msgstr "Sessions recents"
+
+#: templates/accounts/profile.html:194
+#, python-format
+msgid "Sesión n.o %(id)s"
+msgstr "Sessió núm. %(id)s"
+
+#: templates/accounts/profile.html:203
+msgid "Todavía no tienes sesiones guardadas."
+msgstr "Encara no tens cap sessió desada."
+
+#: templates/accounts/profile.html:209
+msgid "Últimos pedidos"
+msgstr "Comandes recents"
+
+#: templates/accounts/profile.html:215
+#, python-format
+msgid "Pedido n.o %(id)s"
+msgstr "Comanda núm. %(id)s"
+
+#: templates/accounts/profile.html:225
+msgid "Todavía no tienes pedidos."
+msgstr "Encara no tens cap comanda."
+
+#: templates/accounts/register.html:4 templates/accounts/register.html:61
+#: templates/base.html:30
+msgid "Crear cuenta"
+msgstr "Crea un compte"
+
+#: templates/accounts/register.html:9
+msgid "Únete a Ludix"
+msgstr "Uneix-te a Ludix"
+
+#: templates/accounts/register.html:10
+msgid "Crea tu cuenta"
+msgstr "Crea el teu compte"
+
+#: templates/accounts/register.html:11
+msgid "Empieza a construir tu biblioteca y tu lista de deseos."
+msgstr "Comença a crear la teva biblioteca i la teva llista de desitjos."
+
+#: templates/accounts/register.html:43
+msgid "Al menos 8 caracteres"
+msgstr "Com a mínim 8 caràcters"
+
+#: templates/accounts/register.html:44
+msgid "Una letra mayúscula"
+msgstr "Una lletra majúscula"
+
+#: templates/accounts/register.html:45
+msgid "Una letra minúscula"
+msgstr "Una lletra minúscula"
+
+#: templates/accounts/register.html:46
+msgid "Un número"
+msgstr "Un número"
+
+#: templates/accounts/register.html:47
+msgid "Un carácter especial"
+msgstr "Un caràcter especial"
+
+#: templates/accounts/register.html:66
+msgid "¿Ya tienes cuenta?"
+msgstr "Ja tens un compte?"
+
+#: templates/accounts/register.html:67
+msgid "Inicia sesión"
+msgstr "Inicia la sessió"
+
+#: templates/base.html:21
+#, python-format
+msgid "Hola, %(username)s"
+msgstr "Hola, %(username)s"
+
+#: templates/base.html:26
+msgid "Cerrar sesión"
+msgstr "Tanca la sessió"
+
+#: templates/base.html:35 templates/websocket_test.html:60
+msgid "Idioma"
+msgstr "Idioma"
+
+#: templates/base.html:45 templates/websocket_test.html:70
+msgid "Cambiar"
+msgstr "Canvia"
+
+#: templates/base.html:47
+msgid "Cambiar tema"
+msgstr "Canvia el tema"
+
+#: templates/base.html:48
+msgid "Tema actual"
+msgstr "Tema actual"
+
+#: templates/base.html:56 templates/base.html:59
+#: templates/websocket_test.html:73
+msgid "Usuarios conectados"
+msgstr "Usuaris connectats"
+
+#: templates/home.html:8
+msgid "Bienvenido a Ludix"
+msgstr "Us donem la benvinguda a Ludix"
+
+#: templates/home.html:10
+msgid ""
+"Descubre, compara y encuentra los mejores juegos de mesa para tu próxima "
+"partida."
+msgstr ""
+"Descobreix, compara i troba els millors jocs de taula per a la propera "
+"partida."
+
+#: templates/home.html:14
+msgid "Buscar juegos"
+msgstr "Cerca jocs"
+
+#: templates/home.html:17
+msgid "Busca por título, categoría o mecánica"
+msgstr "Cerca per títol, categoria o mecànica"
+
+#: templates/home.html:18
+msgid "Buscar"
+msgstr "Cerca"
+
+#: templates/home.html:22
+msgid "¡Recomiéndame un juego!"
+msgstr "Recomana'm un joc!"
+
+#: templates/home.html:34
+msgid "Filtros"
+msgstr "Filtres"
+
+#: templates/home.html:35
+msgid "Refinar búsqueda"
+msgstr "Afina la cerca"
+
+#: templates/home.html:37
+msgid "Limpiar"
+msgstr "Neteja"
+
+#: templates/home.html:42
+msgid "Precio mínimo"
+msgstr "Preu mínim"
+
+#: templates/home.html:48
+msgid "Precio máximo"
+msgstr "Preu màxim"
+
+#: templates/home.html:55
+msgid "Categoría"
+msgstr "Categoria"
+
+#: templates/home.html:57
+msgid "Todas"
+msgstr "Totes"
+
+#: templates/home.html:69
+msgid "Ordenar por"
+msgstr "Ordena per"
+
+#: templates/home.html:80
+msgid "Tipo"
+msgstr "Tipus"
+
+#: templates/home.html:84
+msgid "Todos"
+msgstr "Tots"
+
+#: templates/home.html:88 templates/juegos/game_detail.html:22
+msgid "Juego de mesa"
+msgstr "Joc de taula"
+
+#: templates/home.html:92 templates/juegos/game_detail.html:20
+msgid "Juego online"
+msgstr "Joc en línia"
+
+#: templates/home.html:97
+msgid "Aplicar filtros"
+msgstr "Aplica els filtres"
+
+#: templates/home.html:106
+#, python-format
+msgid "Resultados para \"%(query)s\""
+msgstr "Resultats per a «%(query)s»"
+
+#: templates/home.html:108
+msgid "Juegos destacados"
+msgstr "Jocs destacats"
+
+#: templates/home.html:120
+msgid "General"
+msgstr "General"
+
+#: templates/home.html:128 templates/juegos/game_detail.html:52
+#, python-format
+msgid "%(min)s-%(max)s jugadores"
+msgstr "%(min)s-%(max)s jugadors"
+
+#: templates/home.html:134
+msgid "Ver juego"
+msgstr "Mostra el joc"
+
+#: templates/home.html:145 templates/home.html:146
+#: templates/juegos/sugerencia_form.html:204
+#: templates/juegos/sugerencia_form.html:205
+msgid "Ya está en tu biblioteca"
+msgstr "Ja és a la teva biblioteca"
+
+#: templates/home.html:158 templates/home.html:159
+#: templates/juegos/game_detail.html:136 templates/juegos/game_detail.html:137
+msgid "Quitar de favoritos"
+msgstr "Treu dels preferits"
+
+#: templates/home.html:158 templates/home.html:159
+#: templates/juegos/game_detail.html:136 templates/juegos/game_detail.html:137
+msgid "Añadir a favoritos"
+msgstr "Afegeix als preferits"
+
+#: templates/home.html:169 templates/home.html:170
+#: templates/juegos/game_detail.html:148
+#: templates/juegos/sugerencia_form.html:217
+#: templates/juegos/sugerencia_form.html:218
+msgid "Añadir a mi biblioteca"
+msgstr "Afegeix a la meva biblioteca"
+
+#: templates/home.html:180 templates/home.html:181
+#: templates/juegos/game_detail.html:158 templates/juegos/game_detail.html:159
+#: templates/juegos/sugerencia_form.html:228
+#: templates/juegos/sugerencia_form.html:229
+msgid "Quitar de la lista de deseos"
+msgstr "Treu de la llista de desitjos"
+
+#: templates/home.html:180 templates/home.html:181
+#: templates/juegos/game_detail.html:158 templates/juegos/game_detail.html:159
+#: templates/juegos/sugerencia_form.html:228
+#: templates/juegos/sugerencia_form.html:229
+msgid "Añadir a la lista de deseos"
+msgstr "Afegeix a la llista de desitjos"
+
+#: templates/home.html:195
+msgid "No hemos encontrado resultados"
+msgstr "No hem trobat cap resultat"
+
+#: templates/home.html:198
+#, python-format
+msgid ""
+"No hay juegos que coincidan con \"%(query)s\". Prueba otro título, categoría "
+"o mecánica."
+msgstr ""
+"No hi ha cap joc que coincideixi amb «%(query)s». Prova un altre títol, "
+"categoria o mecànica."
+
+#: templates/home.html:200
+msgid ""
+"No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones."
+msgstr ""
+"No hi ha cap joc que coincideixi amb aquests filtres. Prova de canviar les "
+"opcions."
+
+#: templates/juegos/game_detail.html:8 templates/juegos/game_shop.html:8
+msgid "Ruta de navegación"
+msgstr "Ruta de navegació"
+
+#: templates/juegos/game_detail.html:9 templates/juegos/game_shop.html:9
+msgid "Catálogo"
+msgstr "Catàleg"
+
+#: templates/juegos/game_detail.html:30
+msgid "No hay descripción disponible para este juego."
+msgstr "No hi ha cap descripció disponible per a aquest joc."
+
+#: templates/juegos/game_detail.html:45
+msgid "DE UN VISTAZO"
+msgstr "D'UN COP D'ULL"
+
+#: templates/juegos/game_detail.html:46
+msgid "Detalles del juego"
+msgstr "Detalls del joc"
+
+#: templates/juegos/game_detail.html:51
+msgid "Jugadores"
+msgstr "Jugadors"
+
+#: templates/juegos/game_detail.html:56
+msgid "Duración"
+msgstr "Durada"
+
+#: templates/juegos/game_detail.html:57
+#, python-format
+msgid "%(duration)s minutos"
+msgstr "%(duration)s minuts"
+
+#: templates/juegos/game_detail.html:61
+msgid "Edad mínima"
+msgstr "Edat mínima"
+
+#: templates/juegos/game_detail.html:62
+#, python-format
+msgid "A partir de %(age)s años"
+msgstr "A partir de %(age)s anys"
+
+#: templates/juegos/game_detail.html:66
+msgid "Dificultad"
+msgstr "Dificultat"
+
+#: templates/juegos/game_detail.html:74
+msgid "DESCUBRE SU ESTILO"
+msgstr "DESCOBREIX-NE L'ESTIL"
+
+#: templates/juegos/game_detail.html:75
+msgid "Categorías y mecánicas"
+msgstr "Categories i mecàniques"
+
+#: templates/juegos/game_detail.html:79
+msgid "Categorías"
+msgstr "Categories"
+
+#: templates/juegos/game_detail.html:84
+msgid "Sin categorías"
+msgstr "Sense categories"
+
+#: templates/juegos/game_detail.html:89
+msgid "Mecánicas"
+msgstr "Mecàniques"
+
+#: templates/juegos/game_detail.html:94
+msgid "Sin mecánicas indicadas"
+msgstr "No s'han indicat mecàniques"
+
+#: templates/juegos/game_detail.html:102
+msgid "Información de biblioteca y precio"
+msgstr "Informació de biblioteca i preu"
+
+#: templates/juegos/game_detail.html:103
+msgid "PRECIO"
+msgstr "PREU"
+
+#: templates/juegos/game_detail.html:109
+#, python-format
+msgid "%(stock)s disponibles"
+msgstr "%(stock)s disponibles"
+
+#: templates/juegos/game_detail.html:111
+msgid "Agotado"
+msgstr "Esgotat"
+
+#: templates/juegos/game_detail.html:117
+#: templates/juegos/sugerencia_form.html:194
+msgid "Comprar juego"
+msgstr "Compra el joc"
+
+#: templates/juegos/game_detail.html:121
+msgid "Añádelo a tu colección"
+msgstr "Afegeix-lo a la teva col·lecció"
+
+#: templates/juegos/game_detail.html:122
+msgid "Guarda este juego en tu biblioteca para tenerlo siempre a mano."
+msgstr "Desa aquest joc a la teva biblioteca per tenir-lo sempre a mà."
+
+#: templates/juegos/game_detail.html:129
+msgid "Este juego ya está en tu biblioteca."
+msgstr "Aquest joc ja és a la teva biblioteca."
+
+#: templates/juegos/game_detail.html:170
+msgid "Inicia sesión para añadirlo"
+msgstr "Inicia la sessió per afegir-lo"
+
+#: templates/juegos/game_shop.html:4
+msgid "Tienda próximamente"
+msgstr "La botiga, ben aviat"
+
+#: templates/juegos/game_shop.html:13
+msgid "Tienda"
+msgstr "Botiga"
+
+#: templates/juegos/game_shop.html:28
+msgid "Estamos preparando algo especial"
+msgstr "Estem preparant una cosa especial"
+
+#: templates/juegos/game_shop.html:30
+msgid "LA TIENDA LUDIX"
+msgstr "LA BOTIGA LUDIX"
+
+#: templates/juegos/game_shop.html:31
+msgid "Muy pronto podrás comprar tus juegos favoritos."
+msgstr "Ben aviat podràs comprar els teus jocs preferits."
+
+#: templates/juegos/game_shop.html:33
+msgid ""
+"Estamos trabajando para que pronto puedas descubrir y comprar juegos "
+"directamente desde Ludix. ¡Gracias por esperar!"
+msgstr ""
+"Estem treballant perquè aviat puguis descobrir i comprar jocs directament "
+"des de Ludix. Gràcies per esperar!"
+
+#: templates/juegos/game_shop.html:39
+msgid "El juego que te interesa"
+msgstr "El joc que t'interessa"
+
+#: templates/juegos/game_shop.html:47
+msgid "Volver al juego"
+msgstr "Torna al joc"
+
+#: templates/juegos/game_shop.html:50
+msgid "Explorar el catálogo"
+msgstr "Explora el catàleg"
+
+#: templates/juegos/sugerencia_form.html:4
+msgid "Recomiéndame un juego | Ludix"
+msgstr "Recomana'm un joc | Ludix"
+
+#: templates/juegos/sugerencia_form.html:11
+msgid "🎲 Encuentra tu próximo juego"
+msgstr "🎲 Troba el teu proper joc"
+
+#: templates/juegos/sugerencia_form.html:14
+msgid ""
+"Configura tus preferencias y deja que Ludix encuentre el juego perfecto para "
+"ti."
+msgstr ""
+"Configura les teves preferències i deixa que Ludix trobi el joc perfecte per "
+"a tu."
+
+#: templates/juegos/sugerencia_form.html:31
+#: templates/juegos/sugerencia_form.html:296
+msgid "▼ Modificar búsqueda"
+msgstr "▼ Modifica la cerca"
+
+#: templates/juegos/sugerencia_form.html:65
+msgid "1 jugador"
+msgstr "1 jugador"
+
+#: templates/juegos/sugerencia_form.html:66
+msgid "10 jugadores"
+msgstr "10 jugadors"
+
+#: templates/juegos/sugerencia_form.html:107
+msgid "1 · Muy fácil"
+msgstr "1 · Molt fàcil"
+
+#: templates/juegos/sugerencia_form.html:108
+msgid "3 · Normal"
+msgstr "3 · Normal"
+
+#: templates/juegos/sugerencia_form.html:109
+msgid "5 · Experto"
+msgstr "5 · Expert"
+
+#: templates/juegos/sugerencia_form.html:146
+msgid "🔍 Buscar recomendaciones"
+msgstr "🔍 Cerca recomanacions"
+
+#: templates/juegos/sugerencia_form.html:157
+msgid "Recomendaciones"
+msgstr "Recomanacions"
+
+#: templates/juegos/sugerencia_form.html:161
+msgid "📋 Lista"
+msgstr "📋 Llista"
+
+#: templates/juegos/sugerencia_form.html:165
+msgid "🔲 Cuadrícula"
+msgstr "🔲 Quadrícula"
+
+#: templates/juegos/sugerencia_form.html:179
+msgid "Jugadores:"
+msgstr "Jugadors:"
+
+#: templates/juegos/sugerencia_form.html:180
+msgid "Edad mínima:"
+msgstr "Edat mínima:"
+
+#: templates/juegos/sugerencia_form.html:180
+#: templates/juegos/sugerencia_form.html:256
+msgid "años"
+msgstr "anys"
+
+#: templates/juegos/sugerencia_form.html:181
+msgid "Duración:"
+msgstr "Durada:"
+
+#: templates/juegos/sugerencia_form.html:181
+msgid "minutos"
+msgstr "minuts"
+
+#: templates/juegos/sugerencia_form.html:182
+msgid "Dificultad:"
+msgstr "Dificultat:"
+
+#: templates/juegos/sugerencia_form.html:186
+msgid "Disponible"
+msgstr "Disponible"
+
+#: templates/juegos/sugerencia_form.html:188
+msgid "No disponible actualmente"
+msgstr "No disponible actualment"
+
+#: templates/juegos/sugerencia_form.html:195
+#, fuzzy
+#| msgid "Compra"
+msgid "Comprar"
+msgstr "Compra"
+
+#: templates/juegos/sugerencia_form.html:239
+msgid "No encontramos juegos que encajen con esos criterios."
+msgstr "No trobem jocs que encaixin amb aquests criteris."
+
+#: templates/juegos/sugerencia_form.html:251
+msgid "jugadores"
+msgstr "jugadors"
+
+#: templates/juegos/sugerencia_form.html:256
+msgid "Mayor de 18"
+msgstr ""
+
+#: templates/juegos/sugerencia_form.html:266
+#, fuzzy
+#| msgid "minutos"
+msgid "min"
+msgstr "minuts"
+
+#: templates/juegos/sugerencia_form.html:297
+msgid "▲ Ocultar búsqueda"
+msgstr "▲ Amaga la cerca"
+
+#: templates/websocket_test.html:7
 msgid "Ludix WebSocket Test"
 msgstr "Prova de WebSocket de Ludix"
 
+#: templates/websocket_test.html:75
 msgid "Conectando..."
 msgstr "S'està connectant..."
 
+#: templates/websocket_test.html:78
 msgid "Conectado"
 msgstr "Connectat"
 
+#: templates/websocket_test.html:79
 msgid "Error de conexión"
 msgstr "Error de connexió"
 
+#: templates/websocket_test.html:80
 msgid "Desconectado"
 msgstr "Desconnectat"
 
-msgid "¡Recomiéndame un juego!"
-msgstr "Recomana'm un joc!"
+#: venv/lib/python3.14/site-packages/django/contrib/messages/apps.py:16
+msgid "Messages"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv/lib/python3.14/site-packages/django/core/paginator.py:33
+msgid "…"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/paginator.py:35
+msgid "That page number is not an integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/paginator.py:36
+msgid "That page number is less than 1"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/paginator.py:37
+msgid "That page contains no results"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:70
+msgid "Enter a valid domain name."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:153
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:775
+msgid "Enter a valid URL."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:200
+msgid "Enter a valid integer."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:211
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv/lib/python3.14/site-packages/django/core/validators.py:289
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:297
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:309
+#: venv/lib/python3.14/site-packages/django/core/validators.py:318
+#: venv/lib/python3.14/site-packages/django/core/validators.py:332
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2299
+#, python-format
+msgid "Enter a valid %(protocol)s address."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:311
+msgid "IPv4"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:320
+#: venv/lib/python3.14/site-packages/django/utils/ipv6.py:43
+msgid "IPv6"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:334
+msgid "IPv4 or IPv6"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:375
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:381
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:416
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:425
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:434
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:441
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:473
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:491
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:514
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:366
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:405
+msgid "Enter a number."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:516
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:521
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:526
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:597
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/core/validators.py:659
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/base.py:1666
+#: venv/lib/python3.14/site-packages/django/forms/models.py:933
+msgid "and"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/base.py:1668
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/constraints.py:22
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:94
+msgid "- Select an option -"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:143
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:144
+msgid "This field cannot be null."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:145
+msgid "This field cannot be blank."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:146
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:150
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:187
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1203
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1204
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1206
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1256
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1258
+msgid "String (unlimited)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1367
+msgid "Comma-separated integers"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1468
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1472
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1607
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1476
+msgid "Date (without time)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1603
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1611
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1616
+msgid "Date (with time)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1743
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1745
+msgid "Decimal number"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1947
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1951
+msgid "Duration"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:1999
+msgid "Email address"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2024
+msgid "File path"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2102
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2104
+msgid "Floating point number"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2144
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2146
+msgid "Integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2242
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2259
+msgid "Small integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2267
+msgid "IPv4 address"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2298
+msgid "IP address"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2389
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2390
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2392
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2443
+msgid "Positive big integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2458
+msgid "Positive integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2473
+msgid "Positive small integer"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2489
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2525
+msgid "Text"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2605
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2609
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2613
+msgid "Time"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2721
+msgid "URL"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2745
+msgid "Raw binary data"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2748
+#, python-format
+msgid "“%(value)s” is not a valid binary value."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2821
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/__init__.py:2823
+msgid "Universally unique identifier"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/files.py:247
+msgid "File"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/files.py:423
+msgid "Image"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/related.py:991
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r is not a valid choice."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/related.py:994
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/related.py:1369
+msgid "One-to-one relationship"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/related.py:1426
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/related.py:1428
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/db/models/fields/related.py:1476
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to
+#. the label
+#: venv/lib/python3.14/site-packages/django/forms/boundfield.py:188
+msgid ":?.!"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:93
+msgid "This field is required."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:315
+msgid "Enter a whole number."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:486
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:1246
+msgid "Enter a valid date."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:509
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:1247
+msgid "Enter a valid time."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:536
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:570
+msgid "Enter a valid duration."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:571
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:640
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:641
+msgid "No file was submitted."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:642
+msgid "The submitted file is empty."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:644
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:649
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:717
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:864
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:951
+#: venv/lib/python3.14/site-packages/django/forms/models.py:1624
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:953
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:1073
+#: venv/lib/python3.14/site-packages/django/forms/models.py:1622
+msgid "Enter a list of values."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:1074
+msgid "Enter a complete value."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:1318
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/fields.py:1348
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: venv/lib/python3.14/site-packages/django/forms/forms.py:97
+msgid ":"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/forms.py:239
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/forms/formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/forms/formsets.py:484
+#: venv/lib/python3.14/site-packages/django/forms/formsets.py:491
+#, fuzzy
+#| msgid "Ordenar por"
+msgid "Order"
+msgstr "Ordena per"
+
+#: venv/lib/python3.14/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:926
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:931
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:938
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:947
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:1384
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:1475
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/models.py:1626
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/utils.py:229
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/widgets.py:573
+msgid "Clear"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/widgets.py:574
+msgid "Currently"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/widgets.py:575
+msgid "Change"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/widgets.py:914
+msgid "Unknown"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/widgets.py:915
+msgid "Yes"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/forms/widgets.py:916
+msgid "No"
+msgstr ""
+
+#. Translators: %s is the name of a model, e.g. "No City matches the
+#. given query."
+#: venv/lib/python3.14/site-packages/django/shortcuts.py:105
+#: venv/lib/python3.14/site-packages/django/shortcuts.py:125
+#: venv/lib/python3.14/site-packages/django/shortcuts.py:149
+#: venv/lib/python3.14/site-packages/django/shortcuts.py:168
+#, python-format
+msgid "No %s matches the given query."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/tasks/base.py:35
+msgctxt "Task"
+msgid "Ready"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/tasks/base.py:37
+msgctxt "Task"
+msgid "Running"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/tasks/base.py:39
+msgctxt "Task"
+msgid "Failed"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/tasks/base.py:41
+msgctxt "Task"
+msgid "Successful"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:879
+msgid "yes,no,maybe"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:909
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:926
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:928
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:930
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:932
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:934
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/template/defaultfilters.py:936
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dateformat.py:74
+msgid "p.m."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dateformat.py:75
+msgid "a.m."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dateformat.py:80
+msgid "PM"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dateformat.py:81
+msgid "AM"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dateformat.py:153
+msgid "midnight"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dateformat.py:155
+msgid "noon"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:25
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:26
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:27
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:28
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:29
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:30
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:31
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:33
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:34
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:35
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:36
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:41
+#, fuzzy
+#| msgid "Cambiar"
+msgid "mar"
+msgstr "Canvia"
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/text.py:76
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/text.py:282
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: venv/lib/python3.14/site-packages/django/utils/text.py:301
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:30
+msgid "Forbidden"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:31
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:35
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:41
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:46
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:55
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:61
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/csrf.py:67
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:64
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:115
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:353
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:384
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:680
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/dates.py:720
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/generic/list.py:173
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/static.py:68
+#: venv/lib/python3.14/site-packages/django/views/templates/directory_index.html:9
+#: venv/lib/python3.14/site-packages/django/views/templates/directory_index.html:12
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:197
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:199
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:201
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:220
+msgid "Django Documentation"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:221
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:229
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Get started with Django"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:238
+msgid "Django Community"
+msgstr ""
+
+#: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#~ msgid "Acción"
+#~ msgstr "Acció"
+
+#~ msgid "Cartas"
+#~ msgstr "Cartes"
+
+#~ msgid "Estrategia"
+#~ msgstr "Estratègia"
+
+#~ msgid "Familiar"
+#~ msgstr "Familiar"
+
+#~ msgid "Volver al catálogo"
+#~ msgstr "Torna al catàleg"
+
+#~ msgid "Precio"
+#~ msgstr "Preu"
+
+#~ msgid "Disponibilidad"
+#~ msgstr "Disponibilitat"
