@@ -273,11 +273,14 @@ body{
 
 .language-form select {
     max-width: 130px;
-    padding: .65rem .5rem;
+    height: 44px;
+    padding: 0 1.1rem;
+    font: inherit;
+    line-height: normal;
     color: var(--text-primary);
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 .navbar nav button.language-button {

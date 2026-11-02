@@ -33,7 +33,7 @@
             <form method="post" action="{% url 'set_language' %}" class="language-form">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                <label for="language-select">{% translate "Idioma" %}</label>
+                <label for="language-select">🌎</label>
                 <select id="language-select" name="language" onchange="this.form.submit()">
                     {% get_current_language as CURRENT_LANGUAGE %}
                     {% get_available_languages as AVAILABLE_LANGUAGES %}
@@ -43,7 +43,6 @@
                     </option>
                     {% endfor %}
                 </select>
-                <button type="submit" class="language-button">{% translate "Cambiar" %}</button>
             </form>
             <button id="theme-toggle" class="theme-btn" type="button" aria-label="{% translate 'Cambiar tema' %}"
                 data-current-theme-prefix="{% translate 'Tema actual' %}">🌙</button>
