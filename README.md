@@ -57,13 +57,13 @@ Los objetivos técnicos contemplan un diseño responsive y una arquitectura basa
 ### Backend
 
 - **Python 3.14**
-- **Django 6.1.1**
+- **Django 6.0.x**
 - **Django REST Framework 3.18.1**
 - **django-filter 26.1**
 
 ### Base de datos
 
-- **SQLite** para el desarrollo inicial.
+- **SQLite** por defecto; **PostgreSQL** disponible para desarrollo local.
 
 ### Control de versiones
 
@@ -423,11 +423,71 @@ pip install django-filter==26.1
 ```
 
 # 🗄️ Configurar base de datos
-Aplicar las migraciones:
 
-```python manage.py migrate```
+SQLite sigue siendo la opción por defecto. Para usar PostgreSQL localmente, copia
+las variables de `.env.example` a tu `.env` existente (sin sobrescribir las demás
+variables) y arranca el servicio:
 
-Esto creará y actualizará la base de datos SQLite. 
+```bash
+docker compose up -d db
+```
+
+Espera a que `docker compose ps` muestre el servicio como `healthy`. Luego aplica
+las migraciones:
+
+```bash
+python manage.py migrate
+```
+
+Para pasar los datos existentes de SQLite a PostgreSQL, exporta primero mientras
+`DATABASE_ENGINE=sqlite` está activo:
+
+```bash
+DATABASE_ENGINE=sqlite python manage.py dumpdata \
+  --natural-foreign \
+  --exclude contenttypes \
+  --exclude auth.permission \
+  --exclude admin.logentry \
+  --indent 2 \
+  --output /tmp/ludix-data.json
+```
+
+Después cambia `DATABASE_ENGINE=postgresql` en `.env`, aplica las migraciones y
+carga el fixture:
+
+```bash
+python manage.py migrate
+python manage.py loaddata /tmp/ludix-data.json
+```
+
+La base SQLite original no se borra y puedes volver a ella configurando
+`DATABASE_ENGINE=sqlite`. El fixture contiene datos de la aplicación; guárdalo
+solo localmente y elimínalo de `/tmp` una vez verificada la importación. Las
+credenciales predeterminadas de Compose son solo para desarrollo local.
+
+# ⏰ Tareas en segundo plano
+
+Celery Beat usa Redis como broker y guarda las tareas periódicas en la base de datos.
+Inicia Redis y aplica las migraciones antes de arrancar los procesos:
+
+```bash
+python manage.py migrate
+celery -A ludix worker -l INFO
+celery -A ludix beat -l INFO
+```
+
+Ejecuta el worker y Beat en terminales separadas. Las tareas periódicas se pueden
+crear y administrar desde `/admin/`, en **Periodic tasks**. Si Redis no está en la
+dirección predeterminada (`redis://127.0.0.1:6379/0`), define `CELERY_BROKER_URL`.
+
+# 💬 Chat privado
+
+El chat guarda conversaciones y mensajes en la base de datos, y usa Channels
+con Redis para entregarlos en tiempo real. Arranca PostgreSQL y Redis con
+`docker compose up -d`, aplica las migraciones con `python manage.py migrate`
+y ejecuta el servidor ASGI con `python manage.py runserver`. Las personas
+autenticadas pueden iniciar conversaciones desde **Mensajes**; solo sus dos
+participantes pueden acceder a ellas.
 
 # ▶️ Ejecutar el proyecto
 
@@ -665,10 +725,6 @@ La planificación inicial divide el trabajo en diferentes áreas:
 | Usuarios      | Registro, login y autenticación       |
 | Base de datos | Migraciones, modelos y testing        |
 | Frontend      | React, formularios y conexión con API |
-
-
-
-
 
 
 

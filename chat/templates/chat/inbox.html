@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Mensajes" %} | Ludix{% endblock %}
+
+{% block content %}
+<section class="chat-page">
+    <header class="chat-page-header">
+        <div>
+            <p class="chat-eyebrow">{% translate "LUDIX SOCIAL" %}</p>
+            <h1>{% translate "Mensajes" %}</h1>
+            <p>{% translate "Tus conversaciones privadas." %}</p>
+        </div>
+        <a class="chat-primary-button" href="{% url 'chat:new' %}">
+            {% translate "Nuevo mensaje" %}
+        </a>
+    </header>
+
+    <div class="chat-panel">
+        {% for conversation in conversations %}
+            {% if conversation.user_one_id == user.id %}
+                {% with other_user=conversation.user_two %}
+                    <a class="chat-inbox-item" href="{% url 'chat:conversation' conversation.pk %}">
+                        <span class="chat-avatar">{{ other_user.username|first|upper }}</span>
+                        <span class="chat-inbox-copy">
+                            <strong>{{ other_user.username }}</strong>
+                            <span>{{ conversation.last_message|default:_("Inicia la conversación")|truncatechars:90 }}</span>
+                        </span>
+                        {% if conversation.unread_count %}
+                            <span class="chat-unread-count">{{ conversation.unread_count }}</span>
+                        {% endif %}
+                    </a>
+                {% endwith %}
+            {% else %}
+                {% with other_user=conversation.user_one %}
+                    <a class="chat-inbox-item" href="{% url 'chat:conversation' conversation.pk %}">
+                        <span class="chat-avatar">{{ other_user.username|first|upper }}</span>
+                        <span class="chat-inbox-copy">
+                            <strong>{{ other_user.username }}</strong>
+                            <span>{{ conversation.last_message|default:_("Inicia la conversación")|truncatechars:90 }}</span>
+                        </span>
+                        {% if conversation.unread_count %}
+                            <span class="chat-unread-count">{{ conversation.unread_count }}</span>
+                        {% endif %}
+                    </a>
+                {% endwith %}
+            {% endif %}
+        {% empty %}
+            <div class="chat-empty-state">
+                <span aria-hidden="true">💬</span>
+                <h2>{% translate "Todavía no tienes conversaciones" %}</h2>
+                <p>{% translate "Inicia un chat para hablar con otra persona de Ludix." %}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -21,6 +21,7 @@
                 {% blocktranslate trimmed with username=user.username %}Hola, {{ username }}{% endblocktranslate %}
             </span>
             <a href="{% url 'profile' %}">{% translate "Mi perfil" %}</a>
+            <a href="{% url 'chat:inbox' %}">{% translate "Mensajes" %}</a>
             <form method="post" action="{% url 'logout' %}" class="logout-form">
                 {% csrf_token %}
                 <button type="submit" class="logout-button">{% translate "Cerrar sesión" %}</button>
