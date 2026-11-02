@@ -40,6 +40,12 @@ class JuegoAdmin(admin.ModelAdmin):
         "description_ca",
         "title_it",
         "description_it",
+        "min_players",
+        "max_players",
+        "duration_minutes",
+        "min_age",
+        "difficulty",
+        "stock",
     )
     
     inlines = (JuegoCategoriaInline, JuegoMecanicaInline)

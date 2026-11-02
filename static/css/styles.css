@@ -13,9 +13,10 @@
     --text-secondary:#b7c4df;
 
     --accent:#7c6cff;
-    --accent-hover:#9588ff;
+   --accent-hover:#4de2ff; /* --accent-hover:#9588ff; */
 
     --neon:#4de2ff;
+    --alternative: #35f239;
 
     --border:#2e3c60;
 
@@ -46,10 +47,11 @@
     --text-primary:#f8fafc;
     --text-secondary:#9ca3af;
 
-    --accent:#6366f1;
-    --accent-hover:#818cf8;
+    --accent:#050505;
+    --accent-hover:#9ca3af;
 
-    --neon:#818cf8;
+    --neon:#9ca3af;
+    --alternative: #4de2ff;
 
     --border:#2a2a34;
 
@@ -62,42 +64,67 @@
     --glow-cyan: rgba(77, 226, 255, .06);
     --glow-purple: rgba(124, 108, 255, .08);
 }
+.eclipse .navbar {
+    background: var(--bg-main);
+}
 
+.eclipse input {
+    background: rgba(255, 255, 255, .8);
+    color: var(--text-primary);
+}
+
+.eclipse .logo {
+    text-shadow: none;
+}
+
+.eclipse .logo:hover {
+    color: var(--alternative);
+}
+
+.eclipse .navbar nav a:hover {
+    box-shadow: 0 0 12px rgba(104, 84, 223, .12);
+}
+
+.eclipse .theme-btn {
+    color: var(--text-primary);
+}
 
 /* =========================
    TEMA AURORA - CLARO
 ========================= */
 
 .aurora {
-    --bg-main: #f3f5fb;
-    --bg-secondary: #e8edf7;
+    --bg-main: #F6F0E5;
+    --bg-secondary: #eead2c;
 
-    --card: #ffffff;
-    --card-hover: #f5f3ff;
+    --card: #FFFCF6;
+    --card-hover: #F2E9D9;
 
-    --text-primary: #20243a;
-    --text-secondary: #606981;
+    --text-primary: #5E5333;
+    --text-secondary: #766C55;
 
-    --accent: #6854df;
-    --accent-hover: #8170f0;
+    --accent: #B55733;
+    --accent-hover: #984329;
 
-    --neon: #078ba8;
+    --neon: #eead2c;
+    --alternative: #eead2c;
 
-    --border: #d9deed;
+    --border: #D3B486;
 
     --shadow: 0 10px 30px rgba(37, 45, 80, .10);
 
-    --recommend-button-start: #59c7c0;
-    --recommend-button-end: #5ab9b3;
+    --recommend-button-start: #B55733;
+    --recommend-button-end: #984329;
 
-    --glow-cyan: rgba(77, 226, 255, .16);
-    --glow-purple: rgba(124, 108, 255, .09);
+    --glow-cyan: rgba(131, 175, 155, .12);
+    --glow-purple: rgba(181, 87, 51, .08);
+
 }
 
 /* Ajustes específicos para el tema claro */
 
 .aurora .navbar {
-    background: rgba(255, 255, 255, .75);
+    background:#B55733;
 }
 
 .aurora input {
@@ -110,7 +137,7 @@
 }
 
 .aurora .logo:hover {
-    color: var(--accent);
+    color: var(--alternative);
 }
 
 .aurora .navbar nav a:hover {
@@ -158,8 +185,8 @@ body{
         ),
         linear-gradient(
             180deg,
-            var(--bg-main),
-            var(--bg-secondary)
+            var(--accent),
+            var(--neon)
         );
 
     transition:
@@ -560,16 +587,17 @@ input:focus{
     font-weight:700;
     letter-spacing:.12em;
     text-transform:uppercase;
-    color:var(--neon);
+    color:#ffffff;
 }
 
 .filter-panel h3 {
     margin:0;
     font-size:1.05rem;
+    color: #ffffff;
 }
 
 .clear-link {
-    color:var(--neon);
+    color:#ffffff;
     text-decoration:none;
     font-size:.8rem;
     font-weight:700;
