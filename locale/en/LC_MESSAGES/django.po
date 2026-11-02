@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 20:03+0000\n"
+"POT-Creation-Date: 2026-11-01 23:17+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,6 +18,111 @@ msgstr "Email updated successfully."
 #: accounts/views.py:56
 msgid "Introduce una dirección de email válida."
 msgstr "Enter a valid email address."
+
+#: chat/forms.py:11
+msgid "Usuario"
+msgstr "User"
+
+#: chat/forms.py:12
+msgid "Selecciona un usuario"
+msgstr "Select a user"
+
+#: chat/templates/chat/conversation.html:4 chat/templates/chat/inbox.html:4
+#: chat/templates/chat/inbox.html:11 templates/base.html:24
+msgid "Mensajes"
+msgstr "Messages"
+
+#: chat/templates/chat/conversation.html:12
+msgid "CONVERSACIÓN PRIVADA"
+msgstr "PRIVATE CONVERSATION"
+
+#: chat/templates/chat/conversation.html:17
+#: chat/templates/chat/new_conversation.html:15
+msgid "Volver a mensajes"
+msgstr "Back to messages"
+
+#: chat/templates/chat/conversation.html:26
+msgid "Mensajes de la conversación"
+msgstr "Conversation messages"
+
+#: chat/templates/chat/conversation.html:36
+msgid "Envía el primer mensaje para empezar a hablar."
+msgstr "Send the first message to start chatting."
+
+#: chat/templates/chat/conversation.html:42
+msgid "Escribe un mensaje"
+msgstr "Write a message"
+
+#: chat/templates/chat/conversation.html:44
+msgid "Enviar"
+msgstr "Send"
+
+#: chat/templates/chat/conversation.html:47
+#: chat/templates/chat/conversation.html:54
+msgid "Conectando…"
+msgstr "Connecting…"
+
+#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:78
+msgid "Conectado"
+msgstr "Connected"
+
+#: chat/templates/chat/conversation.html:49
+msgid "Conexión perdida. Recarga para volver a conectar."
+msgstr "Connection lost. Reload to reconnect."
+
+#: chat/templates/chat/conversation.html:50
+msgid "No se pudo enviar el mensaje. Comprueba la conexión."
+msgstr "Couldn't send the message. Check your connection."
+
+#: chat/templates/chat/conversation.html:51
+msgid "El mensaje no es válido."
+msgstr "Invalid message."
+
+#: chat/templates/chat/conversation.html:52
+msgid "Escribe un mensaje antes de enviarlo."
+msgstr "Type a message before sending it."
+
+#: chat/templates/chat/conversation.html:53
+msgid "El mensaje supera los 4000 caracteres."
+msgstr "The message exceeds 4000 characters."
+
+#: chat/templates/chat/inbox.html:10
+#: chat/templates/chat/new_conversation.html:10
+msgid "LUDIX SOCIAL"
+msgstr ""
+
+#: chat/templates/chat/inbox.html:12
+msgid "Tus conversaciones privadas."
+msgstr "Your private conversations."
+
+#: chat/templates/chat/inbox.html:15
+#: chat/templates/chat/new_conversation.html:4
+msgid "Nuevo mensaje"
+msgstr "New message"
+
+#: chat/templates/chat/inbox.html:27 chat/templates/chat/inbox.html:40
+msgid "Inicia la conversación"
+msgstr "Start the conversation"
+
+#: chat/templates/chat/inbox.html:51
+msgid "Todavía no tienes conversaciones"
+msgstr "You don't have any conversations yet."
+
+#: chat/templates/chat/inbox.html:52
+msgid "Inicia un chat para hablar con otra persona de Ludix."
+msgstr "Start a chat to talk to another Ludix user."
+
+#: chat/templates/chat/new_conversation.html:11
+msgid "Nueva conversación"
+msgstr "New conversation"
+
+#: chat/templates/chat/new_conversation.html:12
+msgid "Elige a la persona con quien quieres hablar."
+msgstr "Choose who you want to talk to."
+
+#: chat/templates/chat/new_conversation.html:26
+msgid "Abrir conversación"
+msgstr "Open conversation"
 
 #: juegos/forms.py:14
 msgid ""
@@ -131,7 +236,7 @@ msgstr "The page you're looking for doesn't exist or has moved."
 msgid "Ir al inicio"
 msgstr "Go to home"
 
-#: templates/404.html:15 templates/accounts/login.html:4 templates/base.html:29
+#: templates/404.html:15 templates/accounts/login.html:4 templates/base.html:30
 msgid "Iniciar sesión"
 msgstr "Log in"
 
@@ -350,7 +455,7 @@ msgid "Todavía no tienes pedidos."
 msgstr "You don't have any orders yet."
 
 #: templates/accounts/register.html:4 templates/accounts/register.html:61
-#: templates/base.html:30
+#: templates/base.html:31
 msgid "Crear cuenta"
 msgstr "Create account"
 
@@ -399,27 +504,27 @@ msgstr "Log in"
 msgid "Hola, %(username)s"
 msgstr "Hello, %(username)s"
 
-#: templates/base.html:26
+#: templates/base.html:27
 msgid "Cerrar sesión"
 msgstr "Log out"
 
-#: templates/base.html:35 templates/websocket_test.html:60
+#: templates/base.html:36 templates/websocket_test.html:60
 msgid "Idioma"
 msgstr "Language"
 
-#: templates/base.html:45 templates/websocket_test.html:70
+#: templates/base.html:46 templates/websocket_test.html:70
 msgid "Cambiar"
 msgstr "Change"
 
-#: templates/base.html:47
+#: templates/base.html:48
 msgid "Cambiar tema"
 msgstr "Change theme"
 
-#: templates/base.html:48
+#: templates/base.html:49
 msgid "Tema actual"
 msgstr "Current theme"
 
-#: templates/base.html:56 templates/base.html:59
+#: templates/base.html:57 templates/base.html:60
 #: templates/websocket_test.html:73
 msgid "Usuarios conectados"
 msgstr "Users online"
@@ -850,10 +955,6 @@ msgstr "Ludix WebSocket test"
 #: templates/websocket_test.html:75
 msgid "Conectando..."
 msgstr "Connecting..."
-
-#: templates/websocket_test.html:78
-msgid "Conectado"
-msgstr "Connected"
 
 #: templates/websocket_test.html:79
 msgid "Error de conexión"
@@ -2151,4 +2252,3 @@ msgstr ""
 
 #~ msgid "Disponibilidad"
 #~ msgstr "Availability"
-    

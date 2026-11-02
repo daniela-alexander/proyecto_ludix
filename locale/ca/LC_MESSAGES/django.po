@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-01 20:03+0000\n"
+"POT-Creation-Date: 2026-11-01 23:17+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,6 +18,111 @@ msgstr "Adreça electrònica actualitzada correctament."
 #: accounts/views.py:56
 msgid "Introduce una dirección de email válida."
 msgstr "Introdueix una adreça electrònica vàlida."
+
+#: chat/forms.py:11
+msgid "Usuario"
+msgstr "Usuari"
+
+#: chat/forms.py:12
+msgid "Selecciona un usuario"
+msgstr "Selecciona un usuari"
+
+#: chat/templates/chat/conversation.html:4 chat/templates/chat/inbox.html:4
+#: chat/templates/chat/inbox.html:11 templates/base.html:24
+msgid "Mensajes"
+msgstr "Missatges"
+
+#: chat/templates/chat/conversation.html:12
+msgid "CONVERSACIÓN PRIVADA"
+msgstr "CONVERSA PRIVADA"
+
+#: chat/templates/chat/conversation.html:17
+#: chat/templates/chat/new_conversation.html:15
+msgid "Volver a mensajes"
+msgstr "Torna als missatges"
+
+#: chat/templates/chat/conversation.html:26
+msgid "Mensajes de la conversación"
+msgstr "Missatges de la conversa"
+
+#: chat/templates/chat/conversation.html:36
+msgid "Envía el primer mensaje para empezar a hablar."
+msgstr "Envia el primer missatge per començar a parlar."
+
+#: chat/templates/chat/conversation.html:42
+msgid "Escribe un mensaje"
+msgstr "Escriu un missatge"
+
+#: chat/templates/chat/conversation.html:44
+msgid "Enviar"
+msgstr "Envia"
+
+#: chat/templates/chat/conversation.html:47
+#: chat/templates/chat/conversation.html:54
+msgid "Conectando…"
+msgstr "S'està connectant…"
+
+#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:78
+msgid "Conectado"
+msgstr "Connectat"
+
+#: chat/templates/chat/conversation.html:49
+msgid "Conexión perdida. Recarga para volver a conectar."
+msgstr "S'ha perdut la connexió. Torna a carregar la pàgina per connectar-te de nou."
+
+#: chat/templates/chat/conversation.html:50
+msgid "No se pudo enviar el mensaje. Comprueba la conexión."
+msgstr "No s'ha pogut enviar el missatge. Comprova la connexió."
+
+#: chat/templates/chat/conversation.html:51
+msgid "El mensaje no es válido."
+msgstr "El missatge no és vàlid."
+
+#: chat/templates/chat/conversation.html:52
+msgid "Escribe un mensaje antes de enviarlo."
+msgstr "Escriu un missatge abans d'enviar-lo."
+
+#: chat/templates/chat/conversation.html:53
+msgid "El mensaje supera los 4000 caracteres."
+msgstr "El missatge supera els 4000 caràcters."
+
+#: chat/templates/chat/inbox.html:10
+#: chat/templates/chat/new_conversation.html:10
+msgid "LUDIX SOCIAL"
+msgstr ""
+
+#: chat/templates/chat/inbox.html:12
+msgid "Tus conversaciones privadas."
+msgstr "Les teves converses privades."
+
+#: chat/templates/chat/inbox.html:15
+#: chat/templates/chat/new_conversation.html:4
+msgid "Nuevo mensaje"
+msgstr "Nou missatge"
+
+#: chat/templates/chat/inbox.html:27 chat/templates/chat/inbox.html:40
+msgid "Inicia la conversación"
+msgstr "Inicia la conversa"
+
+#: chat/templates/chat/inbox.html:51
+msgid "Todavía no tienes conversaciones"
+msgstr "Encara no tens converses."
+
+#: chat/templates/chat/inbox.html:52
+msgid "Inicia un chat para hablar con otra persona de Ludix."
+msgstr "Inicia un xat per parlar amb una altra persona de Ludix."
+
+#: chat/templates/chat/new_conversation.html:11
+msgid "Nueva conversación"
+msgstr "Nova conversa"
+
+#: chat/templates/chat/new_conversation.html:12
+msgid "Elige a la persona con quien quieres hablar."
+msgstr "Tria amb qui vols parlar."
+
+#: chat/templates/chat/new_conversation.html:26
+msgid "Abrir conversación"
+msgstr "Obre la conversa"
 
 #: juegos/forms.py:14
 msgid ""
@@ -131,7 +236,7 @@ msgstr "La pàgina que cerques no existeix o ha canviat d'ubicació."
 msgid "Ir al inicio"
 msgstr "Ves a l'inici"
 
-#: templates/404.html:15 templates/accounts/login.html:4 templates/base.html:29
+#: templates/404.html:15 templates/accounts/login.html:4 templates/base.html:30
 msgid "Iniciar sesión"
 msgstr "Inicia la sessió"
 
@@ -352,7 +457,7 @@ msgid "Todavía no tienes pedidos."
 msgstr "Encara no tens cap comanda."
 
 #: templates/accounts/register.html:4 templates/accounts/register.html:61
-#: templates/base.html:30
+#: templates/base.html:31
 msgid "Crear cuenta"
 msgstr "Crea un compte"
 
@@ -401,27 +506,27 @@ msgstr "Inicia la sessió"
 msgid "Hola, %(username)s"
 msgstr "Hola, %(username)s"
 
-#: templates/base.html:26
+#: templates/base.html:27
 msgid "Cerrar sesión"
 msgstr "Tanca la sessió"
 
-#: templates/base.html:35 templates/websocket_test.html:60
+#: templates/base.html:36 templates/websocket_test.html:60
 msgid "Idioma"
 msgstr "Idioma"
 
-#: templates/base.html:45 templates/websocket_test.html:70
+#: templates/base.html:46 templates/websocket_test.html:70
 msgid "Cambiar"
 msgstr "Canvia"
 
-#: templates/base.html:47
+#: templates/base.html:48
 msgid "Cambiar tema"
 msgstr "Canvia el tema"
 
-#: templates/base.html:48
+#: templates/base.html:49
 msgid "Tema actual"
 msgstr "Tema actual"
 
-#: templates/base.html:56 templates/base.html:59
+#: templates/base.html:57 templates/base.html:60
 #: templates/websocket_test.html:73
 msgid "Usuarios conectados"
 msgstr "Usuaris connectats"
@@ -858,10 +963,6 @@ msgstr "Prova de WebSocket de Ludix"
 #: templates/websocket_test.html:75
 msgid "Conectando..."
 msgstr "S'està connectant..."
-
-#: templates/websocket_test.html:78
-msgid "Conectado"
-msgstr "Connectat"
 
 #: templates/websocket_test.html:79
 msgid "Error de conexión"

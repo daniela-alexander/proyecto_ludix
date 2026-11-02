@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ recipient.username }} | {% translate "Mensajes" %}{% endblock %}
+
+{% block content %}
+<section class="chat-page chat-conversation-page">
+    <header class="chat-page-header">
+        <div class="chat-recipient-heading">
+            <span class="chat-avatar">{{ recipient.username|first|upper }}</span>
+            <div>
+                <p class="chat-eyebrow">{% translate "CONVERSACIÓN PRIVADA" %}</p>
+                <h1>{{ recipient.username }}</h1>
+            </div>
+        </div>
+        <a class="chat-secondary-button" href="{% url 'chat:inbox' %}">
+            {% translate "Volver a mensajes" %}
+        </a>
+    </header>
+
+    <div class="chat-panel chat-conversation-panel">
+        <ol
+            class="chat-message-list"
+            id="chat-message-list"
+            aria-live="polite"
+            aria-label="{% translate 'Mensajes de la conversación' %}"
+        >
+            {% for message in messages %}
+                <li class="chat-message {% if message.sender_id == user.id %}mine{% endif %}">
+                    <span class="chat-message-author">{{ message.sender.username }}</span>
+                    <p>{{ message.body }}</p>
+                    <time datetime="{{ message.created_at|date:'c' }}">{{ message.created_at|date:"SHORT_DATETIME_FORMAT" }}</time>
+                </li>
+            {% empty %}
+                <li class="chat-empty-messages" id="chat-empty-messages">
+                    {% translate "Envía el primer mensaje para empezar a hablar." %}
+                </li>
+            {% endfor %}
+        </ol>
+
+        <form class="chat-compose-form" id="chat-compose-form">
+            <label class="sr-only" for="chat-message-input">{% translate "Escribe un mensaje" %}</label>
+            <textarea id="chat-message-input" maxlength="4000" rows="2" required></textarea>
+            <button class="chat-primary-button" type="submit">{% translate "Enviar" %}</button>
+        </form>
+        <p class="chat-connection-status" id="chat-connection-status" role="status"
+           data-connecting="{% translate 'Conectando…' %}"
+           data-connected="{% translate 'Conectado' %}"
+           data-disconnected="{% translate 'Conexión perdida. Recarga para volver a conectar.' %}"
+           data-send-error="{% translate 'No se pudo enviar el mensaje. Comprueba la conexión.' %}"
+           data-invalid-message="{% translate 'El mensaje no es válido.' %}"
+           data-empty-message="{% translate 'Escribe un mensaje antes de enviarlo.' %}"
+           data-message-too-long="{% translate 'El mensaje supera los 4000 caracteres.' %}">
+            {% translate "Conectando…" %}
+        </p>
+    </div>
+</section>
+
+{{ user.id|json_script:"chat-current-user-id" }}
+<script>
+    (() => {
+        const list = document.getElementById("chat-message-list");
+        const form = document.getElementById("chat-compose-form");
+        const input = document.getElementById("chat-message-input");
+        const status = document.getElementById("chat-connection-status");
+        const labels = status.dataset;
+        const currentUserId = Number(JSON.parse(
+            document.getElementById("chat-current-user-id").textContent
+        ));
+        const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+        const socket = new WebSocket(
+            `${protocol}//${window.location.host}/ws/chat/{{ conversation.pk }}/`
+        );
+
+        function scrollToLatest() {
+            list.scrollTop = list.scrollHeight;
+        }
+
+        function appendMessage(message) {
+            const emptyState = document.getElementById("chat-empty-messages");
+            if (emptyState) emptyState.remove();
+
+            const item = document.createElement("li");
+            item.className = `chat-message${message.sender_id === currentUserId ? " mine" : ""}`;
+
+            const author = document.createElement("span");
+            author.className = "chat-message-author";
+            author.textContent = message.sender_name;
+
+            const body = document.createElement("p");
+            body.textContent = message.body;
+
+            const time = document.createElement("time");
+            const sentAt = new Date(message.created_at);
+            time.dateTime = message.created_at;
+            time.textContent = new Intl.DateTimeFormat(undefined, {
+                dateStyle: "short",
+                timeStyle: "short"
+            }).format(sentAt);
+
+            item.append(author, body, time);
+            list.append(item);
+            scrollToLatest();
+        }
+
+        socket.addEventListener("open", () => {
+            status.textContent = labels.connected;
+        });
+
+        socket.addEventListener("message", (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === "message") {
+                appendMessage(data);
+            } else if (data.type === "error") {
+                const errorLabels = {
+                    invalid_message: labels.invalidMessage,
+                    empty_message: labels.emptyMessage,
+                    message_too_long: labels.messageTooLong
+                };
+                status.textContent = errorLabels[data.code] || labels.sendError;
+            }
+        });
+
+        socket.addEventListener("close", () => {
+            status.textContent = labels.disconnected;
+        });
+
+        socket.addEventListener("error", () => {
+            status.textContent = labels.disconnected;
+        });
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const message = input.value.trim();
+            if (!message) return;
+            if (socket.readyState !== WebSocket.OPEN) {
+                status.textContent = labels.sendError;
+                return;
+            }
+
+            socket.send(JSON.stringify({message}));
+            input.value = "";
+            input.focus();
+        });
+
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                form.requestSubmit();
+            }
+        });
+
+        window.addEventListener("pagehide", () => socket.close(), {once: true});
+        scrollToLatest();
+    })();
+</script>
+{% endblock %}

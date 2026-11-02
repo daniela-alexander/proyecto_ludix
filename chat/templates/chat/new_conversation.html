@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Nuevo mensaje" %} | Ludix{% endblock %}
+
+{% block content %}
+<section class="chat-page chat-narrow">
+    <header class="chat-page-header">
+        <div>
+            <p class="chat-eyebrow">{% translate "LUDIX SOCIAL" %}</p>
+            <h1>{% translate "Nueva conversación" %}</h1>
+            <p>{% translate "Elige a la persona con quien quieres hablar." %}</p>
+        </div>
+        <a class="chat-secondary-button" href="{% url 'chat:inbox' %}">
+            {% translate "Volver a mensajes" %}
+        </a>
+    </header>
+
+    <form method="post" class="chat-panel chat-new-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label for="{{ form.recipient.id_for_label }}">{{ form.recipient.label }}</label>
+        {{ form.recipient }}
+        {{ form.recipient.errors }}
+        <button class="chat-primary-button" type="submit">
+            {% translate "Abrir conversación" %}
+        </button>
+    </form>
+</section>
+{% endblock %}
