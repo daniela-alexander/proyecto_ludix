@@ -13,6 +13,33 @@
 <body>
 
     <header class="navbar">
+        
+  <!-- 🎲 DADO VIRTUAL LUDIX -->
+   <!-- 2. 🎲 El Dado Virtual Dinámico sin estilos inline -->
+    <div class="dado-container-dinamico">
+        <select id="tipoDado">
+            <option value="4">d4</option>
+            <option value="6" selected>d6 (Tradicional)</option>
+            <option value="8">d8</option>
+            <option value="10">d10</option>
+            <option value="12">d12</option>
+            <option value="20">d20</option>
+            <option value="letras">Letras (A-Z)</option>
+        </select>
+
+        <button id="btnLanzar" onclick="lanzarDadoVirtual()">
+            🎲 Tirar
+        </button>
+
+        <span id="resultadoDado">-</span>
+    </div>
+
+  <!-- Aquí continuará el código original de vuestra barra (logos, menús, etc.) -->
+
+
+
+
+
         <a href="{% url 'home' %}" class="logo">Ludix</a>
 
         <nav>
@@ -158,6 +185,37 @@
 
         aplicarTema(temaActual);
     </script>
+
+
+<script>
+function lanzarDadoVirtual() {
+  const select = document.getElementById('tipoDado');
+  const boton = document.getElementById('btnLanzar');
+  const resultado = document.getElementById('resultadoDado');
+  
+  const modo = select.value;
+  boton.disabled = true;
+  resultado.textContent = "⏳";
+  
+  setTimeout(() => {
+    if (modo === 'letras') {
+      // Lanzamiento de letras aleatorias (A-Z) incluyendo la Ñ
+      const abecedario = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+      const indiceAleatorio = Math.floor(Math.random() * abecedario.length);
+      resultado.textContent = abecedario[indiceAleatorio];
+    } else {
+      // Lanzamiento numérico tradicional según las caras del dado
+      const caras = parseInt(modo);
+      const numeroObtenido = Math.floor(Math.random() * caras) + 1;
+      resultado.textContent = numeroObtenido;
+    }
+    boton.disabled = false;
+  }, 250); // Simulación del giro del dado
+}
+</script>
+
+
+
 
 </body>
 
