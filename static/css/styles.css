@@ -1062,6 +1062,25 @@ input:focus{
     transform:rotate(3deg);
 }
 
+.game-detail-image {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.game-detail-art-placeholder {
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    background:
+       linear-gradient(145deg, rgba(255,255,255,.18), transparent 48%),
+       linear-gradient(145deg, var(--accent), var(--bg-main) 78%);
+}
+
 .game-detail-art-orbit {
     position:absolute;
     width:150%;
@@ -1711,7 +1730,8 @@ input:focus{
     }
 
     .game-detail-art {
-        display:none;
+        width:min(58vw, 220px);
+        justify-self:center;
     }
 
     .game-detail-facts,

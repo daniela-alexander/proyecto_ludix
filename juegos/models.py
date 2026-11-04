@@ -135,6 +135,12 @@ class Mechanic(models.Model):
 class Game(models.Model):
     id = models.BigAutoField(primary_key=True)
 
+    image = models.ImageField(
+        upload_to="games/",
+        blank=True,
+        null=True,
+    )
+
     bgg_id = models.IntegerField(
         unique=True,
         null=True,
