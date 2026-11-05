@@ -257,6 +257,12 @@ def sugerencia_view(request):
             == SesionSugerencia.SuggestionType.LIBRARY
         ):
             juegos = juegos.filter(libraries__user_profile=perfil)
+        else:
+            juegos = juegos.exclude(
+                id__in=LibraryGame.objects.filter(
+                    user_profile=perfil,
+                ).values_list("game_id", flat=True)
+            )
 
         if criterios["tematica"]:
             juegos = juegos.filter(categories=criterios["tematica"])
@@ -286,12 +292,17 @@ def sugerencia_view(request):
             SesionSugerencia.objects.filter(host__user=request.user),
             pk=request.GET["session"],
         )
-        recomendaciones = [
-            proposal.game
-            for proposal in suggestion_session.proposed_games.select_related(
-                "game"
-            ).order_by("id")
-        ]
+        propuestas = suggestion_session.proposed_games.select_related(
+            "game"
+        ).order_by("id")
+        if (
+            suggestion_session.suggestion_type
+            == SesionSugerencia.SuggestionType.PURCHASE
+        ):
+            propuestas = propuestas.exclude(
+                game__libraries__user_profile__user=request.user
+            )
+        recomendaciones = [proposal.game for proposal in propuestas]
         form = SugerenciaForm(
             initial={
                 "tipo_sugerencia": suggestion_session.suggestion_type,
@@ -345,19 +356,17 @@ def personalised_recommendations(request):
         libraries__favorite=True
     )
     
-    print("FAVORITOS:", favoritos.count())
-    
-    for game in favoritos:
-        print(game.title)
+    # print("FAVORITOS:", favoritos.count())
+    # for game in favoritos:
+    #     print(game.title)
         
     categorias = Category.objects.filter(
         games__in=favoritos
     ).distinct()
 
-    print("CATEGORIAS:", categorias.count())
-
-    for categoria in categorias:
-        print(categoria.name)
+    # print("CATEGORIAS:", categorias.count())
+    # for categoria in categorias:
+    #     print(categoria.name)
         
     mecanicas = Mechanic.objects.filter(
         games__in=favoritos
@@ -371,11 +380,17 @@ def personalised_recommendations(request):
             "id",
             flat=True,
         )
+    ).exclude(
+        id__in=LibraryGame.objects.filter(
+            user_profile__user=request.user,
+        ).values_list(
+            "game_id",
+            flat=True,
+        )
     ).distinct()
     
-    print("RECOMENDADOS:", recomendados.count())
-
-    for game in recomendados:
-        print(game.title)
+    # print("RECOMENDADOS:", recomendados.count())
+    # for game in recomendados:
+    #     print(game.title)
 
     return recomendados

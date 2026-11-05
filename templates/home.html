@@ -139,7 +139,7 @@
                         </div>
 
                         {% if user.is_authenticated %}
-                        <div class="game-card-actions">
+                        <div class="game-card-actions" data-game-actions-for="{{ game.id }}">
                             {% if game.id in library_game_ids %}
                             <form method="post" action="{% url 'library_remove' game.id %}" class="game-card-action-form">
                                 {% csrf_token %}

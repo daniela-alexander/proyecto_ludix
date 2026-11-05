@@ -25,7 +25,7 @@
 
         {% for game in recomendados %}
 
-            <article class="game-card">
+            <article class="game-card" data-recommended-game-id="{{ game.id }}">
 
                 <span class="game-tag">
                     {% for category in game.categories.all|slice:":2" %}
