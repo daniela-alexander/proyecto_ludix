@@ -1,0 +1,122 @@
+{% block content %}
+
+<div class="recommendations-wrapper">
+
+    <div class="recommendations-header">
+        <h1>Recomendado para ti</h1>
+        {% if recomendados|length > 3 %}
+        <button class="expand-btn" id="expandBtn">
+            Expandir sugerencias
+        </button>
+        {% endif %}
+    </div>
+
+    {% if recomendados|length == 0 %}
+        <p>No se encontraron recomendaciones.</p>
+    {% endif %}
+
+    {% if recomendados|length > 3 %}
+    <button type="button" class="scroll-btn left" id="scroll-left">
+        &#10094;
+    </button>
+    {% endif %}
+
+    <div class="game-grid recommendations-carousel" id="recommendations-container">
+
+        {% for game in recomendados %}
+
+            <article class="game-card">
+
+                <span class="game-tag">
+                    {% for category in game.categories.all|slice:":2" %}
+                        {{ category.get_name }}
+                        {% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        General
+                    {% endfor %}
+                </span>
+
+                <h3>{{ game.get_title }}</h3>
+
+                <p>
+                    {{ game.get_description|truncatechars:120 }}
+                </p>
+
+                <div class="game-meta">
+                    <span>
+                        {{ game.min_players }}-{{ game.max_players }} jugadores
+                    </span>
+
+                    <span>
+                        {{ game.duration_minutes }} min
+                    </span>
+                </div>
+
+                <div class="game-footer">
+                    <strong>{{ game.price }} €</strong>
+
+                    <a href="{% url 'game_detail' game.id %}">
+                        Ver juego
+                    </a>
+                </div>
+
+            </article>
+
+        {% empty %}
+            <p>No se encontraron recomendaciones.</p>
+        {% endfor %}
+
+    </div>
+
+    {% if recomendados|length > 3 %}
+    <button type="button" class="scroll-btn right" id="scroll-right">
+        &#10095;
+    </button>
+    {% endif %}
+
+</div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const container = document.getElementById("recommendations-container");
+        const left = document.getElementById("scroll-left");
+        const right = document.getElementById("scroll-right");
+        const expand = document.getElementById("expandBtn");
+
+        if (!container) return;
+
+        left?.addEventListener("click", () => {
+            container.scrollBy({
+                left: -container.clientWidth,
+                behavior: "smooth"
+            });
+        });
+
+        right?.addEventListener("click", () => {
+            container.scrollBy({
+                left: container.clientWidth,
+                behavior: "smooth"
+            });
+        });
+
+        expand?.addEventListener("click", () => {
+            container.classList.toggle("expanded");
+
+            const expanded = container.classList.contains("expanded");
+
+            expand.textContent = expanded
+                ? "Mostrar menos"
+                : "Expandir sugerencias";
+
+            if (left) left.hidden = expanded;
+            if (right) right.hidden = expanded;
+        });
+        
+
+    });
+
+</script>
+
+{% endblock %}

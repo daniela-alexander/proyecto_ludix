@@ -26,6 +26,10 @@
     </section>
 </form>
 
+    <section>
+        {% include "juegos/personalised_recommendations.html" with recomendados=recomendados %}
+    </section>
+
     <div class="catalog-layout">
         <form method="get" action="{% url 'home' %}" class="filter-panel">
             <input type="hidden" name="q" value="{{ query }}">

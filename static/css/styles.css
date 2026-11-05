@@ -3358,3 +3358,134 @@ main:has(.register-page) {
         flex-direction: column;
     }
 }
+
+/* =========================
+    RECOMENDADOR DE JUEGOS
+========================= */
+
+
+.recommendations-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.game-grid.recommendations-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+}
+
+.recommendations-carousel .game-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    min-width: 0;
+    scroll-snap-align: start;
+}
+
+/* Botones laterales */
+.recommendations-wrapper {
+    position: relative;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.scroll-btn.left {
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.scroll-btn.right {
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+/* Expandir */
+
+.recommendations-carousel.expanded {
+    flex-wrap: wrap;
+    overflow-x: visible;
+}
+
+.recommendations-carousel.expanded .game-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+}
+
+@media (max-width: 768px) {
+    .recommendations-carousel .game-card {
+        flex-basis: 80%;
+    }
+}
+
+/* Barra de desplazamiento discreta */
+.recommendations-carousel {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #888 transparent;
+}
+
+/* Chrome, Edge y Safari */
+.recommendations-carousel::-webkit-scrollbar {
+    height: 6px;
+}
+
+.recommendations-carousel::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
+}
+
+.recommendations-carousel::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.recommendations-carousel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Ocultar botones, esquinas e indicadores adicionales */
+.recommendations-carousel::-webkit-scrollbar-button,
+.recommendations-carousel::-webkit-scrollbar-corner,
+.recommendations-carousel::-webkit-scrollbar-track-piece,
+.recommendations-carousel::-webkit-scrollbar-track-piece:start,
+.recommendations-carousel::-webkit-scrollbar-track-piece:end {
+    display: none;
+}
+
+.recommendations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.recommendations-header h1 {
+    margin: 0;
+}
+
+.expand-btn {
+    cursor: pointer;
+}
+
+.scroll-btn[hidden] {
+    display: none !important;
+}
