@@ -46,6 +46,9 @@ def add_to_wishlist(request, game_id):
             game=game,
         )
 
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
     next_url = request.POST.get("next")
     if next_url and url_has_allowed_host_and_scheme(
         next_url,
@@ -69,6 +72,9 @@ def remove_from_wishlist(request, game_id):
 
     if not LibraryGame.objects.filter(user_profile=user_profile, game=game).exists():
         Wishlist.objects.filter(user_profile=user_profile, game=game).delete()
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
 
     next_url = request.POST.get("next")
     if next_url and url_has_allowed_host_and_scheme(

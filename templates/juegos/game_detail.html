@@ -122,7 +122,7 @@
                 <p class="game-detail-purchase-copy">{% translate "Guarda este juego en tu biblioteca para tenerlo siempre a mano." %}</p>
 
                 {% if user.is_authenticated %}
-                <div class="game-detail-actions">
+                <div class="game-detail-actions" data-game-actions-for="{{ game.id }}">
                     {% if is_in_library %}
                     <div class="library-added-message">
                         <span aria-hidden="true">✓</span>

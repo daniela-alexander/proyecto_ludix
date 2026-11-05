@@ -44,6 +44,9 @@ def add_to_library(request, game_id):
         item.favorite = request.POST.get("favorito") in {"true", "1", "True"}
         item.save()
 
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
     next_url = request.POST.get("next")
     if next_url is not None:
         if url_has_allowed_host_and_scheme(
@@ -73,6 +76,9 @@ def remove_from_library(request, game_id):
         game=game,
     ).delete()
 
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
     next_url = request.POST.get("next")
     if next_url and url_has_allowed_host_and_scheme(
         next_url,
@@ -95,6 +101,9 @@ def toggle_favorite(request, game_id):
     if item is not None:
         item.favorite = not item.favorite
         item.save(update_fields=["favorite"])
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
 
     next_url = request.POST.get("next")
     if next_url and url_has_allowed_host_and_scheme(
