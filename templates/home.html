@@ -26,9 +26,11 @@
     </section>
 </form>
 
+    {% if user.is_authenticated %}
     <section>
         {% include "juegos/personalised_recommendations.html" with recomendados=recomendados %}
     </section>
+    {% endif %}
 
     <div class="catalog-layout">
         <form method="get" action="{% url 'home' %}" class="filter-panel">

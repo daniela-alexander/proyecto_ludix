@@ -11,10 +11,6 @@
         {% endif %}
     </div>
 
-    {% if recomendados|length == 0 %}
-        <p>No se encontraron recomendaciones.</p>
-    {% endif %}
-
     {% if recomendados|length > 3 %}
     <button type="button" class="scroll-btn left" id="scroll-left">
         &#10094;
