@@ -192,7 +192,6 @@ class Game(models.Model):
 
         return translations.get(lang) or self.description
 
-
     min_players = models.PositiveIntegerField()
 
     max_players = models.PositiveIntegerField()
@@ -500,7 +499,7 @@ class SuggestionVote(models.Model):
         db_table = "voto_sugerencia"
 
     def __str__(self):
-        return f"{self.session} - {self.game} - {self.score}"
+        return f"{self.session} - {self.game} ({self.score})"
 
 
 class Order(models.Model):
