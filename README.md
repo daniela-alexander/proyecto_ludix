@@ -174,7 +174,6 @@ Entre sus principales atributos se encuentran:
 
 * Título.
 * Descripción.
-* ID de BoardGameGeek.
 * Número mínimo de jugadores.
 * Número máximo de jugadores.
 * Duración.
@@ -725,7 +724,6 @@ La planificación inicial divide el trabajo en diferentes áreas:
 | Usuarios      | Registro, login y autenticación       |
 | Base de datos | Migraciones, modelos y testing        |
 | Frontend      | React, formularios y conexión con API |
-
 
 
 

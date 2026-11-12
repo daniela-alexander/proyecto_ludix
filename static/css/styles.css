@@ -1062,6 +1062,25 @@ input:focus{
     transform:rotate(3deg);
 }
 
+.game-detail-image {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.game-detail-art-placeholder {
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    background:
+       linear-gradient(145deg, rgba(255,255,255,.18), transparent 48%),
+       linear-gradient(145deg, var(--accent), var(--bg-main) 78%);
+}
+
 .game-detail-art-orbit {
     position:absolute;
     width:150%;
@@ -1711,7 +1730,8 @@ input:focus{
     }
 
     .game-detail-art {
-        display:none;
+        width:min(58vw, 220px);
+        justify-self:center;
     }
 
     .game-detail-facts,
@@ -3360,8 +3380,6 @@ main:has(.register-page) {
 }
 
 
-
-
 /* ========================================================
    ESTILOS Y COLORES DEL DADO VIRTUAL POR TEMAS (LUDIX)
    ======================================================== */
@@ -3446,4 +3464,133 @@ body.aurora .dado-container-dinamico span {
     background: white;
     border: 1px solid #fef08a;
     color: #713f12;
+}
+/* =========================
+    RECOMENDADOR DE JUEGOS
+
+
+.recommendations-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.game-grid.recommendations-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+}
+
+.recommendations-carousel .game-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    min-width: 0;
+    scroll-snap-align: start;
+}
+
+/* Botones laterales */
+.recommendations-wrapper {
+    position: relative;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.scroll-btn.left {
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.scroll-btn.right {
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+/* Expandir */
+
+.recommendations-carousel.expanded {
+    flex-wrap: wrap;
+    overflow-x: visible;
+}
+
+.recommendations-carousel.expanded .game-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+}
+
+@media (max-width: 768px) {
+    .recommendations-carousel .game-card {
+        flex-basis: 80%;
+    }
+}
+
+/* Barra de desplazamiento discreta */
+.recommendations-carousel {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #888 transparent;
+}
+
+/* Chrome, Edge y Safari */
+.recommendations-carousel::-webkit-scrollbar {
+    height: 6px;
+}
+
+.recommendations-carousel::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
+}
+
+.recommendations-carousel::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.recommendations-carousel::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Ocultar botones, esquinas e indicadores adicionales */
+.recommendations-carousel::-webkit-scrollbar-button,
+.recommendations-carousel::-webkit-scrollbar-corner,
+.recommendations-carousel::-webkit-scrollbar-track-piece,
+.recommendations-carousel::-webkit-scrollbar-track-piece:start,
+.recommendations-carousel::-webkit-scrollbar-track-piece:end {
+    display: none;
+}
+
+.recommendations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.recommendations-header h1 {
+    margin: 0;
+}
+
+.expand-btn {
+    cursor: pointer;
+}
+
+.scroll-btn[hidden] {
+    display: none !important;
 }

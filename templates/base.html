@@ -212,10 +212,92 @@ function lanzarDadoVirtual() {
     boton.disabled = false;
   }, 250); // Simulación del giro del dado
 }
+
+document.addEventListener("submit", async (event) => {
+    const form = event.target.closest(
+        ".game-card-action-form, .game-detail-icon-form, "
+        + ".library-add-form, .profile-library-remove-form"
+    );
+    if (!form) return;
+
+    event.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton?.disabled) return;
+
+    if (submitButton) submitButton.disabled = true;
+    let actionSaved = false;
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method || "POST",
+            body: new FormData(form),
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "Accept": "application/json"
+            },
+            credentials: "same-origin"
+        });
+        if (!response.ok) {
+            throw new Error(`Action request failed: ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (!Number.isInteger(result.game_id)) {
+            throw new Error("Action response did not include a game ID");
+        }
+        actionSaved = true;
+        const pageResponse = await fetch(window.location.href, {
+            headers: { "Accept": "text/html" },
+            credentials: "same-origin",
+            cache: "no-store"
+        });
+        if (!pageResponse.ok) {
+            throw new Error(`Page refresh failed: ${pageResponse.status}`);
+        }
+
+        const page = new DOMParser().parseFromString(
+            await pageResponse.text(),
+            "text/html"
+        );
+        const gameId = String(result.game_id);
+        const findGameActions = (root) => Array.from(
+            root.querySelectorAll("[data-game-actions-for]")
+        ).find((element) => element.dataset.gameActionsFor === gameId);
+        const currentActions = findGameActions(document);
+        const refreshedActions = findGameActions(page);
+
+        if (!currentActions) {
+            throw new Error("Could not find the game actions to update");
+        }
+        if (refreshedActions) {
+            currentActions.replaceWith(refreshedActions);
+        } else {
+            currentActions.remove();
+        }
+
+        const recommendationSelector =
+            `[data-recommended-game-id="${gameId}"]`;
+        const recommendationCard = document.querySelector(
+            recommendationSelector
+        );
+        const refreshedRecommendationCard = page.querySelector(
+            recommendationSelector
+        );
+        if (recommendationCard && !refreshedRecommendationCard) {
+            recommendationCard.remove();
+        }
+    } catch (error) {
+        console.error("No se pudo actualizar la acción del juego:", error);
+        window.alert(
+            actionSaved
+                ? "{% translate 'El cambio se guardó, pero no se pudo actualizar la vista. Recarga la página para verla.' %}"
+                : "{% translate 'No se pudo guardar el cambio. Inténtalo de nuevo.' %}"
+        );
+    } finally {
+        if (submitButton?.isConnected) submitButton.disabled = false;
+    }
+});
 </script>
-
-
-
 
 </body>
 
