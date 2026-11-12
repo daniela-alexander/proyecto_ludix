@@ -3379,9 +3379,94 @@ main:has(.register-page) {
     }
 }
 
+
+/* ========================================================
+   ESTILOS Y COLORES DEL DADO VIRTUAL POR TEMAS (LUDIX)
+   ======================================================== */
+
+/* Estructura y comportamiento base */
+.dado-container-dinamico {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: sans-serif;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.dado-container-dinamico select, 
+.dado-container-dinamico span {
+    padding: 3px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.dado-container-dinamico button {
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+/* 1. Colores para el tema por defecto: Nebula (Tonos Azules) */
+body .dado-container-dinamico {
+    background: #eef2ff;
+    border: 1px solid #e0e7ff;
+}
+body .dado-container-dinamico button {
+    background: #4F46E5;
+    color: white;
+}
+body .dado-container-dinamico select,
+body .dado-container-dinamico span {
+    background: white;
+    border: 1px solid #e0e7ff;
+    color: #1e1b4b;
+}
+
+/* 2. Colores para el tema: Eclipse (Tonos Oscuros) */
+body.eclipse .dado-container-dinamico {
+    background: #1f2937;
+    border: 1px solid #374151;
+}
+body.eclipse .dado-container-dinamico button {
+    background: #374151;
+    color: #f9fafb;
+}
+body.eclipse .dado-container-dinamico select,
+body.eclipse .dado-container-dinamico span {
+    background: #111827;
+    border: 1px solid #4b5563;
+    color: #f3f4f6;
+}
+
+/* 3. Colores para el tema: Aurora (Tonos Amarillos/Cálidos) */
+body.aurora .dado-container-dinamico {
+    background: #fef9c3;
+    border: 1px solid #fef08a;
+}
+body.aurora .dado-container-dinamico button {
+    background: #eab308;
+    color: #451a03;
+}
+body.aurora .dado-container-dinamico select,
+body.aurora .dado-container-dinamico span {
+    background: white;
+    border: 1px solid #fef08a;
+    color: #713f12;
+}
 /* =========================
     RECOMENDADOR DE JUEGOS
-========================= */
 
 
 .recommendations-wrapper {

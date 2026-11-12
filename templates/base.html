@@ -13,6 +13,33 @@
 <body>
 
     <header class="navbar">
+        
+  <!-- 🎲 DADO VIRTUAL LUDIX -->
+   <!-- 2. 🎲 El Dado Virtual Dinámico sin estilos inline -->
+    <div class="dado-container-dinamico">
+        <select id="tipoDado">
+            <option value="4">d4</option>
+            <option value="6" selected>d6 (Tradicional)</option>
+            <option value="8">d8</option>
+            <option value="10">d10</option>
+            <option value="12">d12</option>
+            <option value="20">d20</option>
+            <option value="letras">Letras (A-Z)</option>
+        </select>
+
+        <button id="btnLanzar" onclick="lanzarDadoVirtual()">
+            🎲 Tirar
+        </button>
+
+        <span id="resultadoDado">-</span>
+    </div>
+
+  <!-- Aquí continuará el código original de vuestra barra (logos, menús, etc.) -->
+
+
+
+
+
         <a href="{% url 'home' %}" class="logo">Ludix</a>
 
         <nav>
@@ -159,92 +186,118 @@
         aplicarTema(temaActual);
     </script>
 
-    <script>
-        document.addEventListener("submit", async (event) => {
-            const form = event.target.closest(
-                ".game-card-action-form, .game-detail-icon-form, "
-                + ".library-add-form, .profile-library-remove-form"
-            );
-            if (!form) return;
 
-            event.preventDefault();
-            const submitButton = form.querySelector('button[type="submit"]');
-            if (submitButton?.disabled) return;
+<script>
+function lanzarDadoVirtual() {
+  const select = document.getElementById('tipoDado');
+  const boton = document.getElementById('btnLanzar');
+  const resultado = document.getElementById('resultadoDado');
+  
+  const modo = select.value;
+  boton.disabled = true;
+  resultado.textContent = "⏳";
+  
+  setTimeout(() => {
+    if (modo === 'letras') {
+      // Lanzamiento de letras aleatorias (A-Z) incluyendo la Ñ
+      const abecedario = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+      const indiceAleatorio = Math.floor(Math.random() * abecedario.length);
+      resultado.textContent = abecedario[indiceAleatorio];
+    } else {
+      // Lanzamiento numérico tradicional según las caras del dado
+      const caras = parseInt(modo);
+      const numeroObtenido = Math.floor(Math.random() * caras) + 1;
+      resultado.textContent = numeroObtenido;
+    }
+    boton.disabled = false;
+  }, 250); // Simulación del giro del dado
+}
 
-            if (submitButton) submitButton.disabled = true;
-            let actionSaved = false;
+document.addEventListener("submit", async (event) => {
+    const form = event.target.closest(
+        ".game-card-action-form, .game-detail-icon-form, "
+        + ".library-add-form, .profile-library-remove-form"
+    );
+    if (!form) return;
 
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method || "POST",
-                    body: new FormData(form),
-                    headers: {
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Accept": "application/json"
-                    },
-                    credentials: "same-origin"
-                });
-                if (!response.ok) {
-                    throw new Error(`Action request failed: ${response.status}`);
-                }
+    event.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton?.disabled) return;
 
-                const result = await response.json();
-                if (!Number.isInteger(result.game_id)) {
-                    throw new Error("Action response did not include a game ID");
-                }
-                actionSaved = true;
-                const pageResponse = await fetch(window.location.href, {
-                    headers: { "Accept": "text/html" },
-                    credentials: "same-origin",
-                    cache: "no-store"
-                });
-                if (!pageResponse.ok) {
-                    throw new Error(`Page refresh failed: ${pageResponse.status}`);
-                }
+    if (submitButton) submitButton.disabled = true;
+    let actionSaved = false;
 
-                const page = new DOMParser().parseFromString(
-                    await pageResponse.text(),
-                    "text/html"
-                );
-                const gameId = String(result.game_id);
-                const findGameActions = (root) => Array.from(
-                    root.querySelectorAll("[data-game-actions-for]")
-                ).find((element) => element.dataset.gameActionsFor === gameId);
-                const currentActions = findGameActions(document);
-                const refreshedActions = findGameActions(page);
-
-                if (!currentActions) {
-                    throw new Error("Could not find the game actions to update");
-                }
-                if (refreshedActions) {
-                    currentActions.replaceWith(refreshedActions);
-                } else {
-                    currentActions.remove();
-                }
-
-                const recommendationSelector =
-                    `[data-recommended-game-id="${gameId}"]`;
-                const recommendationCard = document.querySelector(
-                    recommendationSelector
-                );
-                const refreshedRecommendationCard = page.querySelector(
-                    recommendationSelector
-                );
-                if (recommendationCard && !refreshedRecommendationCard) {
-                    recommendationCard.remove();
-                }
-            } catch (error) {
-                console.error("No se pudo actualizar la acción del juego:", error);
-                window.alert(
-                    actionSaved
-                        ? "{% translate 'El cambio se guardó, pero no se pudo actualizar la vista. Recarga la página para verla.' %}"
-                        : "{% translate 'No se pudo guardar el cambio. Inténtalo de nuevo.' %}"
-                );
-            } finally {
-                if (submitButton?.isConnected) submitButton.disabled = false;
-            }
+    try {
+        const response = await fetch(form.action, {
+            method: form.method || "POST",
+            body: new FormData(form),
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "Accept": "application/json"
+            },
+            credentials: "same-origin"
         });
-    </script>
+        if (!response.ok) {
+            throw new Error(`Action request failed: ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (!Number.isInteger(result.game_id)) {
+            throw new Error("Action response did not include a game ID");
+        }
+        actionSaved = true;
+        const pageResponse = await fetch(window.location.href, {
+            headers: { "Accept": "text/html" },
+            credentials: "same-origin",
+            cache: "no-store"
+        });
+        if (!pageResponse.ok) {
+            throw new Error(`Page refresh failed: ${pageResponse.status}`);
+        }
+
+        const page = new DOMParser().parseFromString(
+            await pageResponse.text(),
+            "text/html"
+        );
+        const gameId = String(result.game_id);
+        const findGameActions = (root) => Array.from(
+            root.querySelectorAll("[data-game-actions-for]")
+        ).find((element) => element.dataset.gameActionsFor === gameId);
+        const currentActions = findGameActions(document);
+        const refreshedActions = findGameActions(page);
+
+        if (!currentActions) {
+            throw new Error("Could not find the game actions to update");
+        }
+        if (refreshedActions) {
+            currentActions.replaceWith(refreshedActions);
+        } else {
+            currentActions.remove();
+        }
+
+        const recommendationSelector =
+            `[data-recommended-game-id="${gameId}"]`;
+        const recommendationCard = document.querySelector(
+            recommendationSelector
+        );
+        const refreshedRecommendationCard = page.querySelector(
+            recommendationSelector
+        );
+        if (recommendationCard && !refreshedRecommendationCard) {
+            recommendationCard.remove();
+        }
+    } catch (error) {
+        console.error("No se pudo actualizar la acción del juego:", error);
+        window.alert(
+            actionSaved
+                ? "{% translate 'El cambio se guardó, pero no se pudo actualizar la vista. Recarga la página para verla.' %}"
+                : "{% translate 'No se pudo guardar el cambio. Inténtalo de nuevo.' %}"
+        );
+    } finally {
+        if (submitButton?.isConnected) submitButton.disabled = false;
+    }
+});
+</script>
 
 </body>
 
