@@ -26,6 +26,12 @@
     </section>
 </form>
 
+    {% if user.is_authenticated %}
+    <section>
+        {% include "juegos/personalised_recommendations.html" with recomendados=recomendados %}
+    </section>
+    {% endif %}
+
     <div class="catalog-layout">
         <form method="get" action="{% url 'home' %}" class="filter-panel">
             <input type="hidden" name="q" value="{{ query }}">
@@ -135,7 +141,7 @@
                         </div>
 
                         {% if user.is_authenticated %}
-                        <div class="game-card-actions">
+                        <div class="game-card-actions" data-game-actions-for="{{ game.id }}">
                             {% if game.id in library_game_ids %}
                             <form method="post" action="{% url 'library_remove' game.id %}" class="game-card-action-form">
                                 {% csrf_token %}
