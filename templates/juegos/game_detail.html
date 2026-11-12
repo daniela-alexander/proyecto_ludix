@@ -31,10 +31,20 @@
                     {% endif %}
                 </p>
             </div>
-            <div class="game-detail-art" aria-hidden="true">
-                <span class="game-detail-art-orbit"></span>
-                <span class="game-detail-art-initial">{{ game.get_title|first|upper }}</span>
-                <span class="game-detail-art-caption">LUDIX · JUEGOS</span>
+            <div class="game-detail-art">
+                {% if game.image %}
+                <img
+                    class="game-detail-image"
+                    src="{{ game.image.url }}"
+                    alt="{{ game.get_title }}"
+                >
+                {% else %}
+                <div class="game-detail-art-placeholder" aria-hidden="true">
+                    <span class="game-detail-art-orbit"></span>
+                    <span class="game-detail-art-initial">{{ game.get_title|first|upper }}</span>
+                    <span class="game-detail-art-caption">LUDIX · JUEGOS</span>
+                </div>
+                {% endif %}
             </div>
         </header>
 

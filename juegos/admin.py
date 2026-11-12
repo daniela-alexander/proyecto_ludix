@@ -46,6 +46,7 @@ class JuegoAdmin(admin.ModelAdmin):
         "min_age",
         "difficulty",
         "stock",
+        "image",
     )
     
     inlines = (JuegoCategoriaInline, JuegoMecanicaInline)
