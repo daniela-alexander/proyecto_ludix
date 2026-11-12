@@ -16,7 +16,11 @@
    --accent-hover:#4de2ff; /* --accent-hover:#9588ff; */
 
     --neon:#4de2ff;
+    --small_text:#4de2ff;
     --alternative: #35f239;
+    --available_color: #55d6a5;
+    --unavailable_color: #FF00FF;
+    --bg_icon: rgba(77,226,255,.1);
 
     --border:#2e3c60;
 
@@ -51,9 +55,13 @@
     --accent-hover:#9ca3af;
 
     --neon:#9ca3af;
-    --alternative: #4de2ff;
+    --small_text:#9ca3af;
+    --alternative: #3a4a74;
+    --available_color: #2C6DEE;
+    --unavailable_color: #ff0040;
+    --bg_icon: rgba(77,226,255,.1);
 
-    --border:#2a2a34;
+    --border:#9ca3af; /* #2a2a34; */
 
     --shadow:
         0 15px 40px rgba(0,0,0,.5);
@@ -101,13 +109,18 @@
     --card-hover: #F2E9D9;
 
     --text-primary: #5E5333;
-    --text-secondary: #766C55;
+    --text-secondary: black; /* #766C55; */
 
     --accent: #B55733;
     --accent-hover: #984329;
 
     --neon: #eead2c;
+    --small_text: #ffffff;
     --alternative: #eead2c;
+    --available_color: #2C6DEE;
+    --unavailable_color: #e7033c;
+    --higher_contrast: black;
+    --bg_icon: #b55733;
 
     --border: #D3B486;
 
@@ -116,7 +129,7 @@
     --recommend-button-start: #B55733;
     --recommend-button-end: #984329;
 
-    --glow-cyan: rgba(131, 175, 155, .12);
+    --glow-cyan: rgba(181, 87, 51, .08);
     --glow-purple: rgba(181, 87, 51, .08);
 
 }
@@ -186,7 +199,7 @@ body{
         linear-gradient(
             180deg,
             var(--accent),
-            var(--neon)
+            var(--alternative)
         );
 
     transition:
@@ -421,11 +434,11 @@ h2{
 ========================= */
 
 p{
-    color:var(--text-secondary);
+    color:var(--higher_contrast);
 
-    line-height:1.8;
+    line-height: 1.8;
 
-    max-width:700px;
+    max-width: 700px;
 }
 
 
@@ -725,7 +738,7 @@ input:focus{
     inset:0 auto auto 0;
     width:100%;
     height:4px;
-    background:linear-gradient(90deg, rgba(77,226,255,.6), rgba(124,108,255,.8));
+    background:linear-gradient(90deg, var(--accent), var(--accent-hover));
 }
 
 .featured-header {
@@ -1039,7 +1052,7 @@ input:focus{
     padding:.45rem .8rem;
     border:1px solid rgba(77,226,255,.2);
     border-radius:999px;
-    color:var(--neon);
+    color:var(--small_text);
     background:rgba(77,226,255,.08);
     font-size:.75rem;
     font-weight:800;
@@ -1121,6 +1134,7 @@ input:focus{
     align-items:start;
     gap:clamp(1.5rem, 4vw, 3rem);
     padding:clamp(1.5rem, 4vw, 2.5rem);
+    /* background-color: var(--neon); */
 }
 
 .game-detail-main {
@@ -1181,7 +1195,7 @@ input:focus{
     height:1.7rem;
     border-radius:10px;
     color:var(--neon);
-    background:rgba(77,226,255,.1);
+    background:var(--bg_icon);
     font-size:1.05rem;
 }
 
@@ -1280,11 +1294,11 @@ input:focus{
 }
 
 .game-detail-stock.is-available {
-    color:#55d6a5;
+    color:var(--available_color);
 }
 
 .game-detail-stock.is-unavailable {
-    color:#ff8c8c;
+    color:var(--unavailable_color);
 }
 
 .game-detail-purchase-divider {
@@ -1647,7 +1661,7 @@ input:focus{
 .game-detail-wishlist-button:hover,
 .game-detail-wishlist-button:focus-visible {
     border-color:rgba(255,195,77,.45);
-    color:#ffc34d;
+    color: #F9F018; /* #ffc34d; */
     background:rgba(255,195,77,.12);
 }
 
@@ -2000,10 +2014,6 @@ button:hover{
 #contador-usuarios {
     color: var(--neon);
     font-weight: 800;
-
-    text-shadow:
-        0 0 5px var(--neon),
-        0 0 10px var(--neon);
 
     flex-shrink: 0;
 }
