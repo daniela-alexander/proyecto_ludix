@@ -3489,3 +3489,53 @@ main:has(.register-page) {
 .scroll-btn[hidden] {
     display: none !important;
 }
+
+.recommendation-preview {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 20px;
+}
+
+.recommendation-preview-header,
+.recommendation-preview-note {
+    margin-bottom: 20px;
+}
+
+.recommendation-preview-selector {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.recommendation-preview-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.recommendation-preview-column {
+    padding: 20px;
+    border: 1px solid var(--border-color, #d8dce2);
+    border-radius: 12px;
+    background: var(--card-background, #fff);
+}
+
+.recommendation-preview-column li {
+    padding: 8px 0;
+}
+
+.recommendation-preview-top {
+    margin-left: 8px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--accent-color, #e8efff);
+    font-size: 0.8rem;
+}
+
+@media (max-width: 700px) {
+    .recommendation-preview-columns {
+        grid-template-columns: 1fr;
+    }
+}
