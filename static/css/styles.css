@@ -13,9 +13,14 @@
     --text-secondary:#b7c4df;
 
     --accent:#7c6cff;
-    --accent-hover:#9588ff;
+   --accent-hover:#4de2ff; /* --accent-hover:#9588ff; */
 
     --neon:#4de2ff;
+    --small_text:#4de2ff;
+    --alternative: #35f239;
+    --available_color: #55d6a5;
+    --unavailable_color: #FF00FF;
+    --bg_icon: rgba(77,226,255,.1);
 
     --border:#2e3c60;
 
@@ -46,12 +51,17 @@
     --text-primary:#f8fafc;
     --text-secondary:#9ca3af;
 
-    --accent:#6366f1;
-    --accent-hover:#818cf8;
+    --accent:#050505;
+    --accent-hover:#9ca3af;
 
-    --neon:#818cf8;
+    --neon:#9ca3af;
+    --small_text:#9ca3af;
+    --alternative: #3a4a74;
+    --available_color: #2C6DEE;
+    --unavailable_color: #ff0040;
+    --bg_icon: rgba(77,226,255,.1);
 
-    --border:#2a2a34;
+    --border:#9ca3af; /* #2a2a34; */
 
     --shadow:
         0 15px 40px rgba(0,0,0,.5);
@@ -62,42 +72,72 @@
     --glow-cyan: rgba(77, 226, 255, .06);
     --glow-purple: rgba(124, 108, 255, .08);
 }
+.eclipse .navbar {
+    background: var(--bg-main);
+}
 
+.eclipse input {
+    background: rgba(255, 255, 255, .8);
+    color: var(--text-primary);
+}
+
+.eclipse .logo {
+    text-shadow: none;
+}
+
+.eclipse .logo:hover {
+    color: var(--alternative);
+}
+
+.eclipse .navbar nav a:hover {
+    box-shadow: 0 0 12px rgba(104, 84, 223, .12);
+}
+
+.eclipse .theme-btn {
+    color: var(--text-primary);
+}
 
 /* =========================
    TEMA AURORA - CLARO
 ========================= */
 
 .aurora {
-    --bg-main: #f3f5fb;
-    --bg-secondary: #e8edf7;
+    --bg-main: #F6F0E5;
+    --bg-secondary: #eead2c;
 
-    --card: #ffffff;
-    --card-hover: #f5f3ff;
+    --card: #FFFCF6;
+    --card-hover: #F2E9D9;
 
-    --text-primary: #20243a;
-    --text-secondary: #606981;
+    --text-primary: #5E5333;
+    --text-secondary: black; /* #766C55; */
 
-    --accent: #6854df;
-    --accent-hover: #8170f0;
+    --accent: #B55733;
+    --accent-hover: #984329;
 
-    --neon: #078ba8;
+    --neon: #eead2c;
+    --small_text: #ffffff;
+    --alternative: #eead2c;
+    --available_color: #2C6DEE;
+    --unavailable_color: #e7033c;
+    --higher_contrast: black;
+    --bg_icon: #b55733;
 
-    --border: #d9deed;
+    --border: #D3B486;
 
     --shadow: 0 10px 30px rgba(37, 45, 80, .10);
 
-    --recommend-button-start: #59c7c0;
-    --recommend-button-end: #5ab9b3;
+    --recommend-button-start: #B55733;
+    --recommend-button-end: #984329;
 
-    --glow-cyan: rgba(77, 226, 255, .16);
-    --glow-purple: rgba(124, 108, 255, .09);
+    --glow-cyan: rgba(181, 87, 51, .08);
+    --glow-purple: rgba(181, 87, 51, .08);
+
 }
 
 /* Ajustes específicos para el tema claro */
 
 .aurora .navbar {
-    background: rgba(255, 255, 255, .75);
+    background:#B55733;
 }
 
 .aurora input {
@@ -110,7 +150,7 @@
 }
 
 .aurora .logo:hover {
-    color: var(--accent);
+    color: var(--alternative);
 }
 
 .aurora .navbar nav a:hover {
@@ -158,8 +198,8 @@ body{
         ),
         linear-gradient(
             180deg,
-            var(--bg-main),
-            var(--bg-secondary)
+            var(--accent),
+            var(--alternative)
         );
 
     transition:
@@ -397,11 +437,11 @@ h2{
 ========================= */
 
 p{
-    color:var(--text-secondary);
+    color:var(--higher_contrast);
 
-    line-height:1.8;
+    line-height: 1.8;
 
-    max-width:700px;
+    max-width: 700px;
 }
 
 
@@ -563,16 +603,17 @@ input:focus{
     font-weight:700;
     letter-spacing:.12em;
     text-transform:uppercase;
-    color:var(--neon);
+    color:#ffffff;
 }
 
 .filter-panel h3 {
     margin:0;
     font-size:1.05rem;
+    color: #ffffff;
 }
 
 .clear-link {
-    color:var(--neon);
+    color:#ffffff;
     text-decoration:none;
     font-size:.8rem;
     font-weight:700;
@@ -700,7 +741,7 @@ input:focus{
     inset:0 auto auto 0;
     width:100%;
     height:4px;
-    background:linear-gradient(90deg, rgba(77,226,255,.6), rgba(124,108,255,.8));
+    background:linear-gradient(90deg, var(--accent), var(--accent-hover));
 }
 
 .featured-header {
@@ -1014,7 +1055,7 @@ input:focus{
     padding:.45rem .8rem;
     border:1px solid rgba(77,226,255,.2);
     border-radius:999px;
-    color:var(--neon);
+    color:var(--small_text);
     background:rgba(77,226,255,.08);
     font-size:.75rem;
     font-weight:800;
@@ -1115,6 +1156,7 @@ input:focus{
     align-items:start;
     gap:clamp(1.5rem, 4vw, 3rem);
     padding:clamp(1.5rem, 4vw, 2.5rem);
+    /* background-color: var(--neon); */
 }
 
 .game-detail-main {
@@ -1175,7 +1217,7 @@ input:focus{
     height:1.7rem;
     border-radius:10px;
     color:var(--neon);
-    background:rgba(77,226,255,.1);
+    background:var(--bg_icon);
     font-size:1.05rem;
 }
 
@@ -1274,11 +1316,11 @@ input:focus{
 }
 
 .game-detail-stock.is-available {
-    color:#55d6a5;
+    color:var(--available_color);
 }
 
 .game-detail-stock.is-unavailable {
-    color:#ff8c8c;
+    color:var(--unavailable_color);
 }
 
 .game-detail-purchase-divider {
@@ -1641,7 +1683,7 @@ input:focus{
 .game-detail-wishlist-button:hover,
 .game-detail-wishlist-button:focus-visible {
     border-color:rgba(255,195,77,.45);
-    color:#ffc34d;
+    color: #F9F018; /* #ffc34d; */
     background:rgba(255,195,77,.12);
 }
 
@@ -1995,10 +2037,6 @@ button:hover{
 #contador-usuarios {
     color: var(--neon);
     font-weight: 800;
-
-    text-shadow:
-        0 0 5px var(--neon),
-        0 0 10px var(--neon);
 
     flex-shrink: 0;
 }
