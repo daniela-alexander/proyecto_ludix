@@ -137,7 +137,7 @@
                 </p>
 
                 {% for item in library %}
-                <div class="profile-list-item">
+                <div class="profile-list-item" data-game-actions-for="{{ item.game.id }}">
                     <span class="game-icon">🎮</span>
                     <div>
                         <strong>{{ item.game.title }}</strong>
@@ -229,5 +229,9 @@
 
         </div>
 
+</section>
+
+<section class="activity-card">
+    {% include "juegos/personalised_recommendations.html" with recomendados=recomendados %}
 </section>
 {% endblock %}

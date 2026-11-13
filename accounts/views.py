@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
 
+import juegos
 from juegos.models import LibraryGame, UserProfile, Wishlist
 from .forms import RegisterForm
 
@@ -76,6 +77,8 @@ def profile_view(request):
     )[:5]
 
     orders = profile.orders.order_by("-created_at")[:5]
+    
+    recomendados = juegos.views.personalised_recommendations(request)
 
     context = {
         "profile": profile,
@@ -98,6 +101,7 @@ def profile_view(request):
         "total_pedidos": profile.orders.count(),
         "email_error": email_error,
         "email_success": email_success,
+        "recomendados": recomendados,
     }
 
     return render(request, "accounts/profile.html", context)

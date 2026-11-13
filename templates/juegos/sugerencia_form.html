@@ -166,7 +166,7 @@
             </div>
             <div id="results-container" class="results-grid">
                 {% for game in recomendaciones %}
-                    <article class="result-card">
+                    <article class="result-card" data-recommended-game-id="{{ game.id }}">
                         <div class="result-image">
                             🎲
                             {% comment %} cuando haya imagenes dejamos <img src="..."> {% endcomment %}
@@ -186,7 +186,7 @@
                                 <p>{% translate "No disponible actualmente" %}</p>
                             {% endif %}
 
-                            <div class="game-card-actions recommendation-game-actions">
+                            <div class="game-card-actions recommendation-game-actions" data-game-actions-for="{{ game.id }}">
                                 <a href="{% url 'game_shop' game.id %}"
                                    class="game-card-icon-button recommendation-shop-button"
                                    aria-label="{% translate 'Comprar juego' %}"

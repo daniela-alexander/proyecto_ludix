@@ -7,8 +7,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
-    BibliotecaJuego,
     Juego,
+    Mechanic,
     PerfilUsuario,
     SesionJuegoPropuesto,
     SesionSugerencia,
@@ -26,7 +26,12 @@ from .forms import (
     SugerenciaForm,
 )
 
-
+from django.shortcuts import render
+from .models import (
+    Game,
+    Category,
+    LibraryGame,
+)
 class GameListView(ListAPIView):
     queryset = Game.objects.all().order_by("id")
     serializer_class = GameSerializer
@@ -185,13 +190,16 @@ def home(request):
                 game_id__in=[game.id for game in games],
             ).values_list("game_id", flat=True)
         )
-
+    
+    recomendados = personalised_recommendations(request)
+    
     return render(
         request,
         "home.html",
         {
             "query": query,
             "games": games,
+            "recomendados": recomendados,
             "library_game_ids": library_game_ids,
             "favorite_game_ids": favorite_game_ids,
             "wishlist_game_ids": wishlist_game_ids,
@@ -249,6 +257,12 @@ def sugerencia_view(request):
             == SesionSugerencia.SuggestionType.LIBRARY
         ):
             juegos = juegos.filter(libraries__user_profile=perfil)
+        else:
+            juegos = juegos.exclude(
+                id__in=LibraryGame.objects.filter(
+                    user_profile=perfil,
+                ).values_list("game_id", flat=True)
+            )
 
         if criterios["tematica"]:
             juegos = juegos.filter(categories=criterios["tematica"])
@@ -278,12 +292,17 @@ def sugerencia_view(request):
             SesionSugerencia.objects.filter(host__user=request.user),
             pk=request.GET["session"],
         )
-        recomendaciones = [
-            proposal.game
-            for proposal in suggestion_session.proposed_games.select_related(
-                "game"
-            ).order_by("id")
-        ]
+        propuestas = suggestion_session.proposed_games.select_related(
+            "game"
+        ).order_by("id")
+        if (
+            suggestion_session.suggestion_type
+            == SesionSugerencia.SuggestionType.PURCHASE
+        ):
+            propuestas = propuestas.exclude(
+                game__libraries__user_profile__user=request.user
+            )
+        recomendaciones = [proposal.game for proposal in propuestas]
         form = SugerenciaForm(
             initial={
                 "tipo_sugerencia": suggestion_session.suggestion_type,
@@ -328,3 +347,50 @@ def sugerencia_view(request):
             "edad_mayor_de_18": EDAD_MAYOR_DE_18,
         },
     )
+
+@login_required
+def personalised_recommendations(request):
+
+    favoritos = Game.objects.filter(
+        libraries__user_profile__user=request.user,
+        libraries__favorite=True
+    )
+    
+    # print("FAVORITOS:", favoritos.count())
+    # for game in favoritos:
+    #     print(game.title)
+        
+    categorias = Category.objects.filter(
+        games__in=favoritos
+    ).distinct()
+
+    # print("CATEGORIAS:", categorias.count())
+    # for categoria in categorias:
+    #     print(categoria.name)
+        
+    mecanicas = Mechanic.objects.filter(
+        games__in=favoritos
+    ).distinct()
+    
+    recomendados = Game.objects.filter(
+        Q(categories__in=categorias) |
+        Q(mechanics__in=mecanicas)
+    ).exclude(
+        id__in=favoritos.values_list(
+            "id",
+            flat=True,
+        )
+    ).exclude(
+        id__in=LibraryGame.objects.filter(
+            user_profile__user=request.user,
+        ).values_list(
+            "game_id",
+            flat=True,
+        )
+    ).distinct()
+    
+    # print("RECOMENDADOS:", recomendados.count())
+    # for game in recomendados:
+    #     print(game.title)
+
+    return recomendados
