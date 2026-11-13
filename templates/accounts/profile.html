@@ -185,6 +185,42 @@
             </section>
 
             <section class="profile-card activity-card">
+                <h2>{% translate "Juegos que no me gustan" %}</h2>
+                <p class="profile-description">
+                    {% translate "Juegos que has marcado para ajustar tus recomendaciones." %}
+                </p>
+
+                {% for feedback in disliked_games %}
+                <div class="profile-list-item">
+                    <span class="game-icon" aria-hidden="true">👎</span>
+                    <div>
+                        <a href="{% url 'game_detail' feedback.game.id %}">
+                            <strong>{{ feedback.game.get_title }}</strong>
+                        </a>
+                    </div>
+                    <form
+                        method="post"
+                        action="{% url 'recommendation_feedback_remove' feedback.game.id %}"
+                        class="profile-feedback-remove-form"
+                    >
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button
+                            type="submit"
+                            class="profile-library-remove-button"
+                            aria-label="{% translate 'Quitar de No me gusta' %}"
+                            title="{% translate 'Quitar de No me gusta' %}"
+                        >−</button>
+                    </form>
+                </div>
+                {% empty %}
+                <p class="profile-empty">
+                    {% translate "Todavía no has marcado juegos que no te gusten." %}
+                </p>
+                {% endfor %}
+            </section>
+
+            <section class="profile-card activity-card">
                 <h2>{% translate "Últimas sesiones" %}</h2>
 
                 {% for session in sessions %}

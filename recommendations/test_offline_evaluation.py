@@ -190,6 +190,22 @@ class FavoriteHoldoutEvaluationTests(TestCase):
         self.assertTrue(set(first_recommendations).isdisjoint(favorite_ids))
         self.assertEqual(first_model.training_steps, second_model.training_steps)
 
+    def test_explicit_dislikes_are_trained_as_negative_feedback(self):
+        games = {
+            1: GameFeatures("Favorite", frozenset(), frozenset()),
+            2: GameFeatures("Disliked", frozenset(), frozenset()),
+            3: GameFeatures("Unseen", frozenset(), frozenset()),
+        }
+        model = train_implicit_factor_model(
+            favorites_by_user={1: frozenset({1})},
+            games=games,
+            epochs=100,
+            ignored_game_ids_by_user={1: frozenset({3})},
+            disliked_game_ids_by_user={1: frozenset({2})},
+        )
+
+        self.assertGreater(model.score(1, 3), model.score(1, 2))
+
     def test_database_prototype_is_read_only_and_excludes_library_games(self):
         library_count = LibraryGame.objects.filter(
             user_profile=self.user.profile,

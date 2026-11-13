@@ -1,8 +1,8 @@
-"""Small, in-memory BPR model for offline recommendation experiments.
+"""Small, in-memory BPR model for recommendation experiments.
 
 Unobserved games are sampled as ranking negatives; this does not mean users
-explicitly disliked them. The model is experimental and is not used by the web
-recommendation flow.
+explicitly disliked them. This model is experimental; the web flow trains it
+when content-based recommendations do not provide enough candidates.
 """
 
 import math
@@ -65,6 +65,7 @@ def train_implicit_factor_model(
     regularization: float = 0.02,
     random_seed: int = 17,
     ignored_game_ids_by_user: Mapping[int, AbstractSet[int]] | None = None,
+    disliked_game_ids_by_user: Mapping[int, AbstractSet[int]] | None = None,
 ) -> ImplicitFactorModel:
     if factors < 1:
         raise ValueError("factors must be at least 1")
@@ -97,6 +98,7 @@ def train_implicit_factor_model(
     }
 
     ignored_by_user = ignored_game_ids_by_user or {}
+    disliked_by_user = disliked_game_ids_by_user or {}
     training_pairs = []
     for user_id, favorite_ids in favorites_by_user.items():
         negatives = tuple(
@@ -106,10 +108,16 @@ def train_implicit_factor_model(
             and game_id not in ignored_by_user.get(user_id, frozenset())
         )
         if negatives:
-            training_pairs.extend(
-                (user_id, favorite_id, negatives)
-                for favorite_id in favorite_ids
+            explicit_negatives = (
+                disliked_by_user.get(user_id, frozenset())
+                & set(negatives)
             )
+            for favorite_id in favorite_ids:
+                training_pairs.append((user_id, favorite_id, negatives))
+                training_pairs.extend(
+                    (user_id, favorite_id, (disliked_id,))
+                    for disliked_id in explicit_negatives
+                )
     if not training_pairs:
         raise ValueError(
             "Training requires at least one favorite and one unobserved game"

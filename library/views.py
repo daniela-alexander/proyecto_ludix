@@ -6,6 +6,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
 from juegos.models import Game, LibraryGame, UserProfile, Wishlist
+from recommendations.models import RecommendationFeedback
 
 
 @login_required
@@ -43,6 +44,11 @@ def add_to_library(request, game_id):
     if "favorito" in request.POST:
         item.favorite = request.POST.get("favorito") in {"true", "1", "True"}
         item.save()
+        if item.favorite:
+            RecommendationFeedback.objects.filter(
+                user=request.user,
+                game=game,
+            ).delete()
 
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
         return JsonResponse({"game_id": game.id})
@@ -101,6 +107,11 @@ def toggle_favorite(request, game_id):
     if item is not None:
         item.favorite = not item.favorite
         item.save(update_fields=["favorite"])
+        if item.favorite:
+            RecommendationFeedback.objects.filter(
+                user=request.user,
+                game=game,
+            ).delete()
 
     if request.headers.get("x-requested-with") == "XMLHttpRequest":
         return JsonResponse({"game_id": game.id})

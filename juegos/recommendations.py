@@ -1,6 +1,8 @@
-from django.db.models import Q
+from django.db.models import Count, F, Q
+from django.db.models.functions import Lower
 
 from .models import Category, Game, LibraryGame, Mechanic, UserProfile
+from recommendations.models import RecommendationFeedback
 from recommendations.implicit_factor_model import (
     train_implicit_factor_model,
 )
@@ -8,30 +10,52 @@ from recommendations.hybrid_prototype import GameFeatures
 
 
 def build_content_recommendations(user):
-    favorites = Game.objects.filter(
-        libraries__user_profile__user=user,
-        libraries__favorite=True,
-    )
+    favorite_game_ids = LibraryGame.objects.filter(
+        user_profile__user=user,
+        favorite=True,
+    ).values("game_id")
     categories = Category.objects.filter(
-        games__in=favorites,
-    ).distinct()
+        games__libraries__user_profile__user=user,
+        games__libraries__favorite=True,
+    ).values("id").distinct()
     mechanics = Mechanic.objects.filter(
-        games__in=favorites,
-    ).distinct()
+        games__libraries__user_profile__user=user,
+        games__libraries__favorite=True,
+    ).values("id").distinct()
+    disliked_game_ids = RecommendationFeedback.objects.filter(
+        user=user,
+    ).values("game_id")
 
     return (
         Game.objects.filter(
-            Q(categories__in=categories) |
-            Q(mechanics__in=mechanics),
+            Q(categories__id__in=categories) |
+            Q(mechanics__id__in=mechanics),
         )
         .exclude(
-            id__in=favorites.values_list("id", flat=True),
+            id__in=favorite_game_ids,
         )
         .exclude(
             id__in=LibraryGame.objects.filter(
                 user_profile__user=user,
-            ).values_list("game_id", flat=True),
+            ).values("game_id"),
         )
+        .exclude(id__in=disliked_game_ids)
+        .annotate(
+            shared_category_count=Count(
+                "categories",
+                filter=Q(categories__id__in=categories),
+                distinct=True,
+            ),
+            shared_mechanic_count=Count(
+                "mechanics",
+                filter=Q(mechanics__id__in=mechanics),
+                distinct=True,
+            ),
+        )
+        .annotate(
+            content_score=F("shared_category_count") + F("shared_mechanic_count"),
+        )
+        .order_by("-content_score", Lower("title"), "id")
         .distinct()
     )
 
@@ -80,13 +104,36 @@ def build_factor_model_recommendations(
     if not any(all_game_ids - favorite_ids for favorite_ids in favorites_by_user.values()):
         return []
 
+    if collaborative_profile_ids is None:
+        feedback_rows = RecommendationFeedback.objects.filter(
+            user__profile__id__in=favorites_by_user,
+        ).exclude(
+            user__username__startswith="test_",
+        )
+    else:
+        feedback_rows = RecommendationFeedback.objects.filter(
+            user__profile__id__in=collaborative_profile_ids,
+        )
+    disliked_game_ids_by_user = {}
+    for profile_id, game_id in feedback_rows.values_list(
+        "user__profile__id",
+        "game_id",
+    ):
+        disliked_game_ids_by_user.setdefault(profile_id, set()).add(game_id)
+
     model = train_implicit_factor_model(
         favorites_by_user=favorites_by_user,
         games=game_features,
+        disliked_game_ids_by_user=disliked_game_ids_by_user,
     )
     excluded_game_ids = set(
         LibraryGame.objects.filter(
             user_profile=profile,
+        ).values_list("game_id", flat=True)
+    )
+    excluded_game_ids.update(
+        RecommendationFeedback.objects.filter(
+            user=user,
         ).values_list("game_id", flat=True)
     )
     return model.recommend(

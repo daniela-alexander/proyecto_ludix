@@ -891,6 +891,13 @@ input:focus{
     background:rgba(255,195,77,.14);
 }
 
+.game-card-dislike-button:hover,
+.game-card-dislike-button:focus-visible {
+    border-color:rgba(248,89,116,.45);
+    color:#ff6680;
+    background:rgba(248,89,116,.14);
+}
+
 .game-card-icon-button:focus-visible {
     outline:2px solid var(--neon);
     outline-offset:3px;
@@ -1624,6 +1631,14 @@ input:focus{
     border-color:rgba(255,195,77,.45);
     color:#ffc34d;
     background:rgba(255,195,77,.12);
+}
+
+.game-detail-dislike-button.is-active,
+.game-detail-dislike-button:hover,
+.game-detail-dislike-button:focus-visible {
+    border-color:rgba(248,89,116,.45);
+    color:#ff6680;
+    background:rgba(248,89,116,.12);
 }
 
 .game-detail-icon-button:focus-visible {
@@ -2467,7 +2482,8 @@ main:has(.register-page) {
     font-size: .8rem;
 }
 
-.profile-list-item > .profile-library-remove-form {
+.profile-list-item > .profile-library-remove-form,
+.profile-list-item > .profile-feedback-remove-form {
     flex:0 0 auto;
     width:auto;
     max-width:none;

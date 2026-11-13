@@ -2,10 +2,14 @@ from decimal import Decimal
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.http import require_POST
 
 from juegos.models import Game, LibraryGame, UserProfile
+from .models import RecommendationFeedback
 from juegos.recommendations import (
     build_content_recommendations,
     build_personalised_recommendations,
@@ -54,6 +58,50 @@ def recommendation_dashboard(request):
         ],
     }
     return JsonResponse(payload)
+
+
+@login_required
+@require_POST
+def dislike_recommendation(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    RecommendationFeedback.objects.get_or_create(
+        user=request.user,
+        game=game,
+    )
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
+    next_url = request.POST.get("next")
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return HttpResponseRedirect(next_url)
+    return HttpResponseRedirect(reverse("home"))
+
+
+@login_required
+@require_POST
+def remove_recommendation_feedback(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    RecommendationFeedback.objects.filter(
+        user=request.user,
+        game=game,
+    ).delete()
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
+    next_url = request.POST.get("next")
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return HttpResponseRedirect(next_url)
+    return HttpResponseRedirect(reverse("home"))
 
 
 @staff_member_required

@@ -33,6 +33,7 @@ from .models import (
     LibraryGame,
 )
 from .recommendations import build_personalised_recommendations
+from recommendations.models import RecommendationFeedback
 
 
 class GameListView(ListAPIView):
@@ -61,6 +62,7 @@ def game_detail(request, game_id):
     )
     library_entry = None
     is_in_wishlist = False
+    dislikes_game = False
     if request.user.is_authenticated:
         library_entry = LibraryGame.objects.filter(
             user_profile__user=request.user,
@@ -71,6 +73,10 @@ def game_detail(request, game_id):
                 user_profile__user=request.user,
                 game=game,
             ).exists()
+        dislikes_game = RecommendationFeedback.objects.filter(
+            user=request.user,
+            game=game,
+        ).exists()
 
     return render(
         request,
@@ -80,6 +86,7 @@ def game_detail(request, game_id):
             "is_in_library": library_entry is not None,
             "is_favorite": library_entry.favorite if library_entry else False,
             "is_in_wishlist": is_in_wishlist,
+            "dislikes_game": dislikes_game,
         },
     )
 

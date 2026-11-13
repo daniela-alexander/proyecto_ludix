@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from juegos.models import PerfilUsuario, Juego
+from juegos.models import Game, PerfilUsuario, Juego
 
 
 class RecommendationPreference(models.Model):
@@ -43,3 +43,28 @@ class RecommendationHistory(models.Model):
 
     def __str__(self):
         return f"{self.user.user.username} -> {self.juego.titulo}"
+
+
+class RecommendationFeedback(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="recommendation_feedback",
+    )
+    game = models.ForeignKey(
+        Game,
+        on_delete=models.CASCADE,
+        related_name="recommendation_feedback",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "game"],
+                name="unique_user_recommendation_feedback",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.user} no recomienda {self.game}"

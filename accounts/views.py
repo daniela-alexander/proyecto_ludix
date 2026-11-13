@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 
 import juegos
 from juegos.models import LibraryGame, UserProfile, Wishlist
+from recommendations.models import RecommendationFeedback
 from .forms import RegisterForm
 
 
@@ -71,6 +72,12 @@ def profile_view(request):
         .select_related("game")
         .order_by("-added_at")
     )
+    disliked_games = (
+        RecommendationFeedback.objects
+        .filter(user=request.user)
+        .select_related("game")
+        .order_by("-created_at")
+    )
 
     sessions = profile.suggestion_sessions.order_by(
         "-created_at"
@@ -88,6 +95,13 @@ def profile_view(request):
         "favorites": favorites[:6],
         "favoritos": favorites[:6],
         "wishlist": wishlist[:6],
+        "disliked_games": disliked_games,
+        "wishlist_game_ids": set(
+            Wishlist.objects.filter(user_profile=profile).values_list(
+                "game_id",
+                flat=True,
+            )
+        ),
         "sessions": sessions,
         "sesiones": sessions,
         "orders": orders,
