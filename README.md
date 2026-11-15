@@ -510,6 +510,22 @@ Por ejemplo:
 
 ```curl http://127.0.0.1:8000/api/juegos/```
 
+## Descargar imágenes de juegos
+
+Primero valida las URLs guardadas en los juegos sin guardar archivos ni cambiar la base de datos:
+
+```bash
+python manage.py download_game_images --dry-run
+```
+
+Cuando estés listo para descargarlas a `media/games/` y guardar sus rutas locales:
+
+```bash
+python manage.py download_game_images
+```
+
+El comando solo descarga imágenes de `placehold.co` y `upload.wikimedia.org`, los dominios incluidos en el JSON actual. Espera 3 segundos entre imágenes y se detiene si el servidor responde HTTP 403 o 429.
+
 # 📄 Paginación
 
 El endpoint de juegos utiliza paginación.
@@ -724,8 +740,6 @@ La planificación inicial divide el trabajo en diferentes áreas:
 | Usuarios      | Registro, login y autenticación       |
 | Base de datos | Migraciones, modelos y testing        |
 | Frontend      | React, formularios y conexión con API |
-
-
 
 
 
