@@ -6,7 +6,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.sqlite3
-media/
+media/avatars
 *.log
 .pytest_cache/
 __pycache__/
