@@ -40,7 +40,9 @@
 
 
 
-        <a href="{% url 'home' %}" class="logo">Ludix</a>
+        <a href="{% url 'home' %}" class="logo" aria-label="Ludix">
+            <img src="{% static 'img/ludix_transparente.png' %}" alt="Ludix" class="logo-img">
+        </a>
 
         <nav>
             {% if user.is_authenticated %}
