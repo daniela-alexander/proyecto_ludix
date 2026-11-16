@@ -1,8 +1,14 @@
+from io import BytesIO
+import tempfile
+
 from django.test import SimpleTestCase, TestCase
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import override_settings
 from django.urls import reverse
 from channels.testing import WebsocketCommunicator
 from django.utils.translation import override
+from PIL import Image
 
 from .forms import SugerenciaForm
 from .consumers import UsuariosConsumer
@@ -470,6 +476,7 @@ class GameDetailTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "game-detail-art-initial")
         self.assertContains(response, "Descripción completa del juego.")
         self.assertContains(response, "Aventura")
         self.assertContains(response, "Cooperación")
@@ -478,6 +485,27 @@ class GameDetailTests(TestCase):
             response,
             reverse("game_shop", kwargs={"game_id": self.game.id}),
         )
+
+    def test_detail_page_shows_uploaded_game_image(self):
+        image_bytes = BytesIO()
+        Image.new("RGB", (1, 1), color="purple").save(image_bytes, format="PNG")
+
+        with tempfile.TemporaryDirectory() as media_root:
+            with override_settings(MEDIA_ROOT=media_root):
+                self.game.image.save(
+                    "portada.png",
+                    SimpleUploadedFile(
+                        "portada.png",
+                        image_bytes.getvalue(),
+                        content_type="image/png",
+                    ),
+                )
+                response = self.client.get(
+                    reverse("game_detail", kwargs={"game_id": self.game.id})
+                )
+
+        self.assertContains(response, self.game.image.url)
+        self.assertContains(response, 'alt="Juego detallado"')
 
     def test_game_shop_page_shows_coming_soon_and_returns_to_game(self):
         response = self.client.get(
