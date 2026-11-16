@@ -1,6 +1,7 @@
 from django.db.models import Count, IntegerField, OuterRef, Q, Subquery, Sum, Value
 from django.db.models.functions import Coalesce
 from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
@@ -19,7 +20,6 @@ from .models import Category, Game, LibraryGame, Order, OrderLine, Wishlist
 from .serializers import GameSerializer, JuegoSerializer
 from .pagination import GamePagination, JuegoPagination
 
-from django.contrib.auth.decorators import login_required
 from .forms import (
     EDAD_FILTRO_MAYOR_DE_18,
     EDAD_MAYOR_DE_18,
@@ -32,6 +32,10 @@ from .models import (
     Category,
     LibraryGame,
 )
+from .recommendations import build_personalised_recommendations
+from recommendations.models import RecommendationFeedback
+
+
 class GameListView(ListAPIView):
     queryset = Game.objects.all().order_by("id")
     serializer_class = GameSerializer
@@ -58,6 +62,7 @@ def game_detail(request, game_id):
     )
     library_entry = None
     is_in_wishlist = False
+    dislikes_game = False
     if request.user.is_authenticated:
         library_entry = LibraryGame.objects.filter(
             user_profile__user=request.user,
@@ -68,6 +73,10 @@ def game_detail(request, game_id):
                 user_profile__user=request.user,
                 game=game,
             ).exists()
+        dislikes_game = RecommendationFeedback.objects.filter(
+            user=request.user,
+            game=game,
+        ).exists()
 
     return render(
         request,
@@ -77,6 +86,7 @@ def game_detail(request, game_id):
             "is_in_library": library_entry is not None,
             "is_favorite": library_entry.favorite if library_entry else False,
             "is_in_wishlist": is_in_wishlist,
+            "dislikes_game": dislikes_game,
         },
     )
 
@@ -191,7 +201,11 @@ def home(request):
             ).values_list("game_id", flat=True)
         )
     
-    recomendados = personalised_recommendations(request)
+    recomendados = (
+        personalised_recommendations(request)
+        if request.user.is_authenticated
+        else Game.objects.none()
+    )
     
     return render(
         request,
@@ -350,47 +364,4 @@ def sugerencia_view(request):
 
 @login_required
 def personalised_recommendations(request):
-
-    favoritos = Game.objects.filter(
-        libraries__user_profile__user=request.user,
-        libraries__favorite=True
-    )
-    
-    # print("FAVORITOS:", favoritos.count())
-    # for game in favoritos:
-    #     print(game.title)
-        
-    categorias = Category.objects.filter(
-        games__in=favoritos
-    ).distinct()
-
-    # print("CATEGORIAS:", categorias.count())
-    # for categoria in categorias:
-    #     print(categoria.name)
-        
-    mecanicas = Mechanic.objects.filter(
-        games__in=favoritos
-    ).distinct()
-    
-    recomendados = Game.objects.filter(
-        Q(categories__in=categorias) |
-        Q(mechanics__in=mecanicas)
-    ).exclude(
-        id__in=favoritos.values_list(
-            "id",
-            flat=True,
-        )
-    ).exclude(
-        id__in=LibraryGame.objects.filter(
-            user_profile__user=request.user,
-        ).values_list(
-            "game_id",
-            flat=True,
-        )
-    ).distinct()
-    
-    # print("RECOMENDADOS:", recomendados.count())
-    # for game in recomendados:
-    #     print(game.title)
-
-    return recomendados
+    return build_personalised_recommendations(request.user)

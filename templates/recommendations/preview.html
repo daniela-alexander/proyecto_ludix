@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Vista previa de recomendaciones | Ludix{% endblock %}
+
+{% block content %}
+<section class="recommendation-preview">
+    <header class="recommendation-preview-header">
+        <h1>Vista previa de recomendaciones</h1>
+        <p>Esta herramienta interna compara el sistema actual con un prototipo híbrido usando únicamente cuentas de prueba con nombre `test_*`. No cambia las recomendaciones de la web ni guarda resultados.</p>
+    </header>
+
+    {% if invalid_profile %}
+        <p role="alert">No se encontró el perfil seleccionado.</p>
+    {% else %}
+        <form method="get" class="recommendation-preview-selector">
+            <label for="profile">Perfil de prueba para la comparación</label>
+            <select id="profile" name="profile" required>
+                {% for profile in profiles %}
+                    <option value="{{ profile.id }}" {% if selected_profile.id == profile.id %}selected{% endif %}>
+                        {{ profile.user.username }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Comparar</button>
+        </form>
+
+        {% if selected_profile %}
+            <p class="recommendation-preview-note">
+                Perfil seleccionado: <strong>{{ selected_profile.user.username }}</strong>.
+                El prototipo mantiene primero las coincidencias por categorías y mecánicas; solo añade coincidencias colaborativas si hay menos de tres.
+            </p>
+
+            <div class="recommendation-preview-columns">
+                <section class="recommendation-preview-column">
+                    <h2>Sistema actual</h2>
+                    <p>Orden devuelto actualmente por la consulta.</p>
+                    {% if current_recommendations %}
+                        <ol>
+                            {% for game in current_recommendations %}
+                                <li>
+                                    <a href="{% url 'game_detail' game.id %}">{{ game.get_title }}</a>
+                                    {% if forloop.counter <= 3 %}<span class="recommendation-preview-top">Visible inicialmente</span>{% endif %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p>No se encontraron recomendaciones.</p>
+                    {% endif %}
+                </section>
+
+                <section class="recommendation-preview-column">
+                    <h2>Modelo ML entrenado (BPR)</h2>
+                    <p>Se entrena en memoria con favoritos de las cuentas test_* y completa las recomendaciones de contenido si faltan resultados. No se guarda el modelo.</p>
+                    {% if ml_recommendations %}
+                        <ol>
+                            {% for game in ml_recommendations %}
+                                <li>
+                                    <a href="{% url 'game_detail' game.id %}">{{ game.get_title }}</a>
+                                    {% if forloop.counter <= 3 %}<span class="recommendation-preview-top">Visible inicialmente</span>{% endif %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p>No se encontraron recomendaciones con los datos disponibles para entrenar.</p>
+                    {% endif %}
+                </section>
+            </div>
+        {% else %}
+            <p>No hay perfiles de prueba `test_*` disponibles para comparar.</p>
+        {% endif %}
+    {% endif %}
+</section>
+{% endblock %}

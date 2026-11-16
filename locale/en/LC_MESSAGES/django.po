@@ -646,6 +646,26 @@ msgstr "Remove from favorites"
 msgid "Añadir a favoritos"
 msgstr "Add to favorites"
 
+#: templates/juegos/personalised_recommendations.html
+msgid "No me gusta"
+msgstr "I don't like it"
+
+#: templates/juegos/game_detail.html templates/accounts/profile.html
+msgid "Quitar de No me gusta"
+msgstr "Remove dislike"
+
+#: templates/accounts/profile.html
+msgid "Juegos que no me gustan"
+msgstr "Games I don't like"
+
+#: templates/accounts/profile.html
+msgid "Juegos que has marcado para ajustar tus recomendaciones."
+msgstr "Games you've marked to fine-tune your recommendations."
+
+#: templates/accounts/profile.html
+msgid "Todavía no has marcado juegos que no te gusten."
+msgstr "You haven't marked any games as dislikes yet."
+
 #: templates/home.html:169 templates/home.html:170
 #: templates/juegos/game_detail.html:148
 #: templates/juegos/sugerencia_form.html:217

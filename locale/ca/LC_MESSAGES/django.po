@@ -649,6 +649,26 @@ msgstr "Treu dels preferits"
 msgid "Añadir a favoritos"
 msgstr "Afegeix als preferits"
 
+#: templates/juegos/personalised_recommendations.html
+msgid "No me gusta"
+msgstr "No m'agrada"
+
+#: templates/juegos/game_detail.html templates/accounts/profile.html
+msgid "Quitar de No me gusta"
+msgstr "Treu de No m'agrada"
+
+#: templates/accounts/profile.html
+msgid "Juegos que no me gustan"
+msgstr "Jocs que no m'agraden"
+
+#: templates/accounts/profile.html
+msgid "Juegos que has marcado para ajustar tus recomendaciones."
+msgstr "Jocs que has marcat per ajustar les teves recomanacions."
+
+#: templates/accounts/profile.html
+msgid "Todavía no has marcado juegos que no te gusten."
+msgstr "Encara no has marcat cap joc que no t'agradi."
+
 #: templates/home.html:169 templates/home.html:170
 #: templates/juegos/game_detail.html:148
 #: templates/juegos/sugerencia_form.html:217

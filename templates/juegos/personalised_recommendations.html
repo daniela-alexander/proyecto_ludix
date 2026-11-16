@@ -1,3 +1,4 @@
+{% load i18n %}
 {% block content %}
 
 <div class="recommendations-wrapper">
@@ -22,6 +23,39 @@
         {% for game in recomendados %}
 
             <article class="game-card" data-recommended-game-id="{{ game.id }}">
+                {% if user.is_authenticated %}
+                <div class="game-card-actions" data-game-actions-for="{{ game.id }}">
+                    <form
+                        method="post"
+                        action="{% if game.id in wishlist_game_ids %}{% url 'wishlist_remove' game.id %}{% else %}{% url 'wishlist_add' game.id %}{% endif %}"
+                        class="game-card-action-form"
+                    >
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button
+                            type="submit"
+                            class="game-card-icon-button game-card-wishlist-button{% if game.id in wishlist_game_ids %} is-active{% endif %}"
+                            aria-label="{% if game.id in wishlist_game_ids %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                            title="{% if game.id in wishlist_game_ids %}{% translate 'Quitar de la lista de deseos' %}{% else %}{% translate 'Añadir a la lista de deseos' %}{% endif %}"
+                            aria-pressed="{% if game.id in wishlist_game_ids %}true{% else %}false{% endif %}"
+                        >
+                            {% if game.id in wishlist_game_ids %}★{% else %}☆{% endif %}
+                        </button>
+                    </form>
+                    <form method="post" action="{% url 'recommendation_dislike' game.id %}" class="game-card-action-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button
+                            type="submit"
+                            class="game-card-icon-button game-card-dislike-button"
+                            aria-label="{% translate 'No me gusta' %}"
+                            title="{% translate 'No me gusta' %}"
+                        >
+                            <span aria-hidden="true">👎</span>
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
 
                 <span class="game-tag">
                     {% for category in game.categories.all|slice:":2" %}

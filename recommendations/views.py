@@ -1,9 +1,19 @@
 from decimal import Decimal
 
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.http import require_POST
 
-from juegos.models import LibraryGame, Game, UserProfile
+from juegos.models import Game, LibraryGame, UserProfile
+from .models import RecommendationFeedback
+from juegos.recommendations import (
+    build_content_recommendations,
+    build_personalised_recommendations,
+)
 
 
 def _build_filters(request):
@@ -48,3 +58,113 @@ def recommendation_dashboard(request):
         ],
     }
     return JsonResponse(payload)
+
+
+@login_required
+@require_POST
+def dislike_recommendation(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    RecommendationFeedback.objects.get_or_create(
+        user=request.user,
+        game=game,
+    )
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
+    next_url = request.POST.get("next")
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return HttpResponseRedirect(next_url)
+    return HttpResponseRedirect(reverse("home"))
+
+
+@login_required
+@require_POST
+def remove_recommendation_feedback(request, game_id):
+    game = get_object_or_404(Game, id=game_id)
+    RecommendationFeedback.objects.filter(
+        user=request.user,
+        game=game,
+    ).delete()
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        return JsonResponse({"game_id": game.id})
+
+    next_url = request.POST.get("next")
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url,
+        allowed_hosts={request.get_host()},
+        require_https=request.is_secure(),
+    ):
+        return HttpResponseRedirect(next_url)
+    return HttpResponseRedirect(reverse("home"))
+
+
+@staff_member_required
+def recommendation_preview(request):
+    profiles = UserProfile.objects.filter(
+        user__username__startswith="test_",
+    ).select_related("user").order_by("user__username")
+    collaborative_profile_ids = set(profiles.values_list("id", flat=True))
+    selected_profile_id = request.GET.get("profile")
+
+    if selected_profile_id:
+        try:
+            profile_id = int(selected_profile_id)
+        except ValueError:
+            profile_id = None
+
+        selected_profile = (
+            profiles.filter(pk=profile_id).first()
+            if profile_id is not None
+            else None
+        )
+        if selected_profile is None:
+            return render(
+                request,
+                "recommendations/preview.html",
+                {
+                    "profiles": profiles,
+                    "selected_profile": None,
+                    "current_recommendations": [],
+                    "hybrid_recommendations": [],
+                    "invalid_profile": True,
+                },
+                status=404,
+            )
+    else:
+        selected_profile = profiles.filter(
+            user=request.user,
+            library__favorite=True,
+        ).first()
+        if selected_profile is None:
+            selected_profile = profiles.filter(library__favorite=True).first()
+        if selected_profile is None:
+            selected_profile = profiles.filter(user=request.user).first()
+
+    current_recommendations = []
+    ml_recommendations = []
+    if selected_profile is not None:
+        current_recommendations = list(
+            build_content_recommendations(selected_profile.user)
+        )
+        ml_recommendations = build_personalised_recommendations(
+            selected_profile.user,
+            collaborative_profile_ids=collaborative_profile_ids,
+        )
+
+    return render(
+        request,
+        "recommendations/preview.html",
+        {
+            "profiles": profiles,
+            "selected_profile": selected_profile,
+            "current_recommendations": current_recommendations,
+            "ml_recommendations": ml_recommendations,
+            "invalid_profile": False,
+        },
+    )
