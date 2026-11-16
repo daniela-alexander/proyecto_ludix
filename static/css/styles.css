@@ -17,9 +17,9 @@
 
     --neon:#4de2ff;
     --small_text:#4de2ff;
-    --alternative: #35f239;
+    --alternative: #ca417f;
     --available_color: #55d6a5;
-    --unavailable_color: #FF00FF;
+    --unavailable_color: #8d248d;
     --bg_icon: rgba(77,226,255,.1);
 
     --border:#2e3c60;
@@ -220,7 +220,7 @@ body{
     justify-content:space-between;
     align-items:center;
 
-    padding:1rem 2rem;
+    padding:.55rem 1.25rem;
 
     backdrop-filter:blur(16px);
 
@@ -237,6 +237,9 @@ body{
 ========================= */
 
 .logo{
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
     text-decoration:none;
 
     color:var(--text-primary);
@@ -253,8 +256,30 @@ body{
     transition:.25s;
 }
 
+.logo-img{
+    display:block;
+    width:200px;
+    height:60px;
+    object-fit:contain;
+}
+
 .logo:hover{
     color:var(--accent-hover);
+}
+
+.logo:hover .logo-img{
+    transform:scale(1.04);
+}
+
+@media (max-width:768px){
+    .navbar{
+        padding:.5rem .85rem;
+    }
+
+    .logo-img{
+        width:108px;
+        height:40px;
+    }
 }
 
 
