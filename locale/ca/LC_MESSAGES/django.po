@@ -535,6 +535,10 @@ msgstr "Usuaris connectats"
 msgid "Bienvenido a Ludix"
 msgstr "Us donem la benvinguda a Ludix"
 
+#: templates/home.html:8
+msgid "Tu catálogo de juegos de mesa"
+msgstr "El teu catàleg de jocs de taula"
+
 #: templates/home.html:10
 msgid ""
 "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima "
@@ -542,6 +546,14 @@ msgid ""
 msgstr ""
 "Descobreix, compara i troba els millors jocs de taula per a la propera "
 "partida."
+
+#: templates/home.html:42
+msgid "¿No sabes qué jugar?"
+msgstr "No saps a què jugar?"
+
+#: templates/home.html:43
+msgid "Dinos cuántos sois y cuánto tiempo tenéis, y te sugerimos uno."
+msgstr "Digues-nos quants sou i quant temps teniu, i te'n suggerirem un."
 
 #: templates/home.html:14
 msgid "Buscar juegos"
@@ -619,6 +631,10 @@ msgstr "Resultats per a «%(query)s»"
 #: templates/home.html:108
 msgid "Juegos destacados"
 msgstr "Jocs destacats"
+
+#: templates/juegos/personalised_recommendations.html:7
+msgid "Recomendado para ti"
+msgstr "Recomanat per a tu"
 
 #: templates/home.html:120
 msgid "General"

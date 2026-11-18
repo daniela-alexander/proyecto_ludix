@@ -533,12 +533,24 @@ msgstr "Users online"
 msgid "Bienvenido a Ludix"
 msgstr "Welcome to Ludix"
 
+#: templates/home.html:8
+msgid "Tu catálogo de juegos de mesa"
+msgstr "Your board game catalog"
+
 #: templates/home.html:10
 msgid ""
 "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima "
 "partida."
 msgstr ""
 "Discover, compare, and find the best board games for your next game night."
+
+#: templates/home.html:42
+msgid "¿No sabes qué jugar?"
+msgstr "Not sure what to play?"
+
+#: templates/home.html:43
+msgid "Dinos cuántos sois y cuánto tiempo tenéis, y te sugerimos uno."
+msgstr "Tell us how many players you have and how much time you have, and we'll suggest a game."
 
 #: templates/home.html:14
 msgid "Buscar juegos"
@@ -616,6 +628,10 @@ msgstr "Results for \"%(query)s\""
 #: templates/home.html:108
 msgid "Juegos destacados"
 msgstr "Featured games"
+
+#: templates/juegos/personalised_recommendations.html:7
+msgid "Recomendado para ti"
+msgstr "Recommended for you"
 
 #: templates/home.html:120
 msgid "General"
