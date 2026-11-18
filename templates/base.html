@@ -346,6 +346,53 @@
             const etiquetaDado = menuSelectorDado.querySelector(".navbar-dice-picker-label");
             const opcionesDado = menuSelectorDado.querySelector(".navbar-dice-picker-options");
             const activadorDado = menuSelectorDado.querySelector("summary");
+            const lanzadorDado = menuSelectorDado.closest(".dado-container-dinamico");
+            let temporizadorCierreDado;
+
+            const expandirLanzadorDado = () => {
+                window.clearTimeout(temporizadorCierreDado);
+                lanzadorDado.classList.add("is-expanded");
+            };
+
+            const programarCierreLanzadorDado = () => {
+                window.clearTimeout(temporizadorCierreDado);
+                lanzadorDado.classList.add("is-expanded");
+                temporizadorCierreDado = window.setTimeout(() => {
+                    if (
+                        !lanzadorDado.matches(":hover")
+                        && !lanzadorDado.querySelector(":focus-visible")
+                    ) {
+                        lanzadorDado.classList.remove("is-expanded");
+                    }
+                }, 5000);
+            };
+
+            lanzadorDado.addEventListener("pointerenter", (evento) => {
+                if (evento.pointerType === "mouse") {
+                    expandirLanzadorDado();
+                }
+            });
+
+            lanzadorDado.addEventListener("pointerleave", (evento) => {
+                if (evento.pointerType === "mouse") {
+                    programarCierreLanzadorDado();
+                }
+            });
+
+            lanzadorDado.addEventListener("focusin", (evento) => {
+                if (evento.target.matches(":focus-visible")) {
+                    expandirLanzadorDado();
+                }
+            });
+
+            lanzadorDado.addEventListener("focusout", (evento) => {
+                if (!lanzadorDado.contains(evento.relatedTarget)) {
+                    programarCierreLanzadorDado();
+                }
+            });
+
+            programarCierreLanzadorDado();
+
             const botonesDado = Array.from(selectorDado.options).map((opcion) => {
                 const boton = document.createElement("button");
                 boton.type = "button";

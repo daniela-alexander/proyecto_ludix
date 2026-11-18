@@ -3888,6 +3888,11 @@ body .navbar .dado-container-dinamico #resultadoDado {
     line-height: 1;
 }
 
+body .navbar .dado-container-dinamico .navbar-dice-picker-label {
+    min-height: 0;
+    padding: 0;
+}
+
 body .navbar .dado-container-dinamico select,
 body .navbar .dado-container-dinamico span {
     min-height: 36px;
@@ -4700,4 +4705,90 @@ body .navbar .dado-container-dinamico .navbar-dice-picker-option[aria-pressed="t
 
 .navbar-actions .navbar-dice-picker-option svg[hidden] {
     display: none;
+}
+
+@keyframes dice-picker-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+    body .navbar .dado-container-dinamico {
+        width: max-content;
+        max-width: 54px;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: max-width 1s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    body .navbar .dado-container-dinamico:hover,
+    body .navbar .dado-container-dinamico.is-expanded {
+        max-width: min(460px, calc(100vw - 32px));
+        overflow: visible;
+    }
+
+    body .navbar .dado-container-dinamico .navbar-dice-picker-trigger {
+        width: max-content;
+        max-width: 44px;
+        min-width: 44px;
+        gap: 0;
+        justify-content: center;
+        padding: 0;
+        transition: max-width 1s ease, gap 1s ease, padding 1s ease;
+    }
+
+    .navbar-actions .navbar-dice-picker-label {
+        max-width: 0;
+        opacity: 0;
+        transition: max-width 1s ease, opacity 1s ease;
+    }
+
+    .navbar-actions .navbar-dice-picker-trigger .navbar-caret {
+        width: 0;
+        max-width: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: width 1s ease, max-width 1s ease, opacity 1s ease;
+    }
+
+    body .navbar .dado-container-dinamico:hover .navbar-dice-picker-trigger,
+    body .navbar .dado-container-dinamico.is-expanded .navbar-dice-picker-trigger {
+        max-width: 260px;
+        gap: 8px;
+        justify-content: flex-start;
+        padding: 4px 12px;
+    }
+
+    body .navbar .dado-container-dinamico:hover .navbar-dice-picker-label,
+    body .navbar .dado-container-dinamico.is-expanded .navbar-dice-picker-label {
+        max-width: 150px;
+        opacity: 1;
+    }
+
+    body .navbar .dado-container-dinamico:hover .navbar-dice-picker-trigger .navbar-caret,
+    body .navbar .dado-container-dinamico.is-expanded .navbar-dice-picker-trigger .navbar-caret {
+        width: 14px;
+        max-width: 14px;
+        opacity: 1;
+    }
+
+    body .navbar .dado-container-dinamico.is-expanded .navbar-dice-picker-trigger > svg:first-child {
+        animation: dice-picker-spin 1s ease-out;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body .navbar .dado-container-dinamico {
+        transition: none;
+    }
+
+    .navbar-actions .navbar-dice-picker-label,
+    .navbar-actions .navbar-dice-picker-trigger .navbar-caret {
+        transition: none;
+    }
+
+    body .navbar .dado-container-dinamico.is-expanded .navbar-dice-picker-trigger > svg:first-child {
+        animation: none;
+    }
 }
