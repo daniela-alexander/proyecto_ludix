@@ -22,13 +22,14 @@
                     {% translate "Juego de mesa" %}
                     {% endif %}
                 </span>
-                <h1>{{ game.get_title }}</h1>
-                <p class="game-detail-description">
-                    {% if game.get_description %}
-                    {{ game.get_description }}
-                    {% else %}
-                    {% translate "No hay descripción disponible para este juego." %}
-                    {% endif %}
+                <h1>{% translate game.get_title %}</h1>
+                    <p class="game-detail-description">
+                        {% if game.get_description %}
+                            {% translate game.get_description %}
+                        {% else %}
+                            {% translate "No hay descripción disponible para este juego." %}
+                        {% endif %}
+                    </p>
                 </p>
             </div>
             <div class="game-detail-art">

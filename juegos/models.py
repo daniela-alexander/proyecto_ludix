@@ -2,7 +2,7 @@ from decimal import Decimal
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.utils.translation import get_language
+from django.utils.translation import get_language, gettext
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -81,14 +81,14 @@ class Category(models.Model):
     
     def get_name(self):
         lang = (get_language() or "es").split("-")[0]
-    
         translations = {
             "en": self.name_en,
             "ca": self.name_ca,
             "it": self.name_it,
         }
-    
-        return translations.get(lang) or self.name
+        if translations.get(lang):
+            return translations[lang]
+        return gettext(self.name.strip()) if self.name else ""
 
     class Meta:
         db_table = "categoria"
@@ -172,25 +172,49 @@ class Game(models.Model):
 
     def get_title(self):
         lang = (get_language() or "es").split("-")[0]
-
         translations = {
             "en": self.title_en,
             "ca": self.title_ca,
             "it": self.title_it,
         }
-
-        return translations.get(lang) or self.title
+        if translations.get(lang):
+            return translations[lang]
+        return gettext(self.title.strip()) if self.title else ""
 
     def get_description(self):
         lang = (get_language() or "es").split("-")[0]
-
         translations = {
             "en": self.description_en,
             "ca": self.description_ca,
             "it": self.description_it,
         }
+        if translations.get(lang):
+            return translations[lang]
 
-        return translations.get(lang) or self.description
+        if not self.description:
+            return ""
+
+        # Como PostgreSQL guarda los campos del JSON unidos por saltos de línea,
+        # traducimos cada párrafo/etiqueta por separado para que coincida con el .po
+        texto = self.description.replace('\r\n', '\n')
+        lineas_traducidas = []
+
+        for linea in texto.split('\n'):
+            limpia = linea.strip()
+            if not limpia:
+                lineas_traducidas.append("")
+                continue
+
+            # Si la línea tiene prefijo tipo "Subcategoría: ..." o "Procedencia: ..."
+            if limpia.startswith(("Subcategoría:", "Procedencia:")):
+                etiqueta, valor = limpia.split(":", 1)
+                lineas_traducidas.append(f"{gettext(etiqueta.strip())}: {gettext(valor.strip())}")
+            elif limpia == "Instrucciones:":
+                lineas_traducidas.append(f"{gettext('Instrucciones')}:")
+            else:
+                lineas_traducidas.append(gettext(limpia))
+
+        return "\n".join(lineas_traducidas)
 
     min_players = models.PositiveIntegerField()
 
