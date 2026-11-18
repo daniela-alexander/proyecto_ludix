@@ -4097,7 +4097,7 @@ body .navbar .dado-container-dinamico #btnAbrirDado3D:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 14px;
+    font: 500 14px "Segoe UI", sans-serif;
 }
 
 .navbar-caret {
