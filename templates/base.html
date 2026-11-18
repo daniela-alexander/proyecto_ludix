@@ -13,72 +13,114 @@
 <body>
 
     <header class="navbar">
-        
-  <!-- 🎲 DADO VIRTUAL LUDIX -->
-   <!-- 2. 🎲 El Dado Virtual Dinámico sin estilos inline -->
-    <div class="dado-container-dinamico">
-        <select id="tipoDado">
-            <option value="4">d4</option>
-            <option value="6" selected>d6 (Tradicional)</option>
-            <option value="8">d8</option>
-            <option value="10">d10</option>
-            <option value="12">d12</option>
-            <option value="20">d20</option>
-            <option value="letras">Letras (A-Z)</option>
-        </select>
-
-        <button id="btnLanzar" onclick="lanzarDadoVirtual()">
-            🎲 Tirar
-        </button>
-
-        <span id="resultadoDado">-</span>
-    </div>
-
-  <!-- Aquí continuará el código original de vuestra barra (logos, menús, etc.) -->
-
-
-
-
-
         <a href="{% url 'home' %}" class="logo" aria-label="Ludix">
             <img src="{% static 'img/ludix_transparente.png' %}" alt="Ludix" class="logo-img">
         </a>
 
-        <nav>
-            {% if user.is_authenticated %}
-            <span class="user-name">
-                {% blocktranslate trimmed with username=user.username %}Hola, {{ username }}{% endblocktranslate %}
-            </span>
-            <a href="{% url 'profile' %}">{% translate "Mi perfil" %}</a>
-            <a href="{% url 'chat:inbox' %}">{% translate "Mensajes" %}</a>
-            {% if user.is_staff %}
-            <a href="{% url 'recommendation_preview' %}">Comparar recomendaciones</a>
-            {% endif %}
-            <form method="post" action="{% url 'logout' %}" class="logout-form">
-                {% csrf_token %}
-                <button type="submit" class="logout-button">{% translate "Cerrar sesión" %}</button>
-            </form>
-            {% else %}
-            <a href="{% url 'login' %}">{% translate "Iniciar sesión" %}</a>
-            <a href="{% url 'register' %}">{% translate "Crear cuenta" %}</a>
-            {% endif %}
-            <form method="post" action="{% url 'set_language' %}" class="language-form">
-                {% csrf_token %}
-                <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                <label for="language-select">🌎</label>
-                <select id="language-select" name="language" onchange="this.form.submit()">
-                    {% get_current_language as CURRENT_LANGUAGE %}
-                    {% get_available_languages as AVAILABLE_LANGUAGES %}
-                    {% for language_code, language_name in AVAILABLE_LANGUAGES %}
-                    <option value="{{ language_code }}" {% if language_code == CURRENT_LANGUAGE %}selected{% endif %}>
-                        {{ language_name }}
-                    </option>
-                    {% endfor %}
+        <div class="navbar-actions">
+            <div class="dado-container-dinamico">
+                <select id="tipoDado" aria-label="{% translate 'Tipo de dado' %}">
+                    <option value="4">d4</option>
+                    <option value="6" selected>d6 (Tradicional)</option>
+                    <option value="8">d8</option>
+                    <option value="10">d10</option>
+                    <option value="12">d12</option>
+                    <option value="20">d20</option>
+                    <option value="letras">Letras (A-Z)</option>
                 </select>
-            </form>
+
+                <button id="btnLanzar" type="button" onclick="lanzarDadoVirtual()">
+                    🎲 {% translate "Tirar" %}
+                </button>
+
+                <span id="resultadoDado" aria-live="polite">-</span>
+            </div>
+
+            <nav aria-label="{% translate 'Navegación principal' %}">
+            {% if user.is_authenticated %}
+            <a href="{% url 'chat:inbox' %}" class="navbar-icon-link"
+                aria-label="{% translate 'Mensajes' %}" title="{% translate 'Mensajes' %}">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="m3 7 9 6 9-6"></path>
+                </svg>
+                <span class="sr-only">{% translate "Mensajes" %}</span>
+            </a>
+            {% if user.is_staff %}
+            <a href="{% url 'recommendation_preview' %}" class="navbar-staff-link">Comparar recomendaciones</a>
+            {% endif %}
+            <details class="navbar-account">
+                <summary class="navbar-account-trigger"
+                    aria-label="{% blocktranslate trimmed with username=user.username %}Menú de cuenta de {{ username }}{% endblocktranslate %}">
+                    <span class="navbar-avatar" aria-hidden="true">{{ user.username|first|upper }}</span>
+                    <span class="navbar-account-name">{{ user.username }}</span>
+                    <svg class="navbar-caret" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </summary>
+                <div class="navbar-account-menu">
+                    <a href="{% url 'profile' %}" class="navbar-menu-item">{% translate "Mi perfil" %}</a>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="navbar-menu-item logout-button">{% translate "Cerrar sesión" %}</button>
+                    </form>
+                </div>
+            </details>
+            {% else %}
+            <a href="{% url 'login' %}" class="navbar-secondary-link">{% translate "Iniciar sesión" %}</a>
+            <a href="{% url 'register' %}" class="navbar-primary-link">{% translate "Crear cuenta" %}</a>
+            {% endif %}
+            {% get_current_language as CURRENT_LANGUAGE %}
+            {% get_available_languages as AVAILABLE_LANGUAGES %}
+            <details class="navbar-language">
+                <summary class="navbar-language-trigger" aria-label="{% translate 'Idioma' %}">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"></path>
+                    </svg>
+                    <span class="navbar-language-name">
+                        {% for language_code, language_name in AVAILABLE_LANGUAGES %}
+                        {% if language_code == CURRENT_LANGUAGE %}{{ language_name }}{% endif %}
+                        {% endfor %}
+                    </span>
+                    <svg class="navbar-caret" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </summary>
+                <div class="navbar-language-menu">
+                    <form method="post" action="{% url 'set_language' %}" class="navbar-language-options">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        {% for language_code, language_name in AVAILABLE_LANGUAGES %}
+                        <button type="submit" name="language" value="{{ language_code }}"
+                            class="navbar-language-option" {% if language_code == CURRENT_LANGUAGE %}aria-current="true"{% endif %}>
+                            <span>{{ language_name }}</span>
+                            {% if language_code == CURRENT_LANGUAGE %}
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="m5 12 4 4L19 6"></path>
+                            </svg>
+                            {% endif %}
+                        </button>
+                    {% endfor %}
+                    </form>
+                </div>
+            </details>
             <button id="theme-toggle" class="theme-btn" type="button" aria-label="{% translate 'Cambiar tema' %}"
-                data-current-theme-prefix="{% translate 'Tema actual' %}">🌙</button>
-        </nav>
+                data-current-theme-prefix="{% translate 'Tema actual' %}" data-theme="nebula">
+                <svg class="theme-icon theme-icon-nebula" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path>
+                </svg>
+                <svg class="theme-icon theme-icon-eclipse" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="7"></circle>
+                    <path d="M3 12c2.4-3 15.6-3 18 0-2.4 3-15.6 3-18 0z"></path>
+                </svg>
+                <svg class="theme-icon theme-icon-aurora" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+                </svg>
+            </button>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -150,7 +192,7 @@
         const btn = document.getElementById("theme-toggle");
         const body = document.body;
         const temas = ["", "eclipse", "aurora"];
-        const iconos = ["🌗", "🌑", "☀️"];
+        const iconos = ["nebula", "eclipse", "aurora"];
         const nombres = ["Nebula", "Eclipse", "Aurora"];
         const claveTema = "ludix-theme";
         const temaGuardado = Number.parseInt(
@@ -173,7 +215,7 @@
             }
 
             if (btn) {
-                btn.textContent = iconos[indice];
+                btn.dataset.theme = iconos[indice];
                 const etiqueta = `${btn.dataset.currentThemePrefix}: ${nombres[indice]}`;
                 btn.setAttribute("aria-label", etiqueta);
                 btn.setAttribute("title", etiqueta);
@@ -189,6 +231,86 @@
         }
 
         aplicarTema(temaActual);
+
+        const menuCuenta = document.querySelector(".navbar-account");
+        if (menuCuenta) {
+            const activadorCuenta = menuCuenta.querySelector("summary");
+            let abiertoPorHover = false;
+
+            menuCuenta.addEventListener("pointerenter", (evento) => {
+                if (evento.pointerType !== "touch") {
+                    abiertoPorHover = true;
+                    menuCuenta.open = true;
+                }
+            });
+
+            menuCuenta.addEventListener("pointerleave", (evento) => {
+                if (evento.pointerType !== "touch") {
+                    abiertoPorHover = false;
+                    menuCuenta.open = false;
+                }
+            });
+
+            menuCuenta.addEventListener("click", (evento) => {
+                if (abiertoPorHover && activadorCuenta.contains(evento.target)) {
+                    evento.preventDefault();
+                }
+            });
+
+            document.addEventListener("click", (evento) => {
+                if (!menuCuenta.contains(evento.target)) {
+                    abiertoPorHover = false;
+                    menuCuenta.open = false;
+                }
+            });
+
+            document.addEventListener("keydown", (evento) => {
+                if (evento.key === "Escape" && menuCuenta.open) {
+                    menuCuenta.open = false;
+                    menuCuenta.querySelector("summary").focus();
+                }
+            });
+        }
+
+        const menuIdioma = document.querySelector(".navbar-language");
+        if (menuIdioma) {
+            const activadorIdioma = menuIdioma.querySelector("summary");
+            let idiomaAbiertoPorHover = false;
+
+            menuIdioma.addEventListener("pointerenter", (evento) => {
+                if (evento.pointerType !== "touch") {
+                    idiomaAbiertoPorHover = true;
+                    menuIdioma.open = true;
+                }
+            });
+
+            menuIdioma.addEventListener("pointerleave", (evento) => {
+                if (evento.pointerType !== "touch") {
+                    idiomaAbiertoPorHover = false;
+                    menuIdioma.open = false;
+                }
+            });
+
+            menuIdioma.addEventListener("click", (evento) => {
+                if (idiomaAbiertoPorHover && activadorIdioma.contains(evento.target)) {
+                    evento.preventDefault();
+                }
+            });
+
+            document.addEventListener("click", (evento) => {
+                if (!menuIdioma.contains(evento.target)) {
+                    idiomaAbiertoPorHover = false;
+                    menuIdioma.open = false;
+                }
+            });
+
+            document.addEventListener("keydown", (evento) => {
+                if (evento.key === "Escape" && menuIdioma.open) {
+                    menuIdioma.open = false;
+                    menuIdioma.querySelector("summary").focus();
+                }
+            });
+        }
     </script>
 
 

@@ -2,29 +2,52 @@
 {% load i18n %}
 {% block content %}
 
-<form method="get" action="{% url 'home' %}" class="search-form">
+<div class="home-hero-layout">
     <section class="hero-card">
-        <div class="hero-copy">
-            <h1>{% translate "Bienvenido a Ludix" %}</h1>
-
-            <p>{% translate "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida." %}</p>
-        </div>
-
-        <div class="search-main">
-            <label for="q">{% translate "Buscar juegos" %}</label>
-            <div class="search-row">
-                <input id="q" name="q" type="search" value="{{ query }}"
-                    placeholder="{% translate 'Busca por título, categoría o mecánica' %}">
-                <button type="submit" class="search-button">{% translate "Buscar" %}</button>
+        <div class="hero-main">
+            <div class="hero-copy">
+                <span class="hero-kicker">{% translate "Tu catálogo de juegos de mesa" %}</span>
+                <h1>{% translate "Bienvenido a Ludix" %}</h1>
+                <p>{% translate "Descubre, compara y encuentra los mejores juegos de mesa para tu próxima partida." %}</p>
             </div>
 
-            <div class="search-row recommendation-row">
-                <a class="recommendation-button" href="{% url 'sugerencia' %}">{% translate "¡Recomiéndame un juego!" %}</a>
-            </div>
-            
+            <form method="get" action="{% url 'home' %}" class="search-form">
+                <div class="search-main">
+                    <label for="q">{% translate "Buscar juegos" %}</label>
+                    <div class="search-row">
+                        <input id="q" name="q" type="search" value="{{ query }}"
+                            placeholder="{% translate 'Busca por título, categoría o mecánica' %}">
+                        <button type="submit" class="search-button">{% translate "Buscar" %}</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
-</form>
+
+    <aside class="hero-recommendation" aria-labelledby="hero-recommendation-title">
+        <svg class="hero-dice-illustration" viewBox="0 0 150 110" aria-hidden="true" focusable="false">
+            <g transform="rotate(-14 45 60)">
+                <rect x="12" y="28" width="64" height="64" rx="16" fill="var(--neon)"></rect>
+                <circle cx="30" cy="46" r="5" fill="var(--bg-main)"></circle>
+                <circle cx="58" cy="46" r="5" fill="var(--bg-main)"></circle>
+                <circle cx="44" cy="60" r="5" fill="var(--bg-main)"></circle>
+                <circle cx="30" cy="74" r="5" fill="var(--bg-main)"></circle>
+                <circle cx="58" cy="74" r="5" fill="var(--bg-main)"></circle>
+            </g>
+            <g transform="rotate(12 105 55)">
+                <rect x="76" y="14" width="58" height="58" rx="15" fill="var(--alternative)"></rect>
+                <circle cx="93" cy="31" r="5" fill="var(--card)"></circle>
+                <circle cx="117" cy="55" r="5" fill="var(--card)"></circle>
+                <circle cx="105" cy="43" r="5" fill="var(--card)"></circle>
+            </g>
+        </svg>
+        <h2 id="hero-recommendation-title">{% translate "¿No sabes qué jugar?" %}</h2>
+        <p>{% translate "Dinos cuántos sois y cuánto tiempo tenéis, y te sugerimos uno." %}</p>
+        <a class="recommendation-button hero-recommendation-button" href="{% url 'sugerencia' %}">
+            {% translate "¡Recomiéndame un juego!" %}
+        </a>
+    </aside>
+</div>
 
     {% if user.is_authenticated %}
     <section>
@@ -119,25 +142,44 @@
                 <div class="game-grid">
                     {% for game in games %}
                     <article class="game-card">
-                        <span class="game-tag">
-                            {% for category in game.categories.all|slice:":2" %}
-                            {{ category.get_name }}{% if not forloop.last %}, {% endif %}
-                            {% empty %}
-                            {% translate "General" %}
-                            {% endfor %}
-                        </span>
-
-                        <h3>{{ game.get_title }}</h3>
-                        <p>{{ game.get_description|truncatechars:120 }}</p>
-
-                        <div class="game-meta">
-                            <span>{% blocktranslate trimmed with min=game.min_players max=game.max_players %}{{ min }}-{{ max }} jugadores{% endblocktranslate %}</span>
-                            <span>{{ game.duration_minutes }} min</span>
+                        <a class="game-card-link" href="{% url 'game_detail' game.id %}"
+                            aria-label="{{ game.get_title }}"></a>
+                        <div class="game-card-art">
+                            {% if game.image %}
+                            <img src="{{ game.image.url }}" alt="" loading="lazy">
+                            {% else %}
+                            <span class="game-card-art-initial" aria-hidden="true">{{ game.get_title|first|upper }}</span>
+                            {% endif %}
+                            <span class="game-tag">
+                                {% for category in game.categories.all|slice:":1" %}
+                                {{ category.get_name }}
+                                {% empty %}
+                                {% translate "General" %}
+                                {% endfor %}
+                            </span>
                         </div>
 
-                        <div class="game-footer">
-                            <strong>{{ game.price }} €</strong>
-                            <a href="{% url 'game_detail' game.id %}">{% translate "Ver juego" %}</a>
+                        <div class="game-card-body">
+                            <h3>{{ game.get_title }}</h3>
+
+                            <div class="game-meta">
+                                <span class="game-meta-item"
+                                    aria-label="{% blocktranslate trimmed with min=game.min_players max=game.max_players %}{{ min }}-{{ max }} jugadores{% endblocktranslate %}">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="8" r="4"></circle>
+                                        <path d="M5 21a7 7 0 0 1 14 0"></path>
+                                    </svg>
+                                    <span aria-hidden="true">{{ game.min_players }}–{{ game.max_players }}</span>
+                                </span>
+                                <span class="game-meta-item"
+                                    aria-label="{% blocktranslate trimmed with duration=game.duration_minutes %}{{ duration }} minutos{% endblocktranslate %}">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M12 7v5l3 2"></path>
+                                    </svg>
+                                    <span aria-hidden="true">{{ game.duration_minutes }} min</span>
+                                </span>
+                            </div>
                         </div>
 
                         {% if user.is_authenticated %}
