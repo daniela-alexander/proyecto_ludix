@@ -576,7 +576,8 @@ document.addEventListener("submit", async (event) => {
     let currentRotX = -22;
     let currentRotY = 28;
     let isRolling = false;
-    let historialTiradas = [];
+    let historialTiradas = JSON.parse(sessionStorage.getItem("ludix_historial_dados")) || [];
+
 
     // Asegurar margen superior e inferior en la ventana modal
     if (modal && modal.firstElementChild) {
@@ -615,6 +616,7 @@ document.addEventListener("submit", async (event) => {
     clearHistBtn.style.cssText = "background: none; border: none; color: #94a3b8; font-size: 0.8rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.6; display: none;";
     clearHistBtn.addEventListener("click", () => {
       historialTiradas = [];
+      sessionStorage.removeItem("ludix_historial_dados");
       renderizarHistorial();
     });
 
@@ -643,13 +645,37 @@ document.addEventListener("submit", async (event) => {
         historialLista.appendChild(badge);
       });
     }
+    renderizarHistorial();
     // ---------------------------------------------------
 
     openBtn.addEventListener("click", () => {
-      selectModal.value = selectHeader.value;
-      actualizarAparienciaDado(selectModal.value);
+      if (historialTiradas.length > 0 && historialTiradas.dado) {
+        const ultimaTirada = historialTiradas;
+        const tipoGuardado = ultimaTirada.dado === "A-Z" ? "letras" : String(ultimaTirada.dado).replace("d", "");
+
+        if (selectModal) selectModal.value = tipoGuardado;
+        if (selectHeader) selectHeader.value = tipoGuardado;
+
+        // Solo regeneramos las caras si el cubo está vacío (ej. al recargar página), sin repetir el número ganador en todas
+        if (!faces.textContent) {
+          actualizarAparienciaDado(tipoGuardado);
+        }
+
+        // Ponemos el número ganador ÚNICAMENTE en la cara frontal (sin tocar las otras 5)
+        if (tipoGuardado !== "6") {
+          faces.textContent = ultimaTirada.valor;
+        }
+        if (resultText) resultText.textContent = `✨ Resultado (${ultimaTirada.dado}): ${ultimaTirada.valor}`;
+      } else {
+        selectModal.value = selectHeader.value;
+        actualizarAparienciaDado(selectModal.value);
+      }
+
       modal.style.display = "flex";
     });
+
+
+
 
     closeBtn.addEventListener("click", () => modal.style.display = "none");
     modal.addEventListener("click", (e) => {
@@ -661,23 +687,46 @@ document.addEventListener("submit", async (event) => {
       actualizarAparienciaDado(selectModal.value);
     });
 
+      // 1. Pone números fijos en las 6 caras según el tipo de dado elegido
     function actualizarAparienciaDado(tipo) {
-      if (tipo === "6") {
+      const t = String(tipo).toLowerCase().replace("d", "").trim();
+
+      if (t === "6") {
         cube.classList.remove("rol-mode");
-        const carasClasicas = ["6", "1", "3", "4", "5", "2"];
+        const carasClasicas = ["1", "6", "3", "4", "5", "2"];
         faces.forEach((f, i) => f.textContent = carasClasicas[i]);
       } else {
         cube.classList.add("rol-mode");
-        faces.forEach(f => f.textContent = tipo === "letras" ? "A-Z" : `d${tipo}`);
+        const valoresUnicos = [];
+        let intentos = 0; // Seguro anti-congelamiento
+
+        while (valoresUnicos.length < 6 && intentos < 100) {
+          intentos++;
+          const val = String(calcularResultado(tipo));
+          if (!valoresUnicos.includes(val)) {
+            valoresUnicos.push(val);
+          }
+        }
+
+        // Si por algún motivo quedara algún hueco, lo rellenamos sin bloquear
+        while (valoresUnicos.length < 6) {
+          valoresUnicos.push(String(valoresUnicos.length + 1));
+        }
+
+        faces.forEach((f, i) => f.textContent = valoresUnicos[i]);
       }
     }
 
+
     function calcularResultado(tipo) {
-      if (tipo === "letras") {
+      const t = String(tipo).toLowerCase().trim();
+      if (t === "letras" || t === "abc" || t === "a-z") {
         const alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return alfabeto[Math.floor(Math.random() * alfabeto.length)];
       }
-      const max = parseInt(tipo, 10);
+      // Quitamos la letra "d" por si el HTML envía "d8", "d20", etc.
+      const max = parseInt(t.replace("d", ""), 10);
+      if (isNaN(max) || max < 2) return 1;
       return Math.floor(Math.random() * max) + 1;
     }
 
@@ -689,39 +738,57 @@ document.addEventListener("submit", async (event) => {
 
       const tipo = selectModal.value;
       const etiquetaDado = tipo === "letras" ? "A-Z" : `d${tipo}`;
-      const resultado = calcularResultado(tipo);
       resultText.textContent = "🎲 ...";
 
-      const vueltasX = (Math.floor(Math.random() * 3) + 3) * 360;
-      const vueltasY = (Math.floor(Math.random() * 3) + 3) * 360;
+      // Si es d4, d8, d20, etc., preparamos las 6 caras antes de arrancar para que el resultado real esté en una de ellas
+      if (tipo !== "6") {
+        actualizarAparienciaDado(tipo);
+      }
 
-      currentRotX += vueltasX;
-      currentRotY += vueltasY;
+      // Elegimos al azar cuál de las 6 caras (índice 0 al 5) va a ganar
+      const indiceGanador = Math.floor(Math.random() * 6);
+      const resultado = faces[indiceGanador].textContent;
 
-      const finalX = currentRotX - (currentRotX % 360);
-      const finalY = currentRotY - (currentRotY % 360);
-      currentRotX = finalX;
-      currentRotY = finalY;
+      // Ángulos exactos para dejar cada cara mirando al frente:
+      // 0: Front (0,0) | 1: Back (0,180) | 2: Right (0,-90) | 3: Left (0,90) | 4: Top (-90,0) | 5: Bottom (90,0)
+      const rotacionesCaras = [
+        { x: 0, y: 0 },     // Cara 0 (Frontal)
+        { x: 0, y: 180 },   // Cara 1 (Trasera)
+        { x: 0, y: -90 },   // Cara 2 (Derecha)
+        { x: 0, y: 90 },    // Cara 3 (Izquierda)
+        { x: -90, y: 0 },   // Cara 4 (Superior)
+        { x: 90, y: 0 }     // Cara 5 (Inferior)
+      ];
 
-      setTimeout(() => {
-        faces.textContent = resultado;
-      }, 600);
+      const objetivo = rotacionesCaras[indiceGanador];
 
-      cube.style.transform = `rotateX(${finalX}deg) rotateY(${finalY}deg)`;
+      // Sumamos vueltas completas (múltiplos de 360) a la rotación actual para que gire fluido
+      const vueltasExtraX = (Math.floor(Math.random() * 2) + 3) * 360;
+      const vueltasExtraY = (Math.floor(Math.random() * 2) + 3) * 360;
 
+      const baseX = currentRotX - (currentRotX % 360);
+      const baseY = currentRotY - (currentRotY % 360);
+
+      currentRotX = baseX + vueltasExtraX + objetivo.x;
+      currentRotY = baseY + vueltasExtraY + objetivo.y;
+
+      cube.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+
+      // Al terminar la animación (1.6s), mostramos el texto y guardamos en historial
       setTimeout(() => {
         reproducirSonidoCampana();
         resultText.textContent = `✨ Resultado (${etiquetaDado}): ${resultado}`;
         if (resultadoHeader) resultadoHeader.textContent = resultado;
 
-        // Guardar máximo 5 últimas tiradas para mantenerlo minimalista
-        historialTiradas.unshift({ valor: resultado, dado: etiquetaDado });
+        historialTiradas.unshift({ dado: etiquetaDado, valor: resultado });
         if (historialTiradas.length > 5) historialTiradas.pop();
+        sessionStorage.setItem("ludix_historial_dados", JSON.stringify(historialTiradas));
         renderizarHistorial();
 
         isRolling = false;
       }, 1600);
     }
+
 
     rollBtn.addEventListener("click", lanzarDado3D);
     sceneTrigger.addEventListener("click", lanzarDado3D);
