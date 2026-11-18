@@ -18,23 +18,29 @@
         </a>
 
         <div class="navbar-actions">
-            <div class="dado-container-dinamico">
-                <select id="tipoDado" aria-label="{% translate 'Tipo de dado' %}">
-                    <option value="4">d4</option>
-                    <option value="6" selected>d6 (Tradicional)</option>
-                    <option value="8">d8</option>
-                    <option value="10">d10</option>
-                    <option value="12">d12</option>
-                    <option value="20">d20</option>
-                    <option value="letras">Letras (A-Z)</option>
-                </select>
+  
+          <div class="dado-container-dinamico">
+              <select id="tipoDado" aria-label="{% translate 'Tipo de dado' %}">
+                  <option value="4">d4</option>
+                  <option value="6" selected>d6 (Tradicional)</option>
+                  <option value="8">d8</option>
+                  <option value="10">d10</option>
+                  <option value="12">d12</option>
+                  <option value="20">d20</option>
+                  <option value="letras">{% translate "Letras (A-Z)" %}</option>
+              </select>
 
-                <button id="btnLanzar" type="button" onclick="lanzarDadoVirtual()">
-                    🎲 {% translate "Tirar" %}
-                </button>
+              <button id="btnLanzar" type="button" onclick="lanzarDadoVirtual()">
+                  🎲 {% translate "Tirar" %}
+              </button>
 
-                <span id="resultadoDado" aria-live="polite">-</span>
-            </div>
+              <span id="resultadoDado" aria-live="polite">-</span>
+
+      <!-- Botón para abrir el Dado 3D Gigante -->
+      <button type="button" id="btnAbrirDado3D" title="Abrir Dado 3D Gigante" style="margin-left: 6px; cursor: pointer;">
+          ⛶ 3D
+      </button>
+          </div>
 
             <nav aria-label="{% translate 'Navegación principal' %}">
             {% if user.is_authenticated %}
@@ -424,6 +430,493 @@ document.addEventListener("submit", async (event) => {
         if (submitButton?.isConnected) submitButton.disabled = false;
     }
 });
+</script>
+
+
+
+
+<!-- ==================== MODAL POP-UP DADO 3D GIGANTE ==================== -->
+<div id="ludix-dice-modal" class="dice-modal-overlay" style="display: none;">
+  <div class="dice-modal-content">
+    <button type="button" id="close-dice-modal" class="dice-close-btn" aria-label="Cerrar">&times;</button>
+    
+    <h2 class="dice-modal-title">🎲 {% translate "Lanzador 3D Ludix" %}</h2>
+
+    <!-- Selector sincronizado con el del header -->
+    <div class="dice-modal-controls">
+      <label for="tipoDadoModal" style="color: #e2e8f0; margin-right: 8px;">{% translate "Tipo de dado:" %}</label>
+      <select id="tipoDadoModal" class="dice-modal-select">
+        <option value="4">d4 (Tetraedro)</option>
+        <option value="6" selected>d6 (Cubo Tradicional)</option>
+        <option value="8">d8 (Octaedro)</option>
+        <option value="10">d10 (Decaedro)</option>
+        <option value="12">d12 (Dodecaedro)</option>
+        <option value="20">d20 (Icosaedro)</option>
+        <option value="letras">{% translate "Letras (A-Z)" %}</option>
+      </select>
+    </div>
+
+    <!-- ESCENA 3D GIGANTE -->
+    <div class="dice-scene" id="dice-scene-trigger" title="Haz clic en el dado para lanzar">
+      <div class="dice-cube" id="dice-cube">
+        <div class="dice-face face-1" data-face="1">6</div>
+        <div class="dice-face face-2" data-face="2">1</div>
+        <div class="dice-face face-3" data-face="3">3</div>
+        <div class="dice-face face-4" data-face="4">4</div>
+        <div class="dice-face face-5" data-face="5">5</div>
+        <div class="dice-face face-6" data-face="6">2</div>
+      </div>
+    </div>
+
+    <button type="button" id="roll-dice-3d-btn" class="dice-action-btn">
+      🎲 {% translate "¡Lanzar Dado!" %}
+    </button>
+
+    <div id="dice-3d-result-text" class="dice-result-banner">
+      {% translate "Haz clic en el dado o en el botón" %}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Overlay oscuro con desenfoque */
+  .dice-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    animation: fadeInModal 0.25s ease-out;
+  }
+
+  @keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .dice-modal-content {
+    position: relative;
+    background: #1e293b;
+    border: 2px solid #334155;
+    border-radius: 24px;
+    padding: 40px 30px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  }
+
+  .dice-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 2.2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .dice-close-btn:hover { color: #ffffff; }
+
+  .dice-modal-title {
+    color: #ffffff;
+    margin: 0 0 20px 0;
+    font-size: 1.8rem;
+  }
+
+  .dice-modal-controls {
+    margin-bottom: 45px;
+  }
+
+  .dice-modal-select {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  /* Contenedor 3D Gigante (210px) */
+  .dice-scene {
+    width: 210px;
+    height: 210px;
+    margin: 0 auto 45px auto;
+    perspective: 900px;
+    cursor: pointer;
+  }
+
+  .dice-cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1.6s cubic-bezier(0.18, 0.89, 0.32, 1.15);
+    transform: rotateX(-22deg) rotateY(28deg);
+  }
+
+  .dice-face {
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    background: linear-gradient(145deg, #ffffff, #e2e8f0);
+    border: 4px solid #cbd5e1;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5.5rem;
+    font-weight: 900;
+    color: #0f172a;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.15);
+    user-select: none;
+    transition: border-radius 0.4s, background 0.4s, color 0.4s;
+  }
+
+  /* Estilo especial según tipo de dado (poliédrico / rol) */
+  .dice-cube.rol-mode .dice-face {
+    background: linear-gradient(145deg, #4f46e5, #312e81);
+    border-color: #818cf8;
+    color: #ffffff;
+    border-radius: 45px;
+  }
+
+  /* Posicionamiento 3D de las 6 caras (mitad de 210px = 105px) */
+  .face-1 { transform: rotateY(0deg) translateZ(105px); }
+  .face-2 { transform: rotateY(180deg) translateZ(105px); }
+  .face-3 { transform: rotateY(90deg) translateZ(105px); }
+  .face-4 { transform: rotateY(-90deg) translateZ(105px); }
+  .face-5 { transform: rotateX(90deg) translateZ(105px); }
+  .face-6 { transform: rotateX(-90deg) translateZ(105px); }
+
+  .dice-action-btn {
+    background: #6366f1;
+    color: #ffffff;
+    border: none;
+    padding: 14px 36px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.45);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .dice-action-btn:hover {
+    background: #4f46e5;
+    transform: scale(1.05);
+  }
+
+  .dice-result-banner {
+    color: #fbbf24;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 22px;
+    min-height: 32px;
+  }
+</style>
+
+
+<script>
+  // 1. CONFIGURACIÓN DEL SISTEMA DE SONIDO
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  let sonidoActivo = true;
+
+  function reproducirSonidoDado() {
+    if (!sonidoActivo) return;
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const ahora = audioCtx.currentTime;
+    const cantidadRebotes = 9;
+
+    for (let i = 0; i < cantidadRebotes; i++) {
+      const tiempoGolpe = ahora + Math.pow(i / cantidadRebotes, 1.5) * 1.45;
+      const duracion = 0.045;
+
+      const osc = audioCtx.createOscillator();
+      const ganancia = audioCtx.createGain();
+
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(140 + Math.random() * 120, tiempoGolpe);
+      osc.frequency.exponentialRampToValueAtTime(45, tiempoGolpe + duracion);
+
+      const volumen = (1 - (i / cantidadRebotes) * 0.65) * 0.35;
+      ganancia.gain.setValueAtTime(volumen, tiempoGolpe);
+      ganancia.gain.exponentialRampToValueAtTime(0.001, tiempoGolpe + duracion);
+
+      osc.connect(ganancia);
+      ganancia.connect(audioCtx.destination);
+      osc.start(tiempoGolpe);
+      osc.stop(tiempoGolpe + duracion);
+    }
+  }
+
+  function reproducirSonidoCampana() {
+    if (!sonidoActivo) return;
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const ahora = audioCtx.currentTime;
+    const notas = [1046.50, 1318.51];
+
+    notas.forEach((frecuencia, index) => {
+      const inicio = ahora + index * 0.06;
+      const osc = audioCtx.createOscillator();
+      const ganancia = audioCtx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(frecuencia, inicio);
+
+      ganancia.gain.setValueAtTime(0.001, inicio);
+      ganancia.gain.linearRampToValueAtTime(0.22, inicio + 0.02);
+      ganancia.gain.exponentialRampToValueAtTime(0.0001, inicio + 0.75);
+
+      osc.connect(ganancia);
+      ganancia.connect(audioCtx.destination);
+      osc.start(inicio);
+      osc.stop(inicio + 0.75);
+    });
+  }
+
+  // 2. LÓGICA DEL DADO 3D Y BARRA MINIMALISTA
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("ludix-dice-modal");
+    const openBtn = document.getElementById("btnAbrirDado3D");
+    const closeBtn = document.getElementById("close-dice-modal");
+    const cube = document.getElementById("dice-cube");
+    const rollBtn = document.getElementById("roll-dice-3d-btn");
+    const sceneTrigger = document.getElementById("dice-scene-trigger");
+    const resultText = document.getElementById("dice-3d-result-text");
+    const faces = cube.querySelectorAll(".dice-face");
+
+    const selectHeader = document.getElementById("tipoDado");
+    const selectModal = document.getElementById("tipoDadoModal");
+    const resultadoHeader = document.getElementById("resultadoDado");
+
+    let currentRotX = -22;
+    let currentRotY = 28;
+    let isRolling = false;
+    let historialTiradas = JSON.parse(sessionStorage.getItem("ludix_historial_dados")) || [];
+
+
+    // Asegurar margen superior e inferior en la ventana modal
+    if (modal && modal.firstElementChild) {
+      modal.style.padding = "20px";
+      modal.firstElementChild.style.maxHeight = "90vh";
+      modal.firstElementChild.style.overflowY = "auto";
+    }
+
+    // --- BARRA INFERIOR COMPACTA EN UNA SOLA LÍNEA ---
+    const barraMinimal = document.createElement("div");
+    barraMinimal.style.cssText = "margin: 10px auto 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; max-width: 310px; padding: 5px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);";
+;
+
+    // Botón de silencio minimalista (solo icono)
+    const muteBtn = document.createElement("button");
+    muteBtn.type = "button";
+    muteBtn.title = "Silenciar / Activar sonido";
+    muteBtn.textContent = "🔊";
+    muteBtn.style.cssText = "background: none; border: none; font-size: 0.95rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.9; transition: 0.2s;";
+    muteBtn.addEventListener("click", () => {
+      sonidoActivo = !sonidoActivo;
+      muteBtn.textContent = sonidoActivo ? "🔊" : "🔇";
+      muteBtn.style.opacity = sonidoActivo ? "0.9" : "0.45";
+    });
+
+    // Lista horizontal compacta (máximo 5 últimas tiradas)
+    const historialLista = document.createElement("div");
+    historialLista.style.cssText = "display: flex; align-items: center; justify-content: center; gap: 5px; flex: 1; overflow: hidden; font-size: 0.78rem; color: #94a3b8;";
+    historialLista.textContent = "Sin tiradas previas";
+
+    // Botón discreto para limpiar (icono papelera/X)
+    const clearHistBtn = document.createElement("button");
+    clearHistBtn.type = "button";
+    clearHistBtn.title = "Limpiar historial";
+    clearHistBtn.textContent = "✕";
+    clearHistBtn.style.cssText = "background: none; border: none; color: #94a3b8; font-size: 0.8rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.6; display: none;";
+    clearHistBtn.addEventListener("click", () => {
+      historialTiradas = [];
+      sessionStorage.removeItem("ludix_historial_dados");
+      renderizarHistorial();
+    });
+
+    barraMinimal.appendChild(muteBtn);
+    barraMinimal.appendChild(historialLista);
+    barraMinimal.appendChild(clearHistBtn);
+
+    if (resultText && resultText.parentNode) {
+      resultText.parentNode.insertBefore(barraMinimal, resultText.nextSibling);
+    }
+
+    function renderizarHistorial() {
+      historialLista.innerHTML = "";
+      if (historialTiradas.length === 0) {
+        historialLista.textContent = "Sin tiradas previas";
+        clearHistBtn.style.display = "none";
+        return;
+      }
+      clearHistBtn.style.display = "inline-block";
+      historialTiradas.forEach((item, idx) => {
+        const badge = document.createElement("span");
+        const esUltimo = idx === 0;
+        badge.style.cssText = `padding: 1px 7px; border-radius: 999px; font-weight: 700; font-size: 0.75rem; white-space: nowrap; background: ${esUltimo ? "rgba(250, 204, 21, 0.2)" : "rgba(255, 255, 255, 0.08)"}; color: ${esUltimo ? "#fde047" : "#cbd5e1"};`;
+        badge.textContent = `${item.valor}`;
+        badge.title = `Dado ${item.dado}`;
+        historialLista.appendChild(badge);
+      });
+    }
+    renderizarHistorial();
+    // ---------------------------------------------------
+
+    openBtn.addEventListener("click", () => {
+      if (historialTiradas.length > 0 && historialTiradas.dado) {
+        const ultimaTirada = historialTiradas;
+        const tipoGuardado = ultimaTirada.dado === "A-Z" ? "letras" : String(ultimaTirada.dado).replace("d", "");
+
+        if (selectModal) selectModal.value = tipoGuardado;
+        if (selectHeader) selectHeader.value = tipoGuardado;
+
+        // Solo regeneramos las caras si el cubo está vacío (ej. al recargar página), sin repetir el número ganador en todas
+        if (!faces.textContent) {
+          actualizarAparienciaDado(tipoGuardado);
+        }
+
+        // Ponemos el número ganador ÚNICAMENTE en la cara frontal (sin tocar las otras 5)
+        if (tipoGuardado !== "6") {
+          faces.textContent = ultimaTirada.valor;
+        }
+        if (resultText) resultText.textContent = `✨ Resultado (${ultimaTirada.dado}): ${ultimaTirada.valor}`;
+      } else {
+        selectModal.value = selectHeader.value;
+        actualizarAparienciaDado(selectModal.value);
+      }
+
+      modal.style.display = "flex";
+    });
+
+
+
+
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+
+    selectModal.addEventListener("change", () => {
+      selectHeader.value = selectModal.value;
+      actualizarAparienciaDado(selectModal.value);
+    });
+
+      // 1. Pone números fijos en las 6 caras según el tipo de dado elegido
+    function actualizarAparienciaDado(tipo) {
+      const t = String(tipo).toLowerCase().replace("d", "").trim();
+
+      if (t === "6") {
+        cube.classList.remove("rol-mode");
+        const carasClasicas = ["1", "6", "3", "4", "5", "2"];
+        faces.forEach((f, i) => f.textContent = carasClasicas[i]);
+      } else {
+        cube.classList.add("rol-mode");
+        const valoresUnicos = [];
+        let intentos = 0; // Seguro anti-congelamiento
+
+        while (valoresUnicos.length < 6 && intentos < 100) {
+          intentos++;
+          const val = String(calcularResultado(tipo));
+          if (!valoresUnicos.includes(val)) {
+            valoresUnicos.push(val);
+          }
+        }
+
+        // Si por algún motivo quedara algún hueco, lo rellenamos sin bloquear
+        while (valoresUnicos.length < 6) {
+          valoresUnicos.push(String(valoresUnicos.length + 1));
+        }
+
+        faces.forEach((f, i) => f.textContent = valoresUnicos[i]);
+      }
+    }
+
+
+    function calcularResultado(tipo) {
+      const t = String(tipo).toLowerCase().trim();
+      if (t === "letras" || t === "abc" || t === "a-z") {
+        const alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        return alfabeto[Math.floor(Math.random() * alfabeto.length)];
+      }
+      // Quitamos la letra "d" por si el HTML envía "d8", "d20", etc.
+      const max = parseInt(t.replace("d", ""), 10);
+      if (isNaN(max) || max < 2) return 1;
+      return Math.floor(Math.random() * max) + 1;
+    }
+
+    function lanzarDado3D() {
+      if (isRolling) return;
+      isRolling = true;
+
+      reproducirSonidoDado();
+
+      const tipo = selectModal.value;
+      const etiquetaDado = tipo === "letras" ? "A-Z" : `d${tipo}`;
+      resultText.textContent = "🎲 ...";
+
+      // Si es d4, d8, d20, etc., preparamos las 6 caras antes de arrancar para que el resultado real esté en una de ellas
+      if (tipo !== "6") {
+        actualizarAparienciaDado(tipo);
+      }
+
+      // Elegimos al azar cuál de las 6 caras (índice 0 al 5) va a ganar
+      const indiceGanador = Math.floor(Math.random() * 6);
+      const resultado = faces[indiceGanador].textContent;
+
+      // Ángulos exactos para dejar cada cara mirando al frente:
+      // 0: Front (0,0) | 1: Back (0,180) | 2: Right (0,-90) | 3: Left (0,90) | 4: Top (-90,0) | 5: Bottom (90,0)
+      const rotacionesCaras = [
+        { x: 0, y: 0 },     // Cara 0 (Frontal)
+        { x: 0, y: 180 },   // Cara 1 (Trasera)
+        { x: 0, y: -90 },   // Cara 2 (Derecha)
+        { x: 0, y: 90 },    // Cara 3 (Izquierda)
+        { x: -90, y: 0 },   // Cara 4 (Superior)
+        { x: 90, y: 0 }     // Cara 5 (Inferior)
+      ];
+
+      const objetivo = rotacionesCaras[indiceGanador];
+
+      // Sumamos vueltas completas (múltiplos de 360) a la rotación actual para que gire fluido
+      const vueltasExtraX = (Math.floor(Math.random() * 2) + 3) * 360;
+      const vueltasExtraY = (Math.floor(Math.random() * 2) + 3) * 360;
+
+      const baseX = currentRotX - (currentRotX % 360);
+      const baseY = currentRotY - (currentRotY % 360);
+
+      currentRotX = baseX + vueltasExtraX + objetivo.x;
+      currentRotY = baseY + vueltasExtraY + objetivo.y;
+
+      cube.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
+
+      // Al terminar la animación (1.6s), mostramos el texto y guardamos en historial
+      setTimeout(() => {
+        reproducirSonidoCampana();
+        resultText.textContent = `✨ Resultado (${etiquetaDado}): ${resultado}`;
+        if (resultadoHeader) resultadoHeader.textContent = resultado;
+
+        historialTiradas.unshift({ dado: etiquetaDado, valor: resultado });
+        if (historialTiradas.length > 5) historialTiradas.pop();
+        sessionStorage.setItem("ludix_historial_dados", JSON.stringify(historialTiradas));
+        renderizarHistorial();
+
+        isRolling = false;
+      }, 1600);
+    }
+
+
+    rollBtn.addEventListener("click", lanzarDado3D);
+    sceneTrigger.addEventListener("click", lanzarDado3D);
+  });
 </script>
 
 </body>
