@@ -20,7 +20,29 @@
         <div class="navbar-actions">
   
           <div class="dado-container-dinamico">
-              <select id="tipoDado" aria-label="{% translate 'Tipo de dado' %}">
+              <details class="navbar-dice-picker">
+                  <summary class="navbar-dice-picker-trigger">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+                          <circle cx="8" cy="8" r="1"></circle>
+                          <circle cx="16" cy="8" r="1"></circle>
+                          <circle cx="12" cy="12" r="1"></circle>
+                          <circle cx="8" cy="16" r="1"></circle>
+                          <circle cx="16" cy="16" r="1"></circle>
+                      </svg>
+                      <span class="navbar-dice-picker-label">d6 (Tradicional)</span>
+                      <span class="sr-only">{% translate "Tipo de dado" %}</span>
+                      <svg class="navbar-caret" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="m6 9 6 6 6-6"></path>
+                      </svg>
+                  </summary>
+                  <div class="navbar-dice-picker-menu">
+                      <div class="navbar-dice-picker-options" role="group"
+                          aria-label="{% translate 'Tipo de dado' %}"></div>
+                  </div>
+              </details>
+
+              <select id="tipoDado" hidden aria-hidden="true" tabindex="-1">
                   <option value="4">d4</option>
                   <option value="6" selected>d6 (Tradicional)</option>
                   <option value="8">d8</option>
@@ -317,6 +339,77 @@
                 }
             });
         }
+
+        const selectorDado = document.getElementById("tipoDado");
+        const menuSelectorDado = document.querySelector(".navbar-dice-picker");
+        if (selectorDado && menuSelectorDado) {
+            const etiquetaDado = menuSelectorDado.querySelector(".navbar-dice-picker-label");
+            const opcionesDado = menuSelectorDado.querySelector(".navbar-dice-picker-options");
+            const activadorDado = menuSelectorDado.querySelector("summary");
+            const botonesDado = Array.from(selectorDado.options).map((opcion) => {
+                const boton = document.createElement("button");
+                boton.type = "button";
+                boton.className = "navbar-language-option navbar-dice-picker-option";
+                boton.setAttribute("aria-pressed", "false");
+
+                const texto = document.createElement("span");
+                texto.textContent = opcion.textContent.trim();
+                boton.appendChild(texto);
+
+                const marca = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                marca.setAttribute("viewBox", "0 0 24 24");
+                marca.setAttribute("aria-hidden", "true");
+                marca.setAttribute("hidden", "");
+                const trazo = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                trazo.setAttribute("d", "m5 12 4 4L19 6");
+                marca.appendChild(trazo);
+                boton.appendChild(marca);
+
+                boton.addEventListener("click", () => {
+                    selectorDado.value = opcion.value;
+                    selectorDado.dispatchEvent(new Event("change", { bubbles: true }));
+                    menuSelectorDado.open = false;
+                    activadorDado.focus();
+                });
+
+                opcionesDado.appendChild(boton);
+                return { boton, marca, opcion };
+            });
+
+            const actualizarSelectorDado = () => {
+                const opcionSeleccionada = Array.from(selectorDado.options)
+                    .find((opcion) => opcion.value === selectorDado.value);
+                if (opcionSeleccionada) {
+                    etiquetaDado.textContent = opcionSeleccionada.textContent.trim();
+                }
+
+                botonesDado.forEach(({ boton, marca, opcion }) => {
+                    const seleccionado = opcion.value === selectorDado.value;
+                    boton.setAttribute("aria-pressed", String(seleccionado));
+                    if (seleccionado) {
+                        marca.removeAttribute("hidden");
+                    } else {
+                        marca.setAttribute("hidden", "");
+                    }
+                });
+            };
+
+            selectorDado.addEventListener("change", actualizarSelectorDado);
+            actualizarSelectorDado();
+
+            document.addEventListener("click", (evento) => {
+                if (!menuSelectorDado.contains(evento.target)) {
+                    menuSelectorDado.open = false;
+                }
+            });
+
+            document.addEventListener("keydown", (evento) => {
+                if (evento.key === "Escape" && menuSelectorDado.open) {
+                    menuSelectorDado.open = false;
+                    activadorDado.focus();
+                }
+            });
+        }
     </script>
 
 
@@ -444,7 +537,7 @@ document.addEventListener("submit", async (event) => {
 
     <!-- Selector sincronizado con el del header -->
     <div class="dice-modal-controls">
-      <label for="tipoDadoModal" style="color: #e2e8f0; margin-right: 8px;">{% translate "Tipo de dado:" %}</label>
+      <label for="tipoDadoModal" class="dice-modal-label">{% translate "Tipo de dado:" %}</label>
       <select id="tipoDadoModal" class="dice-modal-select">
         <option value="4">d4 (Tetraedro)</option>
         <option value="6" selected>d6 (Cubo Tradicional)</option>
@@ -479,11 +572,12 @@ document.addEventListener("submit", async (event) => {
 </div>
 
 <style>
-  /* Overlay oscuro con desenfoque */
+  /* Fondo con desenfoque para el modal */
   .dice-modal-overlay {
     position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.9);
+    background: color-mix(in srgb, var(--bg-main) 86%, transparent);
     backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
@@ -499,14 +593,15 @@ document.addEventListener("submit", async (event) => {
 
   .dice-modal-content {
     position: relative;
-    background: #1e293b;
-    border: 2px solid #334155;
+    background: var(--card);
+    border: 2px solid var(--border);
     border-radius: 24px;
     padding: 40px 30px;
     max-width: 480px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    color: var(--text-primary);
+    box-shadow: var(--shadow);
   }
 
   .dice-close-btn {
@@ -515,16 +610,16 @@ document.addEventListener("submit", async (event) => {
     right: 20px;
     background: none;
     border: none;
-    color: #94a3b8;
+    color: var(--text-secondary);
     font-size: 2.2rem;
     cursor: pointer;
     line-height: 1;
     transition: color 0.2s;
   }
-  .dice-close-btn:hover { color: #ffffff; }
+  .dice-close-btn:hover { color: var(--text-primary); }
 
   .dice-modal-title {
-    color: #ffffff;
+    color: var(--text-primary);
     margin: 0 0 20px 0;
     font-size: 1.8rem;
   }
@@ -533,14 +628,30 @@ document.addEventListener("submit", async (event) => {
     margin-bottom: 45px;
   }
 
+  .dice-modal-label {
+    color: var(--text-secondary);
+    margin-right: 8px;
+  }
+
   .dice-modal-select {
     padding: 8px 14px;
     border-radius: 10px;
-    border: 1px solid #475569;
-    background: #0f172a;
-    color: #ffffff;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text-primary);
     font-size: 1rem;
     cursor: pointer;
+  }
+
+  .dice-modal-select option {
+    background: var(--card);
+    color: var(--text-primary);
+  }
+
+  .dice-modal-select:focus-visible {
+    border-color: var(--accent-hover);
+    outline: 2px solid var(--accent-hover);
+    outline-offset: 2px;
   }
 
   /* Contenedor 3D Gigante (210px) */
@@ -565,15 +676,15 @@ document.addEventListener("submit", async (event) => {
     position: absolute;
     width: 210px;
     height: 210px;
-    background: linear-gradient(145deg, #ffffff, #e2e8f0);
-    border: 4px solid #cbd5e1;
+    background: linear-gradient(145deg, var(--card-hover), var(--card));
+    border: 4px solid var(--accent-hover);
     border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 5.5rem;
     font-weight: 900;
-    color: #0f172a;
+    color: var(--text-primary);
     box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.15);
     user-select: none;
     transition: border-radius 0.4s, background 0.4s, color 0.4s;
@@ -581,9 +692,9 @@ document.addEventListener("submit", async (event) => {
 
   /* Estilo especial según tipo de dado (poliédrico / rol) */
   .dice-cube.rol-mode .dice-face {
-    background: linear-gradient(145deg, #4f46e5, #312e81);
-    border-color: #818cf8;
-    color: #ffffff;
+    background: linear-gradient(145deg, var(--card-hover), var(--card));
+    border-color: var(--accent-hover);
+    color: var(--text-primary);
     border-radius: 45px;
   }
 
@@ -596,24 +707,29 @@ document.addEventListener("submit", async (event) => {
   .face-6 { transform: rotateX(-90deg) translateZ(105px); }
 
   .dice-action-btn {
-    background: #6366f1;
-    color: #ffffff;
-    border: none;
+    background: linear-gradient(135deg, var(--accent), var(--alternative));
+    color: var(--text-primary);
+    border: 1px solid var(--accent-hover);
     padding: 14px 36px;
     font-size: 1.15rem;
     font-weight: bold;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.45);
+    box-shadow: 0 10px 25px var(--glow-purple);
     transition: transform 0.2s, background 0.2s;
   }
   .dice-action-btn:hover {
-    background: #4f46e5;
+    filter: brightness(1.08);
     transform: scale(1.05);
   }
 
+  body.aurora .dice-action-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: #ffffff;
+  }
+
   .dice-result-banner {
-    color: #fbbf24;
+    color: var(--accent-hover);
     font-size: 1.4rem;
     font-weight: bold;
     margin-top: 22px;
@@ -712,7 +828,7 @@ document.addEventListener("submit", async (event) => {
 
     // --- BARRA INFERIOR COMPACTA EN UNA SOLA LÍNEA ---
     const barraMinimal = document.createElement("div");
-    barraMinimal.style.cssText = "margin: 10px auto 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; max-width: 310px; padding: 5px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12);";
+    barraMinimal.style.cssText = "margin: 10px auto 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; max-width: 310px; padding: 5px 10px; border-radius: 999px; background: var(--card-hover); border: 1px solid var(--border);";
 ;
 
     // Botón de silencio minimalista (solo icono)
@@ -720,7 +836,7 @@ document.addEventListener("submit", async (event) => {
     muteBtn.type = "button";
     muteBtn.title = "Silenciar / Activar sonido";
     muteBtn.textContent = "🔊";
-    muteBtn.style.cssText = "background: none; border: none; font-size: 0.95rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.9; transition: 0.2s;";
+    muteBtn.style.cssText = "background: none; border: none; color: var(--text-secondary); font-size: 0.95rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.9; transition: 0.2s;";
     muteBtn.addEventListener("click", () => {
       sonidoActivo = !sonidoActivo;
       muteBtn.textContent = sonidoActivo ? "🔊" : "🔇";
@@ -729,7 +845,7 @@ document.addEventListener("submit", async (event) => {
 
     // Lista horizontal compacta (máximo 5 últimas tiradas)
     const historialLista = document.createElement("div");
-    historialLista.style.cssText = "display: flex; align-items: center; justify-content: center; gap: 5px; flex: 1; overflow: hidden; font-size: 0.78rem; color: #94a3b8;";
+    historialLista.style.cssText = "display: flex; align-items: center; justify-content: center; gap: 5px; flex: 1; overflow: hidden; font-size: 0.78rem; color: var(--text-secondary);";
     historialLista.textContent = "Sin tiradas previas";
 
     // Botón discreto para limpiar (icono papelera/X)
@@ -737,7 +853,7 @@ document.addEventListener("submit", async (event) => {
     clearHistBtn.type = "button";
     clearHistBtn.title = "Limpiar historial";
     clearHistBtn.textContent = "✕";
-    clearHistBtn.style.cssText = "background: none; border: none; color: #94a3b8; font-size: 0.8rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.6; display: none;";
+    clearHistBtn.style.cssText = "background: none; border: none; color: var(--text-secondary); font-size: 0.8rem; cursor: pointer; padding: 2px 4px; line-height: 1; opacity: 0.6; display: none;";
     clearHistBtn.addEventListener("click", () => {
       historialTiradas = [];
       sessionStorage.removeItem("ludix_historial_dados");
@@ -763,7 +879,7 @@ document.addEventListener("submit", async (event) => {
       historialTiradas.forEach((item, idx) => {
         const badge = document.createElement("span");
         const esUltimo = idx === 0;
-        badge.style.cssText = `padding: 1px 7px; border-radius: 999px; font-weight: 700; font-size: 0.75rem; white-space: nowrap; background: ${esUltimo ? "rgba(250, 204, 21, 0.2)" : "rgba(255, 255, 255, 0.08)"}; color: ${esUltimo ? "#fde047" : "#cbd5e1"};`;
+        badge.style.cssText = `padding: 1px 7px; border-radius: 999px; font-weight: 700; font-size: 0.75rem; white-space: nowrap; background: ${esUltimo ? "var(--glow-purple)" : "var(--card-hover)"}; color: ${esUltimo ? "var(--accent-hover)" : "var(--text-secondary)"};`;
         badge.textContent = `${item.valor}`;
         badge.title = `Dado ${item.dado}`;
         historialLista.appendChild(badge);
@@ -778,7 +894,10 @@ document.addEventListener("submit", async (event) => {
         const tipoGuardado = ultimaTirada.dado === "A-Z" ? "letras" : String(ultimaTirada.dado).replace("d", "");
 
         if (selectModal) selectModal.value = tipoGuardado;
-        if (selectHeader) selectHeader.value = tipoGuardado;
+        if (selectHeader) {
+          selectHeader.value = tipoGuardado;
+          selectHeader.dispatchEvent(new Event("change", { bubbles: true }));
+        }
 
         // Solo regeneramos las caras si el cubo está vacío (ej. al recargar página), sin repetir el número ganador en todas
         if (!faces.textContent) {
@@ -808,6 +927,7 @@ document.addEventListener("submit", async (event) => {
 
     selectModal.addEventListener("change", () => {
       selectHeader.value = selectModal.value;
+      selectHeader.dispatchEvent(new Event("change", { bubbles: true }));
       actualizarAparienciaDado(selectModal.value);
     });
 

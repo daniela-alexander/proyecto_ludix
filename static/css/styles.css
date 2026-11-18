@@ -3870,11 +3870,22 @@ body .navbar .dado-container-dinamico {
     position: static;
     transform: none;
     gap: 6px;
-    padding: 4px;
+    padding: 0 4px;
     border: 1px solid var(--border);
     border-radius: 14px;
     background: var(--card);
     box-shadow: none;
+}
+
+body .navbar .dado-container-dinamico #resultadoDado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 8px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1;
 }
 
 body .navbar .dado-container-dinamico select,
@@ -3887,16 +3898,11 @@ body .navbar .dado-container-dinamico span {
     color: var(--text-primary);
 }
 
-body .navbar .dado-container-dinamico select {
-    max-width: 145px;
-    font: 500 14px "Segoe UI", sans-serif;
-}
-
 body .navbar .dado-container-dinamico button {
-    min-height: 36px;
+    min-height: 35px;
     padding: 0 14px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 14px;
     background: linear-gradient(135deg, var(--accent), var(--alternative));
     color: #fff;
     font: 600 14px "Segoe UI", sans-serif;
@@ -3905,6 +3911,11 @@ body .navbar .dado-container-dinamico button {
 
 body .navbar .dado-container-dinamico button:hover {
     filter: brightness(1.1);
+}
+
+body .navbar .dado-container-dinamico #btnLanzar:hover,
+body .navbar .dado-container-dinamico #btnAbrirDado3D:hover {
+    transform: none;
 }
 
 .navbar nav {
@@ -3925,6 +3936,14 @@ body .navbar .dado-container-dinamico button:hover {
     border-radius: 14px;
     background: var(--card);
     color: var(--text-primary);
+}
+
+.navbar nav > a.navbar-secondary-link,
+.navbar nav > a.navbar-primary-link,
+.navbar nav > a.navbar-staff-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
 }
 
 .navbar nav a.navbar-icon-link svg,
@@ -4003,6 +4022,9 @@ body .navbar .dado-container-dinamico button:hover {
 
 .navbar nav a.navbar-staff-link {
     order: 1;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     padding: 0 12px;
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -4033,7 +4055,7 @@ body .navbar .dado-container-dinamico button:hover {
     align-items: center;
     gap: 8px;
     min-height: 44px;
-    padding: 4px 10px 4px 4px;
+    padding: 3px 10px 3px 4px;
     border: 1px solid var(--border);
     border-radius: 999px;
     background: var(--card);
@@ -4056,9 +4078,9 @@ body .navbar .dado-container-dinamico button:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    flex: 0 0 36px;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--alternative), var(--accent-hover));
     color: #fff;
@@ -4550,4 +4572,132 @@ body .navbar .dado-container-dinamico button:hover {
     .navbar-language-name {
         display: none;
     }
+}
+
+.navbar-actions .navbar-dice-picker {
+    position: relative;
+    display: block;
+    min-height: 44px;
+}
+
+.navbar-actions .navbar-dice-picker-trigger {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 4px 12px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--card);
+    color: var(--text-primary);
+    font: 500 14px "Segoe UI", sans-serif;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+}
+
+.navbar-actions .navbar-dice-picker-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.navbar-actions .navbar-dice-picker-trigger > svg:first-child {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.navbar-actions .navbar-dice-picker-label {
+    display: flex;
+    align-items: center;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.navbar-actions .navbar-dice-picker-trigger:hover,
+.navbar-actions .navbar-dice-picker[open] > .navbar-dice-picker-trigger {
+    background: var(--card-hover);
+}
+
+.navbar-actions .navbar-dice-picker-trigger:focus-visible {
+    outline: 2px solid var(--neon);
+    outline-offset: 2px;
+}
+
+.navbar-actions .navbar-dice-picker[open] .navbar-caret {
+    transform: rotate(180deg);
+}
+
+.navbar-actions .navbar-dice-picker-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 1100;
+    min-width: 190px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+
+.navbar-actions .navbar-dice-picker-menu::before {
+    position: absolute;
+    top: -8px;
+    right: 0;
+    left: 0;
+    height: 8px;
+    content: "";
+}
+
+.navbar-actions .navbar-dice-picker-options {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+body .navbar .dado-container-dinamico .navbar-dice-picker-option {
+    appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 40px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: none;
+    color: var(--text-primary);
+    font: 500 14px "Segoe UI", sans-serif;
+    text-align: left;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+body .navbar .dado-container-dinamico .navbar-dice-picker-option:hover,
+body .navbar .dado-container-dinamico .navbar-dice-picker-option[aria-pressed="true"] {
+    filter: none;
+    background: var(--card-hover);
+    color: var(--neon);
+}
+
+.navbar-actions .navbar-dice-picker-option svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.navbar-actions .navbar-dice-picker-option svg[hidden] {
+    display: none;
 }
