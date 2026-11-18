@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n static %}
 {% block content %}
 
 <div class="home-hero-layout">
+    <aside class="hero-recommendation" aria-labelledby="hero-recommendation-title">
+        
+        {% comment %} aquí la imagen del logo {% endcomment %}
+
+        <img src='{% static "img/ludix_logo.png" %}' alt="{% translate 'Logo de Ludix' %}" class="hero-logo" loading="lazy">
+    
+        
+        <h2 id="hero-recommendation-title">{% translate "¿No sabes qué jugar?" %}</h2>
+        <p>{% translate "Dinos cuántos sois y cuánto tiempo tenéis, y te sugerimos uno." %}</p>
+        <a class="recommendation-button hero-recommendation-button" href="{% url 'sugerencia' %}">
+            {% translate "¡Recomiéndame un juego!" %}
+        </a>
+    </aside>
+
     <section class="hero-card">
         <div class="hero-main">
             <div class="hero-copy">
@@ -23,30 +37,6 @@
             </form>
         </div>
     </section>
-
-    <aside class="hero-recommendation" aria-labelledby="hero-recommendation-title">
-        <svg class="hero-dice-illustration" viewBox="0 0 150 110" aria-hidden="true" focusable="false">
-            <g transform="rotate(-14 45 60)">
-                <rect x="12" y="28" width="64" height="64" rx="16" fill="var(--neon)"></rect>
-                <circle cx="30" cy="46" r="5" fill="var(--bg-main)"></circle>
-                <circle cx="58" cy="46" r="5" fill="var(--bg-main)"></circle>
-                <circle cx="44" cy="60" r="5" fill="var(--bg-main)"></circle>
-                <circle cx="30" cy="74" r="5" fill="var(--bg-main)"></circle>
-                <circle cx="58" cy="74" r="5" fill="var(--bg-main)"></circle>
-            </g>
-            <g transform="rotate(12 105 55)">
-                <rect x="76" y="14" width="58" height="58" rx="15" fill="var(--alternative)"></rect>
-                <circle cx="93" cy="31" r="5" fill="var(--card)"></circle>
-                <circle cx="117" cy="55" r="5" fill="var(--card)"></circle>
-                <circle cx="105" cy="43" r="5" fill="var(--card)"></circle>
-            </g>
-        </svg>
-        <h2 id="hero-recommendation-title">{% translate "¿No sabes qué jugar?" %}</h2>
-        <p>{% translate "Dinos cuántos sois y cuánto tiempo tenéis, y te sugerimos uno." %}</p>
-        <a class="recommendation-button hero-recommendation-button" href="{% url 'sugerencia' %}">
-            {% translate "¡Recomiéndame un juego!" %}
-        </a>
-    </aside>
 </div>
 
     {% if user.is_authenticated %}
