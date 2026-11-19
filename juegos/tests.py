@@ -1,3 +1,4 @@
+from decimal import Decimal
 from io import BytesIO
 import tempfile
 
@@ -690,17 +691,219 @@ class SuggestionViewTests(TestCase):
         self.assertContains(response, "sessionStorage.setItem(claveTema")
         self.assertContains(response, "(() => {")
 
-    def test_age_and_duration_controls_use_sensible_ranges_and_steps(self):
+    def test_age_difficulty_and_duration_cards_have_clear_options(self):
         response = self.client.get("/sugerencia/")
-        age_widget = SugerenciaForm.base_fields[
-            "edad_minima_participante"
-        ].widget
-        duration_widget = SugerenciaForm.base_fields["duracion_max"].widget
+        form = SugerenciaForm()
 
-        self.assertEqual(int(age_widget.attrs["min"]), 3)
-        self.assertEqual(int(age_widget.attrs["max"]), 19)
-        self.assertEqual(duration_widget.attrs["step"], "15")
-        self.assertContains(response, "Mayor de 18")
+        self.assertEqual(
+            [value for value, _ in form.fields["edad_minima_participante"].choices],
+            ["", 3, 6, 10, 14, 19],
+        )
+        self.assertEqual(
+            [value for value, _ in form.fields["dificultad_preferida"].choices],
+            ["", Decimal("1"), Decimal("2"), Decimal("3"), Decimal("4"), Decimal("5")],
+        )
+        self.assertEqual(
+            [value for value, _ in form.fields["duracion_preferencia"].choices],
+            ["", "max15", "max30", "max60", "max120", "min120"],
+        )
+        self.assertNotContains(response, "¿Dónde buscar?")
+        self.assertContains(response, "Hasta 15m")
+        self.assertContains(response, "120 y más")
+
+    def test_age_and_difficulty_can_be_omitted_with_no_preference(self):
+        adult_game = Game.objects.create(
+            title="Juego sin límite de edad",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=60,
+            min_age=35,
+            difficulty=5,
+            price=19.99,
+        )
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": "",
+                "duracion_preferencia": "max60",
+                "dificultad_preferida": "",
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["enviado"])
+        self.assertIn(adult_game, response.context["recomendaciones"])
+
+        session = SuggestionSession.objects.get(host=self.profile)
+        self.assertIsNone(session.edad_minima_participante)
+        self.assertIsNone(session.dificultad_preferida)
+        self.assertEqual(session.max_duration, 60)
+        self.assertIsNone(session.min_duration)
+        restored_response = self.client.get(
+            "/sugerencia/",
+            {"session": session.id},
+        )
+        self.assertEqual(
+            restored_response.context["form"][
+                "edad_minima_participante"
+            ].value(),
+            "",
+        )
+        self.assertEqual(
+            restored_response.context["form"]["dificultad_preferida"].value(),
+            "",
+        )
+
+    def test_suggestion_results_include_up_to_four_games(self):
+        games = [self.game]
+        for index in range(3):
+            games.append(
+                Game.objects.create(
+                    title=f"Juego adicional {index}",
+                    description="",
+                    min_players=1,
+                    max_players=4,
+                    duration_minutes=60,
+                    min_age=8,
+                    difficulty=3,
+                    price=19.99,
+                )
+            )
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": "",
+                "duracion_preferencia": "max60",
+                "dificultad_preferida": "",
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["recomendaciones"]), 4)
+        self.assertCountEqual(response.context["recomendaciones"], games)
+
+    def test_age_and_difficulty_reject_values_outside_the_card_options(self):
+        form = SugerenciaForm(
+            data={
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 7,
+                "duracion_preferencia": "max60",
+                "dificultad_preferida": 0,
+                "tematica": "",
+            }
+        )
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("edad_minima_participante", form.errors)
+        self.assertIn("dificultad_preferida", form.errors)
+
+    def test_any_duration_option_removes_the_duration_filter(self):
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": "",
+                "duracion_preferencia": "",
+                "dificultad_preferida": "",
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(self.game, response.context["recomendaciones"])
+        session = SuggestionSession.objects.get(host=self.profile)
+        self.assertIsNone(session.max_duration)
+        self.assertIsNone(session.min_duration)
+
+        restored_response = self.client.get(
+            "/sugerencia/",
+            {"session": session.id},
+        )
+        self.assertEqual(
+            restored_response.context["form"]["duracion_preferencia"].value(),
+            "",
+        )
+
+    def test_long_duration_card_finds_games_of_120_minutes_or_more(self):
+        threshold_game = Game.objects.create(
+            title="Partida de dos horas",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=120,
+            min_age=10,
+            difficulty=4,
+            price=19.99,
+        )
+        long_game = Game.objects.create(
+            title="Partida larga",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=180,
+            min_age=10,
+            difficulty=4,
+            price=19.99,
+        )
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": "",
+                "duracion_preferencia": "min120",
+                "dificultad_preferida": "",
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(threshold_game, response.context["recomendaciones"])
+        self.assertIn(long_game, response.context["recomendaciones"])
+        self.assertNotIn(self.game, response.context["recomendaciones"])
+        session = SuggestionSession.objects.get(host=self.profile)
+        self.assertIsNone(session.max_duration)
+        self.assertEqual(session.min_duration, 120)
+
+    def test_age_card_uses_the_selected_threshold_for_the_youngest_player(self):
+        younger_game = Game.objects.create(
+            title="Juego desde seis años",
+            description="",
+            min_players=1,
+            max_players=4,
+            duration_minutes=60,
+            min_age=6,
+            difficulty=3,
+            price=19.99,
+        )
+
+        response = self.client.post(
+            "/sugerencia/",
+            {
+                "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
+                "num_jugadores": 4,
+                "edad_minima_participante": 6,
+                "duracion_preferencia": "max60",
+                "dificultad_preferida": "",
+                "tematica": "",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(younger_game, response.context["recomendaciones"])
+        self.assertNotIn(self.game, response.context["recomendaciones"])
 
     def test_over_18_age_option_includes_games_for_adults(self):
         adult_game = Game.objects.create(
@@ -720,7 +923,7 @@ class SuggestionViewTests(TestCase):
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
                 "edad_minima_participante": 19,
-                "duracion_max": 90,
+                "duracion_preferencia": "max60",
                 "dificultad_preferida": 3,
                 "tematica": "",
             },
@@ -764,8 +967,8 @@ class SuggestionViewTests(TestCase):
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
-                "edad_minima_participante": 18,
-                "duracion_max": 90,
+                "edad_minima_participante": 19,
+                "duracion_preferencia": "max120",
                 "dificultad_preferida": 3,
                 "tematica": self.category.id,
             },
@@ -779,8 +982,8 @@ class SuggestionViewTests(TestCase):
             SuggestionSession.SuggestionType.PURCHASE,
         )
         self.assertEqual(session.player_count, 4)
-        self.assertEqual(session.max_duration, 90)
-        self.assertEqual(session.edad_minima_participante, 18)
+        self.assertEqual(session.max_duration, 120)
+        self.assertEqual(session.edad_minima_participante, 19)
         self.assertEqual(session.tematica, self.category)
         self.assertEqual(
             list(
@@ -809,8 +1012,8 @@ class SuggestionViewTests(TestCase):
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.LIBRARY,
                 "num_jugadores": 4,
-                "edad_minima_participante": 18,
-                "duracion_max": 90,
+                "edad_minima_participante": 14,
+                "duracion_preferencia": "max60",
                 "dificultad_preferida": 3,
                 "tematica": "",
             },
@@ -853,8 +1056,8 @@ class SuggestionViewTests(TestCase):
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
-                "edad_minima_participante": 18,
-                "duracion_max": 90,
+                "edad_minima_participante": 14,
+                "duracion_preferencia": "max60",
                 "dificultad_preferida": 3,
                 "tematica": "",
             },

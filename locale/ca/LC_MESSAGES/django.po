@@ -126,14 +126,6 @@ msgstr "Tria amb qui vols parlar."
 msgid "Abrir conversación"
 msgstr "Obre la conversa"
 
-#: juegos/forms.py:14
-msgid ""
-"La biblioteca muestra juegos que ya tienes. El catálogo puede incluir juegos"
-" no disponibles actualmente."
-msgstr ""
-"La biblioteca mostra jocs que ja tens. El catàleg pot incloure jocs no "
-"disponibles actualment."
-
 #: juegos/forms.py:76
 msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
 msgstr "🎮 D'on vols que surtin les recomanacions?"
@@ -169,6 +161,126 @@ msgstr "Del catàleg de Ludix"
 #: juegos/forms.py:95
 msgid "Cualquiera"
 msgstr "Qualsevol"
+
+#: juegos/forms.py
+msgid "Fuente de recomendaciones"
+msgstr "Font de recomanacions"
+
+#: juegos/forms.py
+msgid "¿Dónde buscar?"
+msgstr "On cercar?"
+
+#: juegos/forms.py
+msgid "Mis juegos"
+msgstr "Els meus jocs"
+
+#: juegos/forms.py
+msgid "Catálogo de Ludix"
+msgstr "Catàleg de Ludix"
+
+#: juegos/forms.py
+msgid "Preferencia de edad"
+msgstr "Preferència d'edat"
+
+#: juegos/forms.py
+msgid "Cualquier edad"
+msgstr "Qualsevol edat"
+
+#: juegos/forms.py
+msgid "Elegir edad"
+msgstr "Triar edat"
+
+#: juegos/forms.py
+msgid "Preferencia de dificultad"
+msgstr "Preferència de dificultat"
+
+#: juegos/forms.py
+msgid "Cualquier dificultad"
+msgstr "Qualsevol dificultat"
+
+#: juegos/forms.py
+msgid "Tiempo de partida"
+msgstr "Durada de la partida"
+
+#: juegos/forms.py
+msgid "♾️ Cualquiera"
+msgstr "♾️ Qualsevol"
+
+#: juegos/forms.py
+msgid "⚡ Hasta 15m"
+msgstr "⚡ Fins a 15m"
+
+#: juegos/forms.py
+msgid "☕ Hasta 30m"
+msgstr "☕ Fins a 30m"
+
+#: juegos/forms.py
+msgid "🎯 Hasta 60m"
+msgstr "🎯 Fins a 60m"
+
+#: juegos/forms.py
+msgid "🎲 Hasta 120m"
+msgstr "🎲 Fins a 120m"
+
+#: juegos/forms.py
+msgid "🕰️ 120 y más"
+msgstr "🕰️ 120 o més"
+
+#: juegos/forms.py
+msgid "Edad de la persona más joven"
+msgstr "Edat de la persona més jove"
+
+#: juegos/forms.py
+msgid "🌱 Muy fácil"
+msgstr "🌱 Molt fàcil"
+
+#: juegos/forms.py
+msgid "🙂 Fácil"
+msgstr "🙂 Fàcil"
+
+#: juegos/forms.py
+msgid "⚖️ Intermedio"
+msgstr "⚖️ Intermedi"
+
+#: juegos/forms.py
+msgid "🔥 Difícil"
+msgstr "🔥 Difícil"
+
+#: juegos/forms.py
+msgid "🏆 Muy difícil"
+msgstr "🏆 Molt difícil"
+
+#: juegos/forms.py
+msgid "Muy difícil"
+msgstr "Molt difícil"
+
+#: juegos/forms.py
+msgid "Elegir dificultad"
+msgstr "Triar dificultat"
+
+#: juegos/forms.py
+msgid "Indica la edad de la persona más joven del grupo."
+msgstr "Indica l'edat de la persona més jove del grup."
+
+#: juegos/forms.py
+msgid "Busca juegos que admitan el número elegido."
+msgstr "Cerca jocs que admetin el nombre de jugadors triat."
+
+#: juegos/forms.py
+msgid "Se mostrarán juegos que duren como máximo ese tiempo."
+msgstr "Es mostraran jocs que durin com a màxim aquest temps."
+
+#: juegos/forms.py
+msgid "La dificultad solo influye en el orden de las recomendaciones."
+msgstr "La dificultat només influeix en l'ordre de les recomanacions."
+
+#: juegos/forms.py
+msgid "Es opcional; déjalo en «Cualquiera» para ver más opciones."
+msgstr "És opcional; deixa-ho a «Qualsevol» per veure més opcions."
+
+#: juegos/forms.py
+msgid "Elige un valor para aplicar esta preferencia."
+msgstr "Tria un valor per aplicar aquesta preferència."
 
 #: juegos/models.py:12
 msgid "Cliente"
@@ -887,12 +999,36 @@ msgid "🎲 Encuentra tu próximo juego"
 msgstr "🎲 Troba el teu proper joc"
 
 #: templates/juegos/sugerencia_form.html:14
-msgid ""
-"Configura tus preferencias y deja que Ludix encuentre el juego perfecto para"
-" ti."
-msgstr ""
-"Configura les teves preferències i deixa que Ludix trobi el joc perfecte per"
-" a tu."
+msgid "Elige de dónde buscar y ajusta solo las preferencias que te importan."
+msgstr "Tria on cercar i ajusta només les preferències que t'importen."
+
+#: templates/juegos/sugerencia_form.html
+msgid "¿Dónde quieres buscar?"
+msgstr "On cerquem?"
+
+#: templates/juegos/sugerencia_form.html
+msgid "Elige una fuente para tus recomendaciones."
+msgstr "Tria una font per a les recomanacions."
+
+#: templates/juegos/sugerencia_form.html
+msgid "Define la partida"
+msgstr "Configura la partida"
+
+#: templates/juegos/sugerencia_form.html
+msgid "Jugadores y duración son los criterios principales."
+msgstr "Els jugadors i la durada són els criteris principals."
+
+#: templates/juegos/sugerencia_form.html
+msgid "Preferencias opcionales"
+msgstr "Preferències opcionals"
+
+#: templates/juegos/sugerencia_form.html
+msgid "Edad, dificultad y temática ayudan a afinar, pero no son obligatorias."
+msgstr "L'edat, la dificultat i la temàtica ajuden a afinar, però no són obligatòries."
+
+#: templates/juegos/sugerencia_form.html
+msgid "Sin preferencia"
+msgstr "Sense preferència"
 
 #: templates/juegos/sugerencia_form.html:31
 #: templates/juegos/sugerencia_form.html:296
@@ -919,9 +1055,17 @@ msgstr "3 · Normal"
 msgid "5 · Experto"
 msgstr "5 · Expert"
 
-#: templates/juegos/sugerencia_form.html:146
-msgid "🔍 Buscar recomendaciones"
-msgstr "🔍 Cerca recomanacions"
+#: templates/juegos/sugerencia_form.html
+msgid "🎲 Ver recomendaciones"
+msgstr "🎲 Veure recomanacions"
+
+#: templates/juegos/sugerencia_form.html
+msgid "No encontramos coincidencias"
+msgstr "No hem trobat coincidències"
+
+#: templates/juegos/sugerencia_form.html
+msgid "Prueba ampliar la duración, cambiar la temática o dejar la edad o la dificultad en «Cualquiera»."
+msgstr "Prova d'ampliar la durada, canviar la temàtica o deixar l'edat o la dificultat a «Qualsevol»."
 
 #: templates/juegos/sugerencia_form.html:157
 msgid "Recomendaciones"
@@ -977,6 +1121,10 @@ msgstr "Compra"
 #: templates/juegos/sugerencia_form.html:239
 msgid "No encontramos juegos que encajen con esos criterios."
 msgstr "No trobem jocs que encaixin amb aquests criteris."
+
+#: templates/juegos/sugerencia_form.html:251
+msgid "jugador"
+msgstr "jugador"
 
 #: templates/juegos/sugerencia_form.html:251
 msgid "jugadores"

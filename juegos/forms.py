@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django import forms
 from django.utils.translation import gettext, gettext_lazy as _
 
@@ -10,10 +12,7 @@ EDAD_FILTRO_MAYOR_DE_18 = 100
 class SugerenciaForm(forms.Form):
 
     tipo_sugerencia = forms.ChoiceField(
-        help_text=_(
-            "La biblioteca muestra juegos que ya tienes. "
-            "El catálogo puede incluir juegos no disponibles actualmente."
-        ),
+        widget=forms.RadioSelect(attrs={"class": "recommend-source-options"}),
     )
 
     num_jugadores = forms.IntegerField(
@@ -28,40 +27,35 @@ class SugerenciaForm(forms.Form):
         }),
     )
 
-    edad_minima_participante = forms.IntegerField(
-        min_value=3,
-        max_value=EDAD_MAYOR_DE_18,
-        initial=18,
-        widget=forms.NumberInput(attrs={
-            "type": "range",
-            "min": "3",
-            "max": str(EDAD_MAYOR_DE_18),
-            "step": "1",
-        }),
+    duracion_preferencia = forms.ChoiceField(
+        required=False,
+        choices=(),
+        initial="max60",
+        widget=forms.RadioSelect(
+            attrs={"class": "recommend-option-cards duration-options"}
+        ),
     )
 
-    duracion_max = forms.IntegerField(
-        min_value=15,
-        max_value=240,
-        initial=90,
-        widget=forms.NumberInput(attrs={
-            "type": "range",
-            "min": "15",
-            "max": "240",
-            "step": "15",
-        }),
+    edad_minima_participante = forms.TypedChoiceField(
+        required=False,
+        choices=(),
+        coerce=int,
+        empty_value=None,
+        initial="",
+        widget=forms.RadioSelect(
+            attrs={"class": "recommend-option-cards age-options"}
+        ),
     )
 
-    dificultad_preferida = forms.DecimalField(
-        initial=3,
-        min_value=1,
-        max_value=5,
-        widget=forms.NumberInput(attrs={
-            "type": "range",
-            "min": "1",
-            "max": "5",
-            "step": "1",
-        }),
+    dificultad_preferida = forms.TypedChoiceField(
+        required=False,
+        choices=(),
+        coerce=Decimal,
+        empty_value=None,
+        initial="",
+        widget=forms.RadioSelect(
+            attrs={"class": "recommend-option-cards difficulty-options"}
+        ),
     )
 
     tematica = forms.ModelChoiceField(
@@ -73,22 +67,54 @@ class SugerenciaForm(forms.Form):
         super().__init__(*args, **kwargs)
         
         # Asignamos los labels dinámicamente para que respeten el idioma del request
-        self.fields["tipo_sugerencia"].label = _("🎮 ¿De dónde quieres que salgan las recomendaciones?")
+        self.fields["tipo_sugerencia"].label = _("¿Dónde buscar?")
+        self.fields["duracion_preferencia"].label = _("Tiempo de partida")
+        self.fields["duracion_preferencia"].choices = [
+            ("", _("♾️ Cualquiera")),
+            ("max15", _("⚡ Hasta 15m")),
+            ("max30", _("☕ Hasta 30m")),
+            ("max60", _("🎯 Hasta 60m")),
+            ("max120", _("🎲 Hasta 120m")),
+            ("min120", _("🕰️ 120 y más")),
+        ]
+        self.fields["duracion_preferencia"].help_text = ""
         self.fields["num_jugadores"].label = _("👥 Número de jugadores")
-        self.fields["edad_minima_participante"].label = _("👶 Edad de la persona más joven")
-        self.fields["duracion_max"].label = _("⏱️ Duración máxima en minutos")
-        self.fields["dificultad_preferida"].label = _("🎯 Dificultad (1 = muy fácil, 5 = muy difícil)")
+        self.fields["num_jugadores"].help_text = ""
+        self.fields["edad_minima_participante"].label = _(
+            "Edad"
+        )
+        self.fields["edad_minima_participante"].choices = [
+            ("", _("Cualquier edad")),
+            (3, "🧸 3+"),
+            (6, "🚀 6+"),
+            (10, "🎲 10+"),
+            (14, "⚔️ 14+"),
+            (EDAD_MAYOR_DE_18, "🍷 18+"),
+        ]
+        self.fields["dificultad_preferida"].label = _("Dificultad")
+        self.fields["dificultad_preferida"].choices = [
+            ("", _("Cualquier dificultad")),
+            (Decimal("1"), _("🌱 Muy fácil")),
+            (Decimal("2"), _("🙂 Fácil")),
+            (Decimal("3"), _("⚖️ Intermedio")),
+            (Decimal("4"), _("🔥 Difícil")),
+            (Decimal("5"), _("🏆 Muy difícil")),
+        ]
+        self.fields["dificultad_preferida"].help_text = _(
+            "La dificultad solo influye en el orden de las recomendaciones."
+        )
         self.fields["tematica"].label = _("🏷️ Temática")
+        self.fields["tematica"].help_text = ""
 
         # Opciones y empty_label también de forma dinámica
         self.fields["tipo_sugerencia"].choices = [
             (
                 SuggestionSession.SuggestionType.LIBRARY,
-                _("De mi biblioteca"),
+                _("Mis juegos"),
             ),
             (
                 SuggestionSession.SuggestionType.PURCHASE,
-                _("Del catálogo de Ludix"),
+                _("Catálogo de Ludix"),
             ),
         ]
         

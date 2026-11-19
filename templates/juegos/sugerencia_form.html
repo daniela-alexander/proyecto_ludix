@@ -10,9 +10,16 @@
     <div class="recommend-header">
         <h1>{% translate "🎲 Encuentra tu próximo juego" %}</h1>
 
-        <p>
-            {% translate "Configura tus preferencias y deja que Ludix encuentre el juego perfecto para ti." %}
-        </p>
+        {% if enviado %}
+            <button
+                type="button"
+                id="toggle-search"
+                class="toggle-search-btn"
+            >
+                {% translate "▼ Modificar búsqueda" %}
+            </button>
+        {% endif %}
+
     </div>
 
     {% comment %} {% if enviado %}
@@ -21,32 +28,26 @@
         </div>
     {% endif %} {% endcomment %}
 
-    {% if enviado %}
-        <button
-            type="button"
-            id="toggle-search"
-            class="toggle-search-btn"
-        >
-            {% translate "▼ Modificar búsqueda" %}
-        </button>
-    {% endif %}
-
     <div id="search-container">
 
         <form method="post" class="recommend-form">
 
             {% csrf_token %}
+            {{ form.non_field_errors }}
 
-            <div class="recommend-group">
-                <label>
+            <div
+                class="recommend-source-group"
+                role="group"
+                aria-labelledby="recommend-source-label"
+            >
+                <span id="recommend-source-label" class="recommend-source-label">
                     {{ form.tipo_sugerencia.label }}
-                </label>
-
+                </span>
                 {{ form.tipo_sugerencia }}
-                <p class="helptext">{{ form.tipo_sugerencia.help_text }}</p>
+                {{ form.tipo_sugerencia.errors }}
             </div>
 
-            <div class="recommend-group">
+            <div class="recommend-group recommend-player-group">
 
                 <div class="slider-heading">
                     <label for="{{ form.num_jugadores.id_for_label }}">
@@ -55,7 +56,7 @@
                     <output
                         id="jugadores-valor"
                         for="{{ form.num_jugadores.id_for_label }}"
-                    >0</output>
+                    >{{ form.num_jugadores.value }}</output>
                 </div>
 
                 {{ form.num_jugadores }}
@@ -67,82 +68,56 @@
 
             </div>
 
-            <div class="recommend-group">
+            <fieldset class="recommend-group recommend-choice-group recommend-duration-group">
+                <legend>{{ form.duracion_preferencia.label }}</legend>
+                {{ form.duracion_preferencia }}
+                {{ form.duracion_preferencia.errors }}
+            </fieldset>
 
-                <div class="slider-heading">
-                    <label for="{{ form.edad_minima_participante.id_for_label }}">
-                        {{ form.edad_minima_participante.label }}
-                    </label>
-                    <output
-                        id="edad-valor"
-                        for="{{ form.edad_minima_participante.id_for_label }}"
-                    >0</output>
-                </div>
-
+            <fieldset class="recommend-group recommend-choice-group recommend-age-group">
+                <legend>{{ form.edad_minima_participante.label }}</legend>
                 {{ form.edad_minima_participante }}
-                <div class="slider-labels">
-                    <span>3 años</span>
-                    <span>Mayor de 18</span>
-                </div>
+                {{ form.edad_minima_participante.errors }}
+            </fieldset>
 
-            </div>
-
-            <div class="recommend-group">
-
-                <div class="difficulty-heading">
-                    <label for="{{ form.dificultad_preferida.id_for_label }}">
-                        {{ form.dificultad_preferida.label }}
-                    </label>
-
-                    <output
-                        id="dificultad-valor"
-                        for="{{ form.dificultad_preferida.id_for_label }}"
-                    >3</output>
-                </div>
-
+            <fieldset class="recommend-group recommend-choice-group recommend-difficulty-group">
+                <legend>{{ form.dificultad_preferida.label }}</legend>
                 {{ form.dificultad_preferida }}
+                {{ form.dificultad_preferida.errors }}
+                <p class="helptext">{{ form.dificultad_preferida.help_text }}</p>
+            </fieldset>
 
-                <div class="slider-labels">
-                    <span>{% translate "1 · Muy fácil" %}</span>
-                    <span>{% translate "3 · Normal" %}</span>
-                    <span>{% translate "5 · Experto" %}</span>
-                </div>
-
-            </div>
-
-            <div class="recommend-group">
-
-                <div class="slider-heading">
-                    <label for="{{ form.duracion_max.id_for_label }}">
-                        {{ form.duracion_max.label }}
-                    </label>
-                    <output
-                        id="duracion-valor"
-                        for="{{ form.duracion_max.id_for_label }}"
-                    >0</output>
-                </div>
-
-                {{ form.duracion_max }}
-
-                <div class="slider-labels">
-                    <span>15 min</span>
-                    <span>240 min</span>
-                </div>
-
-            </div>
-
-            <div class="recommend-group">
-
-                <label>
+            <div class="recommend-group recommend-category-group">
+                <label id="recommend-category-label" for="{{ form.tematica.id_for_label }}">
                     {{ form.tematica.label }}
                 </label>
-
-                {{ form.tematica }}
-
+                <div class="recommend-category-select" data-category-select>
+                    {{ form.tematica }}
+                    <button
+                        type="button"
+                        id="recommend-category-trigger"
+                        class="recommend-category-trigger"
+                        aria-labelledby="recommend-category-label"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-controls="recommend-category-options"
+                    ></button>
+                    <div
+                        id="recommend-category-options"
+                        class="recommend-category-menu"
+                        role="listbox"
+                        aria-labelledby="recommend-category-label"
+                        hidden
+                    ></div>
+                </div>
+                {{ form.tematica.errors }}
+                {% if form.tematica.help_text %}
+                    <p class="helptext">{{ form.tematica.help_text }}</p>
+                {% endif %}
             </div>
 
             <button type="submit" class="recommend-btn">
-                {% translate "🔍 Buscar recomendaciones" %}
+                {% translate "🎲 Ver recomendaciones" %}
             </button>
 
         </form>
@@ -155,38 +130,49 @@
         <section class="recommend-results">
             <h2>{% translate "Recomendaciones" %}</h2>
 
-            <div class="results-toolbar">
-                <button type="button" id="list-view">
-                    {% translate "📋 Lista" %}
-                </button>
+            {% if recomendaciones %}
+                <div class="results-toolbar">
+                    <button type="button" id="list-view">
+                        {% translate "📋 Lista" %}
+                    </button>
 
-                <button type="button" id="grid-view">
-                    {% translate "🔲 Cuadrícula" %}
-                </button>
-            </div>
+                    <button type="button" id="grid-view">
+                        {% translate "🔲 Cuadrícula" %}
+                    </button>
+                </div>
+            {% endif %}
             <div id="results-container" class="results-grid">
                 {% for game in recomendaciones %}
                     <article class="result-card" data-recommended-game-id="{{ game.id }}">
                         <div class="result-image">
-                            🎲
-                            {% comment %} cuando haya imagenes dejamos <img src="..."> {% endcomment %}
+                            {% if game.image %}
+                                <img src="{{ game.image.url }}" alt="{{ game.title }}" loading="lazy">
+                            {% else %}
+                                <span aria-hidden="true">🎲</span>
+                            {% endif %}
                         </div>
 
-                        <div class="result-content">
+                        <div class="result-name">
                             <h3>{{ game.title }}</h3>
-                            <p>{% translate "Jugadores:" %} {{ game.min_players }}-{{ game.max_players }}</p>
-                            <p>{% translate "Edad mínima:" %} {{ game.min_age }} {% translate "años" %}</p>
-                            <p>{% translate "Duración:" %} {{ game.duration_minutes }} {% translate "minutos" %}</p>
-                            <p>{% translate "Dificultad:" %} {{ game.difficulty }}</p>
-                        <div>
+                        </div>
 
-                            {% if game.stock > 0 %}
-                                <p>{% translate "Disponible" %}</p>
-                            {% else %}
-                                <p>{% translate "No disponible actualmente" %}</p>
-                            {% endif %}
+                        <div class="result-details">
+                            <div class="result-facts">
+                                <p>{% translate "Jugadores:" %} {{ game.min_players }}-{{ game.max_players }}</p>
+                                <p>{% translate "Edad mínima:" %} {{ game.min_age }} {% translate "años" %}</p>
+                                <p>{% translate "Duración:" %} {{ game.duration_minutes }} {% translate "minutos" %}</p>
+                                <p>{% translate "Dificultad:" %} {{ game.difficulty }}</p>
+                            </div>
+                            <div class="result-availability">
+                                {% if game.stock > 0 %}
+                                    <p>{% translate "Disponible" %}</p>
+                                {% else %}
+                                    <p>{% translate "No disponible actualmente" %}</p>
+                                {% endif %}
+                            </div>
+                        </div>
 
-                            <div class="game-card-actions recommendation-game-actions" data-game-actions-for="{{ game.id }}">
+                        <div class="game-card-actions recommendation-game-actions" data-game-actions-for="{{ game.id }}">
                                 <a href="{% url 'game_shop' game.id %}"
                                    class="game-card-icon-button recommendation-shop-button"
                                    aria-label="{% translate 'Comprar juego' %}"
@@ -230,11 +216,13 @@
                                         </button>
                                     </form>
                                 {% endif %}
-                            </div>
                         </div>
                     </article>
                 {% empty %}
-                    <p>{% translate "No encontramos juegos que encajen con esos criterios." %}</p>
+                    <div class="recommend-empty-state">
+                        <h3>{% translate "No encontramos coincidencias" %}</h3>
+                        <p>{% translate "Prueba ampliar la duración, cambiar la temática o dejar la edad o la dificultad en «Cualquiera»." %}</p>
+                    </div>
                 {% endfor %}
             </div>
         </section>
@@ -242,42 +230,133 @@
 
 <script>
 (() => {
-    const controles = [
-        [
-            "{{ form.num_jugadores.id_for_label }}",
-            "jugadores-valor",
-            value => `${value} {% translate 'jugadores' %}`
-        ],
-        [
-            "{{ form.edad_minima_participante.id_for_label }}",
-            "edad-valor", 
-            value => value === "{{ edad_mayor_de_18 }}" ? "{% translate 'Mayor de 18' %}" : `${value} {% translate 'años' %}`
-        ],
-        [
-            "{{ form.dificultad_preferida.id_for_label }}", 
-            "dificultad-valor", 
-            value => value
-        ],
-        [
-            "{{ form.duracion_max.id_for_label }}", 
-            "duracion-valor", 
-            value => `${value} {% translate 'min' %}`
-        ],
-    ];
+    const jugadores = document.getElementById(
+        "{{ form.num_jugadores.id_for_label }}"
+    );
+    const jugadoresValor = document.getElementById("jugadores-valor");
 
-    controles.forEach(([controlId, outputId, formatValue]) => {
-        const control = document.getElementById(controlId);
-        const output = document.getElementById(outputId);
+    if (jugadores && jugadoresValor) {
+        const actualizarJugadores = () => {
+            const cantidad = Number(jugadores.value);
+            const etiqueta = cantidad === 1
+                ? "{% translate 'jugador' %}"
+                : "{% translate 'jugadores' %}";
+            jugadoresValor.textContent = `${cantidad} ${etiqueta}`;
+        };
+        jugadores.addEventListener("input", actualizarJugadores);
+        actualizarJugadores();
+    }
 
-        if (control && output) {
-            const actualizar = () => {
-                output.textContent = formatValue(control.value);
+    const categoryDropdown = document.querySelector("[data-category-select]");
+    if (categoryDropdown) {
+        const categorySelect = categoryDropdown.querySelector("select");
+        const categoryTrigger = categoryDropdown.querySelector(
+            ".recommend-category-trigger"
+        );
+        const categoryMenu = categoryDropdown.querySelector(
+            ".recommend-category-menu"
+        );
+
+        if (categorySelect && categoryTrigger && categoryMenu) {
+            const categoryOptions = Array.from(categorySelect.options);
+            const updateCategorySelection = () => {
+                categoryTrigger.textContent =
+                    categorySelect.selectedOptions[0].textContent;
+                categoryMenu.querySelectorAll('[role="option"]').forEach(
+                    (optionButton) => {
+                        optionButton.setAttribute(
+                            "aria-selected",
+                            String(optionButton.dataset.value === categorySelect.value)
+                        );
+                    }
+                );
+            };
+            const closeCategoryMenu = () => {
+                categoryMenu.hidden = true;
+                categoryTrigger.setAttribute("aria-expanded", "false");
+                categoryDropdown.classList.remove("is-open");
             };
 
-            control.addEventListener("input", actualizar);
-            actualizar();
+            categoryOptions.forEach((option) => {
+                const optionButton = document.createElement("button");
+                optionButton.type = "button";
+                optionButton.className = "recommend-category-option";
+                optionButton.setAttribute("role", "option");
+                optionButton.setAttribute("aria-selected", "false");
+                optionButton.dataset.value = option.value;
+                optionButton.textContent = option.textContent;
+                optionButton.disabled = option.disabled;
+                optionButton.addEventListener("click", () => {
+                    categorySelect.value = option.value;
+                    categorySelect.dispatchEvent(
+                        new Event("change", { bubbles: true })
+                    );
+                    closeCategoryMenu();
+                    categoryTrigger.focus();
+                });
+                categoryMenu.appendChild(optionButton);
+            });
+
+            categoryTrigger.addEventListener("click", () => {
+                const open = categoryMenu.hidden;
+                categoryMenu.hidden = !open;
+                categoryTrigger.setAttribute("aria-expanded", String(open));
+                categoryDropdown.classList.toggle("is-open", open);
+            });
+            categoryTrigger.addEventListener("keydown", (event) => {
+                if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                    event.preventDefault();
+                    categoryMenu.hidden = false;
+                    categoryTrigger.setAttribute("aria-expanded", "true");
+                    categoryDropdown.classList.add("is-open");
+                    const selectedOption = categoryMenu.querySelector(
+                        '[aria-selected="true"]'
+                    );
+                    const firstOption = categoryMenu.querySelector(
+                        '[role="option"]:not(:disabled)'
+                    );
+                    (selectedOption || firstOption)?.focus();
+                }
+            });
+            categoryMenu.addEventListener("keydown", (event) => {
+                const availableOptions = Array.from(
+                    categoryMenu.querySelectorAll('[role="option"]:not(:disabled)')
+                );
+                const currentIndex = availableOptions.indexOf(
+                    document.activeElement
+                );
+                if (event.key === "Escape") {
+                    event.preventDefault();
+                    closeCategoryMenu();
+                    categoryTrigger.focus();
+                } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                    event.preventDefault();
+                    const direction = event.key === "ArrowDown" ? 1 : -1;
+                    const nextIndex =
+                        (currentIndex + direction + availableOptions.length) %
+                        availableOptions.length;
+                    availableOptions[nextIndex].focus();
+                }
+            });
+            document.addEventListener("pointerdown", (event) => {
+                if (!categoryDropdown.contains(event.target)) {
+                    closeCategoryMenu();
+                }
+            });
+            document.addEventListener("focusin", (event) => {
+                if (!categoryDropdown.contains(event.target)) {
+                    closeCategoryMenu();
+                }
+            });
+            categorySelect.addEventListener("change", updateCategorySelection);
+            updateCategorySelection();
+            document.getElementById("recommend-category-label").htmlFor =
+                categoryTrigger.id;
+            categorySelect.tabIndex = -1;
+            categorySelect.setAttribute("aria-hidden", "true");
+            categoryDropdown.classList.add("is-enhanced");
         }
-    });
+    }
 
     const btn = document.getElementById("toggle-search");
     const panel = document.getElementById("search-container");
