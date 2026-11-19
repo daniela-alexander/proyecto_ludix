@@ -2891,7 +2891,7 @@ main:has(.register-page) {
 }
 
 .recommend-results{
-    margin-top:2rem;
+    margin-top:0;
     width:100%;
 }
 
@@ -3165,6 +3165,7 @@ main:has(.recommend-card) {
     width: calc(100% - 2rem);
     max-width: 1600px;
     padding-top: 1.5rem;
+    gap: 1rem;
 }
 
 .recommend-card {
