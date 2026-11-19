@@ -436,6 +436,11 @@ class SuggestionSession(models.Model):
         blank=True,
     )
 
+    min_duration = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
     )

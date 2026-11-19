@@ -241,6 +241,16 @@ def sugerencia_view(request):
     if request.method == "POST" and form.is_valid():
         perfil, _ = PerfilUsuario.objects.get_or_create(user=request.user)
         criterios = form.cleaned_data
+        duracion_preferencia = criterios["duracion_preferencia"]
+        if duracion_preferencia == "min120":
+            min_duration = 120
+            max_duration = None
+        elif duracion_preferencia:
+            min_duration = None
+            max_duration = int(duracion_preferencia[3:])
+        else:
+            min_duration = None
+            max_duration = None
 
         session = SesionSugerencia.objects.create(
             host=perfil,
@@ -250,21 +260,26 @@ def sugerencia_view(request):
                 "edad_minima_participante"
             ],
             dificultad_preferida=criterios["dificultad_preferida"],
-            max_duration=criterios["duracion_max"],
+            max_duration=max_duration,
+            min_duration=min_duration,
             tematica=criterios["tematica"],
         )
         suggestion_session = session
 
-        edad_participante = criterios["edad_minima_participante"]
-        if edad_participante == EDAD_MAYOR_DE_18:
-            edad_participante = EDAD_FILTRO_MAYOR_DE_18
-
         juegos = Juego.objects.filter(
             min_players__lte=criterios["num_jugadores"],
             max_players__gte=criterios["num_jugadores"],
-            min_age__lte=edad_participante,
-            duration_minutes__lte=criterios["duracion_max"],
         )
+        if min_duration is not None:
+            juegos = juegos.filter(duration_minutes__gte=min_duration)
+        elif max_duration is not None:
+            juegos = juegos.filter(duration_minutes__lte=max_duration)
+
+        edad_participante = criterios["edad_minima_participante"]
+        if edad_participante is not None:
+            if edad_participante == EDAD_MAYOR_DE_18:
+                edad_participante = EDAD_FILTRO_MAYOR_DE_18
+            juegos = juegos.filter(min_age__lte=edad_participante)
 
         if (
             criterios["tipo_sugerencia"]
@@ -284,15 +299,19 @@ def sugerencia_view(request):
         candidatos = list(juegos.distinct())
         candidatos.sort(
             key=lambda juego: (
-                abs(
-                    juego.difficulty
-                    - criterios["dificultad_preferida"]
+                (
+                    abs(
+                        juego.difficulty
+                        - criterios["dificultad_preferida"]
+                    )
+                    if criterios["dificultad_preferida"] is not None
+                    else 0
                 ),
                 juego.duration_minutes,
                 juego.title.lower(),
             )
         )
-        recomendaciones = candidatos[:3]
+        recomendaciones = candidatos[:4]
 
         SesionJuegoPropuesto.objects.bulk_create(
             [
@@ -317,17 +336,45 @@ def sugerencia_view(request):
                 game__libraries__user_profile__user=request.user
             )
         recomendaciones = [proposal.game for proposal in propuestas]
+        if suggestion_session.min_duration is not None:
+            duracion_preferencia = "min120"
+        elif suggestion_session.max_duration in (15, 30, 60, 120):
+            duracion_preferencia = (
+                f"max{suggestion_session.max_duration}"
+            )
+        else:
+            duracion_preferencia = ""
+
+        age_choices = (3, 6, 10, 14, EDAD_MAYOR_DE_18)
+        if suggestion_session.edad_minima_participante is None:
+            edad_inicial = ""
+        else:
+            edad_inicial = min(
+                age_choices,
+                key=lambda age: abs(
+                    age - suggestion_session.edad_minima_participante
+                ),
+            )
+
+        difficulty_choices = (1, 2, 3, 4, 5)
+        if suggestion_session.dificultad_preferida is None:
+            dificultad_inicial = ""
+        else:
+            dificultad_inicial = min(
+                difficulty_choices,
+                key=lambda difficulty: abs(
+                    difficulty
+                    - suggestion_session.dificultad_preferida
+                ),
+            )
+
         form = SugerenciaForm(
             initial={
                 "tipo_sugerencia": suggestion_session.suggestion_type,
                 "num_jugadores": suggestion_session.player_count,
-                "edad_minima_participante": (
-                    suggestion_session.edad_minima_participante
-                ),
-                "duracion_max": suggestion_session.max_duration,
-                "dificultad_preferida": (
-                    suggestion_session.dificultad_preferida
-                ),
+                "duracion_preferencia": duracion_preferencia,
+                "edad_minima_participante": edad_inicial,
+                "dificultad_preferida": dificultad_inicial,
                 "tematica": suggestion_session.tematica_id,
             }
         )
