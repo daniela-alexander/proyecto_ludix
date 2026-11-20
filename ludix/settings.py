@@ -161,13 +161,13 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'es'
 
 LANGUAGES = [
-   ('es', 'Castellano'),
-   ('ca', 'Català'),
-   ('en', 'English'),
-   ('it', 'Italiano'),
+    ('es', 'Castellano'),
+    ('ca', 'Català'),
+    ('en', 'English'),
+    ('it', 'Italiano'),
 ]
 LOCALE_PATHS = [
-   BASE_DIR / 'locale',
+    BASE_DIR / 'locale',
 ]
 
 TIME_ZONE = 'UTC'

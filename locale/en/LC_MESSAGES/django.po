@@ -146,8 +146,8 @@ msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
 msgstr "🎯 Difficulty (1 = very easy, 5 = very difficult)"
 
 #: juegos/forms.py:81
-msgid "🏷️ Temática"
-msgstr "🏷️ Theme"
+msgid "🏷️ Categoría"
+msgstr "🏷️ Category"
 
 #: juegos/forms.py:87
 msgid "De mi biblioteca"
@@ -184,6 +184,10 @@ msgstr "Age preference"
 #: juegos/forms.py
 msgid "Cualquier edad"
 msgstr "Any age"
+
+#: juegos/forms.py
+msgid "Edad"
+msgstr "Age"
 
 #: juegos/forms.py
 msgid "Elegir edad"
@@ -1015,8 +1019,8 @@ msgid "Preferencias opcionales"
 msgstr "Optional preferences"
 
 #: templates/juegos/sugerencia_form.html
-msgid "Edad, dificultad y temática ayudan a afinar, pero no son obligatorias."
-msgstr "Age, difficulty, and theme help refine results, but are optional."
+msgid "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
+msgstr "Age, difficulty, and category help refine results, but are optional."
 
 #: templates/juegos/sugerencia_form.html
 msgid "Sin preferencia"
@@ -1056,8 +1060,8 @@ msgid "No encontramos coincidencias"
 msgstr "No matches found"
 
 #: templates/juegos/sugerencia_form.html
-msgid "Prueba ampliar la duración, cambiar la temática o dejar la edad o la dificultad en «Cualquiera»."
-msgstr "Try increasing the duration, changing the theme, or setting age or difficulty to “Any”."
+msgid "Prueba ampliar la duración, cambiar la categoría o dejar la edad o la dificultad en «Cualquiera»."
+msgstr "Try increasing the duration, changing the category, or setting age or difficulty to “Any”."
 
 #: templates/juegos/sugerencia_form.html:157
 msgid "Recomendaciones"
@@ -1105,8 +1109,6 @@ msgid "No disponible actualmente"
 msgstr "Currently unavailable"
 
 #: templates/juegos/sugerencia_form.html:195
-#, fuzzy
-#| msgid "Compra"
 msgid "Comprar"
 msgstr "Purchase"
 
@@ -1124,11 +1126,9 @@ msgstr "players"
 
 #: templates/juegos/sugerencia_form.html:256
 msgid "Mayor de 18"
-msgstr ""
+msgstr "Over 18"
 
 #: templates/juegos/sugerencia_form.html:266
-#, fuzzy
-#| msgid "minutos"
 msgid "min"
 msgstr "minutes"
 

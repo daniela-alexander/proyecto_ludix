@@ -147,8 +147,8 @@ msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
 msgstr "🎯 Dificultat (1 = molt fàcil, 5 = molt difícil)"
 
 #: juegos/forms.py:81
-msgid "🏷️ Temática"
-msgstr "🏷️ Temàtica"
+msgid "🏷️ Categoría"
+msgstr "🏷️ Categoria"
 
 #: juegos/forms.py:87
 msgid "De mi biblioteca"
@@ -185,6 +185,10 @@ msgstr "Preferència d'edat"
 #: juegos/forms.py
 msgid "Cualquier edad"
 msgstr "Qualsevol edat"
+
+#: juegos/forms.py
+msgid "Edad"
+msgstr "Edat"
 
 #: juegos/forms.py
 msgid "Elegir edad"
@@ -1023,8 +1027,8 @@ msgid "Preferencias opcionales"
 msgstr "Preferències opcionals"
 
 #: templates/juegos/sugerencia_form.html
-msgid "Edad, dificultad y temática ayudan a afinar, pero no son obligatorias."
-msgstr "L'edat, la dificultat i la temàtica ajuden a afinar, però no són obligatòries."
+msgid "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
+msgstr "L'edat, la dificultat i la categoria ajuden a afinar, però no són obligatòries."
 
 #: templates/juegos/sugerencia_form.html
 msgid "Sin preferencia"
@@ -1064,8 +1068,8 @@ msgid "No encontramos coincidencias"
 msgstr "No hem trobat coincidències"
 
 #: templates/juegos/sugerencia_form.html
-msgid "Prueba ampliar la duración, cambiar la temática o dejar la edad o la dificultad en «Cualquiera»."
-msgstr "Prova d'ampliar la durada, canviar la temàtica o deixar l'edat o la dificultat a «Qualsevol»."
+msgid "Prueba ampliar la duración, cambiar la categoría o dejar la edad o la dificultad en «Cualquiera»."
+msgstr "Prova d'ampliar la durada, canviar la categoria o deixar l'edat o la dificultat a «Qualsevol»."
 
 #: templates/juegos/sugerencia_form.html:157
 msgid "Recomendaciones"
@@ -1113,8 +1117,6 @@ msgid "No disponible actualmente"
 msgstr "No disponible actualment"
 
 #: templates/juegos/sugerencia_form.html:195
-#, fuzzy
-#| msgid "Compra"
 msgid "Comprar"
 msgstr "Compra"
 
@@ -1132,11 +1134,9 @@ msgstr "jugadors"
 
 #: templates/juegos/sugerencia_form.html:256
 msgid "Mayor de 18"
-msgstr ""
+msgstr "Majors de 18"
 
 #: templates/juegos/sugerencia_form.html:266
-#, fuzzy
-#| msgid "minutos"
 msgid "min"
 msgstr "minuts"
 

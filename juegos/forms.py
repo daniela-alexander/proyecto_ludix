@@ -103,7 +103,7 @@ class SugerenciaForm(forms.Form):
         self.fields["dificultad_preferida"].help_text = _(
             "La dificultad solo influye en el orden de las recomendaciones."
         )
-        self.fields["tematica"].label = _("🏷️ Temática")
+        self.fields["tematica"].label = _("🏷️ Categoría")
         self.fields["tematica"].help_text = ""
 
         # Opciones y empty_label también de forma dinámica

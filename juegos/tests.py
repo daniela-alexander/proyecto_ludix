@@ -613,6 +613,25 @@ class GameDetailTests(TestCase):
 
 
 class LanguageSelectionTests(TestCase):
+    def test_language_names_use_their_native_names(self):
+        from ludix.settings import LANGUAGES
+
+        self.assertEqual(
+            LANGUAGES,
+            [
+                ("es", "Castellano"),
+                ("ca", "Català"),
+                ("en", "English"),
+                ("it", "Italiano"),
+            ],
+        )
+
+        response = self.client.get("/")
+        self.assertContains(response, "English")
+        self.assertNotContains(response, "Inglés")
+        self.assertNotContains(response, "Inglese")
+        self.assertNotContains(response, "Anglès")
+
     def test_theme_selection_is_restored_and_saved_for_the_browser_session(self):
         response = self.client.get("/")
 
@@ -695,6 +714,7 @@ class SuggestionViewTests(TestCase):
         response = self.client.get("/sugerencia/")
         form = SugerenciaForm()
 
+        self.assertEqual(str(form.fields["tematica"].label), "🏷️ Categoría")
         self.assertEqual(
             [value for value, _ in form.fields["edad_minima_participante"].choices],
             ["", 3, 6, 10, 14, 19],
@@ -707,7 +727,8 @@ class SuggestionViewTests(TestCase):
             [value for value, _ in form.fields["duracion_preferencia"].choices],
             ["", "max15", "max30", "max60", "max120", "min120"],
         )
-        self.assertNotContains(response, "¿Dónde buscar?")
+        self.assertContains(response, "¿Dónde buscar?")
+        self.assertContains(response, "🏷️ Categoría")
         self.assertContains(response, "Hasta 15m")
         self.assertContains(response, "120 y más")
 

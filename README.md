@@ -15,7 +15,7 @@ Los criterios contemplados incluyen:
 - Edad.
 - Dificultad.
 - Duración.
-- Temática.
+- Categoría.
 
 Ludix contempla dos modos principales de sugerencia:
 
@@ -162,8 +162,8 @@ Los roles contemplados son:
 # 🗣️ Idiomas
 
 * Español (```es```)
-* Inglés (```en```)
-* Catalán (```ca```)
+* English (```en```)
+* Català (```ca```)
 * Italiano (```it```)
 
 # 🎲 Juegos
@@ -287,7 +287,7 @@ Selecciona criterios
    ├── Edad
    ├── Dificultad
    ├── Duración
-   └── Temática
+   └── Categoría
    │
    ▼
 Sistema de recomendación
@@ -303,7 +303,7 @@ Número de jugadores: 4
 Edad: 18+
 Dificultad: Media
 Duración: 60 minutos
-Temática: Estrategia
+Categoría: Estrategia
 
              ↓
 

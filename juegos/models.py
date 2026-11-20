@@ -14,8 +14,8 @@ class UserProfile(models.Model):
 
     class Language(models.TextChoices):
         SPANISH = "es", "Español"
-        ENGLISH = "en", "Inglés"
-        CATALAN = "ca", "Catalán"
+        ENGLISH = "en", "English"
+        CATALAN = "ca", "Català"
         ITALIAN = "it", "Italiano"
 
     id = models.BigAutoField(primary_key=True)
