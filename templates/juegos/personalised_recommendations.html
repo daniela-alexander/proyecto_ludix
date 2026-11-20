@@ -7,7 +7,7 @@
             <h2>{% translate "Recomendado para ti" %}</h2>
             {% if recomendados|length > 3 %}
             <button class="expand-btn" id="expandBtn">
-                Expandir sugerencias
+                {% translate "Expandir sugerencias" %}
             </button>
             {% endif %}
         </div>
@@ -99,7 +99,7 @@
             </article>
 
             {% empty %}
-            <p>No se encontraron recomendaciones.</p>
+            <p>{% translate "No se encontraron recomendaciones." %}</p>
             {% endfor %}
 
         </div>

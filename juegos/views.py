@@ -6,6 +6,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.generics import ListAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils.translation import gettext_lazy as _
+from django.core.paginator import Paginator
 
 from .models import (
     Juego,
@@ -179,7 +180,10 @@ def home(request):
     else:
         games = games.order_by("title")
 
-    games = list(games[:12])
+    paginator = Paginator(games, 12)
+    page_obj = paginator.get_page(request.GET.get("page"))
+    games = page_obj.object_list
+
     library_game_ids = set()
     favorite_game_ids = set()
     wishlist_game_ids = set()
@@ -213,6 +217,7 @@ def home(request):
         {
             "query": query,
             "games": games,
+            "page_obj": page_obj,
             "recomendados": recomendados,
             "library_game_ids": library_game_ids,
             "favorite_game_ids": favorite_game_ids,
