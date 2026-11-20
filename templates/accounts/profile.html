@@ -91,8 +91,10 @@
 
                 <div class="profile-detail">
                     <span>{% translate "Idioma actual" %}</span>
-                    {% get_language_info for LANGUAGE_CODE as current_language %}
-                    <strong>{{ current_language.name_local }}</strong>
+                    {% if LANGUAGE_CODE == "es" %}<strong>Español</strong>
+                    {% elif LANGUAGE_CODE == "ca" %}<strong>Català</strong>
+                    {% elif LANGUAGE_CODE == "en" %}<strong>English</strong>
+                    {% elif LANGUAGE_CODE == "it" %}<strong>Italiano</strong>{% endif %}
                 </div>
 
                 <div class="profile-detail">

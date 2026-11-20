@@ -63,7 +63,10 @@
         <select id="language-select" name="language">
             {% for language_code, language_name in AVAILABLE_LANGUAGES %}
             <option value="{{ language_code }}" {% if language_code == CURRENT_LANGUAGE %}selected{% endif %}>
-                {{ language_name }}
+                {% if language_code == "es" %}Español
+                {% elif language_code == "ca" %}Català
+                {% elif language_code == "en" %}English
+                {% elif language_code == "it" %}Italiano{% endif %}
             </option>
             {% endfor %}
         </select>

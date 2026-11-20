@@ -158,7 +158,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(primary_key=True, serialize=False)),
                 ('role', models.CharField(choices=[('CLIENTE', 'Cliente'), ('ADMIN', 'Administrador')], default='CLIENTE', max_length=20)),
-                ('preferred_language', models.CharField(choices=[('es', 'Español'), ('en', 'Inglés'), ('ca', 'Catalán'), ('it', 'Italiano')], default='es', max_length=5)),
+                ('preferred_language', models.CharField(choices=[('es', 'Español'), ('en', 'English'), ('ca', 'Català'), ('it', 'Italiano')], default='es', max_length=5)),
                 ('date_of_birth', models.DateField(blank=True, null=True)),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='profile', to=settings.AUTH_USER_MODEL)),
             ],
