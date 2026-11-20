@@ -376,19 +376,7 @@
     "creador": "Creador: Diseñador tradicional / Editorial de Francia | Año: Desconocido o tradicional | Por qué se creó: Desarrollado para enriquecer el catálogo cultural de juegos de estrategia clásica de la región.",
     "imagen_juego": "games/portadas/29 - Risk.jpg"
   },
-  {
-    "id": 30,
-    "nombre": "Uno",
-    "categoria": "Cartas",
-    "subcategoria": "Descarte rápido y colores",
-    "pais_procedencia": "EE. UU.",
-    "numero_jugadores": "2 a 4",
-    "tiempo_estimado": "15 - 60 min",
-    "descripcion": "Reconocido juego de mesa titulado Uno, enfocado en descarte rápido y colores dentro de la categoría de cartas.",
-    "instrucciones": "Se disponen los componentes de Uno. Los jugadores ejecutan turnos secuenciales aplicando las mecánicas principales de descarte rápido y colores y respetando las condiciones de victoria específicas.",
-    "creador": "Creador: Diseñador tradicional / Editorial de EE. UU. | Año: Desconocido o tradicional | Por qué se creó: Desarrollado para enriquecer el catálogo cultural de juegos de cartas de la región.",
-    "imagen_juego": "games/portadas/30 - Uno.jpg"
-  },
+
   {
     "id": 31,
     "nombre": "Jenga",
