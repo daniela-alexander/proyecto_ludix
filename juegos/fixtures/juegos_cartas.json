@@ -10,7 +10,8 @@
     "descripcion": "El juego de cartas familiar más popular del mundo, donde los jugadores compiten por quedarse sin cartas emparejando colores o números y lanzando comodines de penalización.",
     "instrucciones": "Se reparten 7 cartas a cada jugador y se destapa una carta central. En su turno, cada jugador debe lanzar una carta que coincida en color, número o símbolo con la visible, o jugar un comodín (+4, cambio de color, reversa, salto o +2). Al quedarse con una sola carta hay que gritar '¡UNO!' para evitar robar penalización.",
     "creador": "Creador: Merle Robbins | Año: 1971 | Por qué se creó: Robbins diseñó cartas propias con símbolos y colores para resolver una discusión familiar sobre las reglas del tradicional juego Crazy Eights.",
-    "imagen_juego": "games/portadas_cartas/01 - UNO.jpg"
+    "imagen_juego": "games/portadas_cartas/01 - UNO.jpg",
+    "precio": 12.99
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "descripcion": "Frenético juego de cartas circulares basadas en geometría proyectiva donde entre dos cartas cualesquiera siempre existe exactamente un único símbolo en común.",
     "instrucciones": "Consta de 55 cartas con 8 símbolos cada una. Incluye 5 minijuegos distintos (como La Torre o El Pozo) en los que todos juegan simultáneamente buscando identificar y nombrar en voz alta el único dibujo idéntico entre dos cartas antes que los rivales.",
     "creador": "Creador: Denis Blanchot, Jacques Cottereau y Play Factory | Año: 2009 | Por qué se creó: Inspirado en un problema matemático de combinatoria (el problema de las colegialas de Kirkman), fue adaptado para crear un juego de reflejos instantáneo para todas las edades.",
-    "imagen_juego": "games/portadas_cartas/02 - Dobble (Spot It!).jpg"
+    "imagen_juego": "games/portadas_cartas/02 - Dobble (Spot It!).jpg",
+    "precio": 14.99
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
     "descripcion": "Una versión estratégica y cargada de humor absurdo de la ruleta rusa con gatitos explosivos, rayos láser y cartas de sabotaje.",
     "instrucciones": "Los jugadores roban cartas del mazo por turnos hasta que a alguien le sale un 'Exploding Kitten', quedando eliminado a menos que disponga de una carta de 'Desactivación'. Antes de robar se pueden jugar cartas de acción para saltar turno, ver el futuro del mazo o atacar a otros jugadores.",
     "creador": "Creador: Elan Lee, Matthew Inman (The Oatmeal) y Shane Small | Año: 2015 | Por qué se creó: Nació como proyecto en Kickstarter buscando un juego de cartas rápido de 15 minutos con ilustraciones irreverentes, batiendo récords históricos de financiación.",
-    "imagen_juego": "games/portadas_cartas/03 - Exploding Kittens.jpg"
+    "imagen_juego": "games/portadas_cartas/03 - Exploding Kittens.jpg",
+    "precio": 19.99
   },
   {
     "id": 4,
@@ -49,7 +52,8 @@
     "descripcion": "Poético juego de cartas de gran formato con ilustraciones oníricas y surrealistas donde la imaginación y la empatía deciden los puntos.",
     "instrucciones": "En cada ronda, el cuentacuentos elige una de sus 6 cartas y dice una frase, palabra o sonido relacionado sin mostrarla. Los demás eligen de su mano la carta que mejor encaje con esa pista, se barajan y todos votan cuál es la original. El narrador solo puntúa si aciertan algunos jugadores, pero no todos ni ninguno.",
     "creador": "Creador: Jean-Louis Roubira | Año: 2008 | Por qué se creó: Roubira, psicólogo infantil, lo ideó inicialmente como herramienta terapéutica para ayudar a jóvenes con dificultades de expresión a comunicarse mediante imágenes.",
-    "imagen_juego": "games/portadas_cartas/04 - Dixit.jpg"
+    "imagen_juego": "games/portadas_cartas/04 - Dixit.jpg",
+    "precio": 34.99
   },
   {
     "id": 5,
@@ -62,7 +66,8 @@
     "descripcion": "El gran fenómeno español de los juegos de cartas modernos: erradica los virus y logra aislar un cuerpo sano de cuatro órganos antes que tus rivales.",
     "instrucciones": "Cada jugador tiene 3 cartas en mano. En su turno puede jugar una carta (colocar un órgano en su mesa, infectar con un virus un órgano rival, vacunar los suyos o usar cartas de tratamiento para robar o contagiar) o descartarse. Gana el primero con 4 órganos sanos de distinto color.",
     "creador": "Creador: Domingo Cabrero, Carlos López y Santi Santisteban | Año: 2015 | Por qué se creó: Tres diseñadores españoles buscaban un juego portátil, ágil y con alta interacción directa ('pique') para jugar en bares y reuniones familiares.",
-    "imagen_juego": "games/portadas_cartas/05 - Virus!.jpg"
+    "imagen_juego": "games/portadas_cartas/05 - Virus!.jpg",
+    "precio": 12.99
   },
   {
     "id": 6,
@@ -75,7 +80,8 @@
     "descripcion": "Rápido juego de selección simultánea de cartas donde los jugadores eligen platos de sushi de una cinta transportadora imaginaria para maximizar combos.",
     "instrucciones": "Se reparte una mano de cartas a cada jugador. Todos eligen una carta en secreto, la revelan a la vez y pasan el resto de su mano al jugador de al lado. Se repite durante tres rondas puntuando combinaciones como tempuras por parejas, tríos de sashimi, makis o puddings al final.",
     "creador": "Creador: Phil Walker-Harding | Año: 2013 | Por qué se creó: El autor quiso condensar la mecánica de 'card drafting' de juegos complejos como 7 Wonders en un formato familiar de 15 minutos con estética kawaii.",
-    "imagen_juego": "games/portadas_cartas/06 - Sushi Go!.jpg"
+    "imagen_juego": "games/portadas_cartas/06 - Sushi Go!.jpg",
+    "precio": 14.99
   },
   {
     "id": 7,
@@ -88,7 +94,8 @@
     "descripcion": "Clásico juego matemático con cartas numeradas del 1 al 104 en el que debes evitar a toda costa colocar la sexta carta de una fila.",
     "instrucciones": "Hay cuatro filas en la mesa con una carta inicial cada una. Todos los jugadores eligen una carta de su mano y la revelan a la vez; se colocan en orden ascendente junto a la carta más cercana por debajo. Quien se vea obligado a poner la sexta carta de una fila se lleva las cinco anteriores como puntos negativos.",
     "creador": "Creador: Wolfgang Kramer | Año: 1994 | Por qué se creó: Kramer diseñó un sistema simultáneo sin tiempos muertos donde la tensión aumenta exponencialmente conforme las filas llegan a cinco cartas.",
-    "imagen_juego": "games/portadas_cartas/07 - ¡Toma 6! (6 Nimmt!).jpg"
+    "imagen_juego": "games/portadas_cartas/07 - ¡Toma 6! (6 Nimmt!).jpg",
+    "precio": 12.99
   },
   {
     "id": 8,
@@ -101,7 +108,8 @@
     "descripcion": "Obra maestra del diseño minimalista compuesta por apenas 16 a 21 cartas en la que compites por hacer llegar tu carta de amor a la Princesa.",
     "instrucciones": "Cada jugador empieza con 1 carta secreta. En su turno roba una segunda carta y juega una de las dos aplicando su efecto (adivinar la mano rival con la Guardia, comparar cartas con el Barón, protegerse con la Doncella...). Gana la ronda el último en pie o quien tenga la carta más alta al agotarse el mazo.",
     "creador": "Creador: Seiji Kanai | Año: 2012 | Por qué se creó: Kanai buscaba demostrar que se podía crear un juego profundo de deducción y engaño con menos de veinte cartas.",
-    "imagen_juego": "games/portadas_cartas/08 - Love Letter.jpg"
+    "imagen_juego": "games/portadas_cartas/08 - Love Letter.jpg",
+    "precio": 14.99
   },
   {
     "id": 9,
@@ -114,7 +122,8 @@
     "descripcion": "Juego de identidades secretas en una mina de oro donde los enanos buscadores intentan excavar un túnel hasta el tesoro mientras los saboteadores lo impiden.",
     "instrucciones": "Se reparten cartas de rol en secreto. Por turnos, los jugadores colocan cartas de túnel conectando la entrada con las tres cartas de destino o juegan cartas de acción para romper herramientas rivales o mirar el mapa. Si llegan al oro ganan los buscadores; si se agota el mazo sin llegar, ganan los saboteadores.",
     "creador": "Creador: Frédéric Moyersoen | Año: 2004 | Por qué se creó: Moyersoen combinó la mecánica de colocación de caminos tipo laberinto con la desconfianza social de los juegos de roles ocultos.",
-    "imagen_juego": "games/portadas_cartas/09 - Saboteur.jpg"
+    "imagen_juego": "games/portadas_cartas/09 - Saboteur.jpg",
+    "precio": 14.99
   },
   {
     "id": 10,
@@ -127,7 +136,8 @@
     "descripcion": "Juego ambientado en el Salvaje Oeste donde el Sheriff y sus Alguaciles se enfrentan a los Forajidos y a un Renegado en un tiroteo de identidades ocultas.",
     "instrucciones": "Solo el Sheriff revela su rol al inicio. Cada personaje tiene una habilidad especial y puntos de vida representados con balas. Mediante cartas de alcance, armas, barriles y disparos ('¡Bang!'), cada bando debe cumplir su objetivo secreto eliminando a sus enemigos.",
     "creador": "Creador: Emiliano Sciarra | Año: 2002 | Por qué se creó: Sciarra quiso trasladar la atmósfera de los Spaghetti Western de Sergio Leone a un juego de cartas dinámico con roles secretos.",
-    "imagen_juego": "games/portadas_cartas/10 - Bang!.jpg"
+    "imagen_juego": "games/portadas_cartas/10 - Bang!.jpg",
+    "precio": 24.99
   },
   {
     "id": 11,
@@ -140,7 +150,8 @@
     "descripcion": "Experimento lúdico cooperativo en el que el grupo debe jugar cartas numeradas del 1 al 100 en orden ascendente sin poder hablar ni hacer señas.",
     "instrucciones": "En el nivel 1 cada jugador recibe 1 carta; en el nivel 2 recibe 2 cartas, y así sucesivamente. Sin comunicarse verbalmente ni mostrar sus cartas, los jugadores deben sentir el ritmo colectivo para ir soltando sus números de menor a mayor en un único montón central sin saltarse ninguno.",
     "creador": "Creador: Wolfgang Warsch | Año: 2018 | Por qué se creó: Warsch exploró el concepto de percepción compartida del tiempo y conexión psicológica entre jugadores eliminando toda comunicación explícita.",
-    "imagen_juego": "games/portadas_cartas/11 - The Mind.jpg"
+    "imagen_juego": "games/portadas_cartas/11 - The Mind.jpg",
+    "precio": 14.99
   },
   {
     "id": 12,
@@ -153,7 +164,8 @@
     "descripcion": "Original juego cooperativo de fuegos artificiales en el que todos los jugadores ven las cartas de los demás pero nadie puede mirar las suyas propias.",
     "instrucciones": "Sostienes tus cartas mirando hacia tus compañeros. En tu turno puedes gastar una ficha de pista para informar a otro jugador sobre un color o número de su mano, descartar una carta para recuperar pistas o jugar una carta en la mesa intentando construir escaleras del 1 al 5 en cinco colores distintos.",
     "creador": "Creador: Antoine Bauza | Año: 2010 | Por qué se creó: Bauza invirtió la regla fundamental de los juegos de cartas —ver tu propia mano— para crear un rompecabezas deductivo basado en la confianza.",
-    "imagen_juego": "games/portadas_cartas/12 - Hanabi.jpg"
+    "imagen_juego": "games/portadas_cartas/12 - Hanabi.jpg",
+    "precio": 14.99
   },
   {
     "id": 13,
@@ -166,7 +178,8 @@
     "descripcion": "Vertiginoso juego de destreza manual y coordinación verbal en el que debes palmear el montón central en cuanto la carta coincida con la palabra cantada.",
     "instrucciones": "Se reparte todo el mazo boca abajo. Por turnos rápidos, cada jugador voltea su carta superior mientras recita en secuencia fija: 'Taco, Gato, Cabra, Queso, Pizza'. En cuanto la palabra pronunciada coincida con la ilustración de la carta (o salga una carta especial de gesto), todos deben poner la mano encima; el último se lleva el montón.",
     "creador": "Creador: Dave Campbell | Año: 2018 | Por qué se creó: Diseñado para generar risas instantáneas mediante la confusión cognitiva entre lo que se dice y lo que se ve.",
-    "imagen_juego": "games/portadas_cartas/13 - Taco Gato Cabra Queso Pizza.jpg"
+    "imagen_juego": "games/portadas_cartas/13 - Taco Gato Cabra Queso Pizza.jpg",
+    "precio": 14.99
   },
   {
     "id": 14,
@@ -179,7 +192,8 @@
     "descripcion": "Adictivo juego de cartas de acumular pelusas de colores sabiendo cuándo plantarse antes de que salgan dos números repetidos.",
     "instrucciones": "En tu turno robas cartas una a una del mazo colocándolas frente a ti. Puedes seguir robando todo lo que quieras (e incluso robar cartas de los montones activos de los rivales), pero si sacas un número que ya tenías en esa ronda pierdes todas las cartas acumuladas. Si sobrevives hasta tu siguiente turno, las aseguras como puntos.",
     "creador": "Creador: Reiner Knizia | Año: 2021 | Por qué se creó: El prolífico matemático Reiner Knizia creó una versión ultracompacta y tensa de mecánica 'tienta la suerte' accesible para niños y adultos.",
-    "imagen_juego": "games/portadas_cartas/14 - Pelusas (Fluff).jpg"
+    "imagen_juego": "games/portadas_cartas/14 - Pelusas (Fluff).jpg",
+    "precio": 12.99
   },
   {
     "id": 15,
@@ -192,7 +206,8 @@
     "descripcion": "Popular juego de cartas de los creadores de UNO centrado en vaciar tu pila personal construyendo escaleras ascendentes del 1 al 12.",
     "instrucciones": "Cada jugador recibe una pila personal de reserva boca abajo (con solo la superior visible) y 5 cartas en mano. En su turno debe iniciar o continuar hasta cuatro pilas centrales del 1 al 12 usando cartas de su mano, de sus pilas de descarte o de su reserva personal (apoyándose en comodines Skip-Bo). Gana quien agote antes su pila.",
     "creador": "Creador: Minnie Hazel Bowman | Año: 1967 | Por qué se creó: Evolucionó del juego tradicional Spite and Malice sustituyendo la baraja inglesa por un mazo numerado con comodines claros.",
-    "imagen_juego": "games/portadas_cartas/15 - Skip-Bo.jpg"
+    "imagen_juego": "games/portadas_cartas/15 - Skip-Bo.jpg",
+    "precio": 14.99
   },
   {
     "id": 16,
@@ -205,7 +220,8 @@
     "descripcion": "Uno de los juegos de cartas comerciales más vendidos de la historia, inspirado en el Rummy, donde debes superar diez retos consecutivos.",
     "instrucciones": "Todos los jugadores empiezan en la Fase 1 (dos tríos) y deben completarla bajando sus combinaciones a la mesa para poder avanzar a la Fase 2 en la siguiente mano (un trío y una escalera de 4), y así hasta completar las 10 fases distintas usando cartas de colores, comodines y cartas 'Pierde turno'.",
     "creador": "Creador: Kenneth Johnson | Año: 1982 | Por qué se creó: Johnson adaptó el juego tradicional Liverpool Rummy creando un mazo específico con objetivos impresos por fases.",
-    "imagen_juego": "games/portadas_cartas/16 - Phase 10.jpg"
+    "imagen_juego": "games/portadas_cartas/16 - Phase 10.jpg",
+    "precio": 14.99
   },
   {
     "id": 17,
@@ -218,7 +234,8 @@
     "descripcion": "Galardonado juego de estrategia de cartas donde desarrollas una civilización antigua a lo largo de tres eras sin importar cuántos jugadores haya en la mesa.",
     "instrucciones": "En cada una de las tres eras, los jugadores eligen simultáneamente una carta de su mano (para construir edificios civiles, científicos, comerciales, militares o maravillas) y pasan el resto al vecino. Al jugar todos a la vez, una partida a 7 jugadores dura lo mismo que una a 3.",
     "creador": "Creador: Antoine Bauza | Año: 2010 | Por qué se creó: Bauza diseñó un juego de desarrollo de civilizaciones capaz de alojar hasta siete personas en media hora eliminando los tiempos de espera entre turnos.",
-    "imagen_juego": "games/portadas_cartas/17 - 7 Wonders.jpg"
+    "imagen_juego": "games/portadas_cartas/17 - 7 Wonders.jpg",
+    "precio": 49.99
   },
   {
     "id": 18,
@@ -231,7 +248,8 @@
     "descripcion": "El juego que inventó el género moderno de construcción de mazos: tu propio mazo es tu tablero y evoluciona durante la partida.",
     "instrucciones": "Todos comienzan con un mazo idéntico de 10 cartas básicas (7 Cobres y 3 Fincas). En cada turno robas 5 cartas y las usas para comprar nuevas cartas de acción, tesoro o victoria del suministro central, que van a tu descarte y se barajan cuando se agota tu mazo. Gana quien tenga más puntos de victoria al final.",
     "creador": "Creador: Donald X. Vaccarino | Año: 2008 | Por qué se creó: Vaccarino revolucionó los juegos de mesa modernos trasladando la construcción de mazos de Magic: The Gathering al interior de una misma partida.",
-    "imagen_juego": "games/portadas_cartas/18 - Dominion.jpg"
+    "imagen_juego": "games/portadas_cartas/18 - Dominion.jpg",
+    "precio": 44.99
   },
   {
     "id": 19,
@@ -244,7 +262,8 @@
     "descripcion": "Parodia satírica de los juegos de rol clásicos donde pateas puertas, derrotas monstruos ridículos y traicionas a tus compañeros para llegar al nivel 10.",
     "instrucciones": "Cada jugador empieza en nivel 1 como humano sin clase. En tu turno robas una carta de Puerta; si aparece un monstruo debes superarlo sumando tu nivel y tus objetos equipados (mientras los rivales lanzan maldiciones para ayudarte o hundirte). Gana el primero en alcanzar el nivel 10.",
     "creador": "Creador: Steve Jackson (ilustrado por John Kovalic) | Año: 2001 | Por qué se creó: Steve Jackson parodió el estilo de juego 'powergamer' de los jugadores de rol que solo buscan matar monstruos y acumular tesoros.",
-    "imagen_juego": "games/portadas_cartas/19 - Munchkin.jpg"
+    "imagen_juego": "games/portadas_cartas/19 - Munchkin.jpg",
+    "precio": 24.99
   },
   {
     "id": 20,
@@ -257,6 +276,7 @@
     "descripcion": "Uno de los juegos de cartas coleccionables más jugados y coleccionados del planeta, basado en combates estratégicos entre entrenadores Pokémon.",
     "instrucciones": "Cada jugador utiliza un mazo de 60 cartas con Pokémon básicos, evoluciones, cartas de Energía y cartas de Entrenador. Colocas un Pokémon activo y hasta cinco en banca, unes energías para ejecutar ataques y ganas al recoger tus 6 cartas de Premio debilitando Pokémon rivales.",
     "creador": "Creador: Tsunekazu Ishihara, Kouichi Ohyama y Takumi Akabane (Creatures Inc.) | Año: 1996 | Por qué se creó: Creado en Japón poco después de los videojuegos originales de Game Boy para trasladar los combates por turnos al formato físico coleccionable.",
-    "imagen_juego": "games/portadas_cartas/20 - Pokémon Trading Card Game (JCC).jpg"
+    "imagen_juego": "games/portadas_cartas/20 - Pokémon Trading Card Game (JCC).jpg",
+    "precio": 49.99
   }
 ]
