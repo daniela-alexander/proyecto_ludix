@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 import re
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ludix.settings")
@@ -88,22 +88,34 @@ def cargar_juegos_json(ruta_json=RUTA_JSON):
             )
             duration = max(1, round((duracion_minima + duracion_maxima) / 2))
             titulo = item["nombre"].strip()
+            defaults = {
+                "description": descripcion_completa(item),
+                "min_players": min_players,
+                "max_players": max_players,
+                "duration_minutes": duration,
+                "min_age": 8,
+                "difficulty": Decimal("2.00"),
+                "is_online": False,
+            }
+            if "precio" in item:
+                try:
+                    precio = Decimal(str(item["precio"]))
+                except (InvalidOperation, TypeError, ValueError) as error:
+                    raise ValueError(
+                        f"El precio del juego «{titulo}» no es un número válido."
+                    ) from error
+                if not precio.is_finite() or precio < 0:
+                    raise ValueError(
+                        f"El precio del juego «{titulo}» debe ser un número no negativo."
+                    )
+                defaults["price"] = precio
+
             imagen_url = (
                 item.get("imagen_juego") or item.get("imagen_ilustrativa") or ""
             ).strip()
             game, created = Game.objects.update_or_create(
                 title=titulo,
-                defaults={
-                    "description": descripcion_completa(item),
-                    "min_players": min_players,
-                    "max_players": max_players,
-                    "duration_minutes": duration,
-                    "min_age": 8,
-                    "difficulty": Decimal("2.00"),
-                    "price": Decimal("0.00"),
-                    "stock": 0,
-                    "is_online": False,
-                },
+                defaults=defaults,
             )
             if imagen_url and (
                 not game.image

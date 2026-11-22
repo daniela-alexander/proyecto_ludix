@@ -562,6 +562,64 @@ input:focus{
     min-width:0;
 }
 
+.pagination {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:.75rem;
+    margin-top:1.25rem;
+    padding:.85rem 1rem;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+
+.pagination a {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:42px;
+    padding:.65rem 1rem;
+    border:1px solid var(--border);
+    border-radius:11px;
+    color: #fff;
+    background:linear-gradient(135deg, var(--accent), var(--accent-hover));
+    font-weight:700;
+    text-decoration:none;
+    transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.pagination a:hover {
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px var(--glow-purple);
+}
+
+.pagination a:focus-visible {
+    outline:2px solid var(--neon);
+    outline-offset:3px;
+}
+
+.pagination span {
+    color:var(--text-secondary);
+    font-size:.9rem;
+    font-weight:600;
+    text-align:center;
+}
+
+@media (max-width:480px) {
+    .pagination {
+        gap:.5rem;
+        padding:.75rem;
+    }
+
+    .pagination a {
+        min-height:40px;
+        padding:.6rem .8rem;
+    }
+}
+
 .search-main {
     display:flex;
     flex-direction:column;
@@ -750,6 +808,7 @@ input:focus{
 .featured-highlight {
     width:100%;
     margin-top:0.5rem;
+    scroll-margin-top:6rem;
     padding:0;
     background:transparent;
     border:0;
