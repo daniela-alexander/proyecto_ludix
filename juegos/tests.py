@@ -118,6 +118,18 @@ class GameApiSearchTests(TestCase):
         self.assertEqual(response.json()["count"], 1)
         self.assertEqual(response.json()["results"][0]["title"], "Prueba Ludix")
 
+    def test_api_uses_game_title_for_active_language(self):
+        self.game_one.title_en = "Ludix Test"
+        self.game_one.save(update_fields=["title_en"])
+
+        response = self.client.get(
+            "/api/games/?search=ludix",
+            HTTP_ACCEPT_LANGUAGE="en",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["results"][0]["title"], "Ludix Test")
+
     def test_home_filter_by_online_type(self):
         response = self.client.get("/?format=online")
 

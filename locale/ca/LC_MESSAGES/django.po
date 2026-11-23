@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-19 22:15+0000\n"
+"POT-Creation-Date: 2026-11-23 18:16+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,7 +64,7 @@ msgstr "Envia"
 msgid "Conectando…"
 msgstr "S'està connectant…"
 
-#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:78
+#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:81
 msgid "Conectado"
 msgstr "Connectat"
 
@@ -127,83 +127,11 @@ msgstr "Tria amb qui vols parlar."
 msgid "Abrir conversación"
 msgstr "Obre la conversa"
 
-#: juegos/forms.py:76
-msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
-msgstr "🎮 D'on vols que surtin les recomanacions?"
-
-#: juegos/forms.py:77 juegos/forms.py:81
-msgid "👥 Número de jugadores"
-msgstr "👥 Nombre de jugadors"
-
-#: juegos/forms.py:78
-msgid "👶 Edad de la persona más joven"
-msgstr "👶 Edat de la persona més jove"
-
-#: juegos/forms.py:79
-msgid "⏱️ Duración máxima en minutos"
-msgstr "⏱️ Durada màxima en minuts"
-
-#: juegos/forms.py:80
-msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
-msgstr "🎯 Dificultat (1 = molt fàcil, 5 = molt difícil)"
-
-#: juegos/forms.py:81
-msgid "🏷️ Categoría"
-msgstr "🏷️ Categoria"
-
-#: juegos/forms.py:87
-msgid "De mi biblioteca"
-msgstr "De la meva biblioteca"
-
-#: juegos/forms.py:91
-msgid "Del catálogo de Ludix"
-msgstr "Del catàleg de Ludix"
-
-#: juegos/forms.py:95 juegos/forms.py:121
-msgid "Cualquiera"
-msgstr "Qualsevol"
-
-#: juegos/forms.py
-msgid "Fuente de recomendaciones"
-msgstr "Font de recomanacions"
-
-#: juegos/forms.py
+#: juegos/forms.py:70
 msgid "¿Dónde buscar?"
 msgstr "On cercar?"
 
-#: juegos/forms.py juegos/forms.py:113
-msgid "Mis juegos"
-msgstr "Els meus jocs"
-
-#: juegos/forms.py juegos/forms.py:117
-msgid "Catálogo de Ludix"
-msgstr "Catàleg de Ludix"
-
-#: juegos/forms.py
-msgid "Preferencia de edad"
-msgstr "Preferència d'edat"
-
-#: juegos/forms.py juegos/forms.py:87
-msgid "Cualquier edad"
-msgstr "Qualsevol edat"
-
-#: juegos/forms.py juegos/forms.py:84
-msgid "Edad"
-msgstr "Edat"
-
-#: juegos/forms.py
-msgid "Elegir edad"
-msgstr "Triar edat"
-
-#: juegos/forms.py
-msgid "Preferencia de dificultad"
-msgstr "Preferència de dificultat"
-
-#: juegos/forms.py juegos/forms.py:96
-msgid "Cualquier dificultad"
-msgstr "Qualsevol dificultat"
-
-#: juegos/forms.py
+#: juegos/forms.py:71
 msgid "Tiempo de partida"
 msgstr "Durada de la partida"
 
@@ -231,9 +159,25 @@ msgstr "🎲 Fins a 120m"
 msgid "🕰️ 120 y más"
 msgstr "🕰️ 120 o més"
 
+#: juegos/forms.py:81
+msgid "👥 Número de jugadores"
+msgstr "👥 Nombre de jugadors"
+
+#: juegos/forms.py:84
+msgid "Edad"
+msgstr "Edat"
+
+#: juegos/forms.py:87
+msgid "Cualquier edad"
+msgstr "Qualsevol edat"
+
 #: juegos/forms.py:94 templates/juegos/game_detail.html:77
 msgid "Dificultad"
 msgstr "Dificultat"
+
+#: juegos/forms.py:96
+msgid "Cualquier dificultad"
+msgstr "Qualsevol dificultat"
 
 #: juegos/forms.py:97
 msgid "🌱 Muy fácil"
@@ -260,8 +204,20 @@ msgid "La dificultad solo influye en el orden de las recomendaciones."
 msgstr "La dificultat només influeix en l'ordre de les recomanacions."
 
 #: juegos/forms.py:106
-msgid "🏷️ Temática"
-msgstr "🏷️ Temàtica"
+msgid "🏷️ Categoría"
+msgstr "🏷️ Categoria"
+
+#: juegos/forms.py:113
+msgid "Mis juegos"
+msgstr "Els meus jocs"
+
+#: juegos/forms.py:117
+msgid "Catálogo de Ludix"
+msgstr "Catàleg de Ludix"
+
+#: juegos/forms.py:121
+msgid "Cualquiera"
+msgstr "Qualsevol"
 
 #: juegos/models.py:12
 msgid "Cliente"
@@ -299,27 +255,27 @@ msgstr "Enviat"
 msgid "Cancelado"
 msgstr "Cancel·lat"
 
-#: juegos/views.py:107
+#: juegos/views.py:108
 msgid "Orden alfabético"
 msgstr "Ordre alfabètic"
 
-#: juegos/views.py:108
+#: juegos/views.py:109
 msgid "Más vendidos"
 msgstr "Més venuts"
 
-#: juegos/views.py:109
+#: juegos/views.py:110
 msgid "Precio: menor a mayor"
 msgstr "Preu: de més baix a més alt"
 
-#: juegos/views.py:110
+#: juegos/views.py:111
 msgid "Precio: mayor a menor"
 msgstr "Preu: de més alt a més baix"
 
-#: juegos/views.py:111
+#: juegos/views.py:112
 msgid "Más favoritos"
 msgstr "Més preferits"
 
-#: juegos/views.py:112
+#: juegos/views.py:113
 msgid "Partidas más cortas"
 msgstr "Partides més curtes"
 
@@ -436,7 +392,7 @@ msgstr "Jocs a la biblioteca"
 msgid "Favoritos"
 msgstr "Preferits"
 
-#: templates/accounts/profile.html:49 templates/accounts/profile.html:165
+#: templates/accounts/profile.html:49 templates/accounts/profile.html:167
 msgid "Lista de deseos"
 msgstr "Llista de desitjos"
 
@@ -476,99 +432,99 @@ msgstr "Desa els canvis"
 msgid "Idioma actual"
 msgstr "Idioma actual"
 
-#: templates/accounts/profile.html:99
+#: templates/accounts/profile.html:101
 msgid "Fecha de nacimiento"
 msgstr "Data de naixement"
 
-#: templates/accounts/profile.html:104
+#: templates/accounts/profile.html:106
 msgid "No indicado"
 msgstr "No indicat"
 
-#: templates/accounts/profile.html:111
+#: templates/accounts/profile.html:113
 msgid "Mis juegos favoritos"
 msgstr "Els meus jocs preferits"
 
-#: templates/accounts/profile.html:113
+#: templates/accounts/profile.html:115
 msgid "Juegos marcados como favoritos."
 msgstr "Jocs marcats com a preferits."
 
-#: templates/accounts/profile.html:122 templates/accounts/profile.html:145
-#: templates/accounts/profile.html:176
+#: templates/accounts/profile.html:124 templates/accounts/profile.html:147
+#: templates/accounts/profile.html:178
 #, python-format
 msgid "Añadido %(date)s"
 msgstr "Afegit el %(date)s"
 
-#: templates/accounts/profile.html:128
+#: templates/accounts/profile.html:130
 msgid "Todavía no tienes juegos favoritos."
 msgstr "Encara no tens cap joc preferit."
 
-#: templates/accounts/profile.html:134
+#: templates/accounts/profile.html:136
 msgid "Mi biblioteca"
 msgstr "La meva biblioteca"
 
-#: templates/accounts/profile.html:136
+#: templates/accounts/profile.html:138
 msgid "Los últimos juegos que has añadido."
 msgstr "Els últims jocs que has afegit."
 
-#: templates/accounts/profile.html:153 templates/accounts/profile.html:154
+#: templates/accounts/profile.html:155 templates/accounts/profile.html:156
 #: templates/home.html:183 templates/home.html:186
 #: templates/juegos/sugerencia_form.html:188
 #: templates/juegos/sugerencia_form.html:191
 msgid "Quitar de mi biblioteca"
 msgstr "Treu-lo de la meva biblioteca"
 
-#: templates/accounts/profile.html:159
+#: templates/accounts/profile.html:161
 msgid "Tu biblioteca está vacía."
 msgstr "La teva biblioteca és buida."
 
-#: templates/accounts/profile.html:167
+#: templates/accounts/profile.html:169
 msgid "Juegos que quieres añadir a tu colección."
 msgstr "Jocs que vols afegir a la teva col·lecció."
 
-#: templates/accounts/profile.html:182
+#: templates/accounts/profile.html:184
 msgid "Tu lista de deseos está vacía."
 msgstr "La teva llista de desitjos és buida."
 
-#: templates/accounts/profile.html:188
+#: templates/accounts/profile.html:190
 msgid "Juegos que no me gustan"
 msgstr "Jocs que no m'agraden"
 
-#: templates/accounts/profile.html:190
+#: templates/accounts/profile.html:192
 msgid "Juegos que has marcado para ajustar tus recomendaciones."
 msgstr "Jocs que has marcat per ajustar les teves recomanacions."
 
-#: templates/accounts/profile.html:211 templates/accounts/profile.html:212
+#: templates/accounts/profile.html:213 templates/accounts/profile.html:214
 #: templates/juegos/game_detail.html:186 templates/juegos/game_detail.html:187
 msgid "Quitar de No me gusta"
 msgstr "Treu de No m'agrada"
 
-#: templates/accounts/profile.html:218
+#: templates/accounts/profile.html:220
 msgid "Todavía no has marcado juegos que no te gusten."
 msgstr "Encara no has marcat cap joc que no t'agradi."
 
-#: templates/accounts/profile.html:224
+#: templates/accounts/profile.html:226
 msgid "Últimas sesiones"
 msgstr "Sessions recents"
 
-#: templates/accounts/profile.html:230
+#: templates/accounts/profile.html:232
 #, python-format
 msgid "Sesión n.o %(id)s"
 msgstr "Sessió núm. %(id)s"
 
-#: templates/accounts/profile.html:239
+#: templates/accounts/profile.html:241
 msgid "Todavía no tienes sesiones guardadas."
 msgstr "Encara no tens cap sessió desada."
 
-#: templates/accounts/profile.html:245
+#: templates/accounts/profile.html:247
 msgid "Últimos pedidos"
 msgstr "Comandes recents"
 
-#: templates/accounts/profile.html:251
+#: templates/accounts/profile.html:253
 #, python-format
 msgid "Pedido n.o %(id)s"
 msgstr "Comanda núm. %(id)s"
 
-#: templates/accounts/profile.html:261
+#: templates/accounts/profile.html:263
 msgid "Todavía no tienes pedidos."
 msgstr "Encara no tens cap comanda."
 
@@ -621,7 +577,7 @@ msgstr "Inicia la sessió"
 msgid "Tipo de dado"
 msgstr "Tipus de dau"
 
-#: templates/base.html:53 templates/base.html:596
+#: templates/base.html:53 templates/base.html:602
 msgid "Letras (A-Z)"
 msgstr "Lletres (A-Z)"
 
@@ -632,6 +588,10 @@ msgstr "Llençar"
 #: templates/base.html:68
 msgid "Navegación principal"
 msgstr "Navegació principal"
+
+#: templates/base.html:79
+msgid "Comparar recomendaciones"
+msgstr "Comparar recomanacions"
 
 #: templates/base.html:83
 #, python-format
@@ -646,20 +606,36 @@ msgstr "Tanca la sessió"
 msgid "Idioma"
 msgstr "Idioma"
 
-#: templates/base.html:137
+#: templates/base.html:111 templates/base.html:128
+msgid "Español"
+msgstr "Espanyol"
+
+#: templates/base.html:112 templates/base.html:129
+msgid "Català"
+msgstr "Català"
+
+#: templates/base.html:113 templates/base.html:130
+msgid "English"
+msgstr "Anglès"
+
+#: templates/base.html:114 templates/base.html:131
+msgid "Italiano"
+msgstr "Italià"
+
+#: templates/base.html:143
 msgid "Cambiar tema"
 msgstr "Canvia el tema"
 
-#: templates/base.html:138
+#: templates/base.html:144
 msgid "Tema actual"
 msgstr "Tema actual"
 
-#: templates/base.html:159 templates/base.html:162
-#: templates/websocket_test.html:73
+#: templates/base.html:165 templates/base.html:168
+#: templates/websocket_test.html:76
 msgid "Usuarios conectados"
 msgstr "Usuaris connectats"
 
-#: templates/base.html:567
+#: templates/base.html:573
 msgid ""
 "El cambio se guardó, pero no se pudo actualizar la vista. Recarga la página "
 "para verla."
@@ -667,23 +643,23 @@ msgstr ""
 "El canvi es va desar, però no es va poder actualitzar la vista. Recarrega la "
 "pàgina per veure-la."
 
-#: templates/base.html:568
+#: templates/base.html:574
 msgid "No se pudo guardar el cambio. Inténtalo de nuevo."
 msgstr "No s'ha pogut desar el canvi. Torneu-ho a provar."
 
-#: templates/base.html:584
+#: templates/base.html:590
 msgid "Lanzador 3D Ludix"
 msgstr "Llançador 3D Ludix"
 
-#: templates/base.html:588
+#: templates/base.html:594
 msgid "Tipo de dado:"
 msgstr "Tipus de dau:"
 
-#: templates/base.html:613
+#: templates/base.html:619
 msgid "¡Lanzar Dado!"
 msgstr "Llançar Dau!"
 
-#: templates/base.html:617
+#: templates/base.html:623
 msgid "Haz clic en el dado o en el botón"
 msgstr "Fes clic al dau o al botó"
 
@@ -870,6 +846,26 @@ msgstr ""
 "No hi ha cap joc que coincideixi amb aquests filtres. Prova de canviar les "
 "opcions."
 
+#: templates/home.html:246
+msgid "Paginación del catálogo"
+msgstr "Paginació del catàleg"
+
+#: templates/home.html:249
+msgid "Anterior"
+msgstr ""
+
+#: templates/home.html:254
+#, python-format
+msgid ""
+"\n"
+"                        Página %(current)s de %(total)s\n"
+"                    "
+msgstr ""
+
+#: templates/home.html:261
+msgid "Siguiente"
+msgstr "Següent"
+
 #: templates/juegos/game_detail.html:8 templates/juegos/game_shop.html:8
 msgid "Ruta de navegación"
 msgstr "Ruta de navegació"
@@ -1040,40 +1036,8 @@ msgstr "Recomana'm un joc | Ludix"
 msgid "🎲 Encuentra tu próximo juego"
 msgstr "🎲 Troba el teu proper joc"
 
-#: templates/juegos/sugerencia_form.html:14
-msgid "Elige de dónde buscar y ajusta solo las preferencias que te importan."
-msgstr "Tria on cercar i ajusta només les preferències que t'importen."
-
-#: templates/juegos/sugerencia_form.html
-msgid "¿Dónde quieres buscar?"
-msgstr "On cerquem?"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Elige una fuente para tus recomendaciones."
-msgstr "Tria una font per a les recomanacions."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Define la partida"
-msgstr "Configura la partida"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Jugadores y duración son los criterios principales."
-msgstr "Els jugadors i la durada són els criteris principals."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Preferencias opcionales"
-msgstr "Preferències opcionals"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
-msgstr "L'edat, la dificultat i la categoria ajuden a afinar, però no són obligatòries."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Sin preferencia"
-msgstr "Sense preferència"
-
-#: templates/juegos/sugerencia_form.html:31
-#: templates/juegos/sugerencia_form.html:296
+#: templates/juegos/sugerencia_form.html:19
+#: templates/juegos/sugerencia_form.html:374
 msgid "▼ Modificar búsqueda"
 msgstr "▼ Modifica la cerca"
 
@@ -1089,16 +1053,7 @@ msgstr "10 jugadors"
 msgid "🎲 Ver recomendaciones"
 msgstr "🎲 Veure recomanacions"
 
-#: templates/juegos/sugerencia_form.html
-#: templates/juegos/sugerencia_form.html:224
-msgid "No encontramos coincidencias"
-msgstr "No hem trobat coincidències"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Prueba ampliar la duración, cambiar la categoría o dejar la edad o la dificultad en «Cualquiera»."
-msgstr "Prova d'ampliar la durada, canviar la categoria o deixar l'edat o la dificultat a «Qualsevol»."
-
-#: templates/juegos/sugerencia_form.html:157
+#: templates/juegos/sugerencia_form.html:132
 msgid "Recomendaciones"
 msgstr "Recomanacions"
 
@@ -1142,16 +1097,20 @@ msgstr "Disponible"
 msgid "No disponible actualmente"
 msgstr "No disponible actualment"
 
-#: templates/juegos/sugerencia_form.html:195
+#: templates/juegos/sugerencia_form.html:180
 msgid "Comprar"
 msgstr "Comprar"
 
+#: templates/juegos/sugerencia_form.html:224
+msgid "No encontramos coincidencias"
+msgstr "No hem trobat coincidències"
+
 #: templates/juegos/sugerencia_form.html:225
 msgid ""
-"Prueba ampliar la duración, cambiar la temática o dejar la edad o la "
+"Prueba ampliar la duración, cambiar la categoría o dejar la edad o la "
 "dificultad en «Cualquiera»."
 msgstr ""
-"Prova d'ampliar la durada, canviar la temàtica o deixar l'edat o la "
+"Prova d'ampliar la durada, canviar la categoria o deixar l'edat o la "
 "dificultat a «Qualsevol»."
 
 #: templates/juegos/sugerencia_form.html:243
@@ -1161,14 +1120,6 @@ msgstr "jugador"
 #: templates/juegos/sugerencia_form.html:244
 msgid "jugadores"
 msgstr "jugadors"
-
-#: templates/juegos/sugerencia_form.html:256
-msgid "Mayor de 18"
-msgstr "Majors de 18"
-
-#: templates/juegos/sugerencia_form.html:266
-msgid "min"
-msgstr "minuts"
 
 #: templates/juegos/sugerencia_form.html:375
 msgid "▲ Ocultar búsqueda"
@@ -1251,19 +1202,19 @@ msgstr "No hi ha perfils de prova `test_*` disponibles per comparar."
 msgid "Ludix WebSocket Test"
 msgstr "Prova de WebSocket de Ludix"
 
-#: templates/websocket_test.html:70
+#: templates/websocket_test.html:73
 msgid "Cambiar"
 msgstr "Canvia"
 
-#: templates/websocket_test.html:75
+#: templates/websocket_test.html:78
 msgid "Conectando..."
 msgstr "S'està connectant..."
 
-#: templates/websocket_test.html:79
+#: templates/websocket_test.html:82
 msgid "Error de conexión"
 msgstr "Error de connexió"
 
-#: templates/websocket_test.html:80
+#: templates/websocket_test.html:83
 msgid "Desconectado"
 msgstr "Desconnectat"
 
@@ -2588,6 +2539,368 @@ msgstr "Django Community"
 #: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:239
 msgid "Connect, get help, or contribute"
 msgstr "Connect, get help, or contribute"
+
+#~ msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
+#~ msgstr "🎮 D'on vols que surtin les recomanacions?"
+
+#~ msgid "👶 Edad de la persona más joven"
+#~ msgstr "👶 Edat de la persona més jove"
+
+#~ msgid "⏱️ Duración máxima en minutos"
+#~ msgstr "⏱️ Durada màxima en minuts"
+
+#~ msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
+#~ msgstr "🎯 Dificultat (1 = molt fàcil, 5 = molt difícil)"
+
+#~ msgid "De mi biblioteca"
+#~ msgstr "De la meva biblioteca"
+
+#~ msgid "Del catálogo de Ludix"
+#~ msgstr "Del catàleg de Ludix"
+
+#~ msgid "Fuente de recomendaciones"
+#~ msgstr "Font de recomanacions"
+
+#~ msgid "Preferencia de edad"
+#~ msgstr "Preferència d'edat"
+
+#~ msgid "Elegir edad"
+#~ msgstr "Triar edat"
+
+#~ msgid "Preferencia de dificultad"
+#~ msgstr "Preferència de dificultat"
+
+#~ msgid "🏷️ Temática"
+#~ msgstr "🏷️ Temàtica"
+
+#~ msgid ""
+#~ "Elige de dónde buscar y ajusta solo las preferencias que te importan."
+#~ msgstr "Tria on cercar i ajusta només les preferències que t'importen."
+
+#~ msgid "¿Dónde quieres buscar?"
+#~ msgstr "On cerquem?"
+
+#~ msgid "Elige una fuente para tus recomendaciones."
+#~ msgstr "Tria una font per a les recomanacions."
+
+#~ msgid "Define la partida"
+#~ msgstr "Configura la partida"
+
+#~ msgid "Jugadores y duración son los criterios principales."
+#~ msgstr "Els jugadors i la durada són els criteris principals."
+
+#~ msgid "Preferencias opcionales"
+#~ msgstr "Preferències opcionals"
+
+#~ msgid ""
+#~ "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
+#~ msgstr ""
+#~ "L'edat, la dificultat i la categoria ajuden a afinar, però no són "
+#~ "obligatòries."
+
+#~ msgid "Sin preferencia"
+#~ msgstr "Sense preferència"
+
+#~ msgid ""
+#~ "Prueba ampliar la duración, cambiar la temática o dejar la edad o la "
+#~ "dificultad en «Cualquiera»."
+#~ msgstr ""
+#~ "Prova d'ampliar la durada, canviar la temàtica o deixar l'edat o la "
+#~ "dificultat a «Qualsevol»."
+
+#~ msgid "Mayor de 18"
+#~ msgstr "Majors de 18"
+
+#~ msgid "min"
+#~ msgstr "minuts"
+
+#~ msgid "Hundir la Flota (Batalla Naval)"
+#~ msgstr "Enfonsar la flota (batalla naval)"
+
+#~ msgid "Tres en Raya (Gato / Cero y Cruces)"
+#~ msgstr "Tres en ratlla (gat / creus i zeros)"
+
+#~ msgid "Cuadritos (Puntos y Cajas / Timbiriche)"
+#~ msgstr "Punts i caixes"
+
+#~ msgid "Nimm en Papel"
+#~ msgstr "Nimm en paper"
+
+#~ msgid "Cero Cero (Zero Zero)"
+#~ msgstr "Zero Zero"
+
+#~ msgid "Las Enredaderas (Sprouts)"
+#~ msgstr "Les enfiladisses (Sprouts)"
+
+#~ msgid "El Ahorcado"
+#~ msgstr "El penjat"
+
+#~ msgid "Mastermind de Papel (Bulls and Cows)"
+#~ msgstr "Mastermind de paper (Bulls and Cows)"
+
+#~ msgid "El Juego de la Vida de Conway (Papel)"
+#~ msgstr "El joc de la vida de Conway (paper)"
+
+#~ msgid "Carrera de Vectores (Racetrack)"
+#~ msgstr "Cursa de vectors (Racetrack)"
+
+#~ msgid "Tic-Tac-Toe Cuántico"
+#~ msgstr "Tres en ratlla quàntic"
+
+#~ msgid "Pictionary Casero"
+#~ msgstr "Pictionary casolà"
+
+#~ msgid "Dudo de Números (Gobernador / Chinchón de Palabras)"
+#~ msgstr "Mentida de números (governador / Chinchón de paraules)"
+
+#~ msgid "Gomoku de Papel (Cinco en Raya)"
+#~ msgstr "Gomoku de paper (cinc en ratlla)"
+
+#~ msgid "Cuatro en Raya (Conectar 4 en Papel)"
+#~ msgstr "Quatre en ratlla (connecta 4 en paper)"
+
+#~ msgid "El Cuadro Fantasma"
+#~ msgstr "El quadrat fantasma"
+
+#~ msgid "El Laberinto Cruzado"
+#~ msgstr "El laberint encreuat"
+
+#~ msgid "El Dictado a Ciegas"
+#~ msgstr "El dictat a cegues"
+
+#~ msgid "El Intruso (Gatos y Ratones)"
+#~ msgstr "L'intrús (gats i ratolins)"
+
+#~ msgid "Hink Pink / Anagramas de Papel"
+#~ msgstr "Hink Pink / anagrames de paper"
+
+#~ msgid "Banderas (Conquista de Cuadrantes)"
+#~ msgstr "Bandera (conquesta de quadrants)"
+
+#~ msgid "El Teléfono Roto Dibujado (Telestrations casero)"
+#~ msgstr "El telèfon dibuixat (Telestrations casolà)"
+
+#~ msgid "Criptograma Cruzado"
+#~ msgstr "Criptograma encreuat"
+
+#~ msgid "El Círculo de la Fortuna (Hangman Circular)"
+#~ msgstr "El cercle de la fortuna (penjat circular)"
+
+#~ msgid "Puentes de Königsberg en Papel"
+#~ msgstr "Els ponts de Königsberg en paper"
+
+#~ msgid "El Tesoro Escondido (Mapa de Coordenadas)"
+#~ msgstr "El tresor amagat (mapa de coordenades)"
+
+#~ msgid "Rejilla de Conexión (Hex en Papel)"
+#~ msgstr "Graella de connexions (Hex en paper)"
+
+#~ msgid "La Serpiente (Shedder / Snake)"
+#~ msgstr "La serp (Shedder / Snake)"
+
+#~ msgid "Guerra de Números"
+#~ msgstr "Guerra de números"
+
+#~ msgid "Sopa de Letras Competitiva"
+#~ msgstr "Sopa de lletres competitiva"
+
+#~ msgid "El Cuadrado Mágico"
+#~ msgstr "El quadrat màgic"
+
+#~ msgid "Cadenas de Palabras (Word Ladders / Metagramas)"
+#~ msgstr "Cadenes de paraules (Word Ladders / metagrames)"
+
+#~ msgid "Carreras de Números (1 a 100)"
+#~ msgstr "Curses de números (de l'1 al 100)"
+
+#~ msgid "Dominó de Papel (Domineering)"
+#~ msgstr "Dòmino de paper (Domineering)"
+
+#~ msgid "El Edificio (Skyscrapers)"
+#~ msgstr "L'edifici (Skyscrapers)"
+
+#~ msgid "Puntos y Marcas (Chomp de Papel)"
+#~ msgstr "Punts i marques (Chomp de paper)"
+
+#~ msgid "Triángulos (Polígonos de Hakimi)"
+#~ msgstr "Triangles (polígons de Hakimi)"
+
+#~ msgid "Batalla de Palabras (Anagrameador)"
+#~ msgstr "Batalla de paraules (creador d'anagrames)"
+
+#~ msgid "Pistas Ocultas (Black Box de Papel)"
+#~ msgstr "Pistes ocultes (Black Box de paper)"
+
+#~ msgid "Batalla de Cuadrados (Box-In)"
+#~ msgstr "Batalla de quadrats (Box-In)"
+
+#~ msgid "El Laberinto Invisible"
+#~ msgstr "El laberint invisible"
+
+#~ msgid "Generador de Historias (Cadáver Exquisito)"
+#~ msgstr "Generador d'històries (cadàver exquisit)"
+
+#~ msgid "El Cereal (Kropki de Papel)"
+#~ msgstr "El cereal (Kropki de paper)"
+
+#~ msgid "La Frontera (Borderline)"
+#~ msgstr "La frontera (Borderline)"
+
+#~ msgid "Crucigrama Veloz (Speed Crossword)"
+#~ msgstr "Mots encreuats ràpids (Speed Crossword)"
+
+#~ msgid "La Diana (Target 500)"
+#~ msgstr "La diana (Target 500)"
+
+#~ msgid "Sudoku de Papel"
+#~ msgstr "Sudoku de paper"
+
+#~ msgid "Kakuro (Suma Cruzada)"
+#~ msgstr "Kakuro (sumes encreuades)"
+
+#~ msgid "Slitherlink (El Bucle)"
+#~ msgstr "Slitherlink (el bucle)"
+
+#~ msgid "Futoshiki (Desigualdad)"
+#~ msgstr "Futoshiki (desigualtat)"
+
+#~ msgid "Nonogramas de Papel (Picross)"
+#~ msgstr "Nonogrames de paper (Picross)"
+
+#~ msgid "Shikaku (Rectángulos)"
+#~ msgstr "Shikaku (rectangles)"
+
+#~ msgid "Hidato (Camino Numérico)"
+#~ msgstr "Hidato (camí numèric)"
+
+#~ msgid "Akari (Luz y Sombras)"
+#~ msgstr "Akari (llum i ombres)"
+
+#~ msgid "Palabras Cruzadas (Anagram Cross)"
+#~ msgstr "Mots encreuats (Anagram Cross)"
+
+#~ msgid "La Telaraña de Números"
+#~ msgstr "La teranyina de números"
+
+#~ msgid "Las Tres Torres de Hanoi (En Papel)"
+#~ msgstr "Les tres torres de Hanoi (en paper)"
+
+#~ msgid "Laberinto de Hilos (String Maze)"
+#~ msgstr "Laberint de fils (String Maze)"
+
+#~ msgid "Palabras Encadenadas en Matriz"
+#~ msgstr "Paraules encadenades en una matriu"
+
+#~ msgid "El Reloj Matemático"
+#~ msgstr "El rellotge matemàtic"
+
+#~ msgid "Círculos de Venn (Juego de Lógica)"
+#~ msgstr "Diagrames de Venn (joc de lògica)"
+
+#~ msgid "Conecta 5 con Bloqueos (Lasker Morris en Papel)"
+#~ msgstr "Connecta 5 amb bloquejos (Lasker Morris en paper)"
+
+#~ msgid "Los Seis Grados de Separación"
+#~ msgstr "Els sis graus de separació"
+
+#~ msgid "Tangram de Papel (Corte y Lógica)"
+#~ msgstr "Tangram de paper (retall i lògica)"
+
+#~ msgid "El Telégrafo (Código Morse de Papel)"
+#~ msgstr "El telègraf (codi Morse en paper)"
+
+#~ msgid "Pirámides Numéricas"
+#~ msgstr "Piràmides numèriques"
+
+#~ msgid "Las Ocho Reinas (En Papel)"
+#~ msgstr "Les vuit reines (en paper)"
+
+#~ msgid "Salto de Caballo (Knight's Tour)"
+#~ msgstr "El recorregut del cavall (Knight's Tour)"
+
+#~ msgid "Pentominós de Papel"
+#~ msgstr "Pentòminos de paper"
+
+#~ msgid "El Laberinto Dinámico"
+#~ msgstr "El laberint dinàmic"
+
+#~ msgid "La Caza de la Zorra (Fox and Hounds)"
+#~ msgstr "La caça de la guineu (Fox and Hounds)"
+
+#~ msgid "Batalla de Palíndromos"
+#~ msgstr "Batalla de palíndroms"
+
+#~ msgid "Sopa de Cifras"
+#~ msgstr "Sopa de xifres"
+
+#~ msgid "Cruces e Intersecciones (Planarity)"
+#~ msgstr "Encreuaments i interseccions (Planarity)"
+
+#~ msgid "Cuadrantes Rascacielos (City Grid)"
+#~ msgstr "Quadrants de gratacels (City Grid)"
+
+#~ msgid "Círculos Concéntricos (Bullseye Words)"
+#~ msgstr "Cercles concèntrics (Bullseye Words)"
+
+#~ msgid "Batalla de Barcos Estratégica (Salvo)"
+#~ msgstr "Batalla naval estratègica (Salvo)"
+
+#~ msgid "El Pozo del Dragón"
+#~ msgstr "El pou del drac"
+
+#~ msgid "El Camino del Rey"
+#~ msgstr "El camí del rei"
+
+#~ msgid "Abecedario Cierto"
+#~ msgstr "Abecedari veritable"
+
+#~ msgid "Bloques Rotos (Polyminó Eliminación)"
+#~ msgstr "Blocs trencats (eliminació de poliminós)"
+
+#~ msgid "Acertijos de Cerillas en Papel"
+#~ msgstr "Endevinalles de llumins en paper"
+
+#~ msgid "Cifras y Letras (Prueba de Cifras en Papel)"
+#~ msgstr "Xifres i lletres (repte de xifres en paper)"
+
+#~ msgid "La Escalera de Palabras (Wordle de Papel)"
+#~ msgstr "L'escala de paraules (Wordle de paper)"
+
+#~ msgid "Tres en Raya Tridimensional (3D Tic-Tac-Toe)"
+#~ msgstr "Tres en ratlla tridimensional (3D Tic-Tac-Toe)"
+
+#~ msgid "Las Cuatro Esquinas"
+#~ msgstr "Les quatre cantonades"
+
+#~ msgid "Hexágono de Puntos (Spidron de Papel)"
+#~ msgstr "Hexàgon de punts (Spidron de paper)"
+
+#~ msgid "Triqui Traque de Dados (Simulado)"
+#~ msgstr "Tres en ratlla amb daus (simulat)"
+
+#~ msgid "Laberinto de Flechas (Vector Maze)"
+#~ msgstr "Laberint de fletxes (Vector Maze)"
+
+#~ msgid "Sumas Encadenadas (Number Chain)"
+#~ msgstr "Sumes encadenades (Number Chain)"
+
+#~ msgid "La Isla de las Serpientes"
+#~ msgstr "L'illa de les serps"
+
+#~ msgid "La Telaraña de Palabras (Word Web)"
+#~ msgstr "La teranyina de paraules (Word Web)"
+
+#~ msgid "El Puente Romano (Pons Asinorum en Papel)"
+#~ msgstr "El pont romà (Pons Asinorum en paper)"
+
+#~ msgid "¡Toma 6! (6 Nimmt!)"
+#~ msgstr "Take 6! (6 Nimmt!)"
+
+#~ msgid "Taco Gato Cabra Queso Pizza"
+#~ msgstr "Taco Gat Cabra Formatge Pizza"
+
+#~ msgid "Pelusas (Fluff)"
+#~ msgstr "Fluff"
 
 #~ msgid "Edad de la persona más joven"
 #~ msgstr "Edat de la persona més jove"
@@ -8153,9 +8466,6 @@ msgstr "Connect, get help, or contribute"
 #~ msgid "Geometría visual"
 #~ msgstr "Geometria visual"
 
-#~ msgid "España"
-#~ msgstr "Espanya"
-
 #~ msgid ""
 #~ "Rellena las casillas vacías con dígitos del 1 al 9. La suma de las cifras "
 #~ "de un bloque horizontal o vertical debe dar el número indicado en la "
@@ -8302,9 +8612,6 @@ msgstr "Connect, get help, or contribute"
 #~ "Creador: Dissenyador tradicional / Editorial del Japó | Any: Desconegut o "
 #~ "tradicional | Per què es va crear: Desenvolupat per enriquir el catàleg "
 #~ "cultural de jocs abstractes de la regió."
-
-#~ msgid "Combinación de cartas"
-#~ msgstr "Combinació de cartes"
 
 #~ msgid ""
 #~ "Se disponen los componentes de Queendomino. Los jugadores ejecutan turnos "
@@ -9640,9 +9947,6 @@ msgstr "Connect, get help, or contribute"
 
 #~ msgid "Teléfono descompuesto de dibujos"
 #~ msgstr "Telèfon descompost de dibuixos"
-
-#~ msgid "Italia"
-#~ msgstr "Itàlia"
 
 #~ msgid "Reflejos y fiesta"
 #~ msgstr "Reflexos i festa"
