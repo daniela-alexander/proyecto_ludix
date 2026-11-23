@@ -1,780 +1,328 @@
-# 🎲 Sobre Ludix
+# 🎲 Ludix — Plataforma de juegos de mesa
 
-Ludix nace con una idea sencilla:
+**Ludix** es una aplicación web que ayuda a responder a una pregunta habitual:
+**¿a qué jugamos?**. Su objetivo es facilitar el descubrimiento y la elección
+de juegos de mesa y cartas mediante un catálogo, filtros y sugerencias basadas
+en las preferencias del grupo.
 
-**¿No sabes qué juego jugar? Ludix te ayuda a elegirlo**.
+La aplicación también permite organizar una biblioteca personal, guardar
+favoritos y crear una lista de deseos.
 
-El objetivo es crear una plataforma que combine un catálogo de juegos de mesa con un sistema de recomendaciones que facilite la elección tanto para jugar como para comprar.
+## Equipo de desarrollo 🧑‍💻
+- Angelo Musso: Scrum Master y backend developer.
+- Daniela Alexander: Backend developer.
+- Cristofer Picado: Frontend developer.
+- Diego Llontop Vásques: Frontend developer.
 
-La aplicación busca solucionar el problema de perder tiempo decidiendo qué juego escoger durante una reunión. Para ello, el usuario podrá introducir diferentes criterios y obtener recomendaciones adaptadas a sus necesidades.
 
+## 🎯 Funcionalidades
 
-Los criterios contemplados incluyen:
+- Catálogo con búsqueda, filtros y fichas de juegos.
+- Búsqueda por títulos traducidos y títulos originales.
+- Sugerencias para jugar con juegos de la biblioteca o descubrir juegos del
+  catálogo.
+- Filtros de sugerencias por número de jugadores, edad, duración, dificultad y
+  categoría.
+- Biblioteca personal, favoritos y lista de deseos.
+- Cuentas y perfiles de usuario.
+- Mensajería privada en tiempo real.
+- Interfaz traducida al español, catalán, inglés e italiano.
+- API REST para consultar y filtrar juegos.
+- Herramienta interna, restringida al personal, para comparar recomendaciones.
 
-- Número de jugadores.
-- Edad.
-- Dificultad.
-- Duración.
-- Categoría.
+## 🛠️ Tecnologías y herramientas
 
-Ludix contempla dos modos principales de sugerencia:
-
-- **Sugerencia de compra:** para recomendar juegos que el usuario podría comprar.
-- **Sugerencia de biblioteca:** para recomendar juegos que el usuario ya posee.
-
----
-
-## 🎯 Objetivos
-
-El objetivo principal de Ludix es facilitar la elección de un juego de mesa.
-
-Entre los objetivos del proyecto se encuentran:
-
-- Permitir el registro de usuarios.
-- Permitir la autenticación.
-- Mostrar un catálogo de juegos.
-- Permitir realizar búsquedas.
-- Recomendar juegos según diferentes criterios.
-- Gestionar la biblioteca personal de los usuarios.
-- Consultar juegos favoritos.
-- Gestionar una lista de deseos (*wishlist*).
-- Crear sesiones de sugerencias.
-- Permitir votar entre juegos propuestos.
-- Gestionar un carrito de compras.
-- Crear pedidos.
-- Gestionar el stock.
-- Administrar productos.
-- Consultar el historial de juegos jugados.
-- Consultar el historial de pedidos.
-- Soportar diferentes idiomas.
-
-Los objetivos técnicos contemplan un diseño responsive y una arquitectura basada en una API REST.
-
----
-
-## 🛠️ Tecnologías
-
-### Backend
+### Backend y API
 
 - **Python 3.14**
-- **Django 6.0.x**
-- **Django REST Framework 3.18.1**
-- **django-filter 26.1**
+- **Django 6**
+- **Django REST Framework**
+- **django-filter**
 
-### Base de datos
+### Interfaz
 
-- **SQLite** por defecto; **PostgreSQL** disponible para desarrollo local.
+- Plantillas de Django
+- HTML, CSS y JavaScript
 
-### Control de versiones
+### Datos y servicios
 
-- **Git**
+- **PostgreSQL** para desarrollo local; **SQLite** también está soportado.
+- **Redis** para las capas de comunicación en tiempo real y el broker de Celery.
+- **Django Channels** y **Daphne** para WebSockets.
+- **Celery** y **Celery Beat** están incluidos y configurados; actualmente no
+  hay tareas periódicas activas.
 
-### Frontend previsto
+### Herramientas de desarrollo
 
-- **React**
-
-La arquitectura prevista separa el frontend del backend mediante una API REST.
-
----
+- `pip` y `requirements.txt` para dependencias Python.
+- Docker Compose para PostgreSQL y Redis locales.
+- Git para control de versiones.
 
 ## 🏗️ Arquitectura
 
-La arquitectura prevista para Ludix sigue una separación entre frontend, backend y base de datos:
+Ludix utiliza Django para servir las páginas y la API. La interfaz se construye
+con plantillas, estilos y JavaScript.
 
-```
-┌─────────────────────┐
-│      FRONTEND       │
-│        React        │
-└──────────┬──────────┘
-           │
-           │ HTTP / JSON
-           ▼
-┌─────────────────────┐
-│       BACKEND       │
-│   Django REST API   │
-└──────────┬──────────┘
-           │
-           │ ORM
-           ▼
-┌─────────────────────┐
-│      DATABASE       │
-│       SQLite        │
-└─────────────────────┘
-```
-
-Durante el desarrollo inicial se utiliza SQLite. Posteriormente se contempla la posibilidad de utilizar PostgreSQL.
-
-# 📁 Estructura del proyecto
-
-La estructura principal del backend es:
-
-    Ludix/
-    │
-    ├── manage.py
-    ├── db.sqlite3
-    ├── .gitignore
-    │
-    ├── ludix/
-    │   ├── __init__.py
-    │   ├── asgi.py
-    │   ├── settings.py
-    │   ├── urls.py
-    │   └── wsgi.py
-    │
-    └── juegos/
-        ├── __init__.py
-        ├── admin.py
-        ├── apps.py
-        ├── models.py
-        ├── pagination.py
-        ├── serializers.py
-        ├── tests.py
-        ├── views.py
-        ├── readme.md
-        │
-        └── migrations/
-            ├── __init__.py
-            └── 0001_initial.py
-
-El entorno virtual no debe incluirse en el repositorio. Se recomienda utilizar ```.venv/``` y añadirlo al ```.gitignore```.
-
-# 🗄️ Modelo de datos
-
-Ludix cuenta con diferentes modelos destinados a representar usuarios, juegos, biblioteca, wishlist, sugerencias y pedidos.
-
-# 👥 Usuarios
-
-El proyecto utiliza el sistema de usuarios de Django y cuenta con un modelo ```PerfilUsuario``` asociado al usuario.
-
-El perfil permite almacenar información adicional como:
-
-* Rol.
-* Idioma preferido.
-* Fecha de nacimiento.
-
-#  Roles
-
-Los roles contemplados son:
-
-* Clientes.
-* Admin.
-
-# 🗣️ Idiomas
-
-* Español (```es```)
-* English (```en```)
-* Català (```ca```)
-* Italiano (```it```)
-
-# 🎲 Juegos
-
-El modelo ```Juego``` representa los juegos de mesa disponibles en la aplicación.
-
-Entre sus principales atributos se encuentran:
-
-* Título.
-* Descripción.
-* Número mínimo de jugadores.
-* Número máximo de jugadores.
-* Duración.
-* Edad mínima.
-* Dificultad.
-* Precio.
-* Stock.
-* Enlace de referido.
-
-Los juegos pueden pertenecer a diferentes categorías y mecánicas.
-
-# 🏷️ Categorías
-
-Las categorías permiten clasificar los juegos de mesa.
-
-Un juego puede estar asociado a varias categorías.
-
-Por ejemplo:
-
-```
-Juego
- ├── Estrategia
- ├── Familiar
- └── Competitivo
-```
-
-# ⚙️ Mecánicas
-
-Las mecánicas permiten describir cómo funciona un juego.
-
-Un juego puede tener varias mecánicas asociadas.
-
-Por ejemplo:
-
-```
-Juego
- ├── Gestión de recursos
- ├── Colocación de trabajadores
- └── Construcción de mazos
-```
-
-# 📚 Biblioteca
-
-La biblioteca permite relacionar usuarios con los juegos que poseen.
-
-El modelo utilizado es:
-
-``` BibliotecaJuego ```
-
-Además, permite marcar determinados juegos como favoritos.
-
-La relación puede representarse de la siguiente manera:
-
-```
-Usuario
+```text
+Navegador
    │
-   ▼
-Biblioteca
-   │
-   ├── Juego
-   ├── Juego
-   ├── Juego
-   └── Juego favorito
+   ├── páginas HTML, CSS y JavaScript
+   ├── API HTTP / JSON
+   └── WebSockets
+          │
+          ▼
+   Django / Django REST Framework
+          │
+          ├── PostgreSQL o SQLite
+          └── Redis (Channels y broker de Celery)
 ```
 
-# ❤️ Wishlist
+## 📁 Estructura del proyecto
 
-La wishlist permite que un usuario guarde juegos que le gustaría comprar.
-
-```
-Usuario
-   │
-   ▼
-Wishlist
-   │
-   ├── Juego
-   ├── Juego
-   └── Juego
-```
-
-# 💡 Sistema de sugerencias
-
-Una de las funcionalidades principales de Ludix es el sistema de sugerencias.
-
-El proyecto contempla los siguientes modelos:
-
-* ```SesionSugerencia```
-* ```SesionJuegoPropuesto```
-* ```VotoSugerencia```
-
-Las sesiones de sugerencia pueden ser de dos tipos:
-
-```
-BIBLIOTECA
-COMPRA
+```text
+Ludix/
+├── accounts/          # Cuentas y perfiles
+├── chat/              # Conversaciones y mensajería
+├── juegos/            # Juegos, catálogo y sugerencias
+├── library/           # Biblioteca y favoritos
+├── orders/            # Consultas de pedidos
+├── recommendations/   # Recomendaciones y preferencias
+├── wishlist/          # Lista de deseos
+├── ludix/             # Configuración, rutas y ASGI
+├── templates/         # Plantillas HTML
+├── static/            # CSS, JavaScript e imágenes
+├── locale/            # Traducciones de Django
+├── requirements.txt   # Dependencias Python
+├── docker-compose.yaml
+└── manage.py
 ```
 
-El objetivo es que los usuarios puedan obtener recomendaciones de juegos según diferentes criterios.
+Los fixtures de juegos están en `juegos/fixtures/`. Los archivos subidos o
+descargados por la aplicación se guardan bajo `media/`.
 
-# 🔄 Funcionamiento previsto
+## 🗄️ Datos principales
 
-El flujo básico será:
+El proyecto usa el modelo `User` de Django y lo relaciona con `UserProfile`,
+que almacena el rol, el idioma preferido, la fecha de nacimiento y, si existe,
+la imagen de perfil.
 
-```
-Usuario
-   │
-   ▼
-Selecciona criterios
-   │
-   ├── Número de jugadores
-   ├── Edad
-   ├── Dificultad
-   ├── Duración
-   └── Categoría
-   │
-   ▼
-Sistema de recomendación
-   │
-   ▼
-Juegos recomendados
-```
+### Juegos, categorías y mecánicas
 
-Por ejemplo: 
+`Game` contiene, entre otros datos, el título, descripción, número de
+jugadores, duración, edad mínima, dificultad, precio, stock, imagen y si el
+juego es en línea. Los títulos y descripciones tienen campos opcionales para
+inglés, catalán e italiano. Cada juego puede relacionarse con varias categorías
+y mecánicas.
 
-```
-Número de jugadores: 4
-Edad: 18+
-Dificultad: Media
-Duración: 60 minutos
-Categoría: Estrategia
+### Biblioteca y lista de deseos
 
-             ↓
+- `LibraryGame` vincula un perfil con un juego y permite marcarlo como favorito.
+- `Wishlist` vincula un perfil con los juegos que quiere guardar para más
+  adelante.
 
-        RECOMENDACIONES
+Ambas relaciones impiden que el mismo usuario añada dos veces el mismo juego.
 
-             ↓
+### Sugerencias
 
-          Catan
-       Carcassonne
-            Azul
-```
+`SuggestionSession` guarda las preferencias seleccionadas: tipo de sugerencia,
+número de jugadores y, opcionalmente, duración, edad, dificultad y categoría.
+El tipo permite buscar en la biblioteca o en el catálogo. También existen
+modelos para juegos propuestos y votos asociados a una sesión.
 
-# 🛒 Sistema de compras
+El módulo de recomendaciones incluye sugerencias basadas en contenido y una
+herramienta de comparación con un modelo colaborativo. La vista de comparación
+es una herramienta interna para usuarios del personal, no una pantalla pública
+del catálogo.
 
-Ludix también contempla una parte de ecommerce.
+### Pedidos
 
-El proyecto cuenta con modelos relacionados con los pedidos:
+El proyecto cuenta con modelos de pedido y líneas de pedido, y con endpoints
+autenticados para consultar los pedidos propios. El flujo de checkout y el
+procesamiento de pagos no forman parte de las funcionalidades actuales.
 
-* ```Pedido```
-* ```LineaPedido```
+## 🌐 Idiomas
 
-Los pedidos pueden encontrarse en diferentes estados:
+La interfaz está configurada para:
 
-```
-PENDIENTE
-PAGADO
-ENVIADO
-CANCELADO
-```
+- Español (`es`)
+- Catalán (`ca`)
+- Inglés (`en`)
+- Italiano (`it`)
 
-El objetivo final es permitir:
-
-* Consultar juegos disponibles para comprar.
-* Añadir productos al carrito.
-* Crear pedidos.
-* Consultar pedidos.
-* Gestionar stock.
-
-# 🔗 Relaciones principales
-
-La estructura de relaciones puede representarse de la siguiente manera:
-
-```
-User
- │
- └── 1:1 ── PerfilUsuario
-                │
-                ├── 1:N ── BibliotecaJuego ── N:1 ── Juego
-                │
-                ├── 1:N ── Wishlist ───────── N:1 ── Juego
-                │
-                ├── 1:N ── Pedido
-                │
-                └── 1:N ── SesionSugerencia
-                                  │
-                                  ├── 1:N ── SesionJuegoPropuesto
-                                  │                  │
-                                  │                  └── Juego
-                                  │
-                                  └── 1:N ── VotoSugerencia
-                                                     │
-                                                     └── Juego
-
-
-Juego
- ├── N:M ── Categoria
- └── N:M ── Mecanica
-
-
-Pedido
- │
- └── 1:N ── LineaPedido
-                 │
-                 └── N:1 ── Juego
-```
-
-# Instalación 
-
-**1. Clonar el repositorio**
-
-```git clone <URL_DEL_REPOSITORIO>```
-
-Entrar en la carpeta: 
-
-```cd Ludix```
-
-**2. Crear un entorno virtual**
-
- <small>**Windows**</small>
-
-``` python -m venv .venv ```
-
-Activar el entorno: 
-
-```.venv\Scripts\activate```
-
- <small>**macOS / Linux</small>
-
-```python3 -m venv .venv```
-
-Activar el entorno: 
-
-```source .venv/bin/activate```
-
-# 📦 Instalación de dependencias
-Si existe un archivo ```requirements.txt```:
-
-```pip install -r requirements.txt```
-
-En caso contrario: 
-
-```
-pip install Django==6.1.1
-pip install djangorestframework==3.18.1
-pip install django-filter==26.1
-```
-
-# 🗄️ Configurar base de datos
-
-SQLite sigue siendo la opción por defecto. Para usar PostgreSQL localmente, copia
-las variables de `.env.example` a tu `.env` existente (sin sobrescribir las demás
-variables) y arranca el servicio:
+Los títulos y descripciones de juegos y las categorías también admiten campos
+de traducción. Para actualizar los archivos de traducción de Django se puede
+usar:
 
 ```bash
-docker compose up -d db
+python manage.py makemessages -l ca -l en -l it
+python manage.py compilemessages
 ```
 
-Espera a que `docker compose ps` muestre el servicio como `healthy`. Luego aplica
-las migraciones:
+## 🚀 Instalación y ejecución
+
+### Requisitos
+
+- Python 3.14
+- Git
+- Docker Desktop o Docker Engine con Docker Compose
+
+Docker Compose inicia PostgreSQL y Redis para el entorno de desarrollo.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/daniela-alexander/proyecto_ludix.git
+cd proyecto_ludix
+```
+
+### 2. Crear y activar un entorno virtual
+
+```bash
+python -m venv .venv
+```
+
+macOS / Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+### 3. Instalar dependencias
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### 4. Configurar el entorno y los servicios
+
+Copia `.env.example` a `.env` y arranca PostgreSQL y Redis:
+
+```bash
+cp .env.example .env
+docker compose up -d
+```
+
+En Windows PowerShell, copia el archivo con:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+El ejemplo configura PostgreSQL y direcciones locales para Redis. Si no se
+define `DATABASE_ENGINE`, Django usa SQLite (`db.sqlite3`).
+
+### 5. Aplicar migraciones e iniciar Django
 
 ```bash
 python manage.py migrate
+python manage.py runserver
 ```
 
-Para pasar los datos existentes de SQLite a PostgreSQL, exporta primero mientras
-`DATABASE_ENGINE=sqlite` está activo:
+Abre <http://127.0.0.1:8000/>.
+
+Las credenciales de `.env.example` son solo para desarrollo local. No subas
+`.env`, claves ni credenciales al repositorio.
+
+## ⚙️ Configuración de la base de datos
+
+El proyecto admite:
+
+- **PostgreSQL:** configura `DATABASE_ENGINE=postgresql` y las variables
+  `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST` y `DB_PORT` en `.env`.
+- **SQLite:** configura `DATABASE_ENGINE=sqlite` o deja la variable sin
+  definir.
+
+Para arrancar o detener los servicios locales:
 
 ```bash
-DATABASE_ENGINE=sqlite python manage.py dumpdata \
-  --natural-foreign \
-  --exclude contenttypes \
-  --exclude auth.permission \
-  --exclude admin.logentry \
-  --indent 2 \
-  --output /tmp/ludix-data.json
+docker compose up -d
+docker compose down
 ```
 
-Después cambia `DATABASE_ENGINE=postgresql` en `.env`, aplica las migraciones y
-carga el fixture:
+## ⏰ Celery y Redis
+
+Celery está configurado para utilizar Redis como broker, y Celery Beat usa el
+planificador de Django. Si añades tareas Celery, inicia el worker y Beat en
+terminales separadas:
 
 ```bash
-python manage.py migrate
-python manage.py loaddata /tmp/ludix-data.json
-```
-
-La base SQLite original no se borra y puedes volver a ella configurando
-`DATABASE_ENGINE=sqlite`. El fixture contiene datos de la aplicación; guárdalo
-solo localmente y elimínalo de `/tmp` una vez verificada la importación. Las
-credenciales predeterminadas de Compose son solo para desarrollo local.
-
-# ⏰ Tareas en segundo plano
-
-Celery Beat usa Redis como broker y guarda las tareas periódicas en la base de datos.
-Inicia Redis y aplica las migraciones antes de arrancar los procesos:
-
-```bash
-python manage.py migrate
 celery -A ludix worker -l INFO
 celery -A ludix beat -l INFO
 ```
 
-Ejecuta el worker y Beat en terminales separadas. Las tareas periódicas se pueden
-crear y administrar desde `/admin/`, en **Periodic tasks**. Si Redis no está en la
-dirección predeterminada (`redis://127.0.0.1:6379/0`), define `CELERY_BROKER_URL`.
+## 💬 Chat en tiempo real
 
-# 💬 Chat privado
-
-El chat guarda conversaciones y mensajes en la base de datos, y usa Channels
-con Redis para entregarlos en tiempo real. Arranca PostgreSQL y Redis con
-`docker compose up -d`, aplica las migraciones con `python manage.py migrate`
-y ejecuta el servidor ASGI con `python manage.py runserver`. Las personas
-autenticadas pueden iniciar conversaciones desde **Mensajes**; solo sus dos
-participantes pueden acceder a ellas.
-
-# ▶️ Ejecutar el proyecto
-
-Para iniciar el servidor de desarrollo:
-
-```python manage.py runserver```
-
-El proyecto estará disponible en:
-
-```http://127.0.0.1:8000/```
-
-# 🔌 API
-
-El backend utiliza Django REST Framework para proporcionar una API REST.
-
-Actualmente existe un endpoint para consultar los juegos:
-
-```GET /api/juegos/```
-
-Por ejemplo:
-
-```curl http://127.0.0.1:8000/api/juegos/```
-
-## Descargar imágenes de juegos
-
-Primero valida las URLs guardadas en los juegos sin guardar archivos ni cambiar la base de datos:
+El chat usa Django Channels y Redis para la comunicación en tiempo real. Los
+usuarios autenticados pueden abrir conversaciones; el acceso a cada
+conversación está limitado a sus participantes. Para probarlo localmente,
+arranca PostgreSQL y Redis con Docker Compose y ejecuta:
 
 ```bash
-python manage.py download_game_images --dry-run
+python manage.py runserver
 ```
 
-Cuando estés listo para descargarlas a `media/games/` y guardar sus rutas locales:
+## 🔌 API de juegos
+
+El catálogo está disponible en:
+
+- `GET /api/games/`
+- `GET /api/juegos/` (ruta alternativa)
+
+La API permite búsqueda, filtros por categoría, mecánica, precio, dificultad,
+duración o modalidad en línea, y ordenamiento por campos configurados.
+
+Ejemplo:
 
 ```bash
-python manage.py download_game_images
+curl "http://127.0.0.1:8000/api/games/?search=ajedrez"
 ```
 
-El comando solo descarga imágenes de `placehold.co` y `upload.wikimedia.org`, los dominios incluidos en el JSON actual. Espera 3 segundos entre imágenes y se detiene si el servidor responde HTTP 403 o 429.
+La respuesta se pagina: el tamaño predeterminado es 10 y se puede configurar
+`page_size` hasta un máximo de 100.
 
-# 📄 Paginación
-
-El endpoint de juegos utiliza paginación.
-
-Para consultar la primera página:
-
-```/api/juegos/?page=1```
-
-También se puede especificar el tamaño de la página:
-
-```/api/juegos/?page=1&page_size=20```
-
-El tamaño predeterminado es:
-
-```10```
-
-El tamaño máximo configurado es:
-
-```100```
-
-# 🧪 Test
-
-Los test del proyecto se encuentran en:
-
-```juegos/test.py```
-
-Para ejecutar todos los test:
-
-```python manage.py test```
-
-# ⚙️ Configuración de Django
-
-La configuración principal del proyecto se encuentra en:
-
-```ludix/settings.py```
-
-La base de datos utilizada actualmente es:
-
-```SQLite```
-
-y el archivo de base de datos es:
-
-```db.squlite3```
-
-La configuración actual está orientada al desarrollo. Antes de desplegar la aplicación en producción deben revisarse aspectos como ```DEBUG```, ```SECRET_KEY```, ```ALLOWED_HOSTS```, seguridad y configuración de la base de datos.
-
-# 🔐 Seguridad
-
-Para un entorno de producción se deberán revisar, entre otros, los siguientes aspectos:
-
-* SECRET_KEY
-* DEBUG
-* ALLOWED_HOSTS
-* Autenticación.
-* Permisos de la API.
-* Variables de entorno.
-* Protección de contraseñas.
-* Configuración HTTPS.
-* Configuración de la base de datos.
-* CORS.
-
-Las contraseñas de los usuarios deben gestionarse utilizando el sistema de autenticación de Django y nunca deben almacenarse en texto plano.
-
-# 🌐 Frontend
-
-El proyecto contempla un frontend desarrollado con React.
-
-La comunicación entre React y Django se realizará mediante HTTP y JSON:
-
-```
-React
-  │
-  │ HTTP / JSON
-  ▼
-Django REST API
-  │
-  ▼
-SQLite
+```text
+/api/games/?page=1&page_size=20
 ```
 
-Entre las pantallas previstas se encuentran: 
+## 🧪 Pruebas
 
-```
-/register
-/login
-```
+Las pruebas están en los módulos `tests.py` de las aplicaciones. Para ejecutar
+toda la suite:
 
-# 🌳 Git y trabajo en equipo
-
-Para organizar el trabajo se propone utilizar ramas de funcionalidad.
-
-La rama principal será:
-
-
-```main```
-
-Y las funcionalidades se desarrollarán en ramas:
-
-```
-feature/setup
-feature/auth
-feature/database
-feature/frontend-auth
+```bash
+python manage.py test
 ```
 
-Por ejemplo: 
+Para ejecutar solo las pruebas de juegos:
 
-```git switch -c feature/frontend-auth```
-
-Después de finalizar una funcionalidad:
-
-```
-feature/frontend-auth
-        │
-        ▼
-   Pull Request
-        │
-        ▼
-       main
+```bash
+python manage.py test juegos.tests
 ```
 
-📋 Flujo de desarrollo
+## 🔮 Mejoras futuras
 
-El flujo recomendado es:
+- Seguir mejorando la interfaz y la experiencia de uso.
+- Añadir notificaciones para mantener informados a los usuarios.
+- Incorporar una sección de reseñas y valoraciones en la ficha de cada juego.
 
-```
-1. Crear una rama
-        ↓
-2. Desarrollar la funcionalidad
-        ↓
-3. Realizar pruebas
-        ↓
-4. Crear commits
-        ↓
-5. Crear Pull Request
-        ↓
-6. Revisar
-        ↓
-7. Integrar en main
-```
+## 🔐 Notas de seguridad
 
-Ejemplo de commmits: 
+La configuración del repositorio está orientada al desarrollo local. Antes de
+un despliegue hay que configurar una `SECRET_KEY` privada, desactivar `DEBUG`,
+definir `ALLOWED_HOSTS`, proteger las credenciales de base de datos y aplicar
+la configuración de HTTPS y seguridad recomendada por Django.
 
-```
-git add .
-git commit -m "Create React project"
-git commit -m "Add register page"
-git commit -m "Add login page"
-git commit -m "Connect register API"
-```
+## LICENCIA 📄
+El proyecto Ludix está bajo la licencia MIT. Consulta el archivo `LICENSE` para
+más detalles.
 
-# 🗺️ Roadmap
-**Sprint 1**
-
-El primer sprint se centra en preparar la base técnica del proyecto.
-
-**Backend**
- * ✅ Crear proyecto Django.
- * ✅ Configurar Django REST Framework.
- * ✅ Configurar SQLite.
- * ✅ Crear migraciones.
- * ✅ Crear aplicación juegos.
- * ✅ Crear modelos.
- * ✅ Crear serializer de juegos.
- * ✅ Crear endpoint de juegos.
- * ✅ Añadir paginación.
-
-**Usuarios**
-* 🔲 Registro.
-* 🔲 Login.
-* 🔲 Autenticación.
-* 🔲 Permisos.
-
-**Frontend**
-* 🔲 Crear proyecto en React.
-* 🔲 Crear página de registro.
-* 🔲 Crear página de login.
-* 🔲 Conectar React con la API.
-
-# 🔮 Próximas funcionalidades
-
-Después del primer sprint se contempla implementar:
-
-* 🔲 Sistema completo de autenticación.
-* 🔲 Catálogo de juegos.
-* 🔲 Búsqueda.
-* 🔲 Filtros.
-* 🔲 Sistema de recomendaciones.
-* 🔲 Biblioteca personal.
-* 🔲 Favoritos.
-* 🔲 Wishlist.
-* 🔲 Sesiones de sugerencia.
-* 🔲 Votación.
-* 🔲 Carrito de compra.
-* 🔲 Pedidos.
-* 🔲 Gestión de stock.
-* 🔲 Administración.
-* 🔲 Historial de juegos.
-* 🔲 Historial de pedidos.
-* 🔲 Soporte multidioma.
-* 🔲 Frontend completo en React.
-
-# 👥 Equipo
-
-Ludix es un proyecto colaborativo desarrollado por un equipo de estudiantes.
-
-La planificación inicial divide el trabajo en diferentes áreas:
-
-| Área          | Responsabilidades                     |
-| ------------- | ------------------------------------- |
-| Django        | Configuración del proyecto y backend  |
-| Usuarios      | Registro, login y autenticación       |
-| Base de datos | Migraciones, modelos y testing        |
-| Frontend      | React, formularios y conexión con API |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Agradecimientos 🙏
+A todos los participantes del proyecto.
+Fundació Esplai, por la enseñanza y el apoyo en el desarrollo del proyecto.
