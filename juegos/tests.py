@@ -1,6 +1,9 @@
 from decimal import Decimal
 from io import BytesIO
+import json
 import tempfile
+from pathlib import Path
+from unittest.mock import patch
 
 from django.test import SimpleTestCase, TestCase
 from django.contrib.auth.models import User
@@ -25,6 +28,7 @@ from .models import (
     UserProfile,
     Wishlist,
 )
+from importar_juegos import cargar_juegos_json
 
 
 class UsuariosConsumerTests(SimpleTestCase):
@@ -105,14 +109,16 @@ class GameApiSearchTests(TestCase):
         self.game_two.categories.add(self.category_strategy)
 
     def test_search_returns_matching_title(self):
-        response = self.client.get("/api/games/?search=ludix")
+        response = self.client.get(f"{reverse('game_list')}?search=ludix")
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["count"], 1)
         self.assertEqual(response.json()["results"][0]["title"], "Prueba Ludix")
 
     def test_category_filter_returns_only_matching_games(self):
-        response = self.client.get(f"/api/games/?category={self.category_action.id}")
+        response = self.client.get(
+            f"{reverse('game_list')}?category={self.category_action.id}"
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["count"], 1)
@@ -123,23 +129,75 @@ class GameApiSearchTests(TestCase):
         self.game_one.save(update_fields=["title_en"])
 
         response = self.client.get(
-            "/api/games/?search=ludix",
+            f"{reverse('game_list')}?search=ludix",
             HTTP_ACCEPT_LANGUAGE="en",
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["results"][0]["title"], "Ludix Test")
 
+    def test_api_searches_translated_title(self):
+        self.game_one.title_ca = "Prova Ludix"
+        self.game_one.save(update_fields=["title_ca"])
+
+        response = self.client.get(
+            f"{reverse('game_list')}?search=prova",
+            HTTP_ACCEPT_LANGUAGE="ca",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["results"][0]["title"], "Prova Ludix")
+
+    def test_home_searches_translated_title(self):
+        self.game_one.title_ca = "Prova Ludix"
+        self.game_one.save(update_fields=["title_ca"])
+
+        response = self.client.get(
+            f"{reverse('home')}?q=prova",
+            HTTP_ACCEPT_LANGUAGE="ca",
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Prova Ludix")
+        self.assertNotContains(response, "Cartas del reino")
+
+    def test_importer_updates_provided_title_translations(self):
+        self.game_one.title_en = "Ludix Test"
+        self.game_one.save(update_fields=["title_en"])
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            fixture_path = Path(temporary_directory) / "games.json"
+            fixture_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "nombre": self.game_one.title,
+                            "nombre_ca": "Prova Ludix",
+                            "nombre_it": "Gioco di prova",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            with patch("builtins.print"):
+                cargar_juegos_json(fixture_path)
+
+        self.game_one.refresh_from_db()
+        self.assertEqual(self.game_one.title_en, "Ludix Test")
+        self.assertEqual(self.game_one.title_ca, "Prova Ludix")
+        self.assertEqual(self.game_one.title_it, "Gioco di prova")
+
     def test_home_filter_by_online_type(self):
-        response = self.client.get("/?format=online")
+        response = self.client.get(f"{reverse('home')}?format=online")
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Cartas del reino")
         self.assertNotContains(response, "Prueba Ludix")
 
     def test_home_sorts_by_price(self):
-        ascending = self.client.get("/?sort=price_asc")
-        descending = self.client.get("/?sort=price_desc")
+        ascending = self.client.get(f"{reverse('home')}?sort=price_asc")
+        descending = self.client.get(f"{reverse('home')}?sort=price_desc")
 
         self.assertEqual(
             [game.title for game in ascending.context["games"]],
@@ -181,7 +239,7 @@ class GameApiSearchTests(TestCase):
             unit_price=self.game_one.price,
         )
 
-        response = self.client.get("/?sort=best_selling")
+        response = self.client.get(f"{reverse('home')}?sort=best_selling")
 
         self.assertEqual(
             [game.title for game in response.context["games"]],
@@ -211,7 +269,7 @@ class GameApiSearchTests(TestCase):
             favorite=True,
         )
 
-        response = self.client.get("/?sort=favorites")
+        response = self.client.get(f"{reverse('home')}?sort=favorites")
 
         self.assertEqual(
             [game.title for game in response.context["games"]],
@@ -224,12 +282,15 @@ class GameApiSearchTests(TestCase):
         LibraryGame.objects.create(user_profile=profile, game=self.game_one)
         self.client.force_login(user)
 
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
 
         self.assertEqual(response.context["library_game_ids"], {self.game_one.id})
         self.assertContains(response, 'class="game-card-library-button is-in-library"')
         self.assertContains(response, 'data-remove-label="Quitar de mi biblioteca"')
-        self.assertContains(response, f'action="/library/add/{self.game_two.id}/"')
+        self.assertContains(
+            response,
+            f'action="{reverse("library_add", kwargs={"game_id": self.game_two.id})}"',
+        )
 
     def test_personalised_recommendations_exclude_games_in_library(self):
         user = User.objects.create_user(username="personalised_recommendations_user")
@@ -242,7 +303,7 @@ class GameApiSearchTests(TestCase):
         self.game_two.categories.add(self.category_action)
         self.client.force_login(user)
 
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
         self.assertIn(self.game_two, response.context["recomendados"])
         self.assertContains(
             response,
@@ -250,7 +311,7 @@ class GameApiSearchTests(TestCase):
         )
 
         LibraryGame.objects.create(user_profile=profile, game=self.game_two)
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
 
         self.assertNotIn(self.game_two, response.context["recomendados"])
         self.assertNotContains(
@@ -267,12 +328,13 @@ class GameApiSearchTests(TestCase):
         LibraryGame.objects.create(user_profile=other_profile, game=self.game_one)
         self.client.force_login(user)
 
+        next_url = f"{reverse('home')}?q=Prueba"
         response = self.client.post(
             reverse("library_remove", kwargs={"game_id": self.game_one.id}),
-            {"next": "/?q=Prueba"},
+            {"next": next_url},
         )
 
-        self.assertRedirects(response, "/?q=Prueba")
+        self.assertRedirects(response, next_url)
         self.assertFalse(
             LibraryGame.objects.filter(
                 user_profile=user_profile,
@@ -297,14 +359,31 @@ class GameApiSearchTests(TestCase):
         Wishlist.objects.create(user_profile=profile, game=self.game_two)
         self.client.force_login(user)
 
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
+
+        favorite_url = reverse(
+            "library_favorite",
+            kwargs={"game_id": self.game_one.id},
+        )
+        wishlist_remove_url = reverse(
+            "wishlist_remove",
+            kwargs={"game_id": self.game_two.id},
+        )
+        wishlist_add_url = reverse(
+            "wishlist_add",
+            kwargs={"game_id": self.game_one.id},
+        )
+        second_game_favorite_url = reverse(
+            "library_favorite",
+            kwargs={"game_id": self.game_two.id},
+        )
 
         self.assertEqual(response.context["favorite_game_ids"], {self.game_one.id})
         self.assertEqual(response.context["wishlist_game_ids"], {self.game_two.id})
-        self.assertContains(response, 'action="/library/favorite/1/"')
-        self.assertContains(response, 'action="/wishlist/remove/2/"')
-        self.assertNotContains(response, 'action="/wishlist/add/1/"')
-        self.assertNotContains(response, 'action="/library/favorite/2/"')
+        self.assertContains(response, f'action="{favorite_url}"')
+        self.assertContains(response, f'action="{wishlist_remove_url}"')
+        self.assertNotContains(response, f'action="{wishlist_add_url}"')
+        self.assertNotContains(response, f'action="{second_game_favorite_url}"')
 
     def test_favorite_toggle_only_changes_games_in_current_users_library(self):
         user = User.objects.create_user(username="favorite_toggle_user")
@@ -319,19 +398,19 @@ class GameApiSearchTests(TestCase):
             "library_favorite",
             kwargs={"game_id": self.game_one.id},
         )
-        response = self.client.post(favorite_url, {"next": "/"})
+        response = self.client.post(favorite_url, {"next": reverse("home")})
 
-        self.assertRedirects(response, "/")
+        self.assertRedirects(response, reverse("home"))
         library_entry.refresh_from_db()
         self.assertTrue(library_entry.favorite)
 
-        self.client.post(favorite_url, {"next": "/"})
+        self.client.post(favorite_url, {"next": reverse("home")})
         library_entry.refresh_from_db()
         self.assertFalse(library_entry.favorite)
 
         self.client.post(
             reverse("library_favorite", kwargs={"game_id": self.game_two.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
         )
         self.assertFalse(
             LibraryGame.objects.filter(
@@ -347,9 +426,9 @@ class GameApiSearchTests(TestCase):
         add_url = reverse("wishlist_add", kwargs={"game_id": self.game_two.id})
         remove_url = reverse("wishlist_remove", kwargs={"game_id": self.game_two.id})
 
-        response = self.client.post(add_url, {"next": "/"})
+        response = self.client.post(add_url, {"next": reverse("home")})
 
-        self.assertRedirects(response, "/")
+        self.assertRedirects(response, reverse("home"))
         self.assertTrue(
             Wishlist.objects.filter(
                 user_profile=profile,
@@ -357,7 +436,7 @@ class GameApiSearchTests(TestCase):
             ).exists()
         )
 
-        self.client.post(remove_url, {"next": "/"})
+        self.client.post(remove_url, {"next": reverse("home")})
         self.assertFalse(
             Wishlist.objects.filter(
                 user_profile=profile,
@@ -366,7 +445,7 @@ class GameApiSearchTests(TestCase):
         )
 
         LibraryGame.objects.create(user_profile=profile, game=self.game_two)
-        self.client.post(add_url, {"next": "/"})
+        self.client.post(add_url, {"next": reverse("home")})
         self.assertFalse(
             Wishlist.objects.filter(
                 user_profile=profile,
@@ -382,7 +461,7 @@ class GameApiSearchTests(TestCase):
 
         add_response = self.client.post(
             reverse("library_add", kwargs={"game_id": self.game_one.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
             **ajax_headers,
         )
         self.assertEqual(add_response.status_code, 200)
@@ -390,7 +469,7 @@ class GameApiSearchTests(TestCase):
 
         favorite_response = self.client.post(
             reverse("library_favorite", kwargs={"game_id": self.game_one.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
             **ajax_headers,
         )
         self.assertEqual(favorite_response.status_code, 200)
@@ -403,7 +482,7 @@ class GameApiSearchTests(TestCase):
 
         remove_response = self.client.post(
             reverse("library_remove", kwargs={"game_id": self.game_one.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
             **ajax_headers,
         )
         self.assertEqual(remove_response.status_code, 200)
@@ -416,7 +495,7 @@ class GameApiSearchTests(TestCase):
 
         wishlist_response = self.client.post(
             reverse("wishlist_add", kwargs={"game_id": self.game_two.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
             **ajax_headers,
         )
         self.assertEqual(wishlist_response.status_code, 200)
@@ -429,7 +508,7 @@ class GameApiSearchTests(TestCase):
 
         wishlist_remove_response = self.client.post(
             reverse("wishlist_remove", kwargs={"game_id": self.game_two.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
             **ajax_headers,
         )
         self.assertEqual(wishlist_remove_response.status_code, 200)
@@ -448,7 +527,7 @@ class GameApiSearchTests(TestCase):
 
         self.client.post(
             reverse("library_add", kwargs={"game_id": self.game_one.id}),
-            {"next": "/"},
+            {"next": reverse("home")},
         )
 
         self.assertTrue(
@@ -551,21 +630,29 @@ class GameDetailTests(TestCase):
         profile = UserProfile.objects.create(user=self.user)
         LibraryGame.objects.create(user_profile=profile, game=self.game, favorite=True)
         self.client.force_login(self.user)
+        favorite_url = reverse(
+            "library_favorite",
+            kwargs={"game_id": self.game.id},
+        )
+        wishlist_add_url = reverse(
+            "wishlist_add",
+            kwargs={"game_id": self.game.id},
+        )
 
         response = self.client.get(
             reverse("game_detail", kwargs={"game_id": self.game.id})
         )
 
-        self.assertContains(response, 'action="/library/favorite/1/"')
+        self.assertContains(response, f'action="{favorite_url}"')
         self.assertContains(response, 'aria-pressed="true"')
-        self.assertNotContains(response, 'action="/wishlist/add/1/"')
+        self.assertNotContains(response, f'action="{wishlist_add_url}"')
 
         LibraryGame.objects.filter(user_profile=profile, game=self.game).delete()
         response = self.client.get(
             reverse("game_detail", kwargs={"game_id": self.game.id})
         )
-        self.assertContains(response, 'action="/wishlist/add/1/"')
-        self.assertNotContains(response, 'action="/library/favorite/1/"')
+        self.assertContains(response, f'action="{wishlist_add_url}"')
+        self.assertNotContains(response, f'action="{favorite_url}"')
 
     def test_user_can_add_game_from_detail_and_return_to_detail(self):
         self.client.force_login(self.user)
@@ -638,26 +725,26 @@ class LanguageSelectionTests(TestCase):
             ],
         )
 
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
         self.assertContains(response, "English")
         self.assertNotContains(response, "Inglés")
         self.assertNotContains(response, "Inglese")
         self.assertNotContains(response, "Anglès")
 
     def test_theme_selection_is_restored_and_saved_for_the_browser_session(self):
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
 
         self.assertContains(response, 'sessionStorage.getItem(claveTema)')
         self.assertContains(response, 'sessionStorage.setItem(claveTema')
 
     def test_selected_language_is_applied_across_pages(self):
         self.client.post(
-            "/i18n/setlang/",
-            {"language": "en", "next": "/"},
+            reverse("set_language"),
+            {"language": "en", "next": reverse("home")},
         )
 
-        home_response = self.client.get("/")
-        websocket_response = self.client.get("/websocket-test/")
+        home_response = self.client.get(reverse("home"))
+        websocket_response = self.client.get(reverse("websocket_test"))
 
         self.assertContains(home_response, "Welcome to Ludix")
         self.assertContains(home_response, '<html lang="en">')
@@ -669,7 +756,7 @@ class LanguageSelectionTests(TestCase):
     def test_auth_and_profile_pages_follow_the_selected_language(self):
         self.client.post(
             reverse("set_language"),
-            {"language": "ca", "next": "/"},
+            {"language": "ca", "next": reverse("home")},
         )
 
         self.assertContains(
@@ -689,7 +776,7 @@ class LanguageSelectionTests(TestCase):
         )
 
     def test_language_switcher_offers_all_requested_languages(self):
-        response = self.client.get("/")
+        response = self.client.get(reverse("home"))
 
         for language in ("es", "ca", "en", "it"):
             with self.subTest(language=language):
@@ -698,6 +785,7 @@ class LanguageSelectionTests(TestCase):
 
 class SuggestionViewTests(TestCase):
     def setUp(self):
+        self.suggestion_url = reverse("sugerencia")
         self.user = User.objects.create_user("suggestion_user", password="test")
         self.profile = UserProfile.objects.create(user=self.user)
         self.game = Game.objects.create(
@@ -715,7 +803,7 @@ class SuggestionViewTests(TestCase):
         self.client.force_login(self.user)
 
     def test_suggestion_page_scopes_its_script_so_theme_controls_work(self):
-        response = self.client.get("/sugerencia/")
+        response = self.client.get(reverse("sugerencia"))
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "sessionStorage.getItem(claveTema)")
@@ -723,7 +811,7 @@ class SuggestionViewTests(TestCase):
         self.assertContains(response, "(() => {")
 
     def test_age_difficulty_and_duration_cards_have_clear_options(self):
-        response = self.client.get("/sugerencia/")
+        response = self.client.get(reverse("sugerencia"))
         form = SugerenciaForm()
 
         self.assertEqual(str(form.fields["tematica"].label), "🏷️ Categoría")
@@ -757,7 +845,7 @@ class SuggestionViewTests(TestCase):
         )
 
         response = self.client.post(
-            "/sugerencia/",
+            reverse("sugerencia"),
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -778,7 +866,7 @@ class SuggestionViewTests(TestCase):
         self.assertEqual(session.max_duration, 60)
         self.assertIsNone(session.min_duration)
         restored_response = self.client.get(
-            "/sugerencia/",
+            self.suggestion_url,
             {"session": session.id},
         )
         self.assertEqual(
@@ -809,7 +897,7 @@ class SuggestionViewTests(TestCase):
             )
 
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -842,7 +930,7 @@ class SuggestionViewTests(TestCase):
 
     def test_any_duration_option_removes_the_duration_filter(self):
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -860,7 +948,7 @@ class SuggestionViewTests(TestCase):
         self.assertIsNone(session.min_duration)
 
         restored_response = self.client.get(
-            "/sugerencia/",
+            self.suggestion_url,
             {"session": session.id},
         )
         self.assertEqual(
@@ -891,7 +979,7 @@ class SuggestionViewTests(TestCase):
         )
 
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -923,7 +1011,7 @@ class SuggestionViewTests(TestCase):
         )
 
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -951,7 +1039,7 @@ class SuggestionViewTests(TestCase):
         )
 
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -973,13 +1061,17 @@ class SuggestionViewTests(TestCase):
             "Estrategia": ("Strategy", "Estratègia", "Strategia"),
             "Familiar": ("Family", "Familiar", "Familiare"),
         }
-        category_ids = {
-            name: (
-                Category.objects.filter(name=name).first()
-                or Category.objects.create(name=name)
-            ).pk
-            for name in categories
-        }
+        category_ids = {}
+        for name, translations in categories.items():
+            category, _ = Category.objects.update_or_create(
+                name=name,
+                defaults={
+                    "name_en": translations[0],
+                    "name_ca": translations[1],
+                    "name_it": translations[2],
+                },
+            )
+            category_ids[name] = category.pk
 
         for language, translation_index in (
             ("en", 0),
@@ -996,7 +1088,7 @@ class SuggestionViewTests(TestCase):
 
     def test_purchase_suggestion_creates_session_and_proposal(self):
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,
@@ -1041,7 +1133,7 @@ class SuggestionViewTests(TestCase):
         LibraryGame.objects.create(user_profile=self.profile, game=self.game)
 
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.LIBRARY,
                 "num_jugadores": 4,
@@ -1085,7 +1177,7 @@ class SuggestionViewTests(TestCase):
         Wishlist.objects.create(user_profile=self.profile, game=self.game)
 
         response = self.client.post(
-            "/sugerencia/",
+            self.suggestion_url,
             {
                 "tipo_sugerencia": SuggestionSession.SuggestionType.PURCHASE,
                 "num_jugadores": 4,

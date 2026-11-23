@@ -131,7 +131,7 @@ def recommendation_preview(request):
                     "profiles": profiles,
                     "selected_profile": None,
                     "current_recommendations": [],
-                    "hybrid_recommendations": [],
+                    "ml_recommendations": [],
                     "invalid_profile": True,
                 },
                 status=404,
