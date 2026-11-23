@@ -4516,18 +4516,25 @@ body.aurora .dado-container-dinamico span {
     padding: 20px;
     border: 1px solid var(--border-color, #d8dce2);
     border-radius: 12px;
-    background: var(--card-background, #fff);
+    background: var(--bg-main);
 }
 
 .recommendation-preview-column li {
     padding: 8px 0;
+    list-style-type: none;
+}
+
+.recommendation-preview-column li a {
+    text-decoration: none;
+    color: var(--accent-hover);
 }
 
 .recommendation-preview-top {
     margin-left: 8px;
     padding: 3px 8px;
     border-radius: 999px;
-    background: var(--accent-color, #e8efff);
+    color: #fff;
+    background: var(--unavailable_color);
     font-size: 0.8rem;
 }
 
