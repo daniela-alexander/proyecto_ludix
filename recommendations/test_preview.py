@@ -144,3 +144,4 @@ class RecommendationPreviewTests(TestCase):
                     {"profile": profile_id},
                 )
                 self.assertEqual(response.status_code, 404)
+                self.assertEqual(response.context["ml_recommendations"], [])

@@ -506,6 +506,8 @@
   {
     "id": 38,
     "nombre": "Chess",
+    "nombre_ca": "Escacs",
+    "nombre_it": "Scacchi",
     "categoria": "Abstracto clásico",
     "subcategoria": "Ajedrez estratégico",
     "pais_procedencia": "India / Persia",

@@ -97,6 +97,11 @@ def cargar_juegos_json(ruta_json=RUTA_JSON):
                 "difficulty": Decimal("2.00"),
                 "is_online": False,
             }
+            for language in ("en", "ca", "it"):
+                translated_title = item.get(f"nombre_{language}", "").strip()
+                if translated_title:
+                    defaults[f"title_{language}"] = translated_title
+
             if "precio" in item:
                 try:
                     precio = Decimal(str(item["precio"]))

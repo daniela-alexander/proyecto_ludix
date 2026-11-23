@@ -45,6 +45,9 @@ class GameListView(ListAPIView):
     filterset_class = GameFilter
     search_fields = [
         "title",
+        "title_en",
+        "title_ca",
+        "title_it",
         "description",
         "categories__name",
         "mechanics__name",
