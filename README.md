@@ -9,11 +9,11 @@ La aplicación también permite organizar una biblioteca personal, guardar
 favoritos y crear una lista de deseos.
 
 ## Equipo de desarrollo 🧑‍💻
+
 - Angelo Musso: Scrum Master y backend developer.
 - Daniela Alexander: Backend developer.
 - Cristofer Picado: Frontend developer.
 - Diego Llontop Vásques: Frontend developer.
-
 
 ## 🎯 Funcionalidades
 
@@ -320,9 +320,11 @@ definir `ALLOWED_HOSTS`, proteger las credenciales de base de datos y aplicar
 la configuración de HTTPS y seguridad recomendada por Django.
 
 ## LICENCIA 📄
+
 El proyecto Ludix está bajo la licencia MIT. Consulta el archivo `LICENSE` para
 más detalles.
 
 ## Agradecimientos 🙏
+
 A todos los participantes del proyecto.
 Fundació Esplai, por la enseñanza y el apoyo en el desarrollo del proyecto.
