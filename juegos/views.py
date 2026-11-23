@@ -120,6 +120,9 @@ def home(request):
     if query:
         games = games.filter(
             Q(title__icontains=query)
+            | Q(title_en__icontains=query)
+            | Q(title_ca__icontains=query)
+            | Q(title_it__icontains=query)
             | Q(description__icontains=query)
             | Q(categories__name__icontains=query)
             | Q(mechanics__name__icontains=query)

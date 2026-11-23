@@ -76,7 +76,7 @@
                 <span class="sr-only">{% translate "Mensajes" %}</span>
             </a>
             {% if user.is_staff %}
-            <a href="{% url 'recommendation_preview' %}" class="navbar-staff-link">Comparar recomendaciones</a>
+            <a href="{% url 'recommendation_preview' %}" class="navbar-staff-link">{% translate "Comparar recomendaciones" %}</a>
             {% endif %}
             <details class="navbar-account">
                 <summary class="navbar-account-trigger"
@@ -108,10 +108,10 @@
                         <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"></path>
                     </svg>
                     <span class="navbar-language-name">
-                        {% if CURRENT_LANGUAGE == "es" %}Español
-                        {% elif CURRENT_LANGUAGE == "ca" %}Català
-                        {% elif CURRENT_LANGUAGE == "en" %}English
-                        {% elif CURRENT_LANGUAGE == "it" %}Italiano{% endif %}
+                        {% if CURRENT_LANGUAGE == "es" %}{% translate "Español" %}
+                        {% elif CURRENT_LANGUAGE == "ca" %}{% translate "Català" %}
+                        {% elif CURRENT_LANGUAGE == "en" %}{% translate "English" %}
+                        {% elif CURRENT_LANGUAGE == "it" %}{% translate "Italiano" %}{% endif %}
                     </span>
                     <svg class="navbar-caret" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="m6 9 6 6 6-6"></path>
@@ -125,10 +125,10 @@
                         <button type="submit" name="language" value="{{ language_code }}"
                             class="navbar-language-option" {% if language_code == CURRENT_LANGUAGE %}aria-current="true"{% endif %}>
                             <span>
-                                {% if language_code == "es" %}Español
-                                {% elif language_code == "ca" %}Català
-                                {% elif language_code == "en" %}English
-                                {% elif language_code == "it" %}Italiano{% endif %}
+                                {% if language_code == "es" %}{% translate "Español" %}
+                                {% elif language_code == "ca" %}{% translate "Català" %}
+                                {% elif language_code == "en" %}{% translate "English" %}
+                                {% elif language_code == "it" %}{% translate "Italiano" %}{% endif %}
                             </span>
                             {% if language_code == CURRENT_LANGUAGE %}
                             <svg viewBox="0 0 24 24" aria-hidden="true">

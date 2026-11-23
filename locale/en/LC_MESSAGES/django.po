@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-19 22:15+0000\n"
+"POT-Creation-Date: 2026-11-23 18:16+0000\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,7 +64,7 @@ msgstr "Send"
 msgid "Conectando…"
 msgstr "Connecting…"
 
-#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:78
+#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:81
 msgid "Conectado"
 msgstr "Connected"
 
@@ -126,83 +126,11 @@ msgstr "Choose who you want to talk to."
 msgid "Abrir conversación"
 msgstr "Open conversation"
 
-#: juegos/forms.py:76
-msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
-msgstr "🎮  Where do you want the recommendations to come from?"
-
-#: juegos/forms.py:77 juegos/forms.py:81
-msgid "👥 Número de jugadores"
-msgstr "👥 Number of players"
-
-#: juegos/forms.py:78
-msgid "👶 Edad de la persona más joven"
-msgstr "👶 Age of the youngest person"
-
-#: juegos/forms.py:79
-msgid "⏱️ Duración máxima en minutos"
-msgstr "⏱️ Maximum duration in minutes"
-
-#: juegos/forms.py:80
-msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
-msgstr "🎯 Difficulty (1 = very easy, 5 = very difficult)"
-
-#: juegos/forms.py:81
-msgid "🏷️ Categoría"
-msgstr "🏷️ Category"
-
-#: juegos/forms.py:87
-msgid "De mi biblioteca"
-msgstr "From my library"
-
-#: juegos/forms.py:91
-msgid "Del catálogo de Ludix"
-msgstr "From the Ludix catalog"
-
-#: juegos/forms.py:95 juegos/forms.py:121
-msgid "Cualquiera"
-msgstr "Any"
-
-#: juegos/forms.py
-msgid "Fuente de recomendaciones"
-msgstr "Recommendation source"
-
-#: juegos/forms.py
+#: juegos/forms.py:70
 msgid "¿Dónde buscar?"
 msgstr "Where to search?"
 
-#: juegos/forms.py juegos/forms.py:113
-msgid "Mis juegos"
-msgstr "My games"
-
-#: juegos/forms.py juegos/forms.py:117
-msgid "Catálogo de Ludix"
-msgstr "Ludix catalog"
-
-#: juegos/forms.py
-msgid "Preferencia de edad"
-msgstr "Age preference"
-
-#: juegos/forms.py juegos/forms.py:87
-msgid "Cualquier edad"
-msgstr "Any age"
-
-#: juegos/forms.py juegos/forms.py:84
-msgid "Edad"
-msgstr "Age"
-
-#: juegos/forms.py
-msgid "Elegir edad"
-msgstr "Choose age"
-
-#: juegos/forms.py
-msgid "Preferencia de dificultad"
-msgstr "Difficulty preference"
-
-#: juegos/forms.py juegos/forms.py:96
-msgid "Cualquier dificultad"
-msgstr "Any difficulty"
-
-#: juegos/forms.py
+#: juegos/forms.py:71
 msgid "Tiempo de partida"
 msgstr "Game duration"
 
@@ -230,9 +158,25 @@ msgstr "🎲 Up to 120m"
 msgid "🕰️ 120 y más"
 msgstr "🕰️ 120 and more"
 
+#: juegos/forms.py:81
+msgid "👥 Número de jugadores"
+msgstr "👥 Number of players"
+
+#: juegos/forms.py:84
+msgid "Edad"
+msgstr "Age"
+
+#: juegos/forms.py:87
+msgid "Cualquier edad"
+msgstr "Any age"
+
 #: juegos/forms.py:94 templates/juegos/game_detail.html:77
 msgid "Dificultad"
 msgstr "Difficulty"
+
+#: juegos/forms.py:96
+msgid "Cualquier dificultad"
+msgstr "Any difficulty"
 
 #: juegos/forms.py:97
 msgid "🌱 Muy fácil"
@@ -259,8 +203,20 @@ msgid "La dificultad solo influye en el orden de las recomendaciones."
 msgstr "Difficulty only affects the order of the recommendations."
 
 #: juegos/forms.py:106
-msgid "🏷️ Temática"
-msgstr "🏷️ Theme"
+msgid "🏷️ Categoría"
+msgstr "🏷️ Category"
+
+#: juegos/forms.py:113
+msgid "Mis juegos"
+msgstr "My games"
+
+#: juegos/forms.py:117
+msgid "Catálogo de Ludix"
+msgstr "Ludix catalog"
+
+#: juegos/forms.py:121
+msgid "Cualquiera"
+msgstr "Any"
 
 #: juegos/models.py:12
 msgid "Cliente"
@@ -298,27 +254,27 @@ msgstr "Shipped"
 msgid "Cancelado"
 msgstr "Cancelled"
 
-#: juegos/views.py:107
+#: juegos/views.py:108
 msgid "Orden alfabético"
 msgstr "Alphabetical order"
 
-#: juegos/views.py:108
+#: juegos/views.py:109
 msgid "Más vendidos"
 msgstr "Best sellers"
 
-#: juegos/views.py:109
+#: juegos/views.py:110
 msgid "Precio: menor a mayor"
 msgstr "Price: low to high"
 
-#: juegos/views.py:110
+#: juegos/views.py:111
 msgid "Precio: mayor a menor"
 msgstr "Price: high to low"
 
-#: juegos/views.py:111
+#: juegos/views.py:112
 msgid "Más favoritos"
 msgstr "Most favorited"
 
-#: juegos/views.py:112
+#: juegos/views.py:113
 msgid "Partidas más cortas"
 msgstr "Shortest games"
 
@@ -433,7 +389,7 @@ msgstr "Games in library"
 msgid "Favoritos"
 msgstr "Favorites"
 
-#: templates/accounts/profile.html:49 templates/accounts/profile.html:165
+#: templates/accounts/profile.html:49 templates/accounts/profile.html:167
 msgid "Lista de deseos"
 msgstr "Wishlist"
 
@@ -473,99 +429,99 @@ msgstr "Save changes"
 msgid "Idioma actual"
 msgstr "Current language"
 
-#: templates/accounts/profile.html:99
+#: templates/accounts/profile.html:101
 msgid "Fecha de nacimiento"
 msgstr "Date of birth"
 
-#: templates/accounts/profile.html:104
+#: templates/accounts/profile.html:106
 msgid "No indicado"
 msgstr "Not specified"
 
-#: templates/accounts/profile.html:111
+#: templates/accounts/profile.html:113
 msgid "Mis juegos favoritos"
 msgstr "My favorite games"
 
-#: templates/accounts/profile.html:113
+#: templates/accounts/profile.html:115
 msgid "Juegos marcados como favoritos."
 msgstr "Games marked as favorites."
 
-#: templates/accounts/profile.html:122 templates/accounts/profile.html:145
-#: templates/accounts/profile.html:176
+#: templates/accounts/profile.html:124 templates/accounts/profile.html:147
+#: templates/accounts/profile.html:178
 #, python-format
 msgid "Añadido %(date)s"
 msgstr "Added %(date)s"
 
-#: templates/accounts/profile.html:128
+#: templates/accounts/profile.html:130
 msgid "Todavía no tienes juegos favoritos."
 msgstr "You don't have any favorite games yet."
 
-#: templates/accounts/profile.html:134
+#: templates/accounts/profile.html:136
 msgid "Mi biblioteca"
 msgstr "My library"
 
-#: templates/accounts/profile.html:136
+#: templates/accounts/profile.html:138
 msgid "Los últimos juegos que has añadido."
 msgstr "The latest games you've added."
 
-#: templates/accounts/profile.html:153 templates/accounts/profile.html:154
+#: templates/accounts/profile.html:155 templates/accounts/profile.html:156
 #: templates/home.html:183 templates/home.html:186
 #: templates/juegos/sugerencia_form.html:188
 #: templates/juegos/sugerencia_form.html:191
 msgid "Quitar de mi biblioteca"
 msgstr "Remove from my library"
 
-#: templates/accounts/profile.html:159
+#: templates/accounts/profile.html:161
 msgid "Tu biblioteca está vacía."
 msgstr "Your library is empty."
 
-#: templates/accounts/profile.html:167
+#: templates/accounts/profile.html:169
 msgid "Juegos que quieres añadir a tu colección."
 msgstr "Games you want to add to your collection."
 
-#: templates/accounts/profile.html:182
+#: templates/accounts/profile.html:184
 msgid "Tu lista de deseos está vacía."
 msgstr "Your wishlist is empty."
 
-#: templates/accounts/profile.html:188
+#: templates/accounts/profile.html:190
 msgid "Juegos que no me gustan"
 msgstr "Games I don't like"
 
-#: templates/accounts/profile.html:190
+#: templates/accounts/profile.html:192
 msgid "Juegos que has marcado para ajustar tus recomendaciones."
 msgstr "Games you've marked to fine-tune your recommendations."
 
-#: templates/accounts/profile.html:211 templates/accounts/profile.html:212
+#: templates/accounts/profile.html:213 templates/accounts/profile.html:214
 #: templates/juegos/game_detail.html:186 templates/juegos/game_detail.html:187
 msgid "Quitar de No me gusta"
 msgstr "Remove dislike"
 
-#: templates/accounts/profile.html:218
+#: templates/accounts/profile.html:220
 msgid "Todavía no has marcado juegos que no te gusten."
 msgstr "You haven't marked any games as dislikes yet."
 
-#: templates/accounts/profile.html:224
+#: templates/accounts/profile.html:226
 msgid "Últimas sesiones"
 msgstr "Recent sessions"
 
-#: templates/accounts/profile.html:230
+#: templates/accounts/profile.html:232
 #, python-format
 msgid "Sesión n.o %(id)s"
 msgstr "Session no. %(id)s"
 
-#: templates/accounts/profile.html:239
+#: templates/accounts/profile.html:241
 msgid "Todavía no tienes sesiones guardadas."
 msgstr "You don't have any saved sessions yet."
 
-#: templates/accounts/profile.html:245
+#: templates/accounts/profile.html:247
 msgid "Últimos pedidos"
 msgstr "Recent orders"
 
-#: templates/accounts/profile.html:251
+#: templates/accounts/profile.html:253
 #, python-format
 msgid "Pedido n.o %(id)s"
 msgstr "Order no. %(id)s"
 
-#: templates/accounts/profile.html:261
+#: templates/accounts/profile.html:263
 msgid "Todavía no tienes pedidos."
 msgstr "You don't have any orders yet."
 
@@ -618,7 +574,7 @@ msgstr "Log in"
 msgid "Tipo de dado"
 msgstr "Dice type"
 
-#: templates/base.html:53 templates/base.html:596
+#: templates/base.html:53 templates/base.html:602
 msgid "Letras (A-Z)"
 msgstr "Letters (A-Z)"
 
@@ -629,6 +585,10 @@ msgstr "Throw"
 #: templates/base.html:68
 msgid "Navegación principal"
 msgstr "Main navigation"
+
+#: templates/base.html:79
+msgid "Comparar recomendaciones"
+msgstr "Compare recommendations"
 
 #: templates/base.html:83
 #, python-format
@@ -643,20 +603,36 @@ msgstr "Log out"
 msgid "Idioma"
 msgstr "Language"
 
-#: templates/base.html:137
+#: templates/base.html:111 templates/base.html:128
+msgid "Español"
+msgstr "Spanish"
+
+#: templates/base.html:112 templates/base.html:129
+msgid "Català"
+msgstr "Catalan"
+
+#: templates/base.html:113 templates/base.html:130
+msgid "English"
+msgstr "English"
+
+#: templates/base.html:114 templates/base.html:131
+msgid "Italiano"
+msgstr "Italian"
+
+#: templates/base.html:143
 msgid "Cambiar tema"
 msgstr "Change theme"
 
-#: templates/base.html:138
+#: templates/base.html:144
 msgid "Tema actual"
 msgstr "Current theme"
 
-#: templates/base.html:159 templates/base.html:162
-#: templates/websocket_test.html:73
+#: templates/base.html:165 templates/base.html:168
+#: templates/websocket_test.html:76
 msgid "Usuarios conectados"
 msgstr "Users online"
 
-#: templates/base.html:567
+#: templates/base.html:573
 msgid ""
 "El cambio se guardó, pero no se pudo actualizar la vista. Recarga la página "
 "para verla."
@@ -664,23 +640,23 @@ msgstr ""
 "The change was saved, but the view could not be updated. Reload the page to "
 "see it."
 
-#: templates/base.html:568
+#: templates/base.html:574
 msgid "No se pudo guardar el cambio. Inténtalo de nuevo."
 msgstr "The change could not be saved. Try again."
 
-#: templates/base.html:584
+#: templates/base.html:590
 msgid "Lanzador 3D Ludix"
 msgstr "Ludix 3D Launcher"
 
-#: templates/base.html:588
+#: templates/base.html:594
 msgid "Tipo de dado:"
 msgstr "Dice type:"
 
-#: templates/base.html:613
+#: templates/base.html:619
 msgid "¡Lanzar Dado!"
 msgstr "Roll Dice!"
 
-#: templates/base.html:617
+#: templates/base.html:623
 msgid "Haz clic en el dado o en el botón"
 msgstr "Click on the dice or button"
 
@@ -865,6 +841,26 @@ msgid ""
 "No hay juegos que coincidan con estos filtros. Prueba a cambiar tus opciones."
 msgstr "No games match these filters. Try changing your options."
 
+#: templates/home.html:246
+msgid "Paginación del catálogo"
+msgstr "Catalog pagination"
+
+#: templates/home.html:249
+msgid "Anterior"
+msgstr ""
+
+#: templates/home.html:254
+#, python-format
+msgid ""
+"\n"
+"                        Página %(current)s de %(total)s\n"
+"                    "
+msgstr ""
+
+#: templates/home.html:261
+msgid "Siguiente"
+msgstr "Next"
+
 #: templates/juegos/game_detail.html:8 templates/juegos/game_shop.html:8
 msgid "Ruta de navegación"
 msgstr "Breadcrumb"
@@ -1035,40 +1031,8 @@ msgstr "Recommend me a game | Ludix"
 msgid "🎲 Encuentra tu próximo juego"
 msgstr "🎲 Find your next game"
 
-#: templates/juegos/sugerencia_form.html:14
-msgid "Elige de dónde buscar y ajusta solo las preferencias que te importan."
-msgstr "Choose where to search and adjust only the preferences that matter to you."
-
-#: templates/juegos/sugerencia_form.html
-msgid "¿Dónde quieres buscar?"
-msgstr "Where should we look?"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Elige una fuente para tus recomendaciones."
-msgstr "Choose a source for your recommendations."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Define la partida"
-msgstr "Set up your game"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Jugadores y duración son los criterios principales."
-msgstr "Players and duration are the main criteria."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Preferencias opcionales"
-msgstr "Optional preferences"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
-msgstr "Age, difficulty, and category help refine results, but are optional."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Sin preferencia"
-msgstr "No preference"
-
-#: templates/juegos/sugerencia_form.html:31
-#: templates/juegos/sugerencia_form.html:296
+#: templates/juegos/sugerencia_form.html:19
+#: templates/juegos/sugerencia_form.html:374
 msgid "▼ Modificar búsqueda"
 msgstr "▼ Modify search"
 
@@ -1084,16 +1048,7 @@ msgstr "10 players"
 msgid "🎲 Ver recomendaciones"
 msgstr "🎲 See recommendations"
 
-#: templates/juegos/sugerencia_form.html
-#: templates/juegos/sugerencia_form.html:224
-msgid "No encontramos coincidencias"
-msgstr "No matches found"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Prueba ampliar la duración, cambiar la categoría o dejar la edad o la dificultad en «Cualquiera»."
-msgstr "Try increasing the duration, changing the category, or setting age or difficulty to “Any”."
-
-#: templates/juegos/sugerencia_form.html:157
+#: templates/juegos/sugerencia_form.html:132
 msgid "Recomendaciones"
 msgstr "Recommendations"
 
@@ -1137,16 +1092,20 @@ msgstr "Available"
 msgid "No disponible actualmente"
 msgstr "Currently unavailable"
 
-#: templates/juegos/sugerencia_form.html:195
+#: templates/juegos/sugerencia_form.html:180
 msgid "Comprar"
 msgstr "Buy"
 
+#: templates/juegos/sugerencia_form.html:224
+msgid "No encontramos coincidencias"
+msgstr "No matches found"
+
 #: templates/juegos/sugerencia_form.html:225
 msgid ""
-"Prueba ampliar la duración, cambiar la temática o dejar la edad o la "
+"Prueba ampliar la duración, cambiar la categoría o dejar la edad o la "
 "dificultad en «Cualquiera»."
 msgstr ""
-"Try increasing the duration, changing the theme, or setting age or "
+"Try increasing the duration, changing the category, or setting age or "
 "difficulty to “Any”."
 
 #: templates/juegos/sugerencia_form.html:243
@@ -1156,14 +1115,6 @@ msgstr "player"
 #: templates/juegos/sugerencia_form.html:244
 msgid "jugadores"
 msgstr "players"
-
-#: templates/juegos/sugerencia_form.html:256
-msgid "Mayor de 18"
-msgstr "Over 18"
-
-#: templates/juegos/sugerencia_form.html:266
-msgid "min"
-msgstr "minutes"
 
 #: templates/juegos/sugerencia_form.html:375
 msgid "▲ Ocultar búsqueda"
@@ -1246,19 +1197,19 @@ msgstr "There are no test profiles `test_*` available for comparison."
 msgid "Ludix WebSocket Test"
 msgstr "Ludix WebSocket test"
 
-#: templates/websocket_test.html:70
+#: templates/websocket_test.html:73
 msgid "Cambiar"
 msgstr "Change"
 
-#: templates/websocket_test.html:75
+#: templates/websocket_test.html:78
 msgid "Conectando..."
 msgstr "Connecting..."
 
-#: templates/websocket_test.html:79
+#: templates/websocket_test.html:82
 msgid "Error de conexión"
 msgstr "Connection error"
 
-#: templates/websocket_test.html:80
+#: templates/websocket_test.html:83
 msgid "Desconectado"
 msgstr "Disconnected"
 
@@ -2581,6 +2532,371 @@ msgstr "Django Community"
 #: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:239
 msgid "Connect, get help, or contribute"
 msgstr "Connect, get help, or contribute"
+
+#~ msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
+#~ msgstr "🎮  Where do you want the recommendations to come from?"
+
+#~ msgid "👶 Edad de la persona más joven"
+#~ msgstr "👶 Age of the youngest person"
+
+#~ msgid "⏱️ Duración máxima en minutos"
+#~ msgstr "⏱️ Maximum duration in minutes"
+
+#~ msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
+#~ msgstr "🎯 Difficulty (1 = very easy, 5 = very difficult)"
+
+#~ msgid "De mi biblioteca"
+#~ msgstr "From my library"
+
+#~ msgid "Del catálogo de Ludix"
+#~ msgstr "From the Ludix catalog"
+
+#~ msgid "Fuente de recomendaciones"
+#~ msgstr "Recommendation source"
+
+#~ msgid "Preferencia de edad"
+#~ msgstr "Age preference"
+
+#~ msgid "Elegir edad"
+#~ msgstr "Choose age"
+
+#~ msgid "Preferencia de dificultad"
+#~ msgstr "Difficulty preference"
+
+#~ msgid "🏷️ Temática"
+#~ msgstr "🏷️ Theme"
+
+#~ msgid ""
+#~ "Elige de dónde buscar y ajusta solo las preferencias que te importan."
+#~ msgstr ""
+#~ "Choose where to search and adjust only the preferences that matter to you."
+
+#~ msgid "¿Dónde quieres buscar?"
+#~ msgstr "Where should we look?"
+
+#~ msgid "Elige una fuente para tus recomendaciones."
+#~ msgstr "Choose a source for your recommendations."
+
+#~ msgid "Define la partida"
+#~ msgstr "Set up your game"
+
+#~ msgid "Jugadores y duración son los criterios principales."
+#~ msgstr "Players and duration are the main criteria."
+
+#~ msgid "Preferencias opcionales"
+#~ msgstr "Optional preferences"
+
+#~ msgid ""
+#~ "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
+#~ msgstr ""
+#~ "Age, difficulty, and category help refine results, but are optional."
+
+#~ msgid "Sin preferencia"
+#~ msgstr "No preference"
+
+#~ msgid ""
+#~ "Prueba ampliar la duración, cambiar la temática o dejar la edad o la "
+#~ "dificultad en «Cualquiera»."
+#~ msgstr ""
+#~ "Try increasing the duration, changing the theme, or setting age or "
+#~ "difficulty to “Any”."
+
+#~ msgid "Mayor de 18"
+#~ msgstr "Over 18"
+
+#~ msgid "min"
+#~ msgstr "minutes"
+
+#~ msgid "Hundir la Flota (Batalla Naval)"
+#~ msgstr "Battleship (Naval Battle)"
+
+#~ msgid "Tres en Raya (Gato / Cero y Cruces)"
+#~ msgstr "Tic-Tac-Toe (Noughts and Crosses)"
+
+#~ msgid "Cuadritos (Puntos y Cajas / Timbiriche)"
+#~ msgstr "Dots and Boxes"
+
+#~ msgid "Nimm en Papel"
+#~ msgstr "Paper Nimm"
+
+#~ msgid "Cero Cero (Zero Zero)"
+#~ msgstr "Zero Zero"
+
+#~ msgid "Las Enredaderas (Sprouts)"
+#~ msgstr "Sprouts"
+
+#~ msgid "El Ahorcado"
+#~ msgstr "Hangman"
+
+#~ msgid "Mastermind de Papel (Bulls and Cows)"
+#~ msgstr "Paper Mastermind (Bulls and Cows)"
+
+#~ msgid "El Juego de la Vida de Conway (Papel)"
+#~ msgstr "Conway's Game of Life (Paper)"
+
+#~ msgid "Carrera de Vectores (Racetrack)"
+#~ msgstr "Vector Rally (Racetrack)"
+
+#~ msgid "Tic-Tac-Toe Cuántico"
+#~ msgstr "Quantum Tic-Tac-Toe"
+
+#~ msgid "Pictionary Casero"
+#~ msgstr "Homemade Pictionary"
+
+#~ msgid "Dudo de Números (Gobernador / Chinchón de Palabras)"
+#~ msgstr "Number Bluff (Governor / Word Chinchon)"
+
+#~ msgid "Gomoku de Papel (Cinco en Raya)"
+#~ msgstr "Paper Gomoku (Five in a Row)"
+
+#~ msgid "Cuatro en Raya (Conectar 4 en Papel)"
+#~ msgstr "Four in a Row (Connect 4 on Paper)"
+
+#~ msgid "El Cuadro Fantasma"
+#~ msgstr "The Ghost Square"
+
+#~ msgid "El Laberinto Cruzado"
+#~ msgstr "The Crossed Maze"
+
+#~ msgid "El Dictado a Ciegas"
+#~ msgstr "Blind Drawing Dictation"
+
+#~ msgid "El Intruso (Gatos y Ratones)"
+#~ msgstr "The Intruder (Cats and Mice)"
+
+#~ msgid "Hink Pink / Anagramas de Papel"
+#~ msgstr "Hink Pink / Paper Anagrams"
+
+#~ msgid "Banderas (Conquista de Cuadrantes)"
+#~ msgstr "Flags (Quadrant Conquest)"
+
+#~ msgid "El Teléfono Roto Dibujado (Telestrations casero)"
+#~ msgstr "Drawn Telephone (Homemade Telestrations)"
+
+#~ msgid "Criptograma Cruzado"
+#~ msgstr "Crossword Cryptogram"
+
+#~ msgid "El Círculo de la Fortuna (Hangman Circular)"
+#~ msgstr "The Circle of Fortune (Circular Hangman)"
+
+#~ msgid "Puentes de Königsberg en Papel"
+#~ msgstr "Königsberg Bridges on Paper"
+
+#~ msgid "El Tesoro Escondido (Mapa de Coordenadas)"
+#~ msgstr "The Hidden Treasure (Coordinate Map)"
+
+#~ msgid "Rejilla de Conexión (Hex en Papel)"
+#~ msgstr "Connection Grid (Paper Hex)"
+
+#~ msgid "La Serpiente (Shedder / Snake)"
+#~ msgstr "The Snake (Shedder / Snake)"
+
+#~ msgid "Guerra de Números"
+#~ msgstr "Number War"
+
+#~ msgid "Sopa de Letras Competitiva"
+#~ msgstr "Competitive Word Search"
+
+#~ msgid "El Cuadrado Mágico"
+#~ msgstr "The Magic Square"
+
+#~ msgid "Cadenas de Palabras (Word Ladders / Metagramas)"
+#~ msgstr "Word Chains (Word Ladders / Metagrams)"
+
+#~ msgid "Carreras de Números (1 a 100)"
+#~ msgstr "Number Races (1 to 100)"
+
+#~ msgid "Dominó de Papel (Domineering)"
+#~ msgstr "Paper Dominoes (Domineering)"
+
+#~ msgid "El Edificio (Skyscrapers)"
+#~ msgstr "The Building (Skyscrapers)"
+
+#~ msgid "Puntos y Marcas (Chomp de Papel)"
+#~ msgstr "Dots and Marks (Paper Chomp)"
+
+#~ msgid "Triángulos (Polígonos de Hakimi)"
+#~ msgstr "Triangles (Hakimi Polygons)"
+
+#~ msgid "Batalla de Palabras (Anagrameador)"
+#~ msgstr "Word Battle (Anagram Maker)"
+
+#~ msgid "Pistas Ocultas (Black Box de Papel)"
+#~ msgstr "Hidden Clues (Paper Black Box)"
+
+#~ msgid "Batalla de Cuadrados (Box-In)"
+#~ msgstr "Square Battle (Box-In)"
+
+#~ msgid "El Laberinto Invisible"
+#~ msgstr "The Invisible Maze"
+
+#~ msgid "Generador de Historias (Cadáver Exquisito)"
+#~ msgstr "Story Generator (Exquisite Corpse)"
+
+#~ msgid "El Cereal (Kropki de Papel)"
+#~ msgstr "The Cereal (Paper Kropki)"
+
+#~ msgid "La Frontera (Borderline)"
+#~ msgstr "The Border (Borderline)"
+
+#~ msgid "Crucigrama Veloz (Speed Crossword)"
+#~ msgstr "Speed Crossword"
+
+#~ msgid "La Diana (Target 500)"
+#~ msgstr "The Bullseye (Target 500)"
+
+#~ msgid "Sudoku de Papel"
+#~ msgstr "Paper Sudoku"
+
+#~ msgid "Kakuro (Suma Cruzada)"
+#~ msgstr "Kakuro (Cross Sums)"
+
+#~ msgid "Slitherlink (El Bucle)"
+#~ msgstr "Slitherlink (The Loop)"
+
+#~ msgid "Futoshiki (Desigualdad)"
+#~ msgstr "Futoshiki (Inequality)"
+
+#~ msgid "Nonogramas de Papel (Picross)"
+#~ msgstr "Paper Nonograms (Picross)"
+
+#~ msgid "KenKen (Calcudoku)"
+#~ msgstr "KenKen (Calcudoku)"
+
+#~ msgid "Shikaku (Rectángulos)"
+#~ msgstr "Shikaku (Rectangles)"
+
+#~ msgid "Hidato (Camino Numérico)"
+#~ msgstr "Hidato (Number Path)"
+
+#~ msgid "Akari (Luz y Sombras)"
+#~ msgstr "Akari (Light and Shadows)"
+
+#~ msgid "Palabras Cruzadas (Anagram Cross)"
+#~ msgstr "Crosswords (Anagram Cross)"
+
+#~ msgid "La Telaraña de Números"
+#~ msgstr "The Number Web"
+
+#~ msgid "Las Tres Torres de Hanoi (En Papel)"
+#~ msgstr "The Three Towers of Hanoi (On Paper)"
+
+#~ msgid "Laberinto de Hilos (String Maze)"
+#~ msgstr "String Maze"
+
+#~ msgid "Palabras Encadenadas en Matriz"
+#~ msgstr "Word Chains in a Grid"
+
+#~ msgid "El Reloj Matemático"
+#~ msgstr "The Math Clock"
+
+#~ msgid "Círculos de Venn (Juego de Lógica)"
+#~ msgstr "Venn Diagrams (Logic Game)"
+
+#~ msgid "Conecta 5 con Bloqueos (Lasker Morris en Papel)"
+#~ msgstr "Connect 5 with Blockers (Paper Lasker Morris)"
+
+#~ msgid "Los Seis Grados de Separación"
+#~ msgstr "Six Degrees of Separation"
+
+#~ msgid "Tangram de Papel (Corte y Lógica)"
+#~ msgstr "Paper Tangram (Cut and Logic)"
+
+#~ msgid "El Telégrafo (Código Morse de Papel)"
+#~ msgstr "The Telegraph (Paper Morse Code)"
+
+#~ msgid "Pirámides Numéricas"
+#~ msgstr "Number Pyramids"
+
+#~ msgid "Las Ocho Reinas (En Papel)"
+#~ msgstr "The Eight Queens (On Paper)"
+
+#~ msgid "Salto de Caballo (Knight's Tour)"
+#~ msgstr "Knight's Tour"
+
+#~ msgid "Pentominós de Papel"
+#~ msgstr "Paper Pentominoes"
+
+#~ msgid "El Laberinto Dinámico"
+#~ msgstr "The Dynamic Maze"
+
+#~ msgid "La Caza de la Zorra (Fox and Hounds)"
+#~ msgstr "Fox and Hounds"
+
+#~ msgid "Batalla de Palíndromos"
+#~ msgstr "Palindrome Battle"
+
+#~ msgid "Sopa de Cifras"
+#~ msgstr "Number Search"
+
+#~ msgid "Cruces e Intersecciones (Planarity)"
+#~ msgstr "Crossings and Intersections (Planarity)"
+
+#~ msgid "Cuadrantes Rascacielos (City Grid)"
+#~ msgstr "Skyscraper Quadrants (City Grid)"
+
+#~ msgid "Círculos Concéntricos (Bullseye Words)"
+#~ msgstr "Concentric Circles (Bullseye Words)"
+
+#~ msgid "Batalla de Barcos Estratégica (Salvo)"
+#~ msgstr "Strategic Naval Battle (Salvo)"
+
+#~ msgid "El Pozo del Dragón"
+#~ msgstr "The Dragon's Well"
+
+#~ msgid "El Camino del Rey"
+#~ msgstr "The King's Path"
+
+#~ msgid "Abecedario Cierto"
+#~ msgstr "True Alphabet"
+
+#~ msgid "Bloques Rotos (Polyminó Eliminación)"
+#~ msgstr "Broken Blocks (Polyomino Elimination)"
+
+#~ msgid "Acertijos de Cerillas en Papel"
+#~ msgstr "Paper Matchstick Puzzles"
+
+#~ msgid "Cifras y Letras (Prueba de Cifras en Papel)"
+#~ msgstr "Numbers and Letters (Paper Numbers Challenge)"
+
+#~ msgid "La Escalera de Palabras (Wordle de Papel)"
+#~ msgstr "Word Ladder (Paper Wordle)"
+
+#~ msgid "Tres en Raya Tridimensional (3D Tic-Tac-Toe)"
+#~ msgstr "Three-Dimensional Tic-Tac-Toe (3D Tic-Tac-Toe)"
+
+#~ msgid "Las Cuatro Esquinas"
+#~ msgstr "The Four Corners"
+
+#~ msgid "Hexágono de Puntos (Spidron de Papel)"
+#~ msgstr "Pointed Hexagon (Paper Spidron)"
+
+#~ msgid "Triqui Traque de Dados (Simulado)"
+#~ msgstr "Dice Tic-Tac-Toe (Simulated)"
+
+#~ msgid "Laberinto de Flechas (Vector Maze)"
+#~ msgstr "Arrow Maze (Vector Maze)"
+
+#~ msgid "Sumas Encadenadas (Number Chain)"
+#~ msgstr "Chained Sums (Number Chain)"
+
+#~ msgid "La Isla de las Serpientes"
+#~ msgstr "The Island of Snakes"
+
+#~ msgid "La Telaraña de Palabras (Word Web)"
+#~ msgstr "The Word Web"
+
+#~ msgid "El Puente Romano (Pons Asinorum en Papel)"
+#~ msgstr "The Roman Bridge (Paper Pons Asinorum)"
+
+#~ msgid "¡Toma 6! (6 Nimmt!)"
+#~ msgstr "Take 6! (6 Nimmt!)"
+
+#~ msgid "Taco Gato Cabra Queso Pizza"
+#~ msgstr "Taco Cat Goat Cheese Pizza"
+
+#~ msgid "Pelusas (Fluff)"
+#~ msgstr "Fluff"
 
 #~ msgid "Edad de la persona más joven"
 #~ msgstr "Age of the youngest person"
@@ -8099,9 +8415,6 @@ msgstr "Connect, get help, or contribute"
 #~ msgid "Geometría visual"
 #~ msgstr "visual geometry"
 
-#~ msgid "España"
-#~ msgstr "Spain"
-
 #~ msgid ""
 #~ "Rellena las casillas vacías con dígitos del 1 al 9. La suma de las cifras "
 #~ "de un bloque horizontal o vertical debe dar el número indicado en la "
@@ -8248,9 +8561,6 @@ msgstr "Connect, get help, or contribute"
 #~ "Creator: Traditional Designer / Japan Publisher | Year: Unknown or "
 #~ "traditional | Why it was created: Developed to enrich the cultural "
 #~ "catalog of abstract games in the region."
-
-#~ msgid "Combinación de cartas"
-#~ msgstr "Card combination"
 
 #~ msgid ""
 #~ "Se disponen los componentes de Queendomino. Los jugadores ejecutan turnos "
@@ -9019,9 +9329,6 @@ msgstr "Connect, get help, or contribute"
 #~ "The components of The Crew: The Quest for Planet Nine are laid out. "
 #~ "Players execute sequential turns applying the core game mechanics of "
 #~ "spatial tricks and respecting specific victory conditions."
-
-#~ msgid "Italia"
-#~ msgstr "Italy"
 
 #~ msgid "Vidrieras de colores en la catedral"
 #~ msgstr "Stained glass windows in the cathedral"

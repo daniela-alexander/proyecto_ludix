@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-19 22:15+0000\n"
+"POT-Creation-Date: 2026-11-23 18:16+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,7 +64,7 @@ msgstr "Invia"
 msgid "Conectando…"
 msgstr "Connessione in corso…"
 
-#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:78
+#: chat/templates/chat/conversation.html:48 templates/websocket_test.html:81
 msgid "Conectado"
 msgstr "Connesso"
 
@@ -126,83 +126,11 @@ msgstr "Scegli con chi vuoi parlare."
 msgid "Abrir conversación"
 msgstr "Apri la conversazione"
 
-#: juegos/forms.py:76
-msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
-msgstr "🎮 Da dove vuoi che provengano i suggerimenti?"
-
-#: juegos/forms.py:77 juegos/forms.py:81
-msgid "👥 Número de jugadores"
-msgstr "👥 Numero di giocatori"
-
-#: juegos/forms.py:78
-msgid "👶 Edad de la persona más joven"
-msgstr "👶 Età della persona più giovane"
-
-#: juegos/forms.py:79
-msgid "⏱️ Duración máxima en minutos"
-msgstr "⏱️ Durata massima in minuti"
-
-#: juegos/forms.py:80
-msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
-msgstr "🎯 Difficoltà (1 = molto facile, 5 = molto difficile)"
-
-#: juegos/forms.py:81
-msgid "🏷️ Categoría"
-msgstr "🏷️ Categoria"
-
-#: juegos/forms.py:87
-msgid "De mi biblioteca"
-msgstr "La mia libreria"
-
-#: juegos/forms.py:91
-msgid "Del catálogo de Ludix"
-msgstr "Dal catalogo Ludix"
-
-#: juegos/forms.py:95 juegos/forms.py:121
-msgid "Cualquiera"
-msgstr "Qualunque"
-
-#: juegos/forms.py
-msgid "Fuente de recomendaciones"
-msgstr "Fonte dei consigli"
-
-#: juegos/forms.py
+#: juegos/forms.py:70
 msgid "¿Dónde buscar?"
 msgstr "Dove cercare?"
 
-#: juegos/forms.py juegos/forms.py:113
-msgid "Mis juegos"
-msgstr "I miei giochi"
-
-#: juegos/forms.py juegos/forms.py:117
-msgid "Catálogo de Ludix"
-msgstr "Catalogo Ludix"
-
-#: juegos/forms.py
-msgid "Preferencia de edad"
-msgstr "Preferenza di età"
-
-#: juegos/forms.py juegos/forms.py:87
-msgid "Cualquier edad"
-msgstr "Qualsiasi età"
-
-#: juegos/forms.py juegos/forms.py:84
-msgid "Edad"
-msgstr "Età"
-
-#: juegos/forms.py
-msgid "Elegir edad"
-msgstr "Scegli l'età"
-
-#: juegos/forms.py
-msgid "Preferencia de dificultad"
-msgstr "Preferenza di difficoltà"
-
-#: juegos/forms.py juegos/forms.py:96
-msgid "Cualquier dificultad"
-msgstr "Qualsiasi difficoltà"
-
-#: juegos/forms.py
+#: juegos/forms.py:71
 msgid "Tiempo de partida"
 msgstr "Durata della partita"
 
@@ -230,9 +158,25 @@ msgstr "🎲 Fino a 120m"
 msgid "🕰️ 120 y más"
 msgstr "🕰️ 120 o più"
 
+#: juegos/forms.py:81
+msgid "👥 Número de jugadores"
+msgstr "👥 Numero di giocatori"
+
+#: juegos/forms.py:84
+msgid "Edad"
+msgstr "Età"
+
+#: juegos/forms.py:87
+msgid "Cualquier edad"
+msgstr "Qualsiasi età"
+
 #: juegos/forms.py:94 templates/juegos/game_detail.html:77
 msgid "Dificultad"
 msgstr "Difficoltà"
+
+#: juegos/forms.py:96
+msgid "Cualquier dificultad"
+msgstr "Qualsiasi difficoltà"
 
 #: juegos/forms.py:97
 msgid "🌱 Muy fácil"
@@ -259,8 +203,20 @@ msgid "La dificultad solo influye en el orden de las recomendaciones."
 msgstr "La difficoltà influisce solo sull'ordine dei consigli."
 
 #: juegos/forms.py:106
-msgid "🏷️ Temática"
-msgstr "🏷️ Tema"
+msgid "🏷️ Categoría"
+msgstr "🏷️ Categoria"
+
+#: juegos/forms.py:113
+msgid "Mis juegos"
+msgstr "I miei giochi"
+
+#: juegos/forms.py:117
+msgid "Catálogo de Ludix"
+msgstr "Catalogo Ludix"
+
+#: juegos/forms.py:121
+msgid "Cualquiera"
+msgstr "Qualunque"
 
 #: juegos/models.py:12
 msgid "Cliente"
@@ -298,27 +254,27 @@ msgstr "Spedito"
 msgid "Cancelado"
 msgstr "Annullato"
 
-#: juegos/views.py:107
+#: juegos/views.py:108
 msgid "Orden alfabético"
 msgstr "Ordine alfabetico"
 
-#: juegos/views.py:108
+#: juegos/views.py:109
 msgid "Más vendidos"
 msgstr "Più venduti"
 
-#: juegos/views.py:109
+#: juegos/views.py:110
 msgid "Precio: menor a mayor"
 msgstr "Prezzo: dal più basso al più alto"
 
-#: juegos/views.py:110
+#: juegos/views.py:111
 msgid "Precio: mayor a menor"
 msgstr "Prezzo: dal più alto al più basso"
 
-#: juegos/views.py:111
+#: juegos/views.py:112
 msgid "Más favoritos"
 msgstr "Più apprezzati"
 
-#: juegos/views.py:112
+#: juegos/views.py:113
 msgid "Partidas más cortas"
 msgstr "Partite più brevi"
 
@@ -433,7 +389,7 @@ msgstr "Giochi nella libreria"
 msgid "Favoritos"
 msgstr "Preferiti"
 
-#: templates/accounts/profile.html:49 templates/accounts/profile.html:165
+#: templates/accounts/profile.html:49 templates/accounts/profile.html:167
 msgid "Lista de deseos"
 msgstr "Lista dei desideri"
 
@@ -473,99 +429,99 @@ msgstr "Salva le modifiche"
 msgid "Idioma actual"
 msgstr "Lingua attuale"
 
-#: templates/accounts/profile.html:99
+#: templates/accounts/profile.html:101
 msgid "Fecha de nacimiento"
 msgstr "Data di nascita"
 
-#: templates/accounts/profile.html:104
+#: templates/accounts/profile.html:106
 msgid "No indicado"
 msgstr "Non indicato"
 
-#: templates/accounts/profile.html:111
+#: templates/accounts/profile.html:113
 msgid "Mis juegos favoritos"
 msgstr "I miei giochi preferiti"
 
-#: templates/accounts/profile.html:113
+#: templates/accounts/profile.html:115
 msgid "Juegos marcados como favoritos."
 msgstr "Giochi aggiunti ai preferiti."
 
-#: templates/accounts/profile.html:122 templates/accounts/profile.html:145
-#: templates/accounts/profile.html:176
+#: templates/accounts/profile.html:124 templates/accounts/profile.html:147
+#: templates/accounts/profile.html:178
 #, python-format
 msgid "Añadido %(date)s"
 msgstr "Aggiunto il %(date)s"
 
-#: templates/accounts/profile.html:128
+#: templates/accounts/profile.html:130
 msgid "Todavía no tienes juegos favoritos."
 msgstr "Non hai ancora giochi preferiti."
 
-#: templates/accounts/profile.html:134
+#: templates/accounts/profile.html:136
 msgid "Mi biblioteca"
 msgstr "La mia libreria"
 
-#: templates/accounts/profile.html:136
+#: templates/accounts/profile.html:138
 msgid "Los últimos juegos que has añadido."
 msgstr "Gli ultimi giochi che hai aggiunto."
 
-#: templates/accounts/profile.html:153 templates/accounts/profile.html:154
+#: templates/accounts/profile.html:155 templates/accounts/profile.html:156
 #: templates/home.html:183 templates/home.html:186
 #: templates/juegos/sugerencia_form.html:188
 #: templates/juegos/sugerencia_form.html:191
 msgid "Quitar de mi biblioteca"
 msgstr "Rimuovi dalla mia libreria"
 
-#: templates/accounts/profile.html:159
+#: templates/accounts/profile.html:161
 msgid "Tu biblioteca está vacía."
 msgstr "La tua libreria è vuota."
 
-#: templates/accounts/profile.html:167
+#: templates/accounts/profile.html:169
 msgid "Juegos que quieres añadir a tu colección."
 msgstr "Giochi che vuoi aggiungere alla tua collezione."
 
-#: templates/accounts/profile.html:182
+#: templates/accounts/profile.html:184
 msgid "Tu lista de deseos está vacía."
 msgstr "La tua lista dei desideri è vuota."
 
-#: templates/accounts/profile.html:188
+#: templates/accounts/profile.html:190
 msgid "Juegos que no me gustan"
 msgstr "Giochi che non mi piacciono"
 
-#: templates/accounts/profile.html:190
+#: templates/accounts/profile.html:192
 msgid "Juegos que has marcado para ajustar tus recomendaciones."
 msgstr "Giochi che hai contrassegnato per perfezionare i tuoi consigli."
 
-#: templates/accounts/profile.html:211 templates/accounts/profile.html:212
+#: templates/accounts/profile.html:213 templates/accounts/profile.html:214
 #: templates/juegos/game_detail.html:186 templates/juegos/game_detail.html:187
 msgid "Quitar de No me gusta"
 msgstr "Rimuovi dai giochi che non mi piacciono"
 
-#: templates/accounts/profile.html:218
+#: templates/accounts/profile.html:220
 msgid "Todavía no has marcado juegos que no te gusten."
 msgstr "Non hai ancora contrassegnato giochi che non ti piacciono."
 
-#: templates/accounts/profile.html:224
+#: templates/accounts/profile.html:226
 msgid "Últimas sesiones"
 msgstr "Sessioni recenti"
 
-#: templates/accounts/profile.html:230
+#: templates/accounts/profile.html:232
 #, python-format
 msgid "Sesión n.o %(id)s"
 msgstr "Sessione n. %(id)s"
 
-#: templates/accounts/profile.html:239
+#: templates/accounts/profile.html:241
 msgid "Todavía no tienes sesiones guardadas."
 msgstr "Non hai ancora sessioni salvate."
 
-#: templates/accounts/profile.html:245
+#: templates/accounts/profile.html:247
 msgid "Últimos pedidos"
 msgstr "Ordini recenti"
 
-#: templates/accounts/profile.html:251
+#: templates/accounts/profile.html:253
 #, python-format
 msgid "Pedido n.o %(id)s"
 msgstr "Ordine n. %(id)s"
 
-#: templates/accounts/profile.html:261
+#: templates/accounts/profile.html:263
 msgid "Todavía no tienes pedidos."
 msgstr "Non hai ancora ordini."
 
@@ -618,7 +574,7 @@ msgstr "Accedi"
 msgid "Tipo de dado"
 msgstr "Tipo di dado"
 
-#: templates/base.html:53 templates/base.html:596
+#: templates/base.html:53 templates/base.html:602
 msgid "Letras (A-Z)"
 msgstr "Lettere (A-Z)"
 
@@ -629,6 +585,10 @@ msgstr "Gettare"
 #: templates/base.html:68
 msgid "Navegación principal"
 msgstr "Navigazione principale"
+
+#: templates/base.html:79
+msgid "Comparar recomendaciones"
+msgstr "Confronta raccomandazioni"
 
 #: templates/base.html:83
 #, python-format
@@ -643,20 +603,36 @@ msgstr "Esci"
 msgid "Idioma"
 msgstr "Lingua"
 
-#: templates/base.html:137
+#: templates/base.html:111 templates/base.html:128
+msgid "Español"
+msgstr "Spagnolo"
+
+#: templates/base.html:112 templates/base.html:129
+msgid "Català"
+msgstr "Catalano"
+
+#: templates/base.html:113 templates/base.html:130
+msgid "English"
+msgstr "Inglese"
+
+#: templates/base.html:114 templates/base.html:131
+msgid "Italiano"
+msgstr "Italiano"
+
+#: templates/base.html:143
 msgid "Cambiar tema"
 msgstr "Cambia tema"
 
-#: templates/base.html:138
+#: templates/base.html:144
 msgid "Tema actual"
 msgstr "Tema attuale"
 
-#: templates/base.html:159 templates/base.html:162
-#: templates/websocket_test.html:73
+#: templates/base.html:165 templates/base.html:168
+#: templates/websocket_test.html:76
 msgid "Usuarios conectados"
 msgstr "Utenti connessi"
 
-#: templates/base.html:567
+#: templates/base.html:573
 msgid ""
 "El cambio se guardó, pero no se pudo actualizar la vista. Recarga la página "
 "para verla."
@@ -664,23 +640,23 @@ msgstr ""
 "La modifica è stata salvata, ma non è stato possibile aggiornare la vista. "
 "Ricarica la pagina per vederlo."
 
-#: templates/base.html:568
+#: templates/base.html:574
 msgid "No se pudo guardar el cambio. Inténtalo de nuevo."
 msgstr "Impossibile salvare la modifica. Riprova."
 
-#: templates/base.html:584
+#: templates/base.html:590
 msgid "Lanzador 3D Ludix"
 msgstr "Avvio di Ludix 3D"
 
-#: templates/base.html:588
+#: templates/base.html:594
 msgid "Tipo de dado:"
 msgstr "Tipo di dado:"
 
-#: templates/base.html:613
+#: templates/base.html:619
 msgid "¡Lanzar Dado!"
 msgstr "Lancia i dadi!"
 
-#: templates/base.html:617
+#: templates/base.html:623
 msgid "Haz clic en el dado o en el botón"
 msgstr "Fare clic sul dado o sul pulsante"
 
@@ -866,6 +842,26 @@ msgid ""
 msgstr ""
 "Nessun gioco corrisponde a questi filtri. Prova a modificare le opzioni."
 
+#: templates/home.html:246
+msgid "Paginación del catálogo"
+msgstr "Paginazione del catalogo"
+
+#: templates/home.html:249
+msgid "Anterior"
+msgstr ""
+
+#: templates/home.html:254
+#, python-format
+msgid ""
+"\n"
+"                        Página %(current)s de %(total)s\n"
+"                    "
+msgstr ""
+
+#: templates/home.html:261
+msgid "Siguiente"
+msgstr "Successivo"
+
 #: templates/juegos/game_detail.html:8 templates/juegos/game_shop.html:8
 msgid "Ruta de navegación"
 msgstr "Percorso di navigazione"
@@ -1037,40 +1033,8 @@ msgstr "Consigliami un gioco | Ludix"
 msgid "🎲 Encuentra tu próximo juego"
 msgstr "🎲 Trova il tuo prossimo gioco"
 
-#: templates/juegos/sugerencia_form.html:14
-msgid "Elige de dónde buscar y ajusta solo las preferencias que te importan."
-msgstr "Scegli dove cercare e imposta solo le preferenze che ti interessano."
-
-#: templates/juegos/sugerencia_form.html
-msgid "¿Dónde quieres buscar?"
-msgstr "Dove cerchiamo?"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Elige una fuente para tus recomendaciones."
-msgstr "Scegli una fonte per i consigli."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Define la partida"
-msgstr "Imposta la partita"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Jugadores y duración son los criterios principales."
-msgstr "Giocatori e durata sono i criteri principali."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Preferencias opcionales"
-msgstr "Preferenze facoltative"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
-msgstr "Età, difficoltà e categoria aiutano a perfezionare i risultati, ma sono facoltativi."
-
-#: templates/juegos/sugerencia_form.html
-msgid "Sin preferencia"
-msgstr "Nessuna preferenza"
-
-#: templates/juegos/sugerencia_form.html:31
-#: templates/juegos/sugerencia_form.html:296
+#: templates/juegos/sugerencia_form.html:19
+#: templates/juegos/sugerencia_form.html:374
 msgid "▼ Modificar búsqueda"
 msgstr "▼ Modifica la ricerca"
 
@@ -1086,16 +1050,7 @@ msgstr "10 giocatori"
 msgid "🎲 Ver recomendaciones"
 msgstr "🎲 Vedi i consigli"
 
-#: templates/juegos/sugerencia_form.html
-#: templates/juegos/sugerencia_form.html:224
-msgid "No encontramos coincidencias"
-msgstr "Nessuna corrispondenza trovata"
-
-#: templates/juegos/sugerencia_form.html
-msgid "Prueba ampliar la duración, cambiar la categoría o dejar la edad o la dificultad en «Cualquiera»."
-msgstr "Prova ad aumentare la durata, cambiare la categoria o impostare età o difficoltà su «Qualsiasi»."
-
-#: templates/juegos/sugerencia_form.html:157
+#: templates/juegos/sugerencia_form.html:132
 msgid "Recomendaciones"
 msgstr "Raccomandazioni"
 
@@ -1139,17 +1094,21 @@ msgstr "Disponibile"
 msgid "No disponible actualmente"
 msgstr "Attualmente non disponibile"
 
-#: templates/juegos/sugerencia_form.html:195
+#: templates/juegos/sugerencia_form.html:180
 msgid "Comprar"
 msgstr "Acquista"
 
+#: templates/juegos/sugerencia_form.html:224
+msgid "No encontramos coincidencias"
+msgstr "Nessuna corrispondenza trovata"
+
 #: templates/juegos/sugerencia_form.html:225
 msgid ""
-"Prueba ampliar la duración, cambiar la temática o dejar la edad o la "
+"Prueba ampliar la duración, cambiar la categoría o dejar la edad o la "
 "dificultad en «Cualquiera»."
 msgstr ""
-"Prova ad aumentare la durata, cambiare il tema o impostare età o difficoltà "
-"su «Qualsiasi»."
+"Prova ad aumentare la durata, cambiare la categoria o impostare età o "
+"difficoltà su «Qualsiasi»."
 
 #: templates/juegos/sugerencia_form.html:243
 msgid "jugador"
@@ -1158,14 +1117,6 @@ msgstr "giocatore"
 #: templates/juegos/sugerencia_form.html:244
 msgid "jugadores"
 msgstr "giocatori"
-
-#: templates/juegos/sugerencia_form.html:256
-msgid "Mayor de 18"
-msgstr "Maggiore di 18"
-
-#: templates/juegos/sugerencia_form.html:266
-msgid "min"
-msgstr "minuti"
 
 #: templates/juegos/sugerencia_form.html:375
 msgid "▲ Ocultar búsqueda"
@@ -1251,19 +1202,19 @@ msgstr "Non sono disponibili profili di test `test_*` per il confronto."
 msgid "Ludix WebSocket Test"
 msgstr "Test WebSocket Ludix"
 
-#: templates/websocket_test.html:70
+#: templates/websocket_test.html:73
 msgid "Cambiar"
 msgstr "Cambia"
 
-#: templates/websocket_test.html:75
+#: templates/websocket_test.html:78
 msgid "Conectando..."
 msgstr "Connessione in corso..."
 
-#: templates/websocket_test.html:79
+#: templates/websocket_test.html:82
 msgid "Error de conexión"
 msgstr "Errore di connessione"
 
-#: templates/websocket_test.html:80
+#: templates/websocket_test.html:83
 msgid "Desconectado"
 msgstr "Disconnesso"
 
@@ -2587,6 +2538,369 @@ msgstr "Comunità Django"
 #: venv/lib/python3.14/site-packages/django/views/templates/default_urlconf.html:239
 msgid "Connect, get help, or contribute"
 msgstr "Connettiti, ottieni aiuto o contribuisci"
+
+#~ msgid "🎮 ¿De dónde quieres que salgan las recomendaciones?"
+#~ msgstr "🎮 Da dove vuoi che provengano i suggerimenti?"
+
+#~ msgid "👶 Edad de la persona más joven"
+#~ msgstr "👶 Età della persona più giovane"
+
+#~ msgid "⏱️ Duración máxima en minutos"
+#~ msgstr "⏱️ Durata massima in minuti"
+
+#~ msgid "🎯 Dificultad (1 = muy fácil, 5 = muy difícil)"
+#~ msgstr "🎯 Difficoltà (1 = molto facile, 5 = molto difficile)"
+
+#~ msgid "De mi biblioteca"
+#~ msgstr "La mia libreria"
+
+#~ msgid "Del catálogo de Ludix"
+#~ msgstr "Dal catalogo Ludix"
+
+#~ msgid "Fuente de recomendaciones"
+#~ msgstr "Fonte dei consigli"
+
+#~ msgid "Preferencia de edad"
+#~ msgstr "Preferenza di età"
+
+#~ msgid "Elegir edad"
+#~ msgstr "Scegli l'età"
+
+#~ msgid "Preferencia de dificultad"
+#~ msgstr "Preferenza di difficoltà"
+
+#~ msgid "🏷️ Temática"
+#~ msgstr "🏷️ Tema"
+
+#~ msgid ""
+#~ "Elige de dónde buscar y ajusta solo las preferencias que te importan."
+#~ msgstr ""
+#~ "Scegli dove cercare e imposta solo le preferenze che ti interessano."
+
+#~ msgid "¿Dónde quieres buscar?"
+#~ msgstr "Dove cerchiamo?"
+
+#~ msgid "Elige una fuente para tus recomendaciones."
+#~ msgstr "Scegli una fonte per i consigli."
+
+#~ msgid "Define la partida"
+#~ msgstr "Imposta la partita"
+
+#~ msgid "Jugadores y duración son los criterios principales."
+#~ msgstr "Giocatori e durata sono i criteri principali."
+
+#~ msgid "Preferencias opcionales"
+#~ msgstr "Preferenze facoltative"
+
+#~ msgid ""
+#~ "Edad, dificultad y categoría ayudan a afinar, pero no son obligatorias."
+#~ msgstr ""
+#~ "Età, difficoltà e categoria aiutano a perfezionare i risultati, ma sono "
+#~ "facoltativi."
+
+#~ msgid "Sin preferencia"
+#~ msgstr "Nessuna preferenza"
+
+#~ msgid ""
+#~ "Prueba ampliar la duración, cambiar la temática o dejar la edad o la "
+#~ "dificultad en «Cualquiera»."
+#~ msgstr ""
+#~ "Prova ad aumentare la durata, cambiare il tema o impostare età o "
+#~ "difficoltà su «Qualsiasi»."
+
+#~ msgid "Mayor de 18"
+#~ msgstr "Maggiore di 18"
+
+#~ msgid "min"
+#~ msgstr "minuti"
+
+#~ msgid "Hundir la Flota (Batalla Naval)"
+#~ msgstr "Battaglia navale"
+
+#~ msgid "Tres en Raya (Gato / Cero y Cruces)"
+#~ msgstr "Tris (cerchi e croci)"
+
+#~ msgid "Cuadritos (Puntos y Cajas / Timbiriche)"
+#~ msgstr "Punti e quadrati"
+
+#~ msgid "Nimm en Papel"
+#~ msgstr "Nimm su carta"
+
+#~ msgid "Cero Cero (Zero Zero)"
+#~ msgstr "Zero Zero"
+
+#~ msgid "Las Enredaderas (Sprouts)"
+#~ msgstr "Germogli (Sprouts)"
+
+#~ msgid "El Ahorcado"
+#~ msgstr "L'impiccato"
+
+#~ msgid "Mastermind de Papel (Bulls and Cows)"
+#~ msgstr "Mastermind di carta (Bulls and Cows)"
+
+#~ msgid "El Juego de la Vida de Conway (Papel)"
+#~ msgstr "Il gioco della vita di Conway (su carta)"
+
+#~ msgid "Carrera de Vectores (Racetrack)"
+#~ msgstr "Corsa vettoriale (Racetrack)"
+
+#~ msgid "Tic-Tac-Toe Cuántico"
+#~ msgstr "Tris quantistico"
+
+#~ msgid "Pictionary Casero"
+#~ msgstr "Pictionary fatto in casa"
+
+#~ msgid "Dudo de Números (Gobernador / Chinchón de Palabras)"
+#~ msgstr "Bluff dei numeri (Governatore / Chinchón di parole)"
+
+#~ msgid "Gomoku de Papel (Cinco en Raya)"
+#~ msgstr "Gomoku su carta (cinque in fila)"
+
+#~ msgid "Cuatro en Raya (Conectar 4 en Papel)"
+#~ msgstr "Quattro in fila (Forza 4 su carta)"
+
+#~ msgid "El Cuadro Fantasma"
+#~ msgstr "Il quadrato fantasma"
+
+#~ msgid "El Laberinto Cruzado"
+#~ msgstr "Il labirinto incrociato"
+
+#~ msgid "El Dictado a Ciegas"
+#~ msgstr "Il disegno dettato alla cieca"
+
+#~ msgid "El Intruso (Gatos y Ratones)"
+#~ msgstr "L'intruso (gatti e topi)"
+
+#~ msgid "Hink Pink / Anagramas de Papel"
+#~ msgstr "Hink Pink / anagrammi su carta"
+
+#~ msgid "Banderas (Conquista de Cuadrantes)"
+#~ msgstr "Bandiere (conquista dei quadranti)"
+
+#~ msgid "El Teléfono Roto Dibujado (Telestrations casero)"
+#~ msgstr "Il telefono senza fili disegnato (Telestrations fatto in casa)"
+
+#~ msgid "Criptograma Cruzado"
+#~ msgstr "Criptogramma incrociato"
+
+#~ msgid "El Círculo de la Fortuna (Hangman Circular)"
+#~ msgstr "Il cerchio della fortuna (impiccato circolare)"
+
+#~ msgid "Puentes de Königsberg en Papel"
+#~ msgstr "Ponti di Königsberg su carta"
+
+#~ msgid "El Tesoro Escondido (Mapa de Coordenadas)"
+#~ msgstr "Il tesoro nascosto (mappa delle coordinate)"
+
+#~ msgid "Rejilla de Conexión (Hex en Papel)"
+#~ msgstr "Griglia di connessione (Hex su carta)"
+
+#~ msgid "La Serpiente (Shedder / Snake)"
+#~ msgstr "Il serpente (Shedder / Snake)"
+
+#~ msgid "Guerra de Números"
+#~ msgstr "Guerra dei numeri"
+
+#~ msgid "Sopa de Letras Competitiva"
+#~ msgstr "Cerca parole competitiva"
+
+#~ msgid "El Cuadrado Mágico"
+#~ msgstr "Il quadrato magico"
+
+#~ msgid "Cadenas de Palabras (Word Ladders / Metagramas)"
+#~ msgstr "Catene di parole (Word Ladders / metagrammi)"
+
+#~ msgid "Carreras de Números (1 a 100)"
+#~ msgstr "Corse dei numeri (da 1 a 100)"
+
+#~ msgid "Dominó de Papel (Domineering)"
+#~ msgstr "Domino su carta (Domineering)"
+
+#~ msgid "El Edificio (Skyscrapers)"
+#~ msgstr "L'edificio (Skyscrapers)"
+
+#~ msgid "Puntos y Marcas (Chomp de Papel)"
+#~ msgstr "Punti e segni (Chomp su carta)"
+
+#~ msgid "Triángulos (Polígonos de Hakimi)"
+#~ msgstr "Triangoli (poligoni di Hakimi)"
+
+#~ msgid "Batalla de Palabras (Anagrameador)"
+#~ msgstr "Battaglia di parole (creatore di anagrammi)"
+
+#~ msgid "Pistas Ocultas (Black Box de Papel)"
+#~ msgstr "Indizi nascosti (Black Box su carta)"
+
+#~ msgid "Batalla de Cuadrados (Box-In)"
+#~ msgstr "Battaglia dei quadrati (Box-In)"
+
+#~ msgid "El Laberinto Invisible"
+#~ msgstr "Il labirinto invisibile"
+
+#~ msgid "Generador de Historias (Cadáver Exquisito)"
+#~ msgstr "Generatore di storie (cadavere squisito)"
+
+#~ msgid "El Cereal (Kropki de Papel)"
+#~ msgstr "Il cereale (Kropki su carta)"
+
+#~ msgid "La Frontera (Borderline)"
+#~ msgstr "Il confine (Borderline)"
+
+#~ msgid "Crucigrama Veloz (Speed Crossword)"
+#~ msgstr "Cruciverba veloce (Speed Crossword)"
+
+#~ msgid "La Diana (Target 500)"
+#~ msgstr "Il bersaglio (Target 500)"
+
+#~ msgid "Sudoku de Papel"
+#~ msgstr "Sudoku su carta"
+
+#~ msgid "Kakuro (Suma Cruzada)"
+#~ msgstr "Kakuro (somme incrociate)"
+
+#~ msgid "Slitherlink (El Bucle)"
+#~ msgstr "Slitherlink (il circuito)"
+
+#~ msgid "Futoshiki (Desigualdad)"
+#~ msgstr "Futoshiki (disuguaglianza)"
+
+#~ msgid "Nonogramas de Papel (Picross)"
+#~ msgstr "Nonogrammi su carta (Picross)"
+
+#~ msgid "Shikaku (Rectángulos)"
+#~ msgstr "Shikaku (rettangoli)"
+
+#~ msgid "Hidato (Camino Numérico)"
+#~ msgstr "Hidato (percorso numerico)"
+
+#~ msgid "Akari (Luz y Sombras)"
+#~ msgstr "Akari (luci e ombre)"
+
+#~ msgid "Palabras Cruzadas (Anagram Cross)"
+#~ msgstr "Parole incrociate (Anagram Cross)"
+
+#~ msgid "La Telaraña de Números"
+#~ msgstr "La ragnatela dei numeri"
+
+#~ msgid "Las Tres Torres de Hanoi (En Papel)"
+#~ msgstr "Le tre torri di Hanoi (su carta)"
+
+#~ msgid "Laberinto de Hilos (String Maze)"
+#~ msgstr "Labirinto di fili (String Maze)"
+
+#~ msgid "Palabras Encadenadas en Matriz"
+#~ msgstr "Parole concatenate in una griglia"
+
+#~ msgid "El Reloj Matemático"
+#~ msgstr "L'orologio matematico"
+
+#~ msgid "Círculos de Venn (Juego de Lógica)"
+#~ msgstr "Diagrammi di Venn (gioco di logica)"
+
+#~ msgid "Conecta 5 con Bloqueos (Lasker Morris en Papel)"
+#~ msgstr "Forza 5 con blocchi (Lasker Morris su carta)"
+
+#~ msgid "Los Seis Grados de Separación"
+#~ msgstr "I sei gradi di separazione"
+
+#~ msgid "Tangram de Papel (Corte y Lógica)"
+#~ msgstr "Tangram su carta (taglio e logica)"
+
+#~ msgid "El Telégrafo (Código Morse de Papel)"
+#~ msgstr "Il telegrafo (codice Morse su carta)"
+
+#~ msgid "Pirámides Numéricas"
+#~ msgstr "Piramidi numeriche"
+
+#~ msgid "Las Ocho Reinas (En Papel)"
+#~ msgstr "Le otto regine (su carta)"
+
+#~ msgid "Salto de Caballo (Knight's Tour)"
+#~ msgstr "Il percorso del cavallo (Knight's Tour)"
+
+#~ msgid "Pentominós de Papel"
+#~ msgstr "Pentamini su carta"
+
+#~ msgid "El Laberinto Dinámico"
+#~ msgstr "Il labirinto dinamico"
+
+#~ msgid "La Caza de la Zorra (Fox and Hounds)"
+#~ msgstr "La caccia alla volpe (Fox and Hounds)"
+
+#~ msgid "Batalla de Palíndromos"
+#~ msgstr "Battaglia di palindromi"
+
+#~ msgid "Sopa de Cifras"
+#~ msgstr "Cerca numeri"
+
+#~ msgid "Cruces e Intersecciones (Planarity)"
+#~ msgstr "Incroci e intersezioni (Planarity)"
+
+#~ msgid "Cuadrantes Rascacielos (City Grid)"
+#~ msgstr "Quadranti dei grattacieli (City Grid)"
+
+#~ msgid "Círculos Concéntricos (Bullseye Words)"
+#~ msgstr "Cerchi concentrici (Bullseye Words)"
+
+#~ msgid "Batalla de Barcos Estratégica (Salvo)"
+#~ msgstr "Battaglia navale strategica (Salvo)"
+
+#~ msgid "El Pozo del Dragón"
+#~ msgstr "Il pozzo del drago"
+
+#~ msgid "El Camino del Rey"
+#~ msgstr "Il cammino del re"
+
+#~ msgid "Abecedario Cierto"
+#~ msgstr "Alfabeto vero"
+
+#~ msgid "Bloques Rotos (Polyminó Eliminación)"
+#~ msgstr "Blocchi rotti (eliminazione dei polimini)"
+
+#~ msgid "Acertijos de Cerillas en Papel"
+#~ msgstr "Indovinelli con fiammiferi su carta"
+
+#~ msgid "Cifras y Letras (Prueba de Cifras en Papel)"
+#~ msgstr "Numeri e lettere (sfida numerica su carta)"
+
+#~ msgid "La Escalera de Palabras (Wordle de Papel)"
+#~ msgstr "La scala di parole (Wordle su carta)"
+
+#~ msgid "Tres en Raya Tridimensional (3D Tic-Tac-Toe)"
+#~ msgstr "Tris tridimensionale (3D Tic-Tac-Toe)"
+
+#~ msgid "Las Cuatro Esquinas"
+#~ msgstr "I quattro angoli"
+
+#~ msgid "Hexágono de Puntos (Spidron de Papel)"
+#~ msgstr "Esagono di punti (Spidron su carta)"
+
+#~ msgid "Triqui Traque de Dados (Simulado)"
+#~ msgstr "Tris con i dadi (simulato)"
+
+#~ msgid "Laberinto de Flechas (Vector Maze)"
+#~ msgstr "Labirinto di frecce (Vector Maze)"
+
+#~ msgid "Sumas Encadenadas (Number Chain)"
+#~ msgstr "Addizioni concatenate (Number Chain)"
+
+#~ msgid "La Isla de las Serpientes"
+#~ msgstr "L'isola dei serpenti"
+
+#~ msgid "La Telaraña de Palabras (Word Web)"
+#~ msgstr "La ragnatela di parole (Word Web)"
+
+#~ msgid "El Puente Romano (Pons Asinorum en Papel)"
+#~ msgstr "Il ponte romano (Pons Asinorum su carta)"
+
+#~ msgid "¡Toma 6! (6 Nimmt!)"
+#~ msgstr "6 Nimmt!"
+
+#~ msgid "Taco Gato Cabra Queso Pizza"
+#~ msgstr "Taco Gatto Capra Cacio Pizza"
+
+#~ msgid "Pelusas (Fluff)"
+#~ msgstr "Fluff"
 
 #~ msgid "Edad de la persona más joven"
 #~ msgstr "Età della persona più giovane"
@@ -8239,9 +8553,6 @@ msgstr "Connettiti, ottieni aiuto o contribuisci"
 #~ msgid "Geometría visual"
 #~ msgstr "geometria visiva"
 
-#~ msgid "España"
-#~ msgstr "Spagna"
-
 #~ msgid ""
 #~ "Rellena las casillas vacías con dígitos del 1 al 9. La suma de las cifras "
 #~ "de un bloque horizontal o vertical debe dar el número indicado en la "
@@ -8390,9 +8701,6 @@ msgstr "Connettiti, ottieni aiuto o contribuisci"
 #~ "Creatore: Designer tradizionale / Editore giapponese | Anno: sconosciuto "
 #~ "o tradizionale | Perché è stato creato: Sviluppato per arricchire il "
 #~ "catalogo culturale dei giochi astratti nella regione."
-
-#~ msgid "Combinación de cartas"
-#~ msgstr "Combinazione di carte"
 
 #~ msgid ""
 #~ "Se disponen los componentes de Queendomino. Los jugadores ejecutan turnos "
@@ -9176,9 +9484,6 @@ msgstr "Connettiti, ottieni aiuto o contribuisci"
 #~ "giocatori eseguono turni sequenziali applicando le meccaniche di gioco "
 #~ "fondamentali dei trucchi spaziali e rispettando specifiche condizioni di "
 #~ "vittoria."
-
-#~ msgid "Italia"
-#~ msgstr "Italia"
 
 #~ msgid "Vidrieras de colores en la catedral"
 #~ msgstr "Vetrate della cattedrale"
